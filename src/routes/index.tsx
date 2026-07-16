@@ -384,9 +384,11 @@ function RunTakomaOnePager() {
               role="status"
               className="mt-8 border-2 border-forest bg-paper p-6"
             >
-              <p className="eyebrow text-terracotta">You're in</p>
-              <p className="mt-2 display-tight text-2xl text-forest">
-                See you Sunday, {submitted.name.split(" ")[0]}.
+              <p className="eyebrow text-terracotta">You're in <span aria-hidden>♡</span></p>
+              <p className="mt-2 display-tight text-2xl">
+                <span className="text-forest">See you Sunday, </span>
+                <span className="brush-script text-terracotta text-3xl">{submitted.name.split(" ")[0]}</span>
+                <span className="text-forest">.</span>
               </p>
               <p className="mt-2 text-ink-soft">
                 We saved your spot for the{" "}

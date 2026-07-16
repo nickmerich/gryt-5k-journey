@@ -74,8 +74,60 @@ const initialForm: FormState = {
 function RunTakomaOnePager() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState<null | { name: string; ticket: string }>(null);
+  const [submitted, setSubmitted] = useState<
+    | null
+    | {
+        name: string;
+        ticket: string;
+        registrationId: string | null;
+        strava: StravaAthlete | null;
+        stravaStatus: "idle" | "denied" | "error";
+      }
+  >(null);
   const [submitting, setSubmitting] = useState(false);
+
+  // On mount, detect Strava OAuth return via query string and hydrate the success state.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const strava = params.get("strava");
+    const rid = params.get("rid");
+    if (!strava || !rid) return;
+
+    // Clean the URL so a refresh doesn't re-trigger this.
+    const clean = new URL(window.location.href);
+    clean.searchParams.delete("strava");
+    clean.searchParams.delete("rid");
+    clean.searchParams.delete("reason");
+    window.history.replaceState({}, "", clean.pathname + clean.search + "#register");
+
+    (async () => {
+      try {
+        const res = await fetch(`/api/public/strava/status?rid=${encodeURIComponent(rid)}`);
+        if (!res.ok) throw new Error("status failed");
+        const data = (await res.json()) as {
+          name: string;
+          ticket: string;
+          strava: StravaAthlete | null;
+        };
+        setSubmitted({
+          name: data.name,
+          ticket: data.ticket,
+          registrationId: rid,
+          strava: data.strava,
+          stravaStatus: strava === "denied" ? "denied" : strava === "ok" ? "idle" : "error",
+        });
+      } catch {
+        setSubmitted((s) => s ?? {
+          name: "runner",
+          ticket: "5k",
+          registrationId: rid,
+          strava: null,
+          stravaStatus: strava === "denied" ? "denied" : "error",
+        });
+      }
+    })();
+  }, []);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));

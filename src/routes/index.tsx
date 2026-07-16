@@ -309,9 +309,10 @@ function RunTakomaOnePager() {
       {/* REGISTRATION FORM */}
       <section
         id="register"
-        className="relative z-10 mx-auto max-w-2xl px-6 pb-24 scroll-mt-16"
+        className="relative z-10 mx-auto max-w-2xl px-5 pb-32 sm:px-6 sm:pb-24 scroll-mt-4 sm:scroll-mt-16"
       >
-        <div className="border-2 border-ink bg-paper-warm p-8 sm:p-10">
+        <div className="border-2 border-ink bg-paper-warm p-5 sm:p-8 md:p-10">
+
           <RuledLabel>Registration</RuledLabel>
           <h2 className="mt-4 display-tight text-4xl sm:text-5xl text-forest">
             Grab your bib.

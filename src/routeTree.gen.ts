@@ -16,6 +16,9 @@ import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/r
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
+import { Route as ApiPublicStravaStatusRouteImport } from './routes/api/public/strava.status'
+import { Route as ApiPublicStravaStartRouteImport } from './routes/api/public/strava.start'
+import { Route as ApiPublicStravaCallbackRouteImport } from './routes/api/public/strava.callback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -55,12 +58,30 @@ const LovableEmailQueueProcessRoute =
     path: '/lovable/email/queue/process',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicStravaStatusRoute = ApiPublicStravaStatusRouteImport.update({
+  id: '/api/public/strava/status',
+  path: '/api/public/strava/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicStravaStartRoute = ApiPublicStravaStartRouteImport.update({
+  id: '/api/public/strava/start',
+  path: '/api/public/strava/start',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicStravaCallbackRoute = ApiPublicStravaCallbackRouteImport.update({
+  id: '/api/public/strava/callback',
+  path: '/api/public/strava/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
+  '/api/public/strava/start': typeof ApiPublicStravaStartRoute
+  '/api/public/strava/status': typeof ApiPublicStravaStatusRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
@@ -70,6 +91,9 @@ export interface FileRoutesByTo {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
+  '/api/public/strava/start': typeof ApiPublicStravaStartRoute
+  '/api/public/strava/status': typeof ApiPublicStravaStatusRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
@@ -80,6 +104,9 @@ export interface FileRoutesById {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
+  '/api/public/strava/start': typeof ApiPublicStravaStartRoute
+  '/api/public/strava/status': typeof ApiPublicStravaStatusRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
   '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
@@ -91,6 +118,9 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/rtwl-register'
     | '/lovable/email/suppression'
+    | '/api/public/strava/callback'
+    | '/api/public/strava/start'
+    | '/api/public/strava/status'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
@@ -100,6 +130,9 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/rtwl-register'
     | '/lovable/email/suppression'
+    | '/api/public/strava/callback'
+    | '/api/public/strava/start'
+    | '/api/public/strava/status'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
@@ -109,6 +142,9 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/rtwl-register'
     | '/lovable/email/suppression'
+    | '/api/public/strava/callback'
+    | '/api/public/strava/start'
+    | '/api/public/strava/status'
     | '/lovable/email/queue/process'
     | '/lovable/email/transactional/preview'
     | '/lovable/email/transactional/send'
@@ -119,6 +155,9 @@ export interface RootRouteChildren {
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicStravaCallbackRoute: typeof ApiPublicStravaCallbackRoute
+  ApiPublicStravaStartRoute: typeof ApiPublicStravaStartRoute
+  ApiPublicStravaStatusRoute: typeof ApiPublicStravaStatusRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
   LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
@@ -175,6 +214,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/strava/status': {
+      id: '/api/public/strava/status'
+      path: '/api/public/strava/status'
+      fullPath: '/api/public/strava/status'
+      preLoaderRoute: typeof ApiPublicStravaStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/strava/start': {
+      id: '/api/public/strava/start'
+      path: '/api/public/strava/start'
+      fullPath: '/api/public/strava/start'
+      preLoaderRoute: typeof ApiPublicStravaStartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/strava/callback': {
+      id: '/api/public/strava/callback'
+      path: '/api/public/strava/callback'
+      fullPath: '/api/public/strava/callback'
+      preLoaderRoute: typeof ApiPublicStravaCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +243,9 @@ const rootRouteChildren: RootRouteChildren = {
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicStravaCallbackRoute: ApiPublicStravaCallbackRoute,
+  ApiPublicStravaStartRoute: ApiPublicStravaStartRoute,
+  ApiPublicStravaStatusRoute: ApiPublicStravaStatusRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
   LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,

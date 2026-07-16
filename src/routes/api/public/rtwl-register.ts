@@ -66,6 +66,21 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
         const messageId = crypto.randomUUID()
         const idempotencyKey = `rtwl-${normalized}-${ticket}`
 
+        // Persist the registration so we can attach a Strava athlete later.
+        let registrationId: string | null = null
+        {
+          const { data: reg, error: regErr } = await supabase
+            .from('rtwl_registrations')
+            .insert({ name, email: recipient, ticket, waiver_accepted: waiver })
+            .select('id')
+            .single()
+          if (regErr || !reg) {
+            console.error('Failed to persist registration', regErr)
+          } else {
+            registrationId = reg.id
+          }
+        }
+
         // Suppression check
         const { data: suppressed, error: supErr } = await supabase
           .from('suppressed_emails')

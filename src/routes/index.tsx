@@ -408,13 +408,59 @@ function RunTakomaOnePager() {
                 )}
               </div>
 
-              <button
-                type="button"
-                onClick={() => setSubmitted(null)}
-                className="mt-6 eyebrow underline underline-offset-4 hover:text-terracotta"
-              >
-                Register another runner
-              </button>
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <button
+                  type="button"
+                  disabled={resendState.status === "sending" || resendState.status === "sent"}
+                  onClick={async () => {
+                    if (!submitted) return;
+                    setResendState({ status: "sending" });
+                    try {
+                      const res = await fetch("/api/public/rtwl-resend", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ registrationId: submitted.registrationId }),
+                      });
+                      const payload = (await res.json().catch(() => ({}))) as { error?: string };
+                      if (!res.ok) {
+                        setResendState({
+                          status: "error",
+                          message: payload.error ?? "Could not resend. Try again shortly.",
+                        });
+                      } else {
+                        setResendState({ status: "sent" });
+                      }
+                    } catch {
+                      setResendState({ status: "error", message: "Network error. Try again." });
+                    }
+                  }}
+                  className="eyebrow underline underline-offset-4 hover:text-terracotta disabled:opacity-50 disabled:no-underline"
+                >
+                  {resendState.status === "sending"
+                    ? "Resending…"
+                    : resendState.status === "sent"
+                      ? "Confirmation resent ✓"
+                      : "Resend confirmation email"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitted(null);
+                    setResendState({ status: "idle" });
+                  }}
+                  className="eyebrow underline underline-offset-4 hover:text-terracotta"
+                >
+                  Register another runner
+                </button>
+              </div>
+              {resendState.status === "error" && (
+                <p className="mt-2 text-sm text-terracotta">{resendState.message}</p>
+              )}
+              {resendState.status === "sent" && (
+                <p className="mt-2 text-sm text-forest">
+                  On its way. Check your inbox — and spam, just in case.
+                </p>
+              )}
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-6">

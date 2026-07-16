@@ -55,6 +55,9 @@ const registrationSchema = z.object({
   waiver: z.literal(true, {
     message: "You must accept the waiver to register",
   }),
+  tos: z.literal(true, {
+    message: "You must accept the Terms of Service to register",
+  }),
 });
 
 type FormState = {
@@ -62,6 +65,7 @@ type FormState = {
   email: string;
   ticket: "5k" | "walker" | "supporter" | "";
   waiver: boolean;
+  tos: boolean;
 };
 
 const initialForm: FormState = {
@@ -69,6 +73,7 @@ const initialForm: FormState = {
   email: "",
   ticket: "",
   waiver: false,
+  tos: false,
 };
 
 function RunTakomaOnePager() {
@@ -146,7 +151,7 @@ function RunTakomaOnePager() {
     setForm((f) => ({ ...f, [key]: value }));
     // Re-validate live once the field has been touched (or for instant-choice fields).
     setErrors((prev) => {
-      const shouldValidate = touched[key as string] || key === "ticket" || key === "waiver";
+      const shouldValidate = touched[key as string] || key === "ticket" || key === "waiver" || key === "tos";
       if (!shouldValidate) {
         if (!prev[key as string]) return prev;
         const { [key as string]: _drop, ...rest } = prev;
@@ -181,10 +186,10 @@ function RunTakomaOnePager() {
         if (!next[key]) next[key] = issue.message;
       }
       setErrors(next);
-      setTouched({ name: true, email: true, ticket: true, waiver: true });
+      setTouched({ name: true, email: true, ticket: true, waiver: true, tos: true });
       setShowSummary(true);
       // Focus first invalid field for keyboard/screen-reader users.
-      const order = ["name", "email", "ticket", "waiver"];
+      const order = ["name", "email", "ticket", "waiver", "tos"];
       const firstBad = order.find((k) => next[k]);
       if (firstBad && typeof document !== "undefined") {
         const el = document.getElementById(firstBad) as HTMLElement | null;
@@ -216,7 +221,7 @@ function RunTakomaOnePager() {
         if (res.status === 400 && payload.fieldErrors) {
           // Server rejected input — surface field errors inline and keep form values.
           setErrors(payload.fieldErrors);
-          setTouched({ name: true, email: true, ticket: true, waiver: true });
+          setTouched({ name: true, email: true, ticket: true, waiver: true, tos: true });
           setShowSummary(true);
           serverRejected = true;
         } else if (!res.ok) {
@@ -579,7 +584,7 @@ function RunTakomaOnePager() {
                     Please fix the fields below
                   </p>
                   <ul className="mt-1 list-disc pl-5 text-ink-soft">
-                    {["name", "email", "ticket", "waiver"].map((k) =>
+                    {["name", "email", "ticket", "waiver", "tos"].map((k) =>
                       errors[k] ? <li key={k}>{errors[k]}</li> : null,
                     )}
                   </ul>
@@ -705,6 +710,37 @@ function RunTakomaOnePager() {
                   </p>
                 )}
               </div>
+              <div>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    id="tos"
+                    type="checkbox"
+                    checked={form.tos}
+                    onChange={(e) => update("tos", e.target.checked)}
+                    aria-invalid={!!errors.tos}
+                    aria-describedby={errors.tos ? "tos-error" : undefined}
+                    className={`mt-1 h-5 w-5 accent-[color:var(--color-forest)] border-2 ${errors.tos ? "border-terracotta" : "border-ink"}`}
+                  />
+                  <span className="text-sm text-ink-soft">
+                    I agree to the{" "}
+                    <a
+                      href="/terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-ink underline decoration-terracotta underline-offset-4"
+                    >
+                      Terms of Service
+                    </a>
+                    .
+                  </span>
+                </label>
+                {errors.tos && (
+                  <p id="tos-error" className="mt-2 text-sm text-terracotta">
+                    {errors.tos}
+                  </p>
+                )}
+              </div>
+
 
 
               <button

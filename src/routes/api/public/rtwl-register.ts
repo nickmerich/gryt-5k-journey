@@ -34,6 +34,7 @@ const schema = z.object({
     .regex(EMAIL_RE, { message: 'Enter a valid email address' }),
   ticket: z.enum(TICKETS, { message: 'Choose a ticket type' }),
   waiver: z.literal(true, { message: 'You must accept the waiver to register' }),
+  tos: z.literal(true, { message: 'You must accept the Terms of Service to register' }),
 })
 
 

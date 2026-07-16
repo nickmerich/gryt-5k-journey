@@ -63,14 +63,27 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
 
         let body: unknown
         try {
-          body = await request.json()
+          // Cap request size to guard against abusive payloads (~8KB is plenty).
+          const raw = await request.text()
+          if (raw.length > 8_192) {
+            return Response.json({ error: 'Payload too large' }, { status: 413 })
+          }
+          body = raw ? JSON.parse(raw) : {}
         } catch {
           return Response.json({ error: 'Invalid JSON' }, { status: 400 })
         }
+        if (!body || typeof body !== 'object' || Array.isArray(body)) {
+          return Response.json({ error: 'Invalid input' }, { status: 400 })
+        }
         const parsed = schema.safeParse(body)
         if (!parsed.success) {
+          const fieldErrors: Record<string, string> = {}
+          for (const issue of parsed.error.issues) {
+            const key = String(issue.path[0] ?? 'form')
+            if (!fieldErrors[key]) fieldErrors[key] = issue.message
+          }
           return Response.json(
-            { error: 'Invalid input', issues: parsed.error.issues },
+            { error: 'Invalid input', fieldErrors },
             { status: 400 },
           )
         }
@@ -78,10 +91,6 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
         const recipient = email
         const normalized = recipient.toLowerCase()
 
-        const template = TEMPLATES[TEMPLATE_NAME]
-        if (!template) {
-          return Response.json({ error: 'Template missing' }, { status: 500 })
-        }
 
         const supabase = createClient(supabaseUrl, serviceKey)
         const messageId = crypto.randomUUID()

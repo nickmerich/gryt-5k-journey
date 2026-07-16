@@ -241,7 +241,11 @@ function RunTakomaOnePager() {
 
       setSubmitted({
         name: parsed.data.name,
+        email: parsed.data.email,
         ticket: parsed.data.ticket,
+        waiverAccepted: parsed.data.waiver,
+        tosAccepted: parsed.data.tos,
+        confirmedAt: new Date().toISOString(),
         registrationId,
         strava: null,
         stravaStatus: "idle",

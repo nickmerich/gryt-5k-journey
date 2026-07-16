@@ -551,6 +551,23 @@ function RunTakomaOnePager() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-6">
+              {showSummary && Object.keys(errors).length > 0 && (
+                <div
+                  role="alert"
+                  aria-live="polite"
+                  className="border-2 border-terracotta bg-terracotta/10 px-4 py-3 text-sm text-ink"
+                >
+                  <p className="display-tight tracking-wider text-terracotta">
+                    Please fix the fields below
+                  </p>
+                  <ul className="mt-1 list-disc pl-5 text-ink-soft">
+                    {["name", "email", "ticket", "waiver"].map((k) =>
+                      errors[k] ? <li key={k}>{errors[k]}</li> : null,
+                    )}
+                  </ul>
+                </div>
+              )}
+
               <Field
                 label="Full name"
                 htmlFor="name"
@@ -561,8 +578,12 @@ function RunTakomaOnePager() {
                   name="name"
                   type="text"
                   autoComplete="name"
+                  required
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
                   value={form.name}
                   onChange={(e) => update("name", e.target.value)}
+                  onBlur={() => handleBlur("name")}
                   maxLength={100}
                   className={inputCls(!!errors.name)}
                   placeholder="Angela Davis"
@@ -579,8 +600,13 @@ function RunTakomaOnePager() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  required
+                  inputMode="email"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "email-error" : undefined}
                   value={form.email}
                   onChange={(e) => update("email", e.target.value)}
+                  onBlur={() => handleBlur("email")}
                   maxLength={255}
                   className={inputCls(!!errors.email)}
                   placeholder="you@grytrun.com"
@@ -588,14 +614,20 @@ function RunTakomaOnePager() {
               </Field>
 
               <Field label="Ticket" htmlFor="ticket" error={errors.ticket}>
-                <div className="grid grid-cols-3 gap-2">
+                <div
+                  className="grid grid-cols-3 gap-2"
+                  role="radiogroup"
+                  aria-label="Ticket type"
+                  aria-invalid={!!errors.ticket}
+                  aria-describedby={errors.ticket ? "ticket-error" : undefined}
+                >
                   {(
                     [
                       { v: "5k", label: "5K", sub: "Runner" },
                       { v: "walker", label: "Walker", sub: "" },
                       { v: "supporter", label: "Support", sub: "" },
                     ] as const
-                  ).map((opt) => {
+                  ).map((opt, i) => {
                     const active = form.ticket === opt.v;
                     return (
                       <label
@@ -603,10 +635,13 @@ function RunTakomaOnePager() {
                         className={`cursor-pointer border-2 px-2 py-3 text-center display-tight text-sm sm:text-base tracking-wider transition-colors ${
                           active
                             ? "border-forest bg-forest text-forest-ink"
-                            : "border-ink hover:bg-ink hover:text-paper"
+                            : errors.ticket
+                              ? "border-terracotta hover:bg-ink hover:text-paper"
+                              : "border-ink hover:bg-ink hover:text-paper"
                         }`}
                       >
                         <input
+                          id={i === 0 ? "ticket" : undefined}
                           type="radio"
                           name="ticket"
                           value={opt.v}
@@ -628,10 +663,13 @@ function RunTakomaOnePager() {
               <div>
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
+                    id="waiver"
                     type="checkbox"
                     checked={form.waiver}
                     onChange={(e) => update("waiver", e.target.checked)}
-                    className="mt-1 h-5 w-5 accent-[color:var(--color-forest)] border-2 border-ink"
+                    aria-invalid={!!errors.waiver}
+                    aria-describedby={errors.waiver ? "waiver-error" : undefined}
+                    className={`mt-1 h-5 w-5 accent-[color:var(--color-forest)] border-2 ${errors.waiver ? "border-terracotta" : "border-ink"}`}
                   />
                   <span className="text-sm text-ink-soft">
                     I accept the{" "}
@@ -644,9 +682,12 @@ function RunTakomaOnePager() {
                   </span>
                 </label>
                 {errors.waiver && (
-                  <p className="mt-2 text-sm text-terracotta">{errors.waiver}</p>
+                  <p id="waiver-error" className="mt-2 text-sm text-terracotta">
+                    {errors.waiver}
+                  </p>
                 )}
               </div>
+
 
               <button
                 type="submit"

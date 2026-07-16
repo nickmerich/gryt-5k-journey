@@ -85,7 +85,7 @@ function RunTakomaOnePager() {
       }
   >(null);
   const [resendState, setResendState] = useState<
-    { status: "idle" | "sending" | "sent" | "error"; message?: string }
+    { status: "idle" | "sending" | "sent" | "rate_limited" | "error"; message?: string }
   >({ status: "idle" });
   const [submitting, setSubmitting] = useState(false);
 

@@ -34,9 +34,10 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+        const supabaseUrl = process.env.SUPABASE_URL ?? import.meta.env.VITE_SUPABASE_URL
         const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
         if (!supabaseUrl || !serviceKey) {
+          console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY')
           return Response.json({ error: 'Server configuration error' }, { status: 500 })
         }
 

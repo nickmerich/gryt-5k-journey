@@ -338,12 +338,101 @@ function RunTakomaOnePager() {
                 <span className="font-semibold text-ink">
                   {ticketLabel(submitted.ticket)}
                 </span>{" "}
-                entry. A confirmation will hit your inbox before race week.
+                entry. A confirmation is on its way to your inbox.
               </p>
+
+              {/* Strava connect / personalized CTA */}
+              <div className="mt-6 border-t border-hairline pt-6">
+                {submitted.strava ? (
+                  <>
+                    <p className="eyebrow text-forest">Strava connected</p>
+                    <div className="mt-3 flex items-center gap-3">
+                      {submitted.strava.profile ? (
+                        <img
+                          src={submitted.strava.profile}
+                          alt=""
+                          className="h-10 w-10 rounded-full border border-hairline"
+                        />
+                      ) : null}
+                      <p className="text-ink">
+                        Linked as{" "}
+                        <span className="font-semibold">
+                          {submitted.strava.firstname ?? submitted.strava.username ?? "athlete"}
+                        </span>
+                        {submitted.strava.username ? (
+                          <span className="text-ink-soft"> · @{submitted.strava.username}</span>
+                        ) : null}
+                        .
+                      </p>
+                    </div>
+                    <p className="mt-3 text-ink-soft text-sm">
+                      One tap to join the club on Strava — you'll finish the join
+                      in the Strava app.
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      <a
+                        href={STRAVA_CLUB_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-3 display-tight tracking-[0.08em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors"
+                      >
+                        Join GRYT Run Club on Strava
+                      </a>
+                      <a
+                        href={STRAVA_EVENT_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-3 display-tight tracking-[0.08em] border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors"
+                      >
+                        RSVP to race day on Strava
+                      </a>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="eyebrow text-terracotta">Optional · Strava</p>
+                    <p className="mt-2 text-ink">
+                      Connect Strava so we can add your athlete profile to the
+                      race roster and give you a one-tap join for the club.
+                    </p>
+                    {submitted.stravaStatus === "denied" && (
+                      <p className="mt-2 text-sm text-terracotta">
+                        You cancelled the Strava connect. You can still join the
+                        club manually below.
+                      </p>
+                    )}
+                    {submitted.stravaStatus === "error" && (
+                      <p className="mt-2 text-sm text-terracotta">
+                        Something went wrong linking your Strava account. Try
+                        again or join the club manually.
+                      </p>
+                    )}
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      {submitted.registrationId ? (
+                        <a
+                          href={`/api/public/strava/start?rid=${encodeURIComponent(submitted.registrationId)}`}
+                          className="inline-flex items-center justify-center px-6 py-3 display-tight tracking-[0.08em] bg-[#FC4C02] text-white hover:opacity-90 transition-opacity"
+                        >
+                          Connect Strava
+                        </a>
+                      ) : null}
+                      <a
+                        href={STRAVA_CLUB_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-3 display-tight tracking-[0.08em] border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors"
+                      >
+                        Join the club manually
+                      </a>
+                    </div>
+                  </>
+                )}
+              </div>
+
               <button
                 type="button"
                 onClick={() => setSubmitted(null)}
-                className="mt-5 eyebrow underline underline-offset-4 hover:text-terracotta"
+                className="mt-6 eyebrow underline underline-offset-4 hover:text-terracotta"
               >
                 Register another runner
               </button>

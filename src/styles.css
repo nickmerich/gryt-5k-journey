@@ -46,8 +46,9 @@
   --color-forest-ink: var(--forest-ink);
   --color-hairline: var(--hairline);
 
-  --font-display: "Oswald", "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bebas Neue", "Oswald", "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-brush: "Caveat Brush", "Playfair Display", cursive;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 

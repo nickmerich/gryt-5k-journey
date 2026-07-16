@@ -710,6 +710,37 @@ function RunTakomaOnePager() {
                   </p>
                 )}
               </div>
+              <div>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    id="tos"
+                    type="checkbox"
+                    checked={form.tos}
+                    onChange={(e) => update("tos", e.target.checked)}
+                    aria-invalid={!!errors.tos}
+                    aria-describedby={errors.tos ? "tos-error" : undefined}
+                    className={`mt-1 h-5 w-5 accent-[color:var(--color-forest)] border-2 ${errors.tos ? "border-terracotta" : "border-ink"}`}
+                  />
+                  <span className="text-sm text-ink-soft">
+                    I agree to the{" "}
+                    <a
+                      href="/terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-ink underline decoration-terracotta underline-offset-4"
+                    >
+                      Terms of Service
+                    </a>
+                    .
+                  </span>
+                </label>
+                {errors.tos && (
+                  <p id="tos-error" className="mt-2 text-sm text-terracotta">
+                    {errors.tos}
+                  </p>
+                )}
+              </div>
+
 
 
               <button

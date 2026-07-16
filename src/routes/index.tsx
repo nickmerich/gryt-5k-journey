@@ -248,10 +248,6 @@ function RunTakomaOnePager() {
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start">
             <PartnerMark label="smartwater" />
-            <Dot />
-            <PartnerMark label="HeNO." bold />
-            <Dot />
-            <PartnerMark label="Oddisee" />
           </div>
 
           <a

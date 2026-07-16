@@ -760,7 +760,15 @@ function Field({
         {label}
       </label>
       {children}
-      {error && <p className="mt-1.5 text-sm text-terracotta">{error}</p>}
+      {error && (
+        <p
+          id={htmlFor ? `${htmlFor}-error` : undefined}
+          role="alert"
+          className="mt-1.5 text-sm text-terracotta"
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 }

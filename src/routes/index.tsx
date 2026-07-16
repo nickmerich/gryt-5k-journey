@@ -865,6 +865,30 @@ function ticketLabel(v: string) {
   return "Supporter";
 }
 
+function ReceiptRow({
+  label,
+  value,
+  emphasize,
+}: {
+  label: string;
+  value: string;
+  emphasize?: boolean;
+}) {
+  return (
+    <div className="flex items-baseline justify-between gap-4 py-2">
+      <dt className="eyebrow text-ink-soft shrink-0">{label}</dt>
+      <dd
+        className={
+          emphasize
+            ? "text-right font-semibold text-terracotta"
+            : "text-right text-ink"
+        }
+      >
+        {value}
+      </dd>
+    </div>
+  );
+
 function inputCls(hasError: boolean) {
   return [
     "w-full border-2 bg-paper px-4 py-3 text-ink placeholder:text-ink-soft/60",

@@ -85,7 +85,11 @@ function RunTakomaOnePager() {
     | null
     | {
         name: string;
+        email?: string;
         ticket: string;
+        waiverAccepted?: boolean;
+        tosAccepted?: boolean;
+        confirmedAt?: string;
         registrationId: string | null;
         strava: StravaAthlete | null;
         stravaStatus: "idle" | "denied" | "error";
@@ -237,7 +241,11 @@ function RunTakomaOnePager() {
 
       setSubmitted({
         name: parsed.data.name,
+        email: parsed.data.email,
         ticket: parsed.data.ticket,
+        waiverAccepted: parsed.data.waiver,
+        tosAccepted: parsed.data.tos,
+        confirmedAt: new Date().toISOString(),
         registrationId,
         strava: null,
         stravaStatus: "idle",
@@ -402,6 +410,69 @@ function RunTakomaOnePager() {
                 </span>{" "}
                 entry. A confirmation is on its way to your inbox.
               </p>
+
+              {/* Receipt-style summary */}
+              <div className="mt-6 border border-dashed border-forest/60 bg-[color:var(--color-paper)] p-5">
+                <div className="flex items-baseline justify-between gap-4">
+                  <p className="eyebrow text-forest">Registration receipt</p>
+                  <p className="eyebrow text-ink-soft">
+                    #{(submitted.registrationId ?? "pending").slice(0, 8).toUpperCase()}
+                  </p>
+                </div>
+                <p className="mt-3 display-tight text-xl leading-tight text-ink">
+                  Run Takoma With Love 5K
+                </p>
+                <p className="text-ink-soft text-sm">
+                  Sunday, August 2, 2026 · 9:00 AM · Takoma Park, MD
+                </p>
+
+                <dl className="mt-4 divide-y divide-hairline text-sm">
+                  <ReceiptRow label="Name" value={submitted.name} />
+                  {submitted.email && <ReceiptRow label="Email" value={submitted.email} />}
+                  <ReceiptRow label="Event" value="Run Takoma With Love 5K" />
+                  <ReceiptRow label="Date" value="Sun, Aug 2, 2026 · 9:00 AM" />
+                  <ReceiptRow label="Location" value="Takoma Park, MD" />
+                  <ReceiptRow
+                    label="Ticket"
+                    value={ticketLabel(submitted.ticket)}
+                    emphasize
+                  />
+                  <ReceiptRow
+                    label="Price"
+                    value="Community — pay what moves you at check-in"
+                  />
+                  {typeof submitted.waiverAccepted === "boolean" && (
+                    <ReceiptRow
+                      label="Waiver"
+                      value={submitted.waiverAccepted ? "Accepted ✓" : "Not on file"}
+                    />
+                  )}
+                  {typeof submitted.tosAccepted === "boolean" && (
+                    <ReceiptRow
+                      label="Terms of Service"
+                      value={submitted.tosAccepted ? "Accepted ✓" : "Not on file"}
+                    />
+                  )}
+                  {submitted.confirmedAt && (
+                    <ReceiptRow
+                      label="Confirmed"
+                      value={new Date(submitted.confirmedAt).toLocaleString(undefined, {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                      })}
+                    />
+                  )}
+                </dl>
+
+                <p className="mt-4 text-xs text-ink-soft">
+                  Keep this for your records. Present your name at check-in — we'll
+                  have your BIB packet ready.
+                </p>
+              </div>
 
               {/* Strava connect / personalized CTA */}
               <div className="mt-6 border-t border-hairline pt-6">
@@ -793,6 +864,33 @@ function ticketLabel(v: string) {
   if (v === "walker") return "Walker";
   return "Supporter";
 }
+
+function ReceiptRow({
+  label,
+  value,
+  emphasize,
+}: {
+  label: string;
+  value: string;
+  emphasize?: boolean;
+}) {
+  return (
+    <div className="flex items-baseline justify-between gap-4 py-2">
+      <dt className="eyebrow text-ink-soft shrink-0">{label}</dt>
+      <dd
+        className={
+          emphasize
+            ? "text-right font-semibold text-terracotta"
+            : "text-right text-ink"
+        }
+      >
+        {value}
+      </dd>
+    </div>
+  );
+}
+
+
 
 function inputCls(hasError: boolean) {
   return [

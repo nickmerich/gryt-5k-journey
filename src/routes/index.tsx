@@ -55,6 +55,9 @@ const registrationSchema = z.object({
   waiver: z.literal(true, {
     message: "You must accept the waiver to register",
   }),
+  tos: z.literal(true, {
+    message: "You must accept the Terms of Service to register",
+  }),
 });
 
 type FormState = {
@@ -62,6 +65,7 @@ type FormState = {
   email: string;
   ticket: "5k" | "walker" | "supporter" | "";
   waiver: boolean;
+  tos: boolean;
 };
 
 const initialForm: FormState = {
@@ -69,6 +73,7 @@ const initialForm: FormState = {
   email: "",
   ticket: "",
   waiver: false,
+  tos: false,
 };
 
 function RunTakomaOnePager() {

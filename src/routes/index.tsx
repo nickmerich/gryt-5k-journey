@@ -151,7 +151,7 @@ function RunTakomaOnePager() {
     setForm((f) => ({ ...f, [key]: value }));
     // Re-validate live once the field has been touched (or for instant-choice fields).
     setErrors((prev) => {
-      const shouldValidate = touched[key as string] || key === "ticket" || key === "waiver";
+      const shouldValidate = touched[key as string] || key === "ticket" || key === "waiver" || key === "tos";
       if (!shouldValidate) {
         if (!prev[key as string]) return prev;
         const { [key as string]: _drop, ...rest } = prev;
@@ -186,10 +186,10 @@ function RunTakomaOnePager() {
         if (!next[key]) next[key] = issue.message;
       }
       setErrors(next);
-      setTouched({ name: true, email: true, ticket: true, waiver: true });
+      setTouched({ name: true, email: true, ticket: true, waiver: true, tos: true });
       setShowSummary(true);
       // Focus first invalid field for keyboard/screen-reader users.
-      const order = ["name", "email", "ticket", "waiver"];
+      const order = ["name", "email", "ticket", "waiver", "tos"];
       const firstBad = order.find((k) => next[k]);
       if (firstBad && typeof document !== "undefined") {
         const el = document.getElementById(firstBad) as HTMLElement | null;
@@ -221,7 +221,7 @@ function RunTakomaOnePager() {
         if (res.status === 400 && payload.fieldErrors) {
           // Server rejected input — surface field errors inline and keep form values.
           setErrors(payload.fieldErrors);
-          setTouched({ name: true, email: true, ticket: true, waiver: true });
+          setTouched({ name: true, email: true, ticket: true, waiver: true, tos: true });
           setShowSummary(true);
           serverRejected = true;
         } else if (!res.ok) {
@@ -584,7 +584,7 @@ function RunTakomaOnePager() {
                     Please fix the fields below
                   </p>
                   <ul className="mt-1 list-disc pl-5 text-ink-soft">
-                    {["name", "email", "ticket", "waiver"].map((k) =>
+                    {["name", "email", "ticket", "waiver", "tos"].map((k) =>
                       errors[k] ? <li key={k}>{errors[k]}</li> : null,
                     )}
                   </ul>

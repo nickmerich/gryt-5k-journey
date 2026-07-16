@@ -210,11 +210,11 @@ function RunTakomaOnePager() {
       </header>
 
       {/* HERO — official flyer as the branding source of truth */}
-      <section className="relative z-10 mx-auto grid max-w-6xl gap-10 px-6 pt-10 pb-16 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+      <section className="relative z-10 mx-auto grid max-w-6xl gap-8 px-5 pt-6 pb-10 sm:px-6 sm:pt-10 sm:pb-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10">
         <figure className="relative mx-auto w-full max-w-xl">
           <div
             aria-hidden
-            className="absolute -inset-3 -z-10"
+            className="absolute -inset-2 -z-10 sm:-inset-3"
             style={{
               backgroundColor: "var(--color-forest)",
               transform: "rotate(-1.2deg)",
@@ -222,14 +222,31 @@ function RunTakomaOnePager() {
           />
           <img
             src={flyerAsset.url}
-            alt="Run Takoma With Love 5K — official flyer. Presented by GRYT Club, in partnership with smartwater, HeNO, and Oddisee. Sunday August 2, 2026 at 9:00 AM in Takoma Park, Maryland."
+            alt="Run Takoma With Love 5K — official flyer. Presented by GRYT Club, in partnership with smartwater. Sunday August 2, 2026 at 9:00 AM in Takoma Park, Maryland."
             className="block w-full"
             width={1600}
             height={1600}
           />
         </figure>
 
-        <div className="text-center lg:text-left">
+        {/* Mobile: compact CTA under the flyer (flyer already carries the wordmark) */}
+        <div className="lg:hidden text-center">
+          <h1 className="sr-only">
+            Run Takoma With Love 5K — Sunday August 2, 2026, Takoma Park, Maryland
+          </h1>
+          <a
+            href="#register"
+            className="block w-full display-tight text-base tracking-[0.14em] py-4 bg-forest text-[color:var(--color-forest-ink)] active:scale-[0.99] transition-transform"
+          >
+            REGISTER — LOCK IN YOUR SPOT
+          </a>
+          <p className="mt-3 eyebrow text-ink-soft">
+            Sunday · Aug 2, 2026 · 9:00 AM
+          </p>
+        </div>
+
+        {/* Desktop / large: full editorial block */}
+        <div className="hidden lg:block text-center lg:text-left">
           <RuledLabel align="lg-left">Presented by GRYT</RuledLabel>
           <h1 className="mt-5 display-tight text-[clamp(3rem,8vw,5.5rem)] leading-[0.9]">
             <span className="block text-forest">RUN TAKOMA</span>
@@ -268,6 +285,7 @@ function RunTakomaOnePager() {
         </div>
       </section>
 
+
       {/* Torn terracotta ribbon */}
       <section
         className="relative z-10 py-6"
@@ -291,9 +309,10 @@ function RunTakomaOnePager() {
       {/* REGISTRATION FORM */}
       <section
         id="register"
-        className="relative z-10 mx-auto max-w-2xl px-6 pb-24 scroll-mt-16"
+        className="relative z-10 mx-auto max-w-2xl px-5 pb-32 sm:px-6 sm:pb-24 scroll-mt-4 sm:scroll-mt-16"
       >
-        <div className="border-2 border-ink bg-paper-warm p-8 sm:p-10">
+        <div className="border-2 border-ink bg-paper-warm p-5 sm:p-8 md:p-10">
+
           <RuledLabel>Registration</RuledLabel>
           <h2 className="mt-4 display-tight text-4xl sm:text-5xl text-forest">
             Grab your bib.
@@ -527,19 +546,19 @@ function RunTakomaOnePager() {
               </Field>
 
               <Field label="Ticket" htmlFor="ticket" error={errors.ticket}>
-                <div className="grid gap-2 sm:grid-cols-3">
+                <div className="grid grid-cols-3 gap-2">
                   {(
                     [
-                      { v: "5k", label: "5K Runner" },
-                      { v: "walker", label: "Walker" },
-                      { v: "supporter", label: "Supporter" },
+                      { v: "5k", label: "5K", sub: "Runner" },
+                      { v: "walker", label: "Walker", sub: "" },
+                      { v: "supporter", label: "Support", sub: "" },
                     ] as const
                   ).map((opt) => {
                     const active = form.ticket === opt.v;
                     return (
                       <label
                         key={opt.v}
-                        className={`cursor-pointer border-2 px-4 py-3 text-center display-tight tracking-wider transition-colors ${
+                        className={`cursor-pointer border-2 px-2 py-3 text-center display-tight text-sm sm:text-base tracking-wider transition-colors ${
                           active
                             ? "border-forest bg-forest text-forest-ink"
                             : "border-ink hover:bg-ink hover:text-paper"
@@ -554,11 +573,15 @@ function RunTakomaOnePager() {
                           className="sr-only"
                         />
                         {opt.label}
+                        {opt.sub && (
+                          <span className="hidden sm:inline"> {opt.sub}</span>
+                        )}
                       </label>
                     );
                   })}
                 </div>
               </Field>
+
 
               <div>
                 <label className="flex items-start gap-3 cursor-pointer">
@@ -596,12 +619,28 @@ function RunTakomaOnePager() {
       </section>
 
       <footer className="relative z-10 border-t border-hairline">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-8 pb-28 text-center sm:flex-row sm:justify-between sm:pb-8 sm:text-left">
           <p className="eyebrow text-ink-soft">© GRYT Club · Takoma Park, MD</p>
           <p className="eyebrow text-ink-soft">grytrun.com · @grytclub</p>
         </div>
       </footer>
+
+      {/* Sticky mobile CTA — hidden once the user has registered */}
+      {!submitted && (
+        <div
+          className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-ink bg-paper/95 backdrop-blur px-4 pt-3 lg:hidden"
+          style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)" }}
+        >
+          <a
+            href="#register"
+            className="block w-full text-center display-tight text-base tracking-[0.14em] py-3.5 bg-forest text-[color:var(--color-forest-ink)] active:scale-[0.99] transition-transform"
+          >
+            REGISTER — AUG 2
+          </a>
+        </div>
+      )}
     </main>
+
   );
 }
 

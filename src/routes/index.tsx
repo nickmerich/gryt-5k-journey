@@ -85,7 +85,11 @@ function RunTakomaOnePager() {
     | null
     | {
         name: string;
+        email: string;
         ticket: string;
+        waiverAccepted: boolean;
+        tosAccepted: boolean;
+        confirmedAt: string;
         registrationId: string | null;
         strava: StravaAthlete | null;
         stravaStatus: "idle" | "denied" | "error";

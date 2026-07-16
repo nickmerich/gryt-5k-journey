@@ -85,7 +85,7 @@ function RunTakomaOnePager() {
       }
   >(null);
   const [resendState, setResendState] = useState<
-    { status: "idle" | "sending" | "sent" | "error"; message?: string }
+    { status: "idle" | "sending" | "sent" | "rate_limited" | "error"; message?: string }
   >({ status: "idle" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -410,7 +410,11 @@ function RunTakomaOnePager() {
               <div className="mt-6 flex flex-wrap items-center gap-4">
                 <button
                   type="button"
-                  disabled={resendState.status === "sending" || resendState.status === "sent"}
+                  disabled={
+                    resendState.status === "sending" ||
+                    resendState.status === "sent" ||
+                    resendState.status === "rate_limited"
+                  }
                   onClick={async () => {
                     if (!submitted) return;
                     setResendState({ status: "sending" });
@@ -421,25 +425,43 @@ function RunTakomaOnePager() {
                         body: JSON.stringify({ registrationId: submitted.registrationId }),
                       });
                       const payload = (await res.json().catch(() => ({}))) as { error?: string };
-                      if (!res.ok) {
+                      if (res.status === 429) {
+                        setResendState({
+                          status: "rate_limited",
+                          message:
+                            payload.error ??
+                            "You just requested one. Please wait about a minute before trying again.",
+                        });
+                        // Auto-clear after 60s so the user can try again.
+                        setTimeout(() => {
+                          setResendState((s) =>
+                            s.status === "rate_limited" ? { status: "idle" } : s,
+                          );
+                        }, 60_000);
+                      } else if (!res.ok) {
                         setResendState({
                           status: "error",
-                          message: payload.error ?? "Could not resend. Try again shortly.",
+                          message: payload.error ?? "Something went wrong. Please try again.",
                         });
                       } else {
                         setResendState({ status: "sent" });
                       }
                     } catch {
-                      setResendState({ status: "error", message: "Network error. Try again." });
+                      setResendState({
+                        status: "error",
+                        message: "Network error — check your connection and try again.",
+                      });
                     }
                   }}
                   className="eyebrow underline underline-offset-4 hover:text-terracotta disabled:opacity-50 disabled:no-underline"
                 >
                   {resendState.status === "sending"
-                    ? "Resending…"
+                    ? "Sending…"
                     : resendState.status === "sent"
-                      ? "Confirmation resent ✓"
-                      : "Resend confirmation email"}
+                      ? "Sent ✓ — check your inbox"
+                      : resendState.status === "rate_limited"
+                        ? "Please wait a minute…"
+                        : "Didn't get the email? Resend it"}
                 </button>
                 <button
                   type="button"
@@ -452,13 +474,18 @@ function RunTakomaOnePager() {
                   Register another runner
                 </button>
               </div>
-              {resendState.status === "error" && (
-                <p className="mt-2 text-sm text-terracotta">{resendState.message}</p>
-              )}
               {resendState.status === "sent" && (
                 <p className="mt-2 text-sm text-forest">
-                  On its way. Check your inbox — and spam, just in case.
+                  Confirmation email is on its way. Give it a minute, and check your spam folder just in case.
                 </p>
+              )}
+              {resendState.status === "rate_limited" && (
+                <p className="mt-2 text-sm text-ink-soft">
+                  {resendState.message} To prevent spam, resends are limited to once per minute.
+                </p>
+              )}
+              {resendState.status === "error" && (
+                <p className="mt-2 text-sm text-terracotta">{resendState.message}</p>
               )}
             </div>
           ) : (

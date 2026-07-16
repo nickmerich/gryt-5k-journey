@@ -260,8 +260,8 @@ function RunTakomaOnePager() {
 
       {/* Top eyebrow */}
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 pt-6 sm:pt-8">
-        <span className="eyebrow text-ink-soft">GRYT Club · 5K Series</span>
-        <span className="eyebrow text-ink-soft hidden sm:inline">
+        <span className="eyebrow text-forest">GRYT Club · 5K Series</span>
+        <span className="eyebrow text-terracotta hidden sm:inline">
           08 · 02 · 2026
         </span>
       </header>
@@ -293,54 +293,53 @@ function RunTakomaOnePager() {
           </h1>
           <a
             href="#register"
-            className="block w-full display-tight text-base tracking-[0.14em] py-4 bg-forest text-[color:var(--color-forest-ink)] active:scale-[0.99] transition-transform"
+            className="brush-btn block w-full display-tight text-base tracking-[0.14em] py-5 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
           >
             REGISTER — LOCK IN YOUR SPOT
           </a>
-          <p className="mt-3 eyebrow text-ink-soft">
-            Sunday · Aug 2, 2026 · 9:00 AM
+          <p className="mt-3 eyebrow text-forest">
+            <span className="text-terracotta">♡</span> Sunday · Aug 2, 2026 · 9:00 AM <span className="text-terracotta">♡</span>
           </p>
         </div>
 
         {/* Desktop / large: full editorial block */}
         <div className="hidden lg:block text-center lg:text-left">
           <RuledLabel align="lg-left">Presented by GRYT</RuledLabel>
-          <h1 className="mt-5 display-tight text-[clamp(3rem,8vw,5.5rem)] leading-[0.9]">
-            <span className="block text-forest">RUN TAKOMA</span>
-            <span className="mt-2 block serif-italic text-forest text-[clamp(2rem,5vw,3rem)] leading-none">
+          <h1 className="mt-5 display-tight text-[clamp(3rem,8vw,6rem)] leading-[0.88]">
+            <span className="block">
+              <span className="text-forest">RUN </span>
+              <span className="text-terracotta">TAKOMA</span>
+            </span>
+            <span className="mt-3 block brush-script text-forest text-[clamp(2.5rem,6vw,4rem)]">
               with love{" "}
               <span aria-hidden className="text-terracotta">♡</span>
             </span>
-            <span className="mt-2 block text-terracotta">5K</span>
+            <span className="mt-1 block text-forest">5K</span>
           </h1>
 
-          <div className="mt-8 inline-block border-y-2 border-ink py-4 px-2">
-            <p className="display-tight text-terracotta text-lg sm:text-xl">
+          <div className="mt-8 inline-block">
+            <span className="paint-stroke inline-block bg-forest px-6 py-3 display-tight text-[color:var(--color-forest-ink)] text-lg sm:text-xl">
               Sunday · August 2, 2026 · 9:00 AM
-            </p>
-            <p className="mt-1 display-tight text-forest">
+            </span>
+            <p className="mt-3 display-tight text-forest tracking-[0.12em]">
               Takoma Park, Maryland
             </p>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start">
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <span className="eyebrow text-ink-soft">In partnership with</span>
             <PartnerMark label="smartwater" />
           </div>
 
           <a
             href="#register"
-            className="mt-8 inline-flex items-center justify-center px-9 py-4 display-tight text-lg tracking-[0.08em]"
-            style={{
-              backgroundColor: "var(--color-forest)",
-              color: "var(--color-forest-ink)",
-              clipPath:
-                "polygon(2% 15%, 8% 0%, 30% 8%, 55% 0%, 78% 10%, 96% 0%, 100% 40%, 98% 85%, 90% 100%, 65% 92%, 40% 100%, 15% 90%, 0% 100%, 3% 55%)",
-            }}
+            className="brush-btn mt-8 inline-flex items-center justify-center px-10 py-5 display-tight text-lg tracking-[0.1em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors"
           >
             REGISTER | GRYTRUN.COM
           </a>
         </div>
       </section>
+
 
 
       {/* Torn terracotta ribbon */}

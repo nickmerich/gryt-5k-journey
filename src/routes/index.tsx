@@ -288,26 +288,6 @@ function RunTakomaOnePager() {
         </div>
       </section>
 
-      {/* Supporting */}
-      <section className="relative z-10 mx-auto max-w-5xl px-6 py-16">
-        <div className="grid gap-10 sm:grid-cols-3">
-          <Feature
-            kicker="The Route"
-            title="3.1 miles through Takoma"
-            body="A flat, tree-lined loop through the old neighborhoods and back down Carroll Avenue."
-          />
-          <Feature
-            kicker="The Vibe"
-            title="Neighborhood block-party energy"
-            body="DJ Oddisee at the start, HeNO. crew at the finish, coffee, pastries, kids' zone on the field."
-          />
-          <Feature
-            kicker="The Cause"
-            title="Every entry moves the block"
-            body="Proceeds support youth run clubs and community fridges across Takoma Park and Silver Spring."
-          />
-        </div>
-      </section>
 
       {/* REGISTRATION FORM */}
       <section

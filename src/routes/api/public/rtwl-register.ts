@@ -10,12 +10,32 @@ const SENDER_DOMAIN = 'notify.grytrunclub.com'
 const FROM_DOMAIN = 'notify.grytrunclub.com'
 const TEMPLATE_NAME = 'rtwl-confirmation'
 
+// Strict server-side schema. Runs regardless of client-side checks.
+// Name: letters (incl. common accents), spaces, hyphens, apostrophes, dots — 2..100 chars.
+const NAME_RE = /^[\p{L}][\p{L}\p{M}\s'.-]{1,99}$/u
+// Email: RFC-lite; also enforce a real dot in the domain and no spaces.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+const TICKETS = ['5k', 'walker', 'supporter'] as const
+
 const schema = z.object({
-  name: z.string().trim().min(2).max(100),
-  email: z.string().trim().email().max(255),
-  ticket: z.enum(['5k', 'walker', 'supporter']),
-  waiver: z.literal(true),
+  name: z
+    .string()
+    .trim()
+    .min(2, { message: 'Full name is required' })
+    .max(100, { message: 'Name must be under 100 characters' })
+    .regex(NAME_RE, { message: 'Name contains invalid characters' }),
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .min(5, { message: 'Enter a valid email address' })
+    .max(255, { message: 'Email must be under 255 characters' })
+    .email({ message: 'Enter a valid email address' })
+    .regex(EMAIL_RE, { message: 'Enter a valid email address' }),
+  ticket: z.enum(TICKETS, { message: 'Choose a ticket type' }),
+  waiver: z.literal(true, { message: 'You must accept the waiver to register' }),
 })
+
 
 function generateToken(): string {
   const bytes = new Uint8Array(32)
@@ -43,14 +63,27 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
 
         let body: unknown
         try {
-          body = await request.json()
+          // Cap request size to guard against abusive payloads (~8KB is plenty).
+          const raw = await request.text()
+          if (raw.length > 8_192) {
+            return Response.json({ error: 'Payload too large' }, { status: 413 })
+          }
+          body = raw ? JSON.parse(raw) : {}
         } catch {
           return Response.json({ error: 'Invalid JSON' }, { status: 400 })
         }
+        if (!body || typeof body !== 'object' || Array.isArray(body)) {
+          return Response.json({ error: 'Invalid input' }, { status: 400 })
+        }
         const parsed = schema.safeParse(body)
         if (!parsed.success) {
+          const fieldErrors: Record<string, string> = {}
+          for (const issue of parsed.error.issues) {
+            const key = String(issue.path[0] ?? 'form')
+            if (!fieldErrors[key]) fieldErrors[key] = issue.message
+          }
           return Response.json(
-            { error: 'Invalid input', issues: parsed.error.issues },
+            { error: 'Invalid input', fieldErrors },
             { status: 400 },
           )
         }

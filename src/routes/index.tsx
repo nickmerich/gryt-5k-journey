@@ -201,6 +201,7 @@ function RunTakomaOnePager() {
       localStorage.setItem(key, JSON.stringify(existing));
 
       let registrationId: string | null = null;
+      let serverRejected = false;
       try {
         const res = await fetch("/api/public/rtwl-register", {
           method: "POST",
@@ -209,12 +210,25 @@ function RunTakomaOnePager() {
         });
         const payload = (await res.json().catch(() => ({}))) as {
           registrationId?: string | null;
+          fieldErrors?: Record<string, string>;
+          error?: string;
         };
-        if (!res.ok) console.warn("Registration email request failed", payload);
-        registrationId = payload.registrationId ?? null;
+        if (res.status === 400 && payload.fieldErrors) {
+          // Server rejected input — surface field errors inline and keep form values.
+          setErrors(payload.fieldErrors);
+          setTouched({ name: true, email: true, ticket: true, waiver: true });
+          setShowSummary(true);
+          serverRejected = true;
+        } else if (!res.ok) {
+          console.warn("Registration email request failed", payload);
+        } else {
+          registrationId = payload.registrationId ?? null;
+        }
       } catch (err) {
         console.warn("Registration email request errored", err);
       }
+
+      if (serverRejected) return;
 
       setSubmitted({
         name: parsed.data.name,
@@ -226,6 +240,7 @@ function RunTakomaOnePager() {
       setForm(initialForm);
       setErrors({});
       setTouched({});
+
     } finally {
       setSubmitting(false);
     }

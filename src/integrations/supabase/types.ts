@@ -101,6 +101,51 @@ export type Database = {
         }
         Relationships: []
       }
+      rtwl_registrations: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          strava_athlete_firstname: string | null
+          strava_athlete_id: number | null
+          strava_athlete_lastname: string | null
+          strava_athlete_profile: string | null
+          strava_athlete_username: string | null
+          strava_connected_at: string | null
+          ticket: string
+          waiver_accepted: boolean
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          strava_athlete_firstname?: string | null
+          strava_athlete_id?: number | null
+          strava_athlete_lastname?: string | null
+          strava_athlete_profile?: string | null
+          strava_athlete_username?: string | null
+          strava_connected_at?: string | null
+          ticket: string
+          waiver_accepted?: boolean
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          strava_athlete_firstname?: string | null
+          strava_athlete_id?: number | null
+          strava_athlete_lastname?: string | null
+          strava_athlete_profile?: string | null
+          strava_athlete_username?: string | null
+          strava_connected_at?: string | null
+          ticket?: string
+          waiver_accepted?: boolean
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string

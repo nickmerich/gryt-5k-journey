@@ -1,7 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
+
+const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
+const STRAVA_EVENT_URL =
+  "https://www.strava.com/clubs/1708552/group_events/3512937555494892876/occurrences/FQIWmNW3loWGu8BhHBTUHxQQFAQUEhQAFAAAHBaAwvqo-GcAAA==";
+
+type StravaAthlete = {
+  id: string;
+  firstname: string | null;
+  username: string | null;
+  profile: string | null;
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,8 +74,60 @@ const initialForm: FormState = {
 function RunTakomaOnePager() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState<null | { name: string; ticket: string }>(null);
+  const [submitted, setSubmitted] = useState<
+    | null
+    | {
+        name: string;
+        ticket: string;
+        registrationId: string | null;
+        strava: StravaAthlete | null;
+        stravaStatus: "idle" | "denied" | "error";
+      }
+  >(null);
   const [submitting, setSubmitting] = useState(false);
+
+  // On mount, detect Strava OAuth return via query string and hydrate the success state.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const strava = params.get("strava");
+    const rid = params.get("rid");
+    if (!strava || !rid) return;
+
+    // Clean the URL so a refresh doesn't re-trigger this.
+    const clean = new URL(window.location.href);
+    clean.searchParams.delete("strava");
+    clean.searchParams.delete("rid");
+    clean.searchParams.delete("reason");
+    window.history.replaceState({}, "", clean.pathname + clean.search + "#register");
+
+    (async () => {
+      try {
+        const res = await fetch(`/api/public/strava/status?rid=${encodeURIComponent(rid)}`);
+        if (!res.ok) throw new Error("status failed");
+        const data = (await res.json()) as {
+          name: string;
+          ticket: string;
+          strava: StravaAthlete | null;
+        };
+        setSubmitted({
+          name: data.name,
+          ticket: data.ticket,
+          registrationId: rid,
+          strava: data.strava,
+          stravaStatus: strava === "denied" ? "denied" : strava === "ok" ? "idle" : "error",
+        });
+      } catch {
+        setSubmitted((s) => s ?? {
+          name: "runner",
+          ticket: "5k",
+          registrationId: rid,
+          strava: null,
+          stravaStatus: strava === "denied" ? "denied" : "error",
+        });
+      }
+    })();
+  }, []);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -94,21 +157,29 @@ function RunTakomaOnePager() {
       existing.push({ ...parsed.data, ts: new Date().toISOString() });
       localStorage.setItem(key, JSON.stringify(existing));
 
+      let registrationId: string | null = null;
       try {
         const res = await fetch("/api/public/rtwl-register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(parsed.data),
         });
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}));
-          console.warn("Registration email request failed", err);
-        }
+        const payload = (await res.json().catch(() => ({}))) as {
+          registrationId?: string | null;
+        };
+        if (!res.ok) console.warn("Registration email request failed", payload);
+        registrationId = payload.registrationId ?? null;
       } catch (err) {
         console.warn("Registration email request errored", err);
       }
 
-      setSubmitted({ name: parsed.data.name, ticket: parsed.data.ticket });
+      setSubmitted({
+        name: parsed.data.name,
+        ticket: parsed.data.ticket,
+        registrationId,
+        strava: null,
+        stravaStatus: "idle",
+      });
       setForm(initialForm);
     } finally {
       setSubmitting(false);
@@ -267,12 +338,101 @@ function RunTakomaOnePager() {
                 <span className="font-semibold text-ink">
                   {ticketLabel(submitted.ticket)}
                 </span>{" "}
-                entry. A confirmation will hit your inbox before race week.
+                entry. A confirmation is on its way to your inbox.
               </p>
+
+              {/* Strava connect / personalized CTA */}
+              <div className="mt-6 border-t border-hairline pt-6">
+                {submitted.strava ? (
+                  <>
+                    <p className="eyebrow text-forest">Strava connected</p>
+                    <div className="mt-3 flex items-center gap-3">
+                      {submitted.strava.profile ? (
+                        <img
+                          src={submitted.strava.profile}
+                          alt=""
+                          className="h-10 w-10 rounded-full border border-hairline"
+                        />
+                      ) : null}
+                      <p className="text-ink">
+                        Linked as{" "}
+                        <span className="font-semibold">
+                          {submitted.strava.firstname ?? submitted.strava.username ?? "athlete"}
+                        </span>
+                        {submitted.strava.username ? (
+                          <span className="text-ink-soft"> · @{submitted.strava.username}</span>
+                        ) : null}
+                        .
+                      </p>
+                    </div>
+                    <p className="mt-3 text-ink-soft text-sm">
+                      One tap to join the club on Strava — you'll finish the join
+                      in the Strava app.
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      <a
+                        href={STRAVA_CLUB_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-3 display-tight tracking-[0.08em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors"
+                      >
+                        Join GRYT Run Club on Strava
+                      </a>
+                      <a
+                        href={STRAVA_EVENT_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-3 display-tight tracking-[0.08em] border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors"
+                      >
+                        RSVP to race day on Strava
+                      </a>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="eyebrow text-terracotta">Optional · Strava</p>
+                    <p className="mt-2 text-ink">
+                      Connect Strava so we can add your athlete profile to the
+                      race roster and give you a one-tap join for the club.
+                    </p>
+                    {submitted.stravaStatus === "denied" && (
+                      <p className="mt-2 text-sm text-terracotta">
+                        You cancelled the Strava connect. You can still join the
+                        club manually below.
+                      </p>
+                    )}
+                    {submitted.stravaStatus === "error" && (
+                      <p className="mt-2 text-sm text-terracotta">
+                        Something went wrong linking your Strava account. Try
+                        again or join the club manually.
+                      </p>
+                    )}
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      {submitted.registrationId ? (
+                        <a
+                          href={`/api/public/strava/start?rid=${encodeURIComponent(submitted.registrationId)}`}
+                          className="inline-flex items-center justify-center px-6 py-3 display-tight tracking-[0.08em] bg-[#FC4C02] text-white hover:opacity-90 transition-opacity"
+                        >
+                          Connect Strava
+                        </a>
+                      ) : null}
+                      <a
+                        href={STRAVA_CLUB_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-3 display-tight tracking-[0.08em] border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors"
+                      >
+                        Join the club manually
+                      </a>
+                    </div>
+                  </>
+                )}
+              </div>
+
               <button
                 type="button"
                 onClick={() => setSubmitted(null)}
-                className="mt-5 eyebrow underline underline-offset-4 hover:text-terracotta"
+                className="mt-6 eyebrow underline underline-offset-4 hover:text-terracotta"
               >
                 Register another runner
               </button>

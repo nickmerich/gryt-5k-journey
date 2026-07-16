@@ -624,7 +624,23 @@ function RunTakomaOnePager() {
           <p className="eyebrow text-ink-soft">grytrun.com · @grytclub</p>
         </div>
       </footer>
+
+      {/* Sticky mobile CTA — hidden once the user has registered */}
+      {!submitted && (
+        <div
+          className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-ink bg-paper/95 backdrop-blur px-4 pt-3 lg:hidden"
+          style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)" }}
+        >
+          <a
+            href="#register"
+            className="block w-full text-center display-tight text-base tracking-[0.14em] py-3.5 bg-forest text-[color:var(--color-forest-ink)] active:scale-[0.99] transition-transform"
+          >
+            REGISTER — AUG 2
+          </a>
+        </div>
+      )}
     </main>
+
   );
 }
 

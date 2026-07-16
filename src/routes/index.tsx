@@ -78,7 +78,6 @@ function RunTakomaOnePager() {
     | null
     | {
         name: string;
-        email: string;
         ticket: string;
         registrationId: string | null;
         strava: StravaAthlete | null;

@@ -708,9 +708,9 @@ function RunTakomaOnePager() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full display-tight text-lg tracking-[0.08em] py-4 bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors disabled:opacity-60"
+                className="brush-btn w-full display-tight text-lg tracking-[0.1em] py-5 bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors disabled:opacity-60"
               >
-                {submitting ? "Signing you up…" : "Lock in my spot"}
+                {submitting ? "Signing you up…" : "LOCK IN MY SPOT ♡"}
               </button>
             </form>
           )}

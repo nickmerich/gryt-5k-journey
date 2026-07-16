@@ -78,12 +78,16 @@ function RunTakomaOnePager() {
     | null
     | {
         name: string;
+        email: string;
         ticket: string;
         registrationId: string | null;
         strava: StravaAthlete | null;
         stravaStatus: "idle" | "denied" | "error";
       }
   >(null);
+  const [resendState, setResendState] = useState<
+    { status: "idle" | "sending" | "sent" | "error"; message?: string }
+  >({ status: "idle" });
   const [submitting, setSubmitting] = useState(false);
 
   // On mount, detect Strava OAuth return via query string and hydrate the success state.

@@ -1,7 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
+
+const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
+const STRAVA_EVENT_URL =
+  "https://www.strava.com/clubs/1708552/group_events/3512937555494892876/occurrences/FQIWmNW3loWGu8BhHBTUHxQQFAQUEhQAFAAAHBaAwvqo-GcAAA==";
+
+type StravaAthlete = {
+  id: string;
+  firstname: string | null;
+  username: string | null;
+  profile: string | null;
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({

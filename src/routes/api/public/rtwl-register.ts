@@ -176,7 +176,7 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
           )
         }
 
-        return Response.json({ success: true, emailed: true })
+        return Response.json({ success: true, emailed: true, registrationId })
       },
     },
   },

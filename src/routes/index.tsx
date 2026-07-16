@@ -157,21 +157,29 @@ function RunTakomaOnePager() {
       existing.push({ ...parsed.data, ts: new Date().toISOString() });
       localStorage.setItem(key, JSON.stringify(existing));
 
+      let registrationId: string | null = null;
       try {
         const res = await fetch("/api/public/rtwl-register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(parsed.data),
         });
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}));
-          console.warn("Registration email request failed", err);
-        }
+        const payload = (await res.json().catch(() => ({}))) as {
+          registrationId?: string | null;
+        };
+        if (!res.ok) console.warn("Registration email request failed", payload);
+        registrationId = payload.registrationId ?? null;
       } catch (err) {
         console.warn("Registration email request errored", err);
       }
 
-      setSubmitted({ name: parsed.data.name, ticket: parsed.data.ticket });
+      setSubmitted({
+        name: parsed.data.name,
+        ticket: parsed.data.ticket,
+        registrationId,
+        strava: null,
+        stravaStatus: "idle",
+      });
       setForm(initialForm);
     } finally {
       setSubmitting(false);

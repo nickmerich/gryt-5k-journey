@@ -91,6 +91,10 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
         const recipient = email
         const normalized = recipient.toLowerCase()
 
+        const template = TEMPLATES[TEMPLATE_NAME]
+        if (!template) {
+          return Response.json({ error: 'Template missing' }, { status: 500 })
+        }
 
         const supabase = createClient(supabaseUrl, serviceKey)
         const messageId = crypto.randomUUID()

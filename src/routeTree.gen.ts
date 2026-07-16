@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
+import { Route as ApiPublicEnvcheckRouteImport } from './routes/api/public/envcheck'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -38,6 +39,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
 const ApiPublicRtwlRegisterRoute = ApiPublicRtwlRegisterRouteImport.update({
   id: '/api/public/rtwl-register',
   path: '/api/public/rtwl-register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicEnvcheckRoute = ApiPublicEnvcheckRouteImport.update({
+  id: '/api/public/envcheck',
+  path: '/api/public/envcheck',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LovableEmailTransactionalSendRoute =
@@ -77,6 +83,7 @@ const ApiPublicStravaCallbackRoute = ApiPublicStravaCallbackRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/api/public/envcheck': typeof ApiPublicEnvcheckRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/api/public/envcheck': typeof ApiPublicEnvcheckRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/api/public/envcheck': typeof ApiPublicEnvcheckRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/email/unsubscribe'
+    | '/api/public/envcheck'
     | '/api/public/rtwl-register'
     | '/lovable/email/suppression'
     | '/api/public/strava/callback'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/email/unsubscribe'
+    | '/api/public/envcheck'
     | '/api/public/rtwl-register'
     | '/lovable/email/suppression'
     | '/api/public/strava/callback'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/email/unsubscribe'
+    | '/api/public/envcheck'
     | '/api/public/rtwl-register'
     | '/lovable/email/suppression'
     | '/api/public/strava/callback'
@@ -153,6 +165,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  ApiPublicEnvcheckRoute: typeof ApiPublicEnvcheckRoute
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicStravaCallbackRoute: typeof ApiPublicStravaCallbackRoute
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/rtwl-register'
       fullPath: '/api/public/rtwl-register'
       preLoaderRoute: typeof ApiPublicRtwlRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/envcheck': {
+      id: '/api/public/envcheck'
+      path: '/api/public/envcheck'
+      fullPath: '/api/public/envcheck'
+      preLoaderRoute: typeof ApiPublicEnvcheckRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/transactional/send': {
@@ -241,6 +261,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  ApiPublicEnvcheckRoute: ApiPublicEnvcheckRoute,
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicStravaCallbackRoute: ApiPublicStravaCallbackRoute,
@@ -253,3 +274,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

@@ -134,12 +134,40 @@ function RunTakomaOnePager() {
     })();
   }, []);
 
+  function validateField<K extends keyof FormState>(key: K, value: FormState[K]): string | null {
+    const shape = (registrationSchema as unknown as { shape: Record<string, z.ZodTypeAny> }).shape;
+    const fieldSchema = shape[key as string];
+    if (!fieldSchema) return null;
+    const result = fieldSchema.safeParse(value);
+    return result.success ? null : result.error.issues[0]?.message ?? "Invalid value";
+  }
+
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
-    setErrors((e) => {
-      if (!e[key]) return e;
-      const { [key]: _drop, ...rest } = e;
-      return rest;
+    // Re-validate live once the field has been touched (or for instant-choice fields).
+    setErrors((prev) => {
+      const shouldValidate = touched[key as string] || key === "ticket" || key === "waiver";
+      if (!shouldValidate) {
+        if (!prev[key as string]) return prev;
+        const { [key as string]: _drop, ...rest } = prev;
+        return rest;
+      }
+      const msg = validateField(key, value);
+      const next = { ...prev };
+      if (msg) next[key as string] = msg;
+      else delete next[key as string];
+      return next;
+    });
+  }
+
+  function handleBlur<K extends keyof FormState>(key: K) {
+    setTouched((t) => (t[key as string] ? t : { ...t, [key as string]: true }));
+    const msg = validateField(key, form[key]);
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (msg) next[key as string] = msg;
+      else delete next[key as string];
+      return next;
     });
   }
 
@@ -153,8 +181,18 @@ function RunTakomaOnePager() {
         if (!next[key]) next[key] = issue.message;
       }
       setErrors(next);
+      setTouched({ name: true, email: true, ticket: true, waiver: true });
+      setShowSummary(true);
+      // Focus first invalid field for keyboard/screen-reader users.
+      const order = ["name", "email", "ticket", "waiver"];
+      const firstBad = order.find((k) => next[k]);
+      if (firstBad && typeof document !== "undefined") {
+        const el = document.getElementById(firstBad) as HTMLElement | null;
+        el?.focus();
+      }
       return;
     }
+    setShowSummary(false);
     setSubmitting(true);
     try {
       const key = "rtwl-registrations";

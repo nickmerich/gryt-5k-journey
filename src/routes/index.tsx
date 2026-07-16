@@ -74,6 +74,8 @@ const initialForm: FormState = {
 function RunTakomaOnePager() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [showSummary, setShowSummary] = useState(false);
   const [submitted, setSubmitted] = useState<
     | null
     | {

@@ -1,4 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { z } from "zod";
+import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -7,22 +10,98 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Run Takoma, with love. A neighborhood 5K from GRYT Club — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, Maryland. Community. Movement. Takoma.",
+          "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee.",
       },
       { property: "og:title", content: "Run Takoma With Love 5K — GRYT Club" },
       {
         property: "og:description",
         content:
-          "Sunday, August 2, 2026 · 9:00 AM · Takoma Park, MD. Presented by GRYT in partnership with smartwater.",
+          "Sunday, August 2, 2026 · 9:00 AM · Takoma Park, MD. Community. Movement. Takoma.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: flyerAsset.url },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: flyerAsset.url },
     ],
   }),
   component: RunTakomaOnePager,
 });
 
+const registrationSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, { message: "Full name is required" })
+    .max(100, { message: "Name must be under 100 characters" }),
+  email: z
+    .string()
+    .trim()
+    .email({ message: "Enter a valid email address" })
+    .max(255),
+  ticket: z.enum(["5k", "walker", "supporter"], {
+    message: "Choose a ticket type",
+  }),
+  waiver: z.literal(true, {
+    message: "You must accept the waiver to register",
+  }),
+});
+
+type FormState = {
+  name: string;
+  email: string;
+  ticket: "5k" | "walker" | "supporter" | "";
+  waiver: boolean;
+};
+
+const initialForm: FormState = {
+  name: "",
+  email: "",
+  ticket: "",
+  waiver: false,
+};
+
 function RunTakomaOnePager() {
+  const [form, setForm] = useState<FormState>(initialForm);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitted, setSubmitted] = useState<null | { name: string; ticket: string }>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  function update<K extends keyof FormState>(key: K, value: FormState[K]) {
+    setForm((f) => ({ ...f, [key]: value }));
+    setErrors((e) => {
+      if (!e[key]) return e;
+      const { [key]: _drop, ...rest } = e;
+      return rest;
+    });
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const parsed = registrationSchema.safeParse(form);
+    if (!parsed.success) {
+      const next: Record<string, string> = {};
+      for (const issue of parsed.error.issues) {
+        const key = String(issue.path[0] ?? "form");
+        if (!next[key]) next[key] = issue.message;
+      }
+      setErrors(next);
+      return;
+    }
+    setSubmitting(true);
+    try {
+      // Persist locally so the form is genuinely functional without a backend.
+      const key = "rtwl-registrations";
+      const existing = JSON.parse(localStorage.getItem(key) ?? "[]");
+      existing.push({ ...parsed.data, ts: new Date().toISOString() });
+      localStorage.setItem(key, JSON.stringify(existing));
+      await new Promise((r) => setTimeout(r, 400));
+      setSubmitted({ name: parsed.data.name, ticket: parsed.data.ticket });
+      setForm(initialForm);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
       {/* Paper grain / vignette */}
@@ -31,11 +110,11 @@ function RunTakomaOnePager() {
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse at 30% 15%, oklch(0.34 0.045 165 / 0.18), transparent 55%), radial-gradient(ellipse at 80% 85%, oklch(0.60 0.15 32 / 0.14), transparent 55%), url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.15 0 0 0 0 0.12 0 0 0 0 0.08 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")",
+            "radial-gradient(ellipse at 30% 15%, oklch(0.34 0.045 165 / 0.18), transparent 55%), radial-gradient(ellipse at 80% 85%, oklch(0.60 0.15 32 / 0.14), transparent 55%)",
         }}
       />
 
-      {/* Top rule / eyebrow bar */}
+      {/* Top eyebrow */}
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 pt-6 sm:pt-8">
         <span className="eyebrow text-ink-soft">GRYT Club · 5K Series</span>
         <span className="eyebrow text-ink-soft hidden sm:inline">
@@ -43,71 +122,72 @@ function RunTakomaOnePager() {
         </span>
       </header>
 
-      {/* HERO */}
-      <section className="relative z-10 mx-auto max-w-4xl px-6 pt-10 pb-16 text-center sm:pt-14">
-        <ShieldLogo className="mx-auto h-40 w-40 sm:h-48 sm:w-48" />
+      {/* HERO — official flyer as the branding source of truth */}
+      <section className="relative z-10 mx-auto grid max-w-6xl gap-10 px-6 pt-10 pb-16 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+        <figure className="relative mx-auto w-full max-w-xl">
+          <div
+            aria-hidden
+            className="absolute -inset-3 -z-10"
+            style={{
+              backgroundColor: "var(--color-forest)",
+              transform: "rotate(-1.2deg)",
+            }}
+          />
+          <img
+            src={flyerAsset.url}
+            alt="Run Takoma With Love 5K — official flyer. Presented by GRYT Club, in partnership with smartwater, HeNO, and Oddisee. Sunday August 2, 2026 at 9:00 AM in Takoma Park, Maryland."
+            className="block w-full"
+            width={1600}
+            height={1600}
+          />
+        </figure>
 
-        <RuledLabel className="mt-6">Presented by GRYT</RuledLabel>
+        <div className="text-center lg:text-left">
+          <RuledLabel align="lg-left">Presented by GRYT</RuledLabel>
+          <h1 className="mt-5 display-tight text-[clamp(3rem,8vw,5.5rem)] leading-[0.9]">
+            <span className="block text-forest">RUN TAKOMA</span>
+            <span className="mt-2 block serif-italic text-forest text-[clamp(2rem,5vw,3rem)] leading-none">
+              with love{" "}
+              <span aria-hidden className="text-terracotta">♡</span>
+            </span>
+            <span className="mt-2 block text-terracotta">5K</span>
+          </h1>
 
-        <h1 className="mt-6 display-tight text-[clamp(4rem,14vw,10rem)] leading-[0.88]">
-          <span className="block text-forest">RUN</span>
-          <span className="block text-terracotta">TAKOMA</span>
-        </h1>
-
-        <p className="mt-4 serif-italic text-forest text-[clamp(2.25rem,6vw,4rem)] leading-none">
-          with love{" "}
-          <span aria-hidden className="inline-block align-middle text-terracotta">
-            ♡
-          </span>
-        </p>
-
-        <div className="mt-2 flex items-center justify-center gap-3">
-          <Dash />
-          <span className="display-tight text-forest text-[clamp(2rem,5vw,3rem)]">
-            5K
-          </span>
-          <Dash />
-        </div>
-
-        {/* Date / Location card */}
-        <div className="mx-auto mt-10 max-w-md">
-          <div className="border-y-2 border-ink py-5">
-            <p className="display-tight text-terracotta text-xl sm:text-2xl">
-              Sunday August 2, 2026 · 9:00 AM
+          <div className="mt-8 inline-block border-y-2 border-ink py-4 px-2">
+            <p className="display-tight text-terracotta text-lg sm:text-xl">
+              Sunday · August 2, 2026 · 9:00 AM
             </p>
-            <p className="mt-2 display-tight text-forest text-lg sm:text-xl">
+            <p className="mt-1 display-tight text-forest">
               Takoma Park, Maryland
             </p>
           </div>
 
-          <RuledLabel className="mt-6">In partnership with</RuledLabel>
-          <p className="mt-3 font-sans font-bold text-2xl tracking-tight text-ink">
-            smartwater<span className="align-super text-[0.5em]">®</span>
-          </p>
-        </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start">
+            <PartnerMark label="smartwater" />
+            <Dot />
+            <PartnerMark label="HeNO." bold />
+            <Dot />
+            <PartnerMark label="Oddisee" />
+          </div>
 
-        {/* Register CTA — brushstroke pill */}
-        <a
-          href="https://grytrun.com"
-          target="_blank"
-          rel="noreferrer"
-          className="group relative mt-10 inline-flex items-center justify-center px-10 py-5"
-          style={{
-            backgroundColor: "var(--color-forest)",
-            color: "var(--color-forest-ink)",
-            clipPath:
-              "polygon(2% 15%, 8% 0%, 30% 8%, 55% 0%, 78% 10%, 96% 0%, 100% 40%, 98% 85%, 90% 100%, 65% 92%, 40% 100%, 15% 90%, 0% 100%, 3% 55%)",
-          }}
-        >
-          <span className="display-tight text-xl sm:text-2xl tracking-[0.08em]">
+          <a
+            href="#register"
+            className="mt-8 inline-flex items-center justify-center px-9 py-4 display-tight text-lg tracking-[0.08em]"
+            style={{
+              backgroundColor: "var(--color-forest)",
+              color: "var(--color-forest-ink)",
+              clipPath:
+                "polygon(2% 15%, 8% 0%, 30% 8%, 55% 0%, 78% 10%, 96% 0%, 100% 40%, 98% 85%, 90% 100%, 65% 92%, 40% 100%, 15% 90%, 0% 100%, 3% 55%)",
+            }}
+          >
             REGISTER | GRYTRUN.COM
-          </span>
-        </a>
+          </a>
+        </div>
       </section>
 
       {/* Torn terracotta ribbon */}
       <section
-        className="relative z-10 mt-4 py-6"
+        className="relative z-10 py-6"
         style={{
           backgroundColor: "var(--color-terracotta)",
           color: "var(--color-terracotta-ink)",
@@ -116,30 +196,26 @@ function RunTakomaOnePager() {
         }}
       >
         <div className="mx-auto flex max-w-4xl items-center justify-center gap-6 px-6 pt-4">
-          <span aria-hidden className="serif-italic text-2xl text-forest">
-            ♡
-          </span>
+          <span aria-hidden className="serif-italic text-2xl text-forest">♡</span>
           <p className="display-tight text-sm sm:text-base tracking-[0.32em] text-center">
             COMMUNITY. &nbsp; MOVEMENT. &nbsp; TAKOMA.
           </p>
-          <span aria-hidden className="serif-italic text-2xl text-forest">
-            ♡
-          </span>
+          <span aria-hidden className="serif-italic text-2xl text-forest">♡</span>
         </div>
       </section>
 
-      {/* Supporting one-pager sections */}
+      {/* Supporting */}
       <section className="relative z-10 mx-auto max-w-5xl px-6 py-16">
         <div className="grid gap-10 sm:grid-cols-3">
           <Feature
             kicker="The Route"
             title="3.1 miles through Takoma"
-            body="A flat, tree-lined loop from Ed Wilhelm Field, out through the old neighborhoods and back down Carroll Avenue."
+            body="A flat, tree-lined loop through the old neighborhoods and back down Carroll Avenue."
           />
           <Feature
             kicker="The Vibe"
-            title="Neighborhood block party energy"
-            body="Live DJ at the start, coffee and pastries at the finish, kids' zone on the field. Come for the run, stay for the morning."
+            title="Neighborhood block-party energy"
+            body="DJ Oddisee at the start, HeNO. crew at the finish, coffee, pastries, kids' zone on the field."
           />
           <Feature
             kicker="The Cause"
@@ -149,40 +225,229 @@ function RunTakomaOnePager() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* REGISTRATION FORM */}
+      <section
+        id="register"
+        className="relative z-10 mx-auto max-w-2xl px-6 pb-24 scroll-mt-16"
+      >
+        <div className="border-2 border-ink bg-paper-warm p-8 sm:p-10">
+          <RuledLabel>Registration</RuledLabel>
+          <h2 className="mt-4 display-tight text-4xl sm:text-5xl text-forest">
+            Grab your bib.
+          </h2>
+          <p className="mt-3 text-ink-soft">
+            All finishers get a hand-numbered patch. Community pricing — pay
+            what moves you at check-in.
+          </p>
+
+          {submitted ? (
+            <div
+              role="status"
+              className="mt-8 border-2 border-forest bg-paper p-6"
+            >
+              <p className="eyebrow text-terracotta">You're in</p>
+              <p className="mt-2 display-tight text-2xl text-forest">
+                See you Sunday, {submitted.name.split(" ")[0]}.
+              </p>
+              <p className="mt-2 text-ink-soft">
+                We saved your spot for the{" "}
+                <span className="font-semibold text-ink">
+                  {ticketLabel(submitted.ticket)}
+                </span>{" "}
+                entry. A confirmation will hit your inbox before race week.
+              </p>
+              <button
+                type="button"
+                onClick={() => setSubmitted(null)}
+                className="mt-5 eyebrow underline underline-offset-4 hover:text-terracotta"
+              >
+                Register another runner
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-6">
+              <Field
+                label="Full name"
+                htmlFor="name"
+                error={errors.name}
+              >
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  value={form.name}
+                  onChange={(e) => update("name", e.target.value)}
+                  maxLength={100}
+                  className={inputCls(!!errors.name)}
+                  placeholder="Angela Davis"
+                />
+              </Field>
+
+              <Field
+                label="Email"
+                htmlFor="email"
+                error={errors.email}
+              >
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={form.email}
+                  onChange={(e) => update("email", e.target.value)}
+                  maxLength={255}
+                  className={inputCls(!!errors.email)}
+                  placeholder="you@grytrun.com"
+                />
+              </Field>
+
+              <Field label="Ticket" htmlFor="ticket" error={errors.ticket}>
+                <div className="grid gap-2 sm:grid-cols-3">
+                  {(
+                    [
+                      { v: "5k", label: "5K Runner" },
+                      { v: "walker", label: "Walker" },
+                      { v: "supporter", label: "Supporter" },
+                    ] as const
+                  ).map((opt) => {
+                    const active = form.ticket === opt.v;
+                    return (
+                      <label
+                        key={opt.v}
+                        className={`cursor-pointer border-2 px-4 py-3 text-center display-tight tracking-wider transition-colors ${
+                          active
+                            ? "border-forest bg-forest text-forest-ink"
+                            : "border-ink hover:bg-ink hover:text-paper"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="ticket"
+                          value={opt.v}
+                          checked={active}
+                          onChange={() => update("ticket", opt.v)}
+                          className="sr-only"
+                        />
+                        {opt.label}
+                      </label>
+                    );
+                  })}
+                </div>
+              </Field>
+
+              <div>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.waiver}
+                    onChange={(e) => update("waiver", e.target.checked)}
+                    className="mt-1 h-5 w-5 accent-[color:var(--color-forest)] border-2 border-ink"
+                  />
+                  <span className="text-sm text-ink-soft">
+                    I accept the{" "}
+                    <span className="font-semibold text-ink">
+                      GRYT Club participant waiver
+                    </span>{" "}
+                    and understand that running is a physical activity with
+                    inherent risks. I'm here on my own recognizance to do hard
+                    things, together.
+                  </span>
+                </label>
+                {errors.waiver && (
+                  <p className="mt-2 text-sm text-terracotta">{errors.waiver}</p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full display-tight text-lg tracking-[0.08em] py-4 bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors disabled:opacity-60"
+              >
+                {submitting ? "Signing you up…" : "Lock in my spot"}
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+
       <footer className="relative z-10 border-t border-hairline">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left">
-          <p className="eyebrow text-ink-soft">
-            © GRYT Club · Takoma Park, MD
-          </p>
-          <p className="eyebrow text-ink-soft">
-            grytrun.com · @grytclub
-          </p>
+          <p className="eyebrow text-ink-soft">© GRYT Club · Takoma Park, MD</p>
+          <p className="eyebrow text-ink-soft">grytrun.com · @grytclub</p>
         </div>
       </footer>
     </main>
   );
 }
 
-/* ------------------------------ bits ------------------------------ */
+/* --- helpers --- */
 
-function Dash() {
+function ticketLabel(v: string) {
+  if (v === "5k") return "5K Runner";
+  if (v === "walker") return "Walker";
+  return "Supporter";
+}
+
+function inputCls(hasError: boolean) {
+  return [
+    "w-full border-2 bg-paper px-4 py-3 text-ink placeholder:text-ink-soft/60",
+    "focus:outline-none focus:ring-0 focus:border-forest",
+    hasError ? "border-terracotta" : "border-ink",
+  ].join(" ");
+}
+
+function Field({
+  label,
+  htmlFor,
+  error,
+  children,
+}: {
+  label: string;
+  htmlFor?: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
   return (
-    <span
-      aria-hidden
-      className="inline-block h-[3px] w-10 bg-forest"
-      style={{ clipPath: "polygon(0 40%, 5% 0, 95% 20%, 100% 60%, 95% 100%, 5% 80%)" }}
-    />
+    <div>
+      <label htmlFor={htmlFor} className="eyebrow block mb-2">
+        {label}
+      </label>
+      {children}
+      {error && <p className="mt-1.5 text-sm text-terracotta">{error}</p>}
+    </div>
   );
 }
 
-function RuledLabel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function RuledLabel({
+  children,
+  align = "center",
+}: {
+  children: React.ReactNode;
+  align?: "center" | "lg-left";
+}) {
+  const justify =
+    align === "lg-left" ? "justify-center lg:justify-start" : "justify-center";
   return (
-    <div className={`flex items-center justify-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-3 ${justify}`}>
       <span className="h-px w-10 bg-ink" />
       <span className="eyebrow">{children}</span>
       <span className="h-px w-10 bg-ink" />
     </div>
+  );
+}
+
+function Dot() {
+  return <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-ink/50" />;
+}
+
+function PartnerMark({ label, bold = false }: { label: string; bold?: boolean }) {
+  return (
+    <span
+      className={`text-ink ${bold ? "font-black" : "font-semibold"} tracking-tight text-lg`}
+    >
+      {label}
+    </span>
   );
 }
 
@@ -193,88 +458,5 @@ function Feature({ kicker, title, body }: { kicker: string; title: string; body:
       <h3 className="mt-3 display-tight text-2xl text-forest">{title}</h3>
       <p className="mt-3 text-ink-soft leading-relaxed">{body}</p>
     </article>
-  );
-}
-
-/* ---- GRYT-style shield/bear mark (vector interpretation, not the trademark) ---- */
-function ShieldLogo({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 200 200" className={className} aria-label="GRYT Club shield">
-      <defs>
-        <clipPath id="shield">
-          <path d="M100 6 L188 34 V108 C188 148 152 178 100 194 C48 178 12 148 12 108 V34 Z" />
-        </clipPath>
-      </defs>
-
-      {/* Shield body */}
-      <path
-        d="M100 6 L188 34 V108 C188 148 152 178 100 194 C48 178 12 148 12 108 V34 Z"
-        fill="var(--color-forest)"
-      />
-      {/* Inner border */}
-      <path
-        d="M100 14 L180 40 V108 C180 144 148 172 100 186 C52 172 20 144 20 108 V40 Z"
-        fill="none"
-        stroke="var(--color-paper)"
-        strokeWidth="2"
-      />
-
-      {/* Bear silhouette (stylized) */}
-      <g clipPath="url(#shield)" fill="var(--color-paper)">
-        {/* Head */}
-        <ellipse cx="100" cy="82" rx="46" ry="38" />
-        {/* Ears */}
-        <circle cx="62" cy="52" r="14" />
-        <circle cx="138" cy="52" r="14" />
-        <circle cx="62" cy="52" r="6" fill="var(--color-forest)" />
-        <circle cx="138" cy="52" r="6" fill="var(--color-forest)" />
-        {/* Snout */}
-        <ellipse cx="100" cy="100" rx="24" ry="16" />
-        {/* Roaring mouth */}
-        <path
-          d="M82 104 Q100 128 118 104 Q112 118 100 120 Q88 118 82 104 Z"
-          fill="var(--color-forest)"
-        />
-        {/* Teeth */}
-        <path
-          d="M88 108 L92 116 L96 108 L100 118 L104 108 L108 116 L112 108 Z"
-          fill="var(--color-paper)"
-        />
-        {/* Eyes */}
-        <path d="M80 74 Q86 68 92 74 Q86 78 80 74 Z" fill="var(--color-forest)" />
-        <path d="M120 74 Q126 68 132 74 Q126 78 120 74 Z" fill="var(--color-forest)" />
-        {/* Nose */}
-        <ellipse cx="100" cy="92" rx="6" ry="4" fill="var(--color-forest)" />
-      </g>
-
-      {/* GRYT wordmark ribbon */}
-      <g transform="translate(100 148)">
-        <rect x="-42" y="-14" width="84" height="28" fill="var(--color-paper)" />
-        <text
-          x="0"
-          y="6"
-          textAnchor="middle"
-          fontFamily="Oswald, sans-serif"
-          fontWeight="700"
-          fontSize="22"
-          letterSpacing="2"
-          fill="var(--color-forest)"
-        >
-          GRYT
-        </text>
-      </g>
-      <text
-        x="100"
-        y="176"
-        textAnchor="middle"
-        fontFamily="Oswald, sans-serif"
-        fontWeight="600"
-        fontSize="10"
-        letterSpacing="4"
-        fill="var(--color-paper)"
-      >
-        CLUB
-      </text>
-    </svg>
   );
 }

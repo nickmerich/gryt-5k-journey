@@ -74,6 +74,8 @@ const initialForm: FormState = {
 function RunTakomaOnePager() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [showSummary, setShowSummary] = useState(false);
   const [submitted, setSubmitted] = useState<
     | null
     | {
@@ -132,12 +134,40 @@ function RunTakomaOnePager() {
     })();
   }, []);
 
+  function validateField<K extends keyof FormState>(key: K, value: FormState[K]): string | null {
+    const shape = (registrationSchema as unknown as { shape: Record<string, z.ZodTypeAny> }).shape;
+    const fieldSchema = shape[key as string];
+    if (!fieldSchema) return null;
+    const result = fieldSchema.safeParse(value);
+    return result.success ? null : result.error.issues[0]?.message ?? "Invalid value";
+  }
+
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));
-    setErrors((e) => {
-      if (!e[key]) return e;
-      const { [key]: _drop, ...rest } = e;
-      return rest;
+    // Re-validate live once the field has been touched (or for instant-choice fields).
+    setErrors((prev) => {
+      const shouldValidate = touched[key as string] || key === "ticket" || key === "waiver";
+      if (!shouldValidate) {
+        if (!prev[key as string]) return prev;
+        const { [key as string]: _drop, ...rest } = prev;
+        return rest;
+      }
+      const msg = validateField(key, value);
+      const next = { ...prev };
+      if (msg) next[key as string] = msg;
+      else delete next[key as string];
+      return next;
+    });
+  }
+
+  function handleBlur<K extends keyof FormState>(key: K) {
+    setTouched((t) => (t[key as string] ? t : { ...t, [key as string]: true }));
+    const msg = validateField(key, form[key]);
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (msg) next[key as string] = msg;
+      else delete next[key as string];
+      return next;
     });
   }
 
@@ -151,8 +181,18 @@ function RunTakomaOnePager() {
         if (!next[key]) next[key] = issue.message;
       }
       setErrors(next);
+      setTouched({ name: true, email: true, ticket: true, waiver: true });
+      setShowSummary(true);
+      // Focus first invalid field for keyboard/screen-reader users.
+      const order = ["name", "email", "ticket", "waiver"];
+      const firstBad = order.find((k) => next[k]);
+      if (firstBad && typeof document !== "undefined") {
+        const el = document.getElementById(firstBad) as HTMLElement | null;
+        el?.focus();
+      }
       return;
     }
+    setShowSummary(false);
     setSubmitting(true);
     try {
       const key = "rtwl-registrations";
@@ -184,6 +224,8 @@ function RunTakomaOnePager() {
         stravaStatus: "idle",
       });
       setForm(initialForm);
+      setErrors({});
+      setTouched({});
     } finally {
       setSubmitting(false);
     }
@@ -509,6 +551,23 @@ function RunTakomaOnePager() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-6">
+              {showSummary && Object.keys(errors).length > 0 && (
+                <div
+                  role="alert"
+                  aria-live="polite"
+                  className="border-2 border-terracotta bg-terracotta/10 px-4 py-3 text-sm text-ink"
+                >
+                  <p className="display-tight tracking-wider text-terracotta">
+                    Please fix the fields below
+                  </p>
+                  <ul className="mt-1 list-disc pl-5 text-ink-soft">
+                    {["name", "email", "ticket", "waiver"].map((k) =>
+                      errors[k] ? <li key={k}>{errors[k]}</li> : null,
+                    )}
+                  </ul>
+                </div>
+              )}
+
               <Field
                 label="Full name"
                 htmlFor="name"
@@ -519,8 +578,12 @@ function RunTakomaOnePager() {
                   name="name"
                   type="text"
                   autoComplete="name"
+                  required
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
                   value={form.name}
                   onChange={(e) => update("name", e.target.value)}
+                  onBlur={() => handleBlur("name")}
                   maxLength={100}
                   className={inputCls(!!errors.name)}
                   placeholder="Angela Davis"
@@ -537,8 +600,13 @@ function RunTakomaOnePager() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  required
+                  inputMode="email"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "email-error" : undefined}
                   value={form.email}
                   onChange={(e) => update("email", e.target.value)}
+                  onBlur={() => handleBlur("email")}
                   maxLength={255}
                   className={inputCls(!!errors.email)}
                   placeholder="you@grytrun.com"
@@ -546,14 +614,20 @@ function RunTakomaOnePager() {
               </Field>
 
               <Field label="Ticket" htmlFor="ticket" error={errors.ticket}>
-                <div className="grid grid-cols-3 gap-2">
+                <div
+                  className="grid grid-cols-3 gap-2"
+                  role="radiogroup"
+                  aria-label="Ticket type"
+                  aria-invalid={!!errors.ticket}
+                  aria-describedby={errors.ticket ? "ticket-error" : undefined}
+                >
                   {(
                     [
                       { v: "5k", label: "5K", sub: "Runner" },
                       { v: "walker", label: "Walker", sub: "" },
                       { v: "supporter", label: "Support", sub: "" },
                     ] as const
-                  ).map((opt) => {
+                  ).map((opt, i) => {
                     const active = form.ticket === opt.v;
                     return (
                       <label
@@ -561,10 +635,13 @@ function RunTakomaOnePager() {
                         className={`cursor-pointer border-2 px-2 py-3 text-center display-tight text-sm sm:text-base tracking-wider transition-colors ${
                           active
                             ? "border-forest bg-forest text-forest-ink"
-                            : "border-ink hover:bg-ink hover:text-paper"
+                            : errors.ticket
+                              ? "border-terracotta hover:bg-ink hover:text-paper"
+                              : "border-ink hover:bg-ink hover:text-paper"
                         }`}
                       >
                         <input
+                          id={i === 0 ? "ticket" : undefined}
                           type="radio"
                           name="ticket"
                           value={opt.v}
@@ -586,10 +663,13 @@ function RunTakomaOnePager() {
               <div>
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
+                    id="waiver"
                     type="checkbox"
                     checked={form.waiver}
                     onChange={(e) => update("waiver", e.target.checked)}
-                    className="mt-1 h-5 w-5 accent-[color:var(--color-forest)] border-2 border-ink"
+                    aria-invalid={!!errors.waiver}
+                    aria-describedby={errors.waiver ? "waiver-error" : undefined}
+                    className={`mt-1 h-5 w-5 accent-[color:var(--color-forest)] border-2 ${errors.waiver ? "border-terracotta" : "border-ink"}`}
                   />
                   <span className="text-sm text-ink-soft">
                     I accept the{" "}
@@ -602,9 +682,12 @@ function RunTakomaOnePager() {
                   </span>
                 </label>
                 {errors.waiver && (
-                  <p className="mt-2 text-sm text-terracotta">{errors.waiver}</p>
+                  <p id="waiver-error" className="mt-2 text-sm text-terracotta">
+                    {errors.waiver}
+                  </p>
                 )}
               </div>
+
 
               <button
                 type="submit"
@@ -677,7 +760,15 @@ function Field({
         {label}
       </label>
       {children}
-      {error && <p className="mt-1.5 text-sm text-terracotta">{error}</p>}
+      {error && (
+        <p
+          id={htmlFor ? `${htmlFor}-error` : undefined}
+          role="alert"
+          className="mt-1.5 text-sm text-terracotta"
+        >
+          {error}
+        </p>
+      )}
     </div>
   );
 }

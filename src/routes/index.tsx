@@ -732,9 +732,9 @@ function RunTakomaOnePager() {
         >
           <a
             href="#register"
-            className="block w-full text-center display-tight text-base tracking-[0.14em] py-3.5 bg-forest text-[color:var(--color-forest-ink)] active:scale-[0.99] transition-transform"
+            className="brush-btn block w-full text-center display-tight text-base tracking-[0.14em] py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
           >
-            REGISTER — AUG 2
+            REGISTER — AUG 2 ♡
           </a>
         </div>
       )}

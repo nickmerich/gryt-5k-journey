@@ -546,19 +546,19 @@ function RunTakomaOnePager() {
               </Field>
 
               <Field label="Ticket" htmlFor="ticket" error={errors.ticket}>
-                <div className="grid gap-2 sm:grid-cols-3">
+                <div className="grid grid-cols-3 gap-2">
                   {(
                     [
-                      { v: "5k", label: "5K Runner" },
-                      { v: "walker", label: "Walker" },
-                      { v: "supporter", label: "Supporter" },
+                      { v: "5k", label: "5K", sub: "Runner" },
+                      { v: "walker", label: "Walker", sub: "" },
+                      { v: "supporter", label: "Support", sub: "" },
                     ] as const
                   ).map((opt) => {
                     const active = form.ticket === opt.v;
                     return (
                       <label
                         key={opt.v}
-                        className={`cursor-pointer border-2 px-4 py-3 text-center display-tight tracking-wider transition-colors ${
+                        className={`cursor-pointer border-2 px-2 py-3 text-center display-tight text-sm sm:text-base tracking-wider transition-colors ${
                           active
                             ? "border-forest bg-forest text-forest-ink"
                             : "border-ink hover:bg-ink hover:text-paper"
@@ -573,11 +573,15 @@ function RunTakomaOnePager() {
                           className="sr-only"
                         />
                         {opt.label}
+                        {opt.sub && (
+                          <span className="hidden sm:inline"> {opt.sub}</span>
+                        )}
                       </label>
                     );
                   })}
                 </div>
               </Field>
+
 
               <div>
                 <label className="flex items-start gap-3 cursor-pointer">

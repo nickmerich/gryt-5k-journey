@@ -370,11 +370,13 @@ function RunTakomaOnePager() {
         <div className="border-2 border-ink bg-paper-warm p-5 sm:p-8 md:p-10">
 
           <RuledLabel>Registration</RuledLabel>
-          <h2 className="mt-4 display-tight text-4xl sm:text-5xl text-forest">
-            Grab your bib.
+          <h2 className="mt-4 display-tight text-4xl sm:text-5xl">
+            <span className="text-forest">Grab your </span>
+            <span className="brush-script text-terracotta text-5xl sm:text-6xl">bib</span>
+            <span className="text-forest">.</span>
           </h2>
           <p className="mt-3 text-ink-soft">
-            All finishers get a BIB packet.
+            All finishers get a BIB packet. <span className="text-terracotta" aria-hidden>♡</span>
           </p>
 
           {submitted ? (

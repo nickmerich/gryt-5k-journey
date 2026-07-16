@@ -77,20 +77,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "GRYT Club 5Ks — Ops HQ" },
+      { title: "Run Takoma With Love 5K — GRYT Club" },
       {
         name: "description",
         content:
-          "Ops HQ for GRYT Club 5Ks: run of show, zone leads, the big five risks, and crew notes for race day.",
+          "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee.",
       },
-      { property: "og:title", content: "GRYT Club 5Ks — Ops HQ" },
+      { property: "og:title", content: "Run Takoma With Love 5K — GRYT Club" },
       {
         property: "og:description",
         content:
-          "Ops HQ for GRYT Club 5Ks: run of show, zone leads, the big five risks, and crew notes for race day.",
+          "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Run Takoma With Love 5K — GRYT Club" },
+      { name: "twitter:description", content: "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/9tsoZKQigUUH6OgBkhlqpd1Fu2W2/social-images/social-1784239322014-RTWL_FINAL.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/9tsoZKQigUUH6OgBkhlqpd1Fu2W2/social-images/social-1784239322014-RTWL_FINAL.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Sunday, August 2, 2026 · 9:00 AM · Takoma Park, MD. Community. Movement. Takoma.",
+          "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: flyerAsset.url },

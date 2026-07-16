@@ -157,3 +157,30 @@
   font-style: italic;
   font-weight: 500;
 }
+
+@utility brush-script {
+  font-family: var(--font-brush);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: 1;
+}
+
+/* Terracotta brushstroke button (flyer CTA). Use with bg-terracotta. */
+@utility brush-btn {
+  clip-path: polygon(
+    1% 22%, 4% 8%, 10% 14%, 18% 4%, 28% 12%, 40% 6%, 52% 14%, 64% 4%,
+    76% 12%, 86% 6%, 94% 14%, 99% 22%, 100% 78%, 96% 92%, 88% 86%,
+    78% 96%, 66% 88%, 54% 96%, 42% 88%, 30% 96%, 18% 86%, 10% 94%,
+    3% 88%, 0% 78%
+  );
+}
+
+/* Forest paint-stroke pill (for dates / eyebrow labels on the flyer). */
+@utility paint-stroke {
+  clip-path: polygon(
+    2% 30%, 6% 12%, 14% 20%, 26% 8%, 42% 18%, 60% 6%, 78% 18%, 92% 8%,
+    99% 24%, 100% 74%, 94% 92%, 82% 84%, 66% 96%, 48% 86%, 30% 96%,
+    16% 86%, 6% 94%, 1% 76%
+  );
+}
+

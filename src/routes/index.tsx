@@ -619,7 +619,7 @@ function RunTakomaOnePager() {
       </section>
 
       <footer className="relative z-10 border-t border-hairline">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-8 pb-28 text-center sm:flex-row sm:justify-between sm:pb-8 sm:text-left">
           <p className="eyebrow text-ink-soft">© GRYT Club · Takoma Park, MD</p>
           <p className="eyebrow text-ink-soft">grytrun.com · @grytclub</p>
         </div>

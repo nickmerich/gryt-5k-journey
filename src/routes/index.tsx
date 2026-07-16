@@ -210,11 +210,11 @@ function RunTakomaOnePager() {
       </header>
 
       {/* HERO — official flyer as the branding source of truth */}
-      <section className="relative z-10 mx-auto grid max-w-6xl gap-10 px-6 pt-10 pb-16 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+      <section className="relative z-10 mx-auto grid max-w-6xl gap-8 px-5 pt-6 pb-10 sm:px-6 sm:pt-10 sm:pb-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10">
         <figure className="relative mx-auto w-full max-w-xl">
           <div
             aria-hidden
-            className="absolute -inset-3 -z-10"
+            className="absolute -inset-2 -z-10 sm:-inset-3"
             style={{
               backgroundColor: "var(--color-forest)",
               transform: "rotate(-1.2deg)",
@@ -222,14 +222,31 @@ function RunTakomaOnePager() {
           />
           <img
             src={flyerAsset.url}
-            alt="Run Takoma With Love 5K — official flyer. Presented by GRYT Club, in partnership with smartwater, HeNO, and Oddisee. Sunday August 2, 2026 at 9:00 AM in Takoma Park, Maryland."
+            alt="Run Takoma With Love 5K — official flyer. Presented by GRYT Club, in partnership with smartwater. Sunday August 2, 2026 at 9:00 AM in Takoma Park, Maryland."
             className="block w-full"
             width={1600}
             height={1600}
           />
         </figure>
 
-        <div className="text-center lg:text-left">
+        {/* Mobile: compact CTA under the flyer (flyer already carries the wordmark) */}
+        <div className="lg:hidden text-center">
+          <h1 className="sr-only">
+            Run Takoma With Love 5K — Sunday August 2, 2026, Takoma Park, Maryland
+          </h1>
+          <a
+            href="#register"
+            className="block w-full display-tight text-base tracking-[0.14em] py-4 bg-forest text-[color:var(--color-forest-ink)] active:scale-[0.99] transition-transform"
+          >
+            REGISTER — LOCK IN YOUR SPOT
+          </a>
+          <p className="mt-3 eyebrow text-ink-soft">
+            Sunday · Aug 2, 2026 · 9:00 AM
+          </p>
+        </div>
+
+        {/* Desktop / large: full editorial block */}
+        <div className="hidden lg:block text-center lg:text-left">
           <RuledLabel align="lg-left">Presented by GRYT</RuledLabel>
           <h1 className="mt-5 display-tight text-[clamp(3rem,8vw,5.5rem)] leading-[0.9]">
             <span className="block text-forest">RUN TAKOMA</span>
@@ -267,6 +284,7 @@ function RunTakomaOnePager() {
           </a>
         </div>
       </section>
+
 
       {/* Torn terracotta ribbon */}
       <section

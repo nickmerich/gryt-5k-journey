@@ -89,12 +89,25 @@ function RunTakomaOnePager() {
     }
     setSubmitting(true);
     try {
-      // Persist locally so the form is genuinely functional without a backend.
       const key = "rtwl-registrations";
       const existing = JSON.parse(localStorage.getItem(key) ?? "[]");
       existing.push({ ...parsed.data, ts: new Date().toISOString() });
       localStorage.setItem(key, JSON.stringify(existing));
-      await new Promise((r) => setTimeout(r, 400));
+
+      try {
+        const res = await fetch("/api/public/rtwl-register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(parsed.data),
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          console.warn("Registration email request failed", err);
+        }
+      } catch (err) {
+        console.warn("Registration email request errored", err);
+      }
+
       setSubmitted({ name: parsed.data.name, ticket: parsed.data.ticket });
       setForm(initialForm);
     } finally {

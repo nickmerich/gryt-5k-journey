@@ -888,6 +888,9 @@ function ReceiptRow({
       </dd>
     </div>
   );
+}
+
+
 
 function inputCls(hasError: boolean) {
   return [

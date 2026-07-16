@@ -224,6 +224,8 @@ function RunTakomaOnePager() {
         stravaStatus: "idle",
       });
       setForm(initialForm);
+      setErrors({});
+      setTouched({});
     } finally {
       setSubmitting(false);
     }

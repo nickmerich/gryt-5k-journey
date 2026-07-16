@@ -299,8 +299,7 @@ function RunTakomaOnePager() {
             Grab your bib.
           </h2>
           <p className="mt-3 text-ink-soft">
-            All finishers get a hand-numbered patch. Community pricing — pay
-            what moves you at check-in.
+            All finishers get a BIB packet.
           </p>
 
           {submitted ? (

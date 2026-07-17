@@ -313,6 +313,9 @@ function RunTakomaOnePager() {
           <p className="mt-3 eyebrow text-forest">
             <span className="text-terracotta">♡</span> Sunday · Aug 2, 2026 · 9:00 AM <span className="text-terracotta">♡</span>
           </p>
+          <div className="mt-5">
+            <Countdown />
+          </div>
         </div>
 
         {/* Desktop / large: full editorial block */}

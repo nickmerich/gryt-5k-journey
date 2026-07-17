@@ -340,6 +340,9 @@ function RunTakomaOnePager() {
             <p className="mt-3 display-tight text-forest tracking-[0.12em]">
               Takoma Park, Maryland
             </p>
+            <div className="mt-6 max-w-md">
+              <Countdown />
+            </div>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">

@@ -313,6 +313,9 @@ function RunTakomaOnePager() {
           <p className="mt-3 eyebrow text-forest">
             <span className="text-terracotta">♡</span> Sunday · Aug 2, 2026 · 9:00 AM <span className="text-terracotta">♡</span>
           </p>
+          <div className="mt-5">
+            <Countdown />
+          </div>
         </div>
 
         {/* Desktop / large: full editorial block */}
@@ -337,6 +340,9 @@ function RunTakomaOnePager() {
             <p className="mt-3 display-tight text-forest tracking-[0.12em]">
               Takoma Park, Maryland
             </p>
+            <div className="mt-6 max-w-md">
+              <Countdown />
+            </div>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -969,5 +975,52 @@ function Feature({ kicker, title, body }: { kicker: string; title: string; body:
       <h3 className="mt-3 display-tight text-2xl text-forest">{title}</h3>
       <p className="mt-3 text-ink-soft leading-relaxed">{body}</p>
     </article>
+  );
+}
+
+const EVENT_TS = new Date("2026-08-02T09:00:00-04:00").getTime();
+
+function Countdown() {
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => {
+    setNow(Date.now());
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const diff = Math.max(0, EVENT_TS - (now ?? EVENT_TS));
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+
+  const started = diff === 0;
+
+  return (
+    <div
+      className="border border-hairline bg-[color:var(--color-paper-warm)] px-4 py-3"
+      aria-live="polite"
+    >
+      <p className="eyebrow text-terracotta text-center lg:text-left">
+        {started ? "It's race day ♡" : "Countdown to the start line"}
+      </p>
+      <div className="mt-2 grid grid-cols-4 gap-2 text-center">
+        {[
+          { label: "Days", value: days },
+          { label: "Hrs", value: hours },
+          { label: "Min", value: minutes },
+          { label: "Sec", value: seconds },
+        ].map((u) => (
+          <div key={u.label} className="flex flex-col">
+            <span className="display-tight text-forest text-2xl sm:text-3xl tabular-nums leading-none">
+              {String(u.value).padStart(2, "0")}
+            </span>
+            <span className="eyebrow text-ink-soft text-[0.6rem] mt-1">
+              {u.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

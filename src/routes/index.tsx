@@ -353,10 +353,18 @@ function RunTakomaOnePager() {
           <p className="mt-3 eyebrow text-forest">
             <span className="text-terracotta">♡</span> Sunday · Aug 2, 2026 · 9:00 AM <span className="text-terracotta">♡</span>
           </p>
-          <div className="mt-5">
-            <Countdown />
+          <div className="mt-3">
+            <button
+              type="button"
+              onClick={downloadEventIcs}
+              className="eyebrow text-forest underline decoration-terracotta decoration-2 underline-offset-4"
+            >
+              + Add to calendar (.ics)
+            </button>
           </div>
         </div>
+      </section>
+
 
         {/* Desktop / large: full editorial block */}
         <div className="hidden lg:block text-center lg:text-left">

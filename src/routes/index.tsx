@@ -913,7 +913,7 @@ function RunTakomaOnePager() {
             <a href="/terms" className="eyebrow text-ink-soft hover:text-ink transition-colors">
               Terms
             </a>
-            <p className="eyebrow text-ink-soft">grytrun.com · @grytclub</p>
+            <p className="eyebrow text-ink-soft">grytrun.com · @grytrunclub</p>
           </div>
         </div>
       </footer>

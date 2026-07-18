@@ -400,14 +400,24 @@ function RunTakomaOnePager() {
             <PartnerMark label="smartwater" />
           </div>
 
-          <a
-            href="#register"
-            className="brush-btn mt-8 inline-flex items-center justify-center px-10 py-5 display-tight text-lg tracking-[0.1em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors"
-          >
-            REGISTER | GRYTRUN.COM
-          </a>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href="#register"
+              className="brush-btn inline-flex items-center justify-center px-10 py-5 display-tight text-lg tracking-[0.1em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors"
+            >
+              REGISTER | GRYTRUN.COM
+            </a>
+            <button
+              type="button"
+              onClick={downloadEventIcs}
+              className="eyebrow text-forest underline decoration-terracotta decoration-2 underline-offset-4"
+            >
+              + Add to calendar (.ics)
+            </button>
+          </div>
         </div>
       </section>
+
 
 
 

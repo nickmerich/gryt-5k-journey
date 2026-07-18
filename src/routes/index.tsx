@@ -353,7 +353,10 @@ function RunTakomaOnePager() {
           <p className="mt-3 eyebrow text-forest">
             <span className="text-terracotta">♡</span> Sunday · Aug 2, 2026 · 9:00 AM <span className="text-terracotta">♡</span>
           </p>
-          <div className="mt-3">
+          <div className="mt-5">
+            <Countdown />
+          </div>
+          <div className="mt-4">
             <button
               type="button"
               onClick={downloadEventIcs}
@@ -363,10 +366,9 @@ function RunTakomaOnePager() {
             </button>
           </div>
         </div>
-      </section>
-
 
         {/* Desktop / large: full editorial block */}
+
         <div className="hidden lg:block text-center lg:text-left">
           <RuledLabel align="lg-left">Presented by GRYT</RuledLabel>
           <h1 className="mt-5 display-tight text-[clamp(3rem,8vw,6rem)] leading-[0.88]">

@@ -7,6 +7,46 @@ const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
 const STRAVA_EVENT_URL =
   "https://www.strava.com/clubs/1708552/group_events/3512937555494892876/occurrences/FQIWmNW3loWGu8BhHBTUHxQQFAQUEhQAFAAAHBaAwvqo-GcAAA==";
 
+// Event date: Sunday, August 2, 2026 · 9:00 AM ET (UTC-4 EDT) → 13:00 UTC
+// End: 11:00 AM ET → 15:00 UTC
+function buildEventIcs(): string {
+  const dtStamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//GRYT Club//Run Takoma With Love 5K//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    "UID:rtwl-5k-2026-08-02@grytrun.com",
+    `DTSTAMP:${dtStamp}`,
+    "DTSTART:20260802T130000Z",
+    "DTEND:20260802T150000Z",
+    "SUMMARY:Run Takoma With Love 5K",
+    "LOCATION:Takoma Park\\, Maryland",
+    "DESCRIPTION:Run Takoma With Love 5K — presented by GRYT Club. Details & registration: https://grytrun.com",
+    "URL:https://grytrun.com",
+    "STATUS:CONFIRMED",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ];
+  return lines.join("\r\n");
+}
+
+function downloadEventIcs() {
+  if (typeof window === "undefined") return;
+  const blob = new Blob([buildEventIcs()], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "run-takoma-with-love-5k.ics";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+
 type StravaAthlete = {
   id: string;
   firstname: string | null;

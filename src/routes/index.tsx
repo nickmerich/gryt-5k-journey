@@ -534,11 +534,25 @@ function RunTakomaOnePager() {
                   )}
                 </dl>
 
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={downloadEventIcs}
+                    className="brush-btn inline-flex items-center justify-center px-5 py-3 display-tight text-sm tracking-[0.12em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors"
+                  >
+                    + ADD TO CALENDAR
+                  </button>
+                  <span className="text-xs text-ink-soft">
+                    Downloads an .ics file for Apple, Google & Outlook.
+                  </span>
+                </div>
+
                 <p className="mt-4 text-xs text-ink-soft">
                   Keep this for your records. Present your name at check-in — we'll
                   have your BIB packet ready.
                 </p>
               </div>
+
 
               {/* Strava connect / personalized CTA */}
               <div className="mt-6 border-t border-hairline pt-6">

@@ -907,16 +907,54 @@ function RunTakomaOnePager() {
       </section>
 
       <footer className="relative z-10 border-t border-hairline">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-8 pb-28 text-center sm:flex-row sm:justify-between sm:pb-8 sm:text-left">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-8 pb-28 text-center sm:flex-row sm:justify-between sm:pb-8 sm:text-left">
           <p className="eyebrow text-ink-soft">© GRYT Club · Takoma Park, MD</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
             <a href="/terms" className="eyebrow text-ink-soft hover:text-ink transition-colors">
               Terms
             </a>
             <p className="eyebrow text-ink-soft">grytrun.com · @grytrunclub</p>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://instagram.com/grytrunclub"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GRYT Run Club on Instagram"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink-soft transition-colors hover:border-ink hover:text-terracotta"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </a>
+              <a
+                href="https://facebook.com/grytrunclub"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GRYT Run Club on Facebook"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink-soft transition-colors hover:border-ink hover:text-terracotta"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z" />
+                </svg>
+              </a>
+              <a
+                href="https://x.com/grytrunclub"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GRYT Run Club on X"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-ink-soft transition-colors hover:border-ink hover:text-terracotta"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
+
 
       {/* Sticky mobile CTA — hidden once the user has registered */}
       {!submitted && (

@@ -917,6 +917,9 @@ function RunTakomaOnePager() {
               <a href="/privacy" className="eyebrow text-ink-soft hover:text-ink transition-colors">
                 Privacy
               </a>
+              <a href="/accessibility" className="eyebrow text-ink-soft hover:text-ink transition-colors">
+                Accessibility
+              </a>
             </div>
             <p className="eyebrow text-ink-soft">grytrun.com · @grytrunclub</p>
             <div className="flex items-center gap-2">

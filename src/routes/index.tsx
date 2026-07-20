@@ -596,14 +596,33 @@ function RunTakomaOnePager() {
           {submitted ? (
             <div
               role="status"
-              className="mt-8 border-2 border-forest bg-paper p-6"
+              className="card-lift relative mt-8 overflow-hidden border-2 border-forest bg-paper p-6"
             >
-              <p className="eyebrow text-terracotta">You're in <span aria-hidden>♡</span></p>
-              <p className="mt-2 display-tight text-2xl">
+              {/* Confetti heart burst */}
+              <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
+                <span className="heart-burst" style={{ ["--dx" as string]: "-60px", ["--dy" as string]: "-30px", animationDelay: "0ms", fontSize: "1.25rem" }}>♡</span>
+                <span className="heart-burst" style={{ ["--dx" as string]: "-20px", ["--dy" as string]: "-50px", animationDelay: "120ms", fontSize: "1rem" }}>♡</span>
+                <span className="heart-burst" style={{ ["--dx" as string]: "20px", ["--dy" as string]: "-46px", animationDelay: "240ms", fontSize: "1.1rem" }}>♡</span>
+                <span className="heart-burst" style={{ ["--dx" as string]: "60px", ["--dy" as string]: "-28px", animationDelay: "360ms", fontSize: "0.9rem" }}>♡</span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span
+                  aria-hidden
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-forest text-[color:var(--color-forest-ink)]"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </span>
+                <p className="eyebrow text-terracotta">You're in <span aria-hidden>♡</span></p>
+              </div>
+              <p className="mt-3 display-tight text-2xl">
                 <span className="text-forest">See you Sunday, </span>
                 <span className="brush-script text-terracotta text-3xl">{submitted.name.split(" ")[0]}</span>
                 <span className="text-forest">.</span>
               </p>
+
               <p className="mt-2 text-ink-soft">
                 We saved your spot for the{" "}
                 <span className="font-semibold text-ink">

@@ -276,6 +276,259 @@ function ChapterModal({
   );
 }
 
+// ---------- BIB CARD (shareable) ----------
+
+function bibNumberFrom(id: string | null | undefined): string {
+  if (!id) return "042";
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash = (hash * 31 + id.charCodeAt(i)) >>> 0;
+  }
+  const n = (hash % 899) + 100; // 100–998, no leading-zero collisions
+  return String(n);
+}
+
+function drawBibCanvas(opts: {
+  canvas: HTMLCanvasElement;
+  name: string;
+  bib: string;
+  ticket: string;
+}) {
+  const { canvas, name, bib, ticket } = opts;
+  const W = 1080;
+  const H = 1350;
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  // Paper background
+  ctx.fillStyle = "#f4ede1";
+  ctx.fillRect(0, 0, W, H);
+
+  // Grain (subtle noise)
+  const grain = ctx.createImageData(W, H);
+  for (let i = 0; i < grain.data.length; i += 4) {
+    const v = 235 + Math.floor(Math.random() * 20);
+    grain.data[i] = v;
+    grain.data[i + 1] = v - 8;
+    grain.data[i + 2] = v - 20;
+    grain.data[i + 3] = 14;
+  }
+  ctx.putImageData(grain, 0, 0);
+
+  // Forest border frame
+  ctx.strokeStyle = "#1f3a2e";
+  ctx.lineWidth = 10;
+  ctx.strokeRect(40, 40, W - 80, H - 80);
+  ctx.lineWidth = 2;
+  ctx.strokeRect(64, 64, W - 128, H - 128);
+
+  // Top eyebrow
+  ctx.fillStyle = "#1f3a2e";
+  ctx.font = "600 28px Inter, system-ui, sans-serif";
+  ctx.textAlign = "center";
+  const trackText = (t: string, y: number, size: number, letterSpacing: number, color: string) => {
+    ctx.fillStyle = color;
+    ctx.font = `700 ${size}px "Bebas Neue", "Oswald", Impact, sans-serif`;
+    const chars = t.split("");
+    const widths = chars.map((c) => ctx.measureText(c).width + letterSpacing);
+    const total = widths.reduce((a, b) => a + b, 0) - letterSpacing;
+    let x = (W - total) / 2;
+    chars.forEach((c, i) => {
+      ctx.fillText(c, x + widths[i] / 2 - letterSpacing / 2, y);
+      x += widths[i];
+    });
+  };
+
+  trackText("RUN TAKOMA WITH LOVE 5K", 170, 44, 6, "#1f3a2e");
+  trackText("AUG · 02 · 2026 — TAKOMA PARK", 220, 30, 8, "#7a6b58");
+
+  // Terracotta diagonal slash behind BIB
+  ctx.save();
+  ctx.translate(W / 2, 640);
+  ctx.rotate(-0.06);
+  ctx.fillStyle = "#c2503b";
+  ctx.fillRect(-460, -220, 920, 440);
+  ctx.restore();
+
+  // Grain over slash
+  ctx.save();
+  ctx.globalAlpha = 0.15;
+  ctx.fillStyle = "#000";
+  for (let i = 0; i < 400; i++) {
+    ctx.fillRect(120 + Math.random() * 840, 430 + Math.random() * 420, 2, 2);
+  }
+  ctx.restore();
+
+  // BIB label
+  trackText("BIB", 510, 44, 10, "#f4ede1");
+
+  // BIG BIB number
+  ctx.fillStyle = "#f4ede1";
+  ctx.font = "700 340px \"Bebas Neue\", \"Oswald\", Impact, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(bib, W / 2, 690);
+  ctx.textBaseline = "alphabetic";
+
+  // Name — brush script
+  ctx.fillStyle = "#1f3a2e";
+  ctx.font = "400 96px \"Caveat Brush\", \"Playfair Display\", cursive";
+  ctx.textAlign = "center";
+  const nameToShow = name.length > 22 ? name.slice(0, 21) + "…" : name;
+  ctx.fillText(nameToShow, W / 2, 970);
+
+  // Ticket + mission
+  trackText(ticket.toUpperCase(), 1030, 26, 8, "#7a6b58");
+
+  // Bottom tagline
+  trackText("DO HARD THINGS", 1180, 62, 6, "#1f3a2e");
+  trackText("TOGETHER", 1250, 62, 6, "#c2503b");
+
+  // Corner marks
+  ctx.strokeStyle = "#1f3a2e";
+  ctx.lineWidth = 3;
+  [[64, 64], [W - 64, 64], [64, H - 64], [W - 64, H - 64]].forEach(([x, y]) => {
+    ctx.beginPath();
+    ctx.moveTo(x - 20, y);
+    ctx.lineTo(x + 20, y);
+    ctx.moveTo(x, y - 20);
+    ctx.lineTo(x, y + 20);
+    ctx.stroke();
+  });
+}
+
+function BibCard({
+  name,
+  registrationId,
+  ticket,
+}: {
+  name: string;
+  registrationId: string | null;
+  ticket: string;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [downloaded, setDownloaded] = useState(false);
+  const [shared, setShared] = useState(false);
+  const bib = bibNumberFrom(registrationId);
+
+  useEffect(() => {
+    const c = canvasRef.current;
+    if (!c) return;
+    const paint = () =>
+      drawBibCanvas({ canvas: c, name, bib, ticket: ticketShort(ticket) });
+    paint();
+    // Repaint once brand fonts have loaded so canvas uses them, not fallback.
+    const anyDoc = document as Document & { fonts?: { ready: Promise<unknown> } };
+    if (anyDoc.fonts?.ready) {
+      anyDoc.fonts.ready.then(paint).catch(() => {});
+    }
+  }, [name, bib, ticket]);
+
+  const download = () => {
+    const c = canvasRef.current;
+    if (!c) return;
+    const url = c.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `rtwl-bib-${bib}.png`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setDownloaded(true);
+    setTimeout(() => setDownloaded(false), 2400);
+  };
+
+  const share = async () => {
+    const c = canvasRef.current;
+    if (!c) return;
+    const blob: Blob | null = await new Promise((res) =>
+      c.toBlob((b) => res(b), "image/png"),
+    );
+    if (!blob) return download();
+    const file = new File([blob], `rtwl-bib-${bib}.png`, { type: "image/png" });
+    const nav = navigator as Navigator & {
+      canShare?: (d: { files: File[] }) => boolean;
+      share?: (d: { files?: File[]; title?: string; text?: string }) => Promise<void>;
+    };
+    if (nav.canShare && nav.canShare({ files: [file] }) && nav.share) {
+      try {
+        await nav.share({
+          files: [file],
+          title: "I'm running Takoma with Love",
+          text: `I'm in for Run Takoma With Love 5K · Aug 2, 2026. Bib #${bib}. Come run with us: grytrun.com`,
+        });
+        setShared(true);
+        setTimeout(() => setShared(false), 2400);
+        return;
+      } catch {
+        /* user cancelled or unsupported — fall through */
+      }
+    }
+    download();
+  };
+
+  return (
+    <div className="mt-6 border-2 border-dashed border-terracotta/70 bg-[color:var(--color-paper)] p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
+        <p className="eyebrow text-terracotta">Your race bib</p>
+        <p className="eyebrow text-ink-soft">Bib #{bib}</p>
+      </div>
+      <p className="mt-1 text-sm text-ink-soft">
+        Save it. Post it. Tag <span className="font-semibold text-ink">@grytrunclub</span>.
+        Every share pulls one more neighbor onto the start line.
+      </p>
+
+      <div className="mt-4 flex justify-center">
+        <div
+          className="relative w-full max-w-[320px] aspect-[4/5] overflow-hidden border border-hairline shadow-lift bg-paper-warm hover-lift"
+          aria-label={`Race bib preview for ${name}, bib number ${bib}`}
+        >
+          <canvas
+            ref={canvasRef}
+            className="block h-full w-full"
+            style={{ imageRendering: "auto" }}
+          />
+        </div>
+      </div>
+
+      <div className="mt-5 flex flex-wrap items-center gap-3">
+        <button
+          type="button"
+          onClick={share}
+          className="brush-btn inline-flex items-center justify-center gap-2 px-5 py-3 display-tight text-sm tracking-[0.12em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7" />
+            <polyline points="16 6 12 2 8 6" />
+            <line x1="12" y1="2" x2="12" y2="15" />
+          </svg>
+          {shared ? "Shared!" : "Share my bib"}
+        </button>
+        <button
+          type="button"
+          onClick={download}
+          className="inline-flex items-center gap-2 px-4 py-2.5 text-sm border border-hairline hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors eyebrow"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          {downloaded ? "Downloaded ✓" : "Download PNG"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ticketShort(t: string): string {
+  // keep the visible ticket label compact for the bib
+  if (!t) return "Community entry";
+  return t.length > 32 ? t.slice(0, 31) + "…" : t;
+}
+
 function RunTakomaOnePager() {
   useScrollReveal();
   const [form, setForm] = useState<FormState>(initialForm);
@@ -854,6 +1107,13 @@ function RunTakomaOnePager() {
                 </span>{" "}
                 entry. A confirmation is on its way to your inbox.
               </p>
+
+              {/* Shareable race bib */}
+              <BibCard
+                name={submitted.name}
+                registrationId={submitted.registrationId}
+                ticket={ticketLabel(submitted.ticket)}
+              />
 
               {/* Receipt-style summary */}
               <div className="mt-6 border border-dashed border-forest/60 bg-[color:var(--color-paper)] p-5">

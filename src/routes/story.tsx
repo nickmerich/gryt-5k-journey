@@ -5,25 +5,72 @@ import vinylAsset from "@/assets/img-vinyl.webp.asset.json";
 import creekAsset from "@/assets/img-creek.webp.asset.json";
 import shelterAsset from "@/assets/img-shelter.webp.asset.json";
 
+const STORY_URL = "https://grytrun.com/story";
+const STORY_TITLE = "The Story — Run Takoma With Love 5K · GRYT Club";
+const STORY_DESCRIPTION =
+  "How an album became a starting line. The true story behind Run Takoma With Love — the friendship, the vision, the route, and the full race-day agenda. Sunday, August 2, 2026 · Takoma-Piney Branch Local Park · 100 runners, free RSVP.";
+const STORY_IMAGE = new URL(flyerAsset.url, "https://grytrun.com").toString();
+
 export const Route = createFileRoute("/story")({
   head: () => ({
     meta: [
-      { title: "The Story — Run Takoma With Love 5K · GRYT Club" },
-      {
-        name: "description",
-        content:
-          "The true story behind Run Takoma With Love — how an album became a 5K, the friendship behind it, the vision for the day, and the full race-day agenda. Sunday, August 2, 2026 · Takoma Park, MD.",
-      },
-      { property: "og:title", content: "The Story — Run Takoma With Love 5K" },
-      {
-        property: "og:description",
-        content:
-          "How an album became a starting line. Sunday, August 2, 2026 · Takoma-Piney Branch Local Park · 100 runners, free RSVP.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:image", content: flyerAsset.url },
+      { title: STORY_TITLE },
+      { name: "description", content: STORY_DESCRIPTION },
+      { name: "author", content: "GRYT Club" },
+      { property: "og:title", content: STORY_TITLE },
+      { property: "og:description", content: STORY_DESCRIPTION },
+      { property: "og:type", content: "article" },
+      { property: "og:url", content: STORY_URL },
+      { property: "og:site_name", content: "GRYT Club" },
+      { property: "og:image", content: STORY_IMAGE },
+      { property: "og:image:alt", content: "Run Takoma With Love 5K flyer" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "1500" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: flyerAsset.url },
+      { name: "twitter:title", content: STORY_TITLE },
+      { name: "twitter:description", content: STORY_DESCRIPTION },
+      { name: "twitter:image", content: STORY_IMAGE },
+      { name: "twitter:image:alt", content: "Run Takoma With Love 5K flyer" },
+    ],
+    links: [{ rel: "canonical", href: STORY_URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SportsEvent",
+          name: "Run Takoma With Love 5K",
+          description: STORY_DESCRIPTION,
+          startDate: "2026-08-02T09:00:00-04:00",
+          endDate: "2026-08-02T11:00:00-04:00",
+          eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+          eventStatus: "https://schema.org/EventScheduled",
+          image: [STORY_IMAGE],
+          url: STORY_URL,
+          location: {
+            "@type": "Place",
+            name: "Takoma-Piney Branch Local Park",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Takoma Park",
+              addressRegion: "MD",
+              addressCountry: "US",
+            },
+          },
+          organizer: {
+            "@type": "Organization",
+            name: "GRYT Club",
+            url: "https://grytrun.com",
+          },
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            url: "https://grytrun.com/",
+          },
+        }),
+      },
     ],
   }),
   component: StoryPage,

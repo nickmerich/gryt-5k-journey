@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as StoryRouteImport } from './routes/story'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
@@ -29,6 +30,11 @@ import { Route as ApiPublicStravaCallbackRouteImport } from './routes/api/public
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoryRoute = StoryRouteImport.update({
+  id: '/story',
+  path: '/story',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/contact': typeof ApiPublicContactRoute
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/contact': typeof ApiPublicContactRoute
@@ -152,6 +160,7 @@ export interface FileRoutesById {
   '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/contact': typeof ApiPublicContactRoute
@@ -172,6 +181,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/contact'
     | '/privacy'
+    | '/story'
     | '/terms'
     | '/email/unsubscribe'
     | '/api/public/contact'
@@ -190,6 +200,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/contact'
     | '/privacy'
+    | '/story'
     | '/terms'
     | '/email/unsubscribe'
     | '/api/public/contact'
@@ -208,6 +219,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/contact'
     | '/privacy'
+    | '/story'
     | '/terms'
     | '/email/unsubscribe'
     | '/api/public/contact'
@@ -227,6 +239,7 @@ export interface RootRouteChildren {
   AccessibilityRoute: typeof AccessibilityRoute
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
+  StoryRoute: typeof StoryRoute
   TermsRoute: typeof TermsRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ApiPublicContactRoute: typeof ApiPublicContactRoute
@@ -248,6 +261,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/story': {
+      id: '/story'
+      path: '/story'
+      fullPath: '/story'
+      preLoaderRoute: typeof StoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -363,6 +383,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccessibilityRoute: AccessibilityRoute,
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
+  StoryRoute: StoryRoute,
   TermsRoute: TermsRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ApiPublicContactRoute: ApiPublicContactRoute,

@@ -419,7 +419,28 @@ function RunTakomaOnePager() {
       </section>
 
 
-
+      {/* Marquee ticker — infinite scrolling love */}
+      <section
+        aria-hidden
+        className="relative z-10 overflow-hidden border-y-2 border-ink bg-paper-warm py-4"
+      >
+        <div className="marquee-track whitespace-nowrap display-tight text-2xl sm:text-3xl tracking-[0.18em] text-forest">
+          {Array.from({ length: 2 }).map((_, block) => (
+            <span key={block} className="inline-flex items-center gap-12">
+              <span>RUN TAKOMA</span>
+              <span className="heart-pulse text-terracotta">♡</span>
+              <span className="brush-script text-terracotta text-4xl sm:text-5xl">with love</span>
+              <span className="heart-pulse text-terracotta">♡</span>
+              <span>SUN · AUG 2 · 9AM</span>
+              <span className="heart-pulse text-terracotta">♡</span>
+              <span>DO HARD THINGS TOGETHER</span>
+              <span className="heart-pulse text-terracotta">♡</span>
+              <span>TAKOMA PARK, MD</span>
+              <span className="heart-pulse text-terracotta">♡</span>
+            </span>
+          ))}
+        </div>
+      </section>
 
       {/* Torn terracotta ribbon */}
       <section
@@ -439,6 +460,94 @@ function RunTakomaOnePager() {
           <span aria-hidden className="serif-italic text-2xl text-forest">♡</span>
         </div>
       </section>
+
+      {/* RUN OF SHOW — race day schedule */}
+      <section
+        id="run-of-show"
+        className="relative z-10 mx-auto max-w-5xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20"
+      >
+        <div className="flex flex-col items-center text-center">
+          <RuledLabel>Race day</RuledLabel>
+          <h2 className="mt-4 display-tight text-4xl sm:text-6xl leading-[0.9]">
+            <span className="text-forest">Run of </span>
+            <span className="brush-script text-terracotta text-5xl sm:text-7xl">show</span>
+          </h2>
+          <p className="mt-3 max-w-xl text-ink-soft">
+            Sunday, August 2, 2026 — from first coffee to last cheer. Move at your pace.
+          </p>
+        </div>
+
+        <ol className="relative mt-12 space-y-6 sm:space-y-0">
+          {/* Vertical timeline spine on desktop */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-6 top-2 bottom-2 w-px bg-hairline sm:left-1/2"
+          />
+          {[
+            { time: "7:30 AM", title: "Check-in & bib pickup", body: "Coffee's on. Grab your bib packet, pin up, warm up." },
+            { time: "8:30 AM", title: "Community warm-up", body: "Group stretch on the lawn. Everyone in — walkers, runners, kids." },
+            { time: "9:00 AM", title: "Start line ♡", body: "Horn goes off. Push if you want. Cruise if you want. Just move." },
+            { time: "9:20 AM", title: "First finishers", body: "Cowbells, high-fives, and a very loud cheer squad." },
+            { time: "10:00 AM", title: "Last finisher party", body: "The best applause is for whoever crosses last. We wait." },
+            { time: "10:30 AM", title: "Block party", body: "Music, snacks, smartwater, and a group photo you'll actually want." },
+          ].map((step, i) => {
+            const left = i % 2 === 0;
+            return (
+              <li
+                key={step.time}
+                className={`rise-in relative sm:grid sm:grid-cols-2 sm:gap-10 ${
+                  left ? "" : "sm:[&>*:first-child]:col-start-2"
+                }`}
+                style={{ animationDelay: `${i * 90}ms` }}
+              >
+                <div
+                  className={`relative pl-14 sm:pl-0 ${
+                    left ? "sm:pr-10 sm:text-right" : "sm:pl-10"
+                  }`}
+                >
+                  {/* Dot */}
+                  <span
+                    aria-hidden
+                    className={`absolute top-2 left-4 h-4 w-4 rounded-full border-2 border-ink bg-terracotta tick-bob sm:left-auto ${
+                      left ? "sm:right-[-8px]" : "sm:left-[-8px]"
+                    }`}
+                  />
+                  <p className="eyebrow text-terracotta">{step.time}</p>
+                  <p className="mt-1 display-tight text-xl sm:text-2xl text-forest">
+                    {step.title}
+                  </p>
+                  <p className="mt-2 text-ink-soft leading-relaxed">{step.body}</p>
+                </div>
+                {/* Spacer for the opposite column on desktop */}
+                <div className="hidden sm:block" />
+              </li>
+            );
+          })}
+        </ol>
+
+        {/* Stat strip — bring life */}
+        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {[
+            { n: "5", u: "kilometers" },
+            { n: "1", u: "loop" },
+            { n: "∞", u: "high-fives" },
+            { n: "0", u: "pressure" },
+          ].map((s, i) => (
+            <div
+              key={s.u}
+              className="rise-in border-2 border-ink bg-paper-warm p-4 text-center"
+              style={{ animationDelay: `${i * 80 + 400}ms` }}
+            >
+              <p className="display-tight text-5xl sm:text-6xl text-terracotta leading-none">
+                {s.n}
+              </p>
+              <p className="eyebrow mt-2 text-forest">{s.u}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
 
 
       {/* REGISTRATION FORM */}

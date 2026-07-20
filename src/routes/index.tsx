@@ -512,50 +512,28 @@ function RunTakomaOnePager() {
         </div>
 
         <ol className="mt-10 grid gap-6 sm:grid-cols-3">
-          <li
-            data-reveal
-            style={{ transitionDelay: "0ms" }}
-            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
-          >
-            <p className="eyebrow text-terracotta">Chapter 01</p>
-            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
-              An album dropped.
-            </h3>
-            <p className="mt-3 text-ink-soft">
-              April 30, 2026 — Oddisee and Heno. release{" "}
-              <em className="serif-italic">From Takoma With Love</em>.
-              Twelve tracks written as a love letter to the block.
-            </p>
-          </li>
-          <li
-            data-reveal
-            style={{ transitionDelay: "120ms" }}
-            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
-          >
-            <p className="eyebrow text-terracotta">Chapter 02</p>
-            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
-              One listener laced up.
-            </h3>
-            <p className="mt-3 text-ink-soft">
-              Four hundred miles away in Pittsburgh, a friend hit play, tied
-              his shoes, and started sketching a 5K on the back of a napkin.
-            </p>
-          </li>
-          <li
-            data-reveal
-            style={{ transitionDelay: "240ms" }}
-            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
-          >
-            <p className="eyebrow text-terracotta">Chapter 03</p>
-            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
-              We're running it out loud.
-            </h3>
-            <p className="mt-3 text-ink-soft">
-              August 2, 2026 — one loop through Takoma Park. Small on purpose.
-              A neighborhood pace, a shared playlist, and a bib for every
-              finisher.
-            </p>
-          </li>
+          {CHAPTERS.map((ch, i) => (
+            <li
+              key={ch.number}
+              data-reveal
+              style={{ transitionDelay: `${i * 120}ms` }}
+              className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6 flex flex-col"
+            >
+              <p className="eyebrow text-terracotta">Chapter {ch.number}</p>
+              <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
+                {ch.title}
+              </h3>
+              <p className="mt-3 text-ink-soft">{ch.teaser}</p>
+              <button
+                type="button"
+                onClick={() => setOpenChapter(i as 0 | 1 | 2)}
+                className="mt-4 self-start inline-flex items-center gap-1 eyebrow text-forest hover:text-terracotta transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta"
+                aria-haspopup="dialog"
+              >
+                Read more <span aria-hidden>→</span>
+              </button>
+            </li>
+          ))}
         </ol>
 
         <div className="mt-10 flex flex-col items-center gap-3">
@@ -569,6 +547,11 @@ function RunTakomaOnePager() {
             The album · the friendship · the route
           </p>
         </div>
+
+        <ChapterModal
+          chapter={openChapter !== null ? CHAPTERS[openChapter] : null}
+          onClose={() => setOpenChapter(null)}
+        />
       </section>
 
       {/* RUN OF SHOW — race day schedule */}

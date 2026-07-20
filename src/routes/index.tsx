@@ -143,6 +143,139 @@ function useScrollReveal() {
   }, []);
 }
 
+type Chapter = {
+  number: string;
+  title: string;
+  teaser: string;
+  eyebrow: string;
+  body: string[];
+};
+
+const CHAPTERS: Chapter[] = [
+  {
+    number: "01",
+    title: "An album dropped.",
+    teaser:
+      "April 30, 2026 — Oddisee and Heno. release From Takoma With Love. Twelve tracks written as a love letter to the block.",
+    eyebrow: "April 30, 2026 · Takoma Park",
+    body: [
+      "Oddisee and Heno. release From Takoma With Love — twelve tracks written as a love letter to the block that raised them.",
+      "It isn't a concept record. It's a neighborhood on wax: the corner store, the porch, the walk to the Metro, the friends who stayed and the ones who didn't.",
+      "Within a week the album is on every playlist on Carroll Ave. The block hears itself back — and it hits different.",
+    ],
+  },
+  {
+    number: "02",
+    title: "One listener laced up.",
+    teaser:
+      "Four hundred miles away in Pittsburgh, a friend hit play, tied his shoes, and started sketching a 5K on the back of a napkin.",
+    eyebrow: "May 2026 · Pittsburgh",
+    body: [
+      "Four hundred miles away in Pittsburgh, a longtime friend of the block hit play on the album and went for a run.",
+      "One loop turned into three. By the time he got home, there was a napkin on the counter with a rough 5K sketched on it — start on Carroll, loop the park, finish where the album lives.",
+      "A text went out that night: 'What if we actually did this?' Nobody said no.",
+    ],
+  },
+  {
+    number: "03",
+    title: "We're running it out loud.",
+    teaser:
+      "August 2, 2026 — one loop through Takoma Park. Small on purpose. A neighborhood pace, a shared playlist, and a bib for every finisher.",
+    eyebrow: "August 2, 2026 · 9:00 AM · Takoma Park",
+    body: [
+      "One loop through Takoma Park. Small on purpose — a neighborhood pace, a shared playlist, and a bib for every finisher.",
+      "No qualifying time. No corrals. Just show up, run it with the people who live here, and stay for coffee after.",
+      "This is chapter three. The rest gets written on race day.",
+    ],
+  },
+];
+
+function ChapterModal({
+  chapter,
+  onClose,
+}: {
+  chapter: Chapter | null;
+  onClose: () => void;
+}) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!chapter) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [chapter, onClose]);
+
+  if (!chapter) return null;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="chapter-modal-title"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
+    >
+      <div
+        aria-hidden
+        onClick={onClose}
+        className="absolute inset-0 bg-ink/60 backdrop-blur-sm animate-in fade-in duration-200"
+      />
+      <div className="relative w-full sm:max-w-lg max-h-[90vh] overflow-y-auto bg-paper-warm border border-hairline shadow-lift p-6 sm:p-8 rounded-t-2xl sm:rounded-2xl">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="eyebrow text-terracotta">Chapter {chapter.number}</p>
+            <h3
+              id="chapter-modal-title"
+              className="mt-1 display-tight text-3xl sm:text-4xl text-forest leading-tight"
+            >
+              {chapter.title}
+            </h3>
+            <p className="mt-2 text-sm text-ink-soft">{chapter.eyebrow}</p>
+          </div>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="shrink-0 -mt-1 -mr-1 h-9 w-9 inline-flex items-center justify-center rounded-full border border-hairline text-ink hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta"
+          >
+            <span aria-hidden className="text-xl leading-none">×</span>
+          </button>
+        </div>
+        <div className="mt-5 space-y-4 text-ink-soft leading-relaxed">
+          {chapter.body.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Link
+            to="/story"
+            onClick={onClose}
+            className="brush-btn inline-flex items-center justify-center px-5 py-2.5 display-tight text-sm tracking-[0.14em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors"
+          >
+            READ THE FULL STORY
+          </Link>
+          <button
+            type="button"
+            onClick={onClose}
+            className="eyebrow text-ink-soft hover:text-terracotta transition-colors"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function RunTakomaOnePager() {
   useScrollReveal();
   const [form, setForm] = useState<FormState>(initialForm);
@@ -167,6 +300,7 @@ function RunTakomaOnePager() {
     { status: "idle" | "sending" | "sent" | "rate_limited" | "error"; message?: string }
   >({ status: "idle" });
   const [submitting, setSubmitting] = useState(false);
+  const [openChapter, setOpenChapter] = useState<null | 0 | 1 | 2>(null);
 
   // On mount, detect Strava OAuth return via query string and hydrate the success state.
   useEffect(() => {
@@ -511,50 +645,28 @@ function RunTakomaOnePager() {
         </div>
 
         <ol className="mt-10 grid gap-6 sm:grid-cols-3">
-          <li
-            data-reveal
-            style={{ transitionDelay: "0ms" }}
-            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
-          >
-            <p className="eyebrow text-terracotta">Chapter 01</p>
-            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
-              An album dropped.
-            </h3>
-            <p className="mt-3 text-ink-soft">
-              April 30, 2026 — Oddisee and Heno. release{" "}
-              <em className="serif-italic">From Takoma With Love</em>.
-              Twelve tracks written as a love letter to the block.
-            </p>
-          </li>
-          <li
-            data-reveal
-            style={{ transitionDelay: "120ms" }}
-            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
-          >
-            <p className="eyebrow text-terracotta">Chapter 02</p>
-            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
-              One listener laced up.
-            </h3>
-            <p className="mt-3 text-ink-soft">
-              Four hundred miles away in Pittsburgh, a friend hit play, tied
-              his shoes, and started sketching a 5K on the back of a napkin.
-            </p>
-          </li>
-          <li
-            data-reveal
-            style={{ transitionDelay: "240ms" }}
-            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
-          >
-            <p className="eyebrow text-terracotta">Chapter 03</p>
-            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
-              We're running it out loud.
-            </h3>
-            <p className="mt-3 text-ink-soft">
-              August 2, 2026 — one loop through Takoma Park. Small on purpose.
-              A neighborhood pace, a shared playlist, and a bib for every
-              finisher.
-            </p>
-          </li>
+          {CHAPTERS.map((ch, i) => (
+            <li
+              key={ch.number}
+              data-reveal
+              style={{ transitionDelay: `${i * 120}ms` }}
+              className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6 flex flex-col"
+            >
+              <p className="eyebrow text-terracotta">Chapter {ch.number}</p>
+              <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
+                {ch.title}
+              </h3>
+              <p className="mt-3 text-ink-soft">{ch.teaser}</p>
+              <button
+                type="button"
+                onClick={() => setOpenChapter(i as 0 | 1 | 2)}
+                className="mt-4 self-start inline-flex items-center gap-1 eyebrow text-forest hover:text-terracotta transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta"
+                aria-haspopup="dialog"
+              >
+                Read more <span aria-hidden>→</span>
+              </button>
+            </li>
+          ))}
         </ol>
 
         <div className="mt-10 flex flex-col items-center gap-3">
@@ -568,6 +680,11 @@ function RunTakomaOnePager() {
             The album · the friendship · the route
           </p>
         </div>
+
+        <ChapterModal
+          chapter={openChapter !== null ? CHAPTERS[openChapter] : null}
+          onClose={() => setOpenChapter(null)}
+        />
       </section>
 
       {/* RUN OF SHOW — race day schedule */}

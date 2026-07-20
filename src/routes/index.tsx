@@ -539,9 +539,10 @@ function RunTakomaOnePager() {
           ].map((s, i) => (
             <div
               key={s.u}
-              className="rise-in border-2 border-ink bg-paper-warm p-4 text-center"
+              className="hover-lift rise-in border-2 border-ink bg-paper-warm p-4 text-center"
               style={{ animationDelay: `${i * 80 + 400}ms` }}
             >
+
               <p className="display-tight text-5xl sm:text-6xl text-terracotta leading-none">
                 {s.n}
               </p>

@@ -1244,6 +1244,7 @@ function ReduceMotionToggle() {
       type="button"
       onClick={toggle}
       aria-pressed={reduced}
+      aria-label={reduced ? "Motion reduced. Activate to enable animations." : "Animations enabled. Activate to reduce motion."}
       title="Toggle motion for animations. Timer and timeline stay usable."
       className="eyebrow inline-flex items-center gap-2 border border-hairline px-2.5 py-1 text-ink-soft hover:text-terracotta hover:border-terracotta transition-colors"
     >

@@ -465,7 +465,73 @@ function RunTakomaOnePager() {
         </div>
       </section>
 
+      {/* HOW WE GOT HERE — condensed story with link to full /story */}
+      <section
+        id="story"
+        className="relative z-10 mx-auto max-w-5xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20"
+      >
+        <div className="flex flex-col items-center text-center">
+          <RuledLabel>The story</RuledLabel>
+          <h2 className="mt-4 display-tight text-4xl sm:text-6xl leading-[0.9]">
+            <span className="text-forest">How we </span>
+            <span className="brush-script text-terracotta">got here</span>
+          </h2>
+          <p className="mt-3 max-w-2xl text-ink-soft">
+            A love letter to a neighborhood — and the run that turned it into
+            a Sunday morning ritual.
+          </p>
+        </div>
+
+        <ol className="mt-10 grid gap-6 sm:grid-cols-3">
+          <li className="rise-in hover-lift card-lift border border-hairline bg-paper-warm p-6">
+            <p className="eyebrow text-terracotta">Chapter 01</p>
+            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
+              An album dropped.
+            </h3>
+            <p className="mt-3 text-ink-soft">
+              April 30, 2026 — Oddisee and Heno. release{" "}
+              <em className="serif-italic">From Takoma With Love</em>.
+              Twelve tracks written as a love letter to the block.
+            </p>
+          </li>
+          <li className="rise-in hover-lift card-lift border border-hairline bg-paper-warm p-6">
+            <p className="eyebrow text-terracotta">Chapter 02</p>
+            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
+              One listener laced up.
+            </h3>
+            <p className="mt-3 text-ink-soft">
+              Four hundred miles away in Pittsburgh, a friend hit play, tied
+              his shoes, and started sketching a 5K on the back of a napkin.
+            </p>
+          </li>
+          <li className="rise-in hover-lift card-lift border border-hairline bg-paper-warm p-6">
+            <p className="eyebrow text-terracotta">Chapter 03</p>
+            <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
+              We're running it out loud.
+            </h3>
+            <p className="mt-3 text-ink-soft">
+              August 2, 2026 — one loop through Takoma Park. Small on purpose.
+              A neighborhood pace, a shared playlist, and a bib for every
+              finisher.
+            </p>
+          </li>
+        </ol>
+
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <Link
+            to="/story"
+            className="brush-btn inline-flex items-center justify-center px-8 py-4 display-tight text-base tracking-[0.14em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors"
+          >
+            READ THE FULL STORY
+          </Link>
+          <p className="eyebrow text-ink-soft">
+            The album · the friendship · the route
+          </p>
+        </div>
+      </section>
+
       {/* RUN OF SHOW — race day schedule */}
+
       <section
         id="run-of-show"
         className="relative z-10 mx-auto max-w-5xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20"

@@ -559,7 +559,7 @@ function RunTakomaOnePager() {
         id="register"
         className="relative z-10 mx-auto max-w-2xl px-5 pb-32 sm:px-6 sm:pb-24 scroll-mt-4 sm:scroll-mt-16"
       >
-        <div className="border-2 border-ink bg-paper-warm p-5 sm:p-8 md:p-10">
+        <div className="card-lift relative border-2 border-ink bg-paper-warm p-5 sm:p-8 md:p-10">
 
           <RuledLabel>Registration</RuledLabel>
           <h2 className="mt-4 display-tight text-4xl sm:text-5xl">
@@ -570,6 +570,28 @@ function RunTakomaOnePager() {
           <p className="mt-3 text-ink-soft">
             All finishers get a BIB packet. <span className="text-terracotta" aria-hidden>♡</span>
           </p>
+
+          {/* Trust strip — GoFundMe/Stripe-style reassurance */}
+          {!submitted && (
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <span className="trust-chip">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-forest" />
+                Free to enter
+              </span>
+              <span className="trust-chip">
+                <svg aria-hidden width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4" y="10" width="16" height="10" rx="1.5" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                </svg>
+                Secure form
+              </span>
+              <span className="trust-chip">
+                <span aria-hidden>⏱</span>
+                Under 60 seconds
+              </span>
+            </div>
+          )}
+
 
           {submitted ? (
             <div

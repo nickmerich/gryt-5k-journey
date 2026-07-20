@@ -1132,17 +1132,21 @@ function RunTakomaOnePager() {
       {/* Sticky mobile CTA — hidden once the user has registered */}
       {!submitted && (
         <div
-          className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-ink bg-paper/95 backdrop-blur px-4 pt-3 lg:hidden"
+          className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-ink bg-paper/95 backdrop-blur-md px-4 pt-3 lg:hidden shadow-[0_-12px_30px_-12px_oklch(0.20_0.01_60/0.25)]"
           style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)" }}
         >
           <a
             href="#register"
-            className="brush-btn block w-full text-center display-tight text-base tracking-[0.14em] py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
+            className="brush-btn flex w-full items-center justify-center gap-2 text-center display-tight text-base tracking-[0.14em] py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
           >
             REGISTER — AUG 2 ♡
           </a>
+          <p className="mt-1.5 text-center text-[0.65rem] tracking-[0.14em] uppercase text-ink-soft">
+            Free · Under 60 seconds · Confirmation email
+          </p>
         </div>
       )}
+
     </main>
 
   );

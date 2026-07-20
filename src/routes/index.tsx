@@ -911,6 +911,9 @@ function RunTakomaOnePager() {
           <p className="eyebrow text-ink-soft">© GRYT Club · Takoma Park, MD</p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
             <div className="flex items-center gap-4">
+              <a href="/story" className="eyebrow text-ink-soft hover:text-ink transition-colors">
+                The Story
+              </a>
               <a href="/contact" className="eyebrow text-ink-soft hover:text-ink transition-colors">
                 Contact
               </a>

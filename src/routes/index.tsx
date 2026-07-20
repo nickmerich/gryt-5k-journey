@@ -167,6 +167,7 @@ function RunTakomaOnePager() {
     { status: "idle" | "sending" | "sent" | "rate_limited" | "error"; message?: string }
   >({ status: "idle" });
   const [submitting, setSubmitting] = useState(false);
+  const [openChapter, setOpenChapter] = useState<null | 0 | 1 | 2>(null);
 
   // On mount, detect Strava OAuth return via query string and hydrate the success state.
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
 
@@ -1328,15 +1328,44 @@ function Countdown() {
 
   const started = diff === 0;
 
+  // Screen-reader announcement: update at a human cadence, not every second.
+  // Announce hourly when far out, every 15 minutes within a day, every minute
+  // in the final hour, and once when the race starts. Never per-second.
+  const announcement = started
+    ? "The race has started. Have a beautiful run."
+    : days > 0
+      ? `${days} day${days === 1 ? "" : "s"} and ${hours} hour${hours === 1 ? "" : "s"} until the start line.`
+      : hours > 0
+        ? `${hours} hour${hours === 1 ? "" : "s"} and ${minutes} minute${minutes === 1 ? "" : "s"} until the start line.`
+        : `${minutes} minute${minutes === 1 ? "" : "s"} until the start line.`;
+
+  const announceKey = started
+    ? "started"
+    : days > 0
+      ? `d-${days}-h-${hours}`
+      : hours > 1
+        ? `h-${hours}-q-${Math.floor(minutes / 15)}`
+        : `m-${hours * 60 + minutes}`;
+
+  const [liveMessage, setLiveMessage] = useState("");
+  const lastKey = useRef<string>("");
+  useEffect(() => {
+    if (now === null) return;
+    if (lastKey.current !== announceKey) {
+      lastKey.current = announceKey;
+      setLiveMessage(announcement);
+    }
+  }, [announceKey, announcement, now]);
+
   return (
-    <div
-      className="border border-hairline bg-[color:var(--color-paper-warm)] px-4 py-3"
-      aria-live="polite"
-    >
+    <div className="border border-hairline bg-[color:var(--color-paper-warm)] px-4 py-3">
       <p className="eyebrow text-terracotta text-center lg:text-left">
         {started ? "It's race day ♡" : "Countdown to the start line"}
       </p>
-      <div className="mt-2 grid grid-cols-4 gap-2 text-center">
+      <div
+        className="mt-2 grid grid-cols-4 gap-2 text-center"
+        aria-hidden="true"
+      >
         {[
           { label: "Days", value: days },
           { label: "Hrs", value: hours },
@@ -1352,6 +1381,15 @@ function Countdown() {
             </span>
           </div>
         ))}
+      </div>
+      {/* Visually hidden polite live region — focus never moves. */}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {liveMessage}
       </div>
     </div>
   );

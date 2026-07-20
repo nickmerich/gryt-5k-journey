@@ -244,5 +244,89 @@
   transform: none !important;
 }
 
+/* ─── Polish: elevation, focus, spinner, confetti ───────────────── */
+
+@theme inline {
+  --shadow-soft: 0 1px 2px oklch(0.20 0.01 60 / 0.04),
+                 0 4px 12px oklch(0.20 0.01 60 / 0.06);
+  --shadow-lift: 0 2px 6px oklch(0.20 0.01 60 / 0.06),
+                 0 18px 40px -12px oklch(0.20 0.01 60 / 0.18);
+  --shadow-focus: 0 0 0 4px oklch(0.60 0.15 32 / 0.22);
+}
+
+/* Elevated card — used for the register box and receipt */
+@utility card-lift {
+  box-shadow: var(--shadow-lift);
+  transition: box-shadow 220ms ease, transform 220ms ease;
+}
+@utility hover-lift {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Focus ring — Stripe-ish soft terracotta halo on inputs */
+@utility field-focus {
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+.field-focus:focus,
+.field-focus:focus-visible {
+  outline: none;
+  border-color: var(--color-terracotta);
+  box-shadow: var(--shadow-focus);
+  background-color: var(--color-paper);
+}
+
+/* Spinner used inside the submit button */
+@keyframes gryt-spin {
+  to { transform: rotate(360deg); }
+}
+@utility spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: gryt-spin 0.7s linear infinite;
+}
+.motion-off .spinner {
+  animation: none !important;
+  opacity: 0.6;
+}
+
+/* Trust chip — small pill for "free · secure · <2 min" */
+@utility trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-paper);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  border-radius: 9999px;
+}
+
+/* Confetti-ish heart burst on registration success */
+@keyframes gryt-burst {
+  0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: translate(var(--dx, 0), var(--dy, -40px)) scale(1); opacity: 0; }
+}
+@utility heart-burst {
+  position: absolute;
+  animation: gryt-burst 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  pointer-events: none;
+  color: var(--color-terracotta);
+}
+.motion-off .heart-burst { display: none; }
+
+
 
 

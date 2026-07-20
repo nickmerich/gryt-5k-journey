@@ -539,9 +539,10 @@ function RunTakomaOnePager() {
           ].map((s, i) => (
             <div
               key={s.u}
-              className="rise-in border-2 border-ink bg-paper-warm p-4 text-center"
+              className="hover-lift rise-in border-2 border-ink bg-paper-warm p-4 text-center"
               style={{ animationDelay: `${i * 80 + 400}ms` }}
             >
+
               <p className="display-tight text-5xl sm:text-6xl text-terracotta leading-none">
                 {s.n}
               </p>
@@ -559,7 +560,7 @@ function RunTakomaOnePager() {
         id="register"
         className="relative z-10 mx-auto max-w-2xl px-5 pb-32 sm:px-6 sm:pb-24 scroll-mt-4 sm:scroll-mt-16"
       >
-        <div className="border-2 border-ink bg-paper-warm p-5 sm:p-8 md:p-10">
+        <div className="card-lift relative border-2 border-ink bg-paper-warm p-5 sm:p-8 md:p-10">
 
           <RuledLabel>Registration</RuledLabel>
           <h2 className="mt-4 display-tight text-4xl sm:text-5xl">
@@ -571,17 +572,58 @@ function RunTakomaOnePager() {
             All finishers get a BIB packet. <span className="text-terracotta" aria-hidden>♡</span>
           </p>
 
+          {/* Trust strip — GoFundMe/Stripe-style reassurance */}
+          {!submitted && (
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <span className="trust-chip">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-forest" />
+                Free to enter
+              </span>
+              <span className="trust-chip">
+                <svg aria-hidden width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4" y="10" width="16" height="10" rx="1.5" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                </svg>
+                Secure form
+              </span>
+              <span className="trust-chip">
+                <span aria-hidden>⏱</span>
+                Under 60 seconds
+              </span>
+            </div>
+          )}
+
+
           {submitted ? (
             <div
               role="status"
-              className="mt-8 border-2 border-forest bg-paper p-6"
+              className="card-lift relative mt-8 overflow-hidden border-2 border-forest bg-paper p-6"
             >
-              <p className="eyebrow text-terracotta">You're in <span aria-hidden>♡</span></p>
-              <p className="mt-2 display-tight text-2xl">
+              {/* Confetti heart burst */}
+              <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
+                <span className="heart-burst" style={{ ["--dx" as string]: "-60px", ["--dy" as string]: "-30px", animationDelay: "0ms", fontSize: "1.25rem" }}>♡</span>
+                <span className="heart-burst" style={{ ["--dx" as string]: "-20px", ["--dy" as string]: "-50px", animationDelay: "120ms", fontSize: "1rem" }}>♡</span>
+                <span className="heart-burst" style={{ ["--dx" as string]: "20px", ["--dy" as string]: "-46px", animationDelay: "240ms", fontSize: "1.1rem" }}>♡</span>
+                <span className="heart-burst" style={{ ["--dx" as string]: "60px", ["--dy" as string]: "-28px", animationDelay: "360ms", fontSize: "0.9rem" }}>♡</span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span
+                  aria-hidden
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-forest text-[color:var(--color-forest-ink)]"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </span>
+                <p className="eyebrow text-terracotta">You're in <span aria-hidden>♡</span></p>
+              </div>
+              <p className="mt-3 display-tight text-2xl">
                 <span className="text-forest">See you Sunday, </span>
                 <span className="brush-script text-terracotta text-3xl">{submitted.name.split(" ")[0]}</span>
                 <span className="text-forest">.</span>
               </p>
+
               <p className="mt-2 text-ink-soft">
                 We saved your spot for the{" "}
                 <span className="font-semibold text-ink">
@@ -1010,10 +1052,15 @@ function RunTakomaOnePager() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="brush-btn w-full display-tight text-lg tracking-[0.1em] py-5 bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors disabled:opacity-60"
+                className="brush-btn w-full display-tight text-lg tracking-[0.1em] py-5 bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors disabled:opacity-60 inline-flex items-center justify-center gap-3"
               >
+                {submitting && <span className="spinner" aria-hidden />}
                 {submitting ? "Signing you up…" : "LOCK IN MY SPOT ♡"}
               </button>
+              <p className="mt-3 text-center text-xs text-ink-soft">
+                No payment required. You'll get a confirmation email within a minute.
+              </p>
+
             </form>
           )}
         </div>
@@ -1086,17 +1133,21 @@ function RunTakomaOnePager() {
       {/* Sticky mobile CTA — hidden once the user has registered */}
       {!submitted && (
         <div
-          className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-ink bg-paper/95 backdrop-blur px-4 pt-3 lg:hidden"
+          className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-ink bg-paper/95 backdrop-blur-md px-4 pt-3 lg:hidden shadow-[0_-12px_30px_-12px_oklch(0.20_0.01_60/0.25)]"
           style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)" }}
         >
           <a
             href="#register"
-            className="brush-btn block w-full text-center display-tight text-base tracking-[0.14em] py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
+            className="brush-btn flex w-full items-center justify-center gap-2 text-center display-tight text-base tracking-[0.14em] py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
           >
             REGISTER — AUG 2 ♡
           </a>
+          <p className="mt-1.5 text-center text-[0.65rem] tracking-[0.14em] uppercase text-ink-soft">
+            Free · Under 60 seconds · Confirmation email
+          </p>
         </div>
       )}
+
     </main>
 
   );
@@ -1139,11 +1190,12 @@ function ReceiptRow({
 
 function inputCls(hasError: boolean) {
   return [
-    "w-full border-2 bg-paper px-4 py-3 text-ink placeholder:text-ink-soft/60",
-    "focus:outline-none focus:ring-0 focus:border-forest",
+    "field-focus w-full border-2 bg-paper px-4 py-3 text-ink placeholder:text-ink-soft/60",
+    "focus:outline-none",
     hasError ? "border-terracotta" : "border-ink",
   ].join(" ");
 }
+
 
 function Field({
   label,

@@ -232,4 +232,17 @@
   }
 }
 
+/* Manual toggle — mirrors prefers-reduced-motion, applied by a class on <html>. */
+.motion-off .marquee-track,
+.motion-off .heart-pulse,
+.motion-off .tick-bob,
+.motion-off .rise-in {
+  animation: none !important;
+}
+.motion-off .rise-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
 

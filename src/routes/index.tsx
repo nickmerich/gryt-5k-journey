@@ -312,12 +312,16 @@ function RunTakomaOnePager() {
       />
 
       {/* Top eyebrow */}
-      <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 pt-6 sm:pt-8">
+      <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 pt-6 sm:pt-8">
         <span className="eyebrow text-forest">GRYT Club · 5K Series</span>
-        <span className="eyebrow text-terracotta hidden sm:inline">
-          08 · 02 · 2026
-        </span>
+        <div className="flex items-center gap-4">
+          <ReduceMotionToggle />
+          <span className="eyebrow text-terracotta hidden sm:inline">
+            08 · 02 · 2026
+          </span>
+        </div>
       </header>
+
 
       {/* HERO — official flyer as the branding source of truth */}
       <section className="relative z-10 mx-auto grid max-w-6xl gap-8 px-5 pt-6 pb-10 sm:px-6 sm:pt-10 sm:pb-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10">
@@ -1213,7 +1217,42 @@ function Feature({ kicker, title, body }: { kicker: string; title: string; body:
   );
 }
 
+function ReduceMotionToggle() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const stored = localStorage.getItem("gryt-reduce-motion");
+    const prefers =
+      stored === null
+        ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        : stored === "1";
+    setReduced(prefers);
+    document.documentElement.classList.toggle("motion-off", prefers);
+  }, []);
+  function toggle() {
+    const next = !reduced;
+    setReduced(next);
+    document.documentElement.classList.toggle("motion-off", next);
+    localStorage.setItem("gryt-reduce-motion", next ? "1" : "0");
+  }
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-pressed={reduced}
+      title="Toggle motion for animations. Timer and timeline stay usable."
+      className="eyebrow inline-flex items-center gap-2 border border-hairline px-2.5 py-1 text-ink-soft hover:text-terracotta hover:border-terracotta transition-colors"
+    >
+      <span
+        aria-hidden
+        className={`h-2 w-2 rounded-full ${reduced ? "bg-ink-soft" : "bg-terracotta"}`}
+      />
+      {reduced ? "Motion off" : "Reduce motion"}
+    </button>
+  );
+}
+
 const EVENT_TS = new Date("2026-08-02T09:00:00-04:00").getTime();
+
 
 function Countdown() {
   const [now, setNow] = useState<number | null>(null);

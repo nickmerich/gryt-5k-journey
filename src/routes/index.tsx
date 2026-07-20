@@ -1108,6 +1108,13 @@ function RunTakomaOnePager() {
                 entry. A confirmation is on its way to your inbox.
               </p>
 
+              {/* Shareable race bib */}
+              <BibCard
+                name={submitted.name}
+                registrationId={submitted.registrationId}
+                ticket={ticketLabel(submitted.ticket)}
+              />
+
               {/* Receipt-style summary */}
               <div className="mt-6 border border-dashed border-forest/60 bg-[color:var(--color-paper)] p-5">
                 <div className="flex items-baseline justify-between gap-4">

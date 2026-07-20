@@ -1032,10 +1032,15 @@ function RunTakomaOnePager() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="brush-btn w-full display-tight text-lg tracking-[0.1em] py-5 bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors disabled:opacity-60"
+                className="brush-btn w-full display-tight text-lg tracking-[0.1em] py-5 bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors disabled:opacity-60 inline-flex items-center justify-center gap-3"
               >
+                {submitting && <span className="spinner" aria-hidden />}
                 {submitting ? "Signing you up…" : "LOCK IN MY SPOT ♡"}
               </button>
+              <p className="mt-3 text-center text-xs text-ink-soft">
+                No payment required. You'll get a confirmation email within a minute.
+              </p>
+
             </form>
           )}
         </div>

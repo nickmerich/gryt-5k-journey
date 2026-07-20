@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /lovable/
+Disallow: /email/
+
+Sitemap: https://grytrun.com/sitemap.xml

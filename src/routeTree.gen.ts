@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StoryRouteImport } from './routes/story'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
@@ -35,6 +36,11 @@ const TermsRoute = TermsRouteImport.update({
 const StoryRoute = StoryRouteImport.update({
   id: '/story',
   path: '/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/accessibility': typeof AccessibilityRoute
   '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/contact'
     | '/privacy'
+    | '/sitemap.xml'
     | '/story'
     | '/terms'
     | '/email/unsubscribe'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/contact'
     | '/privacy'
+    | '/sitemap.xml'
     | '/story'
     | '/terms'
     | '/email/unsubscribe'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/contact'
     | '/privacy'
+    | '/sitemap.xml'
     | '/story'
     | '/terms'
     | '/email/unsubscribe'
@@ -239,6 +251,7 @@ export interface RootRouteChildren {
   AccessibilityRoute: typeof AccessibilityRoute
   ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoryRoute: typeof StoryRoute
   TermsRoute: typeof TermsRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
@@ -268,6 +281,13 @@ declare module '@tanstack/react-router' {
       path: '/story'
       fullPath: '/story'
       preLoaderRoute: typeof StoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -383,6 +403,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccessibilityRoute: AccessibilityRoute,
   ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoryRoute: StoryRoute,
   TermsRoute: TermsRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,

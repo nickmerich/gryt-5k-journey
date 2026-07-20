@@ -1161,11 +1161,12 @@ function ReceiptRow({
 
 function inputCls(hasError: boolean) {
   return [
-    "w-full border-2 bg-paper px-4 py-3 text-ink placeholder:text-ink-soft/60",
-    "focus:outline-none focus:ring-0 focus:border-forest",
+    "field-focus w-full border-2 bg-paper px-4 py-3 text-ink placeholder:text-ink-soft/60",
+    "focus:outline-none",
     hasError ? "border-terracotta" : "border-ink",
   ].join(" ");
 }
+
 
 function Field({
   label,

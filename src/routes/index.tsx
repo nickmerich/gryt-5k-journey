@@ -1220,13 +1220,18 @@ function Feature({ kicker, title, body }: { kicker: string; title: string; body:
 function ReduceMotionToggle() {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = (prefers: boolean) => {
+      setReduced(prefers);
+      document.documentElement.classList.toggle("motion-off", prefers);
+    };
     const stored = localStorage.getItem("gryt-reduce-motion");
-    const prefers =
-      stored === null
-        ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        : stored === "1";
-    setReduced(prefers);
-    document.documentElement.classList.toggle("motion-off", prefers);
+    apply(stored === null ? mql.matches : stored === "1");
+    const onChange = (e: MediaQueryListEvent) => {
+      if (localStorage.getItem("gryt-reduce-motion") === null) apply(e.matches);
+    };
+    mql.addEventListener?.("change", onChange);
+    return () => mql.removeEventListener?.("change", onChange);
   }, []);
   function toggle() {
     const next = !reduced;

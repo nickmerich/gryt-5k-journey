@@ -910,9 +910,14 @@ function RunTakomaOnePager() {
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-8 pb-28 text-center sm:flex-row sm:justify-between sm:pb-8 sm:text-left">
           <p className="eyebrow text-ink-soft">© GRYT Club · Takoma Park, MD</p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-            <a href="/terms" className="eyebrow text-ink-soft hover:text-ink transition-colors">
-              Terms
-            </a>
+            <div className="flex items-center gap-4">
+              <a href="/terms" className="eyebrow text-ink-soft hover:text-ink transition-colors">
+                Terms
+              </a>
+              <a href="/privacy" className="eyebrow text-ink-soft hover:text-ink transition-colors">
+                Privacy
+              </a>
+            </div>
             <p className="eyebrow text-ink-soft">grytrun.com · @grytrunclub</p>
             <div className="flex items-center gap-2">
               <a

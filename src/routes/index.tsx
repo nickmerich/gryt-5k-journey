@@ -116,7 +116,35 @@ const initialForm: FormState = {
   tos: false,
 };
 
+function useScrollReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    if (!els.length) return;
+    const motionOff =
+      document.documentElement.classList.contains("motion-off") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (motionOff || typeof IntersectionObserver === "undefined") {
+      els.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.18, rootMargin: "0px 0px -40px 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
 function RunTakomaOnePager() {
+  useScrollReveal();
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -483,7 +511,11 @@ function RunTakomaOnePager() {
         </div>
 
         <ol className="mt-10 grid gap-6 sm:grid-cols-3">
-          <li className="rise-in hover-lift card-lift border border-hairline bg-paper-warm p-6">
+          <li
+            data-reveal
+            style={{ transitionDelay: "0ms" }}
+            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
+          >
             <p className="eyebrow text-terracotta">Chapter 01</p>
             <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
               An album dropped.
@@ -494,7 +526,11 @@ function RunTakomaOnePager() {
               Twelve tracks written as a love letter to the block.
             </p>
           </li>
-          <li className="rise-in hover-lift card-lift border border-hairline bg-paper-warm p-6">
+          <li
+            data-reveal
+            style={{ transitionDelay: "120ms" }}
+            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
+          >
             <p className="eyebrow text-terracotta">Chapter 02</p>
             <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
               One listener laced up.
@@ -504,7 +540,11 @@ function RunTakomaOnePager() {
               his shoes, and started sketching a 5K on the back of a napkin.
             </p>
           </li>
-          <li className="rise-in hover-lift card-lift border border-hairline bg-paper-warm p-6">
+          <li
+            data-reveal
+            style={{ transitionDelay: "240ms" }}
+            className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6"
+          >
             <p className="eyebrow text-terracotta">Chapter 03</p>
             <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
               We're running it out loud.

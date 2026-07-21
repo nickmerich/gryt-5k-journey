@@ -751,7 +751,6 @@ function RunTakomaOnePager() {
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 pt-6 sm:pt-8">
         <span className="eyebrow text-forest">GRYT Club · 5K Series</span>
         <div className="flex items-center gap-4">
-          <ReduceMotionToggle />
           <span className="eyebrow text-terracotta hidden sm:inline">
             08 · 02 · 2026
           </span>

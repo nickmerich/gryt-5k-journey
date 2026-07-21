@@ -697,7 +697,7 @@ function RunTakomaOnePager() {
 
       if (serverRejected) return;
 
-      setSubmitted({
+      const nextSubmitted = {
         name: parsed.data.name,
         email: parsed.data.email,
         ticket: parsed.data.ticket,
@@ -706,8 +706,13 @@ function RunTakomaOnePager() {
         confirmedAt: new Date().toISOString(),
         registrationId,
         strava: null,
-        stravaStatus: "idle",
-      });
+        stravaStatus: "idle" as const,
+      };
+      setSubmitted(nextSubmitted);
+      try {
+        localStorage.setItem("rtwl-last-submitted", JSON.stringify(nextSubmitted));
+      } catch {}
+
       setForm(initialForm);
       setErrors({});
       setTouched({});

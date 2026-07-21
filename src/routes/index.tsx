@@ -154,41 +154,43 @@ type Chapter = {
 const CHAPTERS: Chapter[] = [
   {
     number: "01",
-    title: "An album dropped.",
+    title: "A love letter dropped.",
     teaser:
-      "April 30, 2026 — Oddisee and Heno. release From Takoma With Love. Twelve tracks written as a love letter to the block.",
+      "April 30, 2026 — Oddisee and Heno. release From Takoma With Love. Twelve tracks about the block that raised them both. Not nostalgia — gratitude. Two artists, a generation apart, writing home to the same neighborhood.",
     eyebrow: "April 30, 2026 · Takoma Park",
     body: [
-      "Oddisee and Heno. release From Takoma With Love — twelve tracks written as a love letter to the block that raised them.",
-      "It isn't a concept record. It's a neighborhood on wax: the corner store, the porch, the walk to the Metro, the friends who stayed and the ones who didn't.",
-      "Within a week the album is on every playlist on Carroll Ave. The block hears itself back — and it hits different.",
+      "Some albums are made for the charts. This one was made for a zip code.",
+      "From Takoma With Love is Oddisee and Heno. writing back to Takoma Park — the porches, the corner stores, the people who knew them before anyone else did. Twelve tracks that don't romanticize the neighborhood. They thank it.",
+      "That's the rare kind of project: artists at two different points in their careers, pointing all of it back at the place that made them. Not a victory lap. A returned favor.",
     ],
   },
   {
     number: "02",
-    title: "One listener laced up.",
+    title: "Five years. Then a collision.",
     teaser:
-      "Four hundred miles away in Pittsburgh, a friend hit play, tied his shoes, and started sketching a 5K on the back of a napkin.",
+      "Four hundred miles away in Pittsburgh, one of the first listeners wasn't a stranger. Nick and Heno. had spent five years building together — music ventures, tech partnerships, late-night ideas that became real things. The last two years, Nick's project was different: doing hard things and getting his health back.",
     eyebrow: "May 2026 · Pittsburgh",
     body: [
-      "Four hundred miles away in Pittsburgh, a longtime friend of the block hit play on the album and went for a run.",
-      "One loop turned into three. By the time he got home, there was a napkin on the counter with a rough 5K sketched on it — start on Carroll, loop the park, finish where the album lives.",
-      "A text went out that night: 'What if we actually did this?' Nobody said no.",
+      "Nick and Heno. have been partners longer than they've been anything else. Five years of joint ventures across music and tech — some worked, some didn't, all of them built on the same handshake.",
+      "Two years ago, Nick's hardest project stopped being a company. It became his own body. Early mornings. Long miles. Doing hard things, together, until it turned into a community called GRYT.",
+      "So when From Takoma With Love dropped, Nick heard it the way you hear a friend's work — twice. Once as a listener. Once as a builder. An album about giving back to a neighborhood. A life rebuilt one run at a time. Those two things were always going to collide.",
     ],
   },
   {
     number: "03",
-    title: "We're running it out loud.",
+    title: "We run it back.",
     teaser:
-      "August 2, 2026 — one loop through Takoma Park. Small on purpose. A neighborhood pace, a shared playlist, and a bib for every finisher.",
+      "August 2, 2026 — Run Takoma With Love. One loop through the neighborhood the album is written to. Free, 100 runners, small on purpose. Not a concert. Not a promo. A community moving through its own streets — the most physical way to say thank you.",
     eyebrow: "August 2, 2026 · 9:00 AM · Takoma Park",
     body: [
-      "One loop through Takoma Park. Small on purpose — a neighborhood pace, a shared playlist, and a bib for every finisher.",
-      "No qualifying time. No corrals. Just show up, run it with the people who live here, and stay for coffee after.",
-      "This is chapter three. The rest gets written on race day.",
+      "The best way to honor a love letter to a neighborhood is to move through it.",
+      "So on August 2, we run Takoma Park. One loop. A neighborhood pace. A shared playlist. A bib for every finisher. Capped at 100 because this isn't about scale — it's about the block.",
+      "This is Nick and GRYT supporting Heno.'s community, and the neighborhood both artists came up in, the way GRYT knows how: physically, positively, together. You don't have to be fast. You have to show up.",
+      "That's how we got here. That's how we finish it — on foot.",
     ],
   },
 ];
+
 
 function ChapterModal({
   chapter,

@@ -446,30 +446,43 @@ function BibCard({
   const share = async () => {
     const c = canvasRef.current;
     if (!c) return;
+    const shareUrl = `https://grytrun.com/?bib=${bib}`;
+    const shareText = `I'm in for Run Takoma With Love 5K · Aug 2, 2026. Bib #${bib}. Come run with us:`;
     const blob: Blob | null = await new Promise((res) =>
       c.toBlob((b) => res(b), "image/png"),
     );
-    if (!blob) return download();
-    const file = new File([blob], `rtwl-bib-${bib}.png`, { type: "image/png" });
+    const file = blob
+      ? new File([blob], `rtwl-bib-${bib}.png`, { type: "image/png" })
+      : null;
     const nav = navigator as Navigator & {
-      canShare?: (d: { files: File[] }) => boolean;
-      share?: (d: { files?: File[]; title?: string; text?: string }) => Promise<void>;
+      canShare?: (d: { files?: File[]; url?: string }) => boolean;
+      share?: (d: { files?: File[]; title?: string; text?: string; url?: string }) => Promise<void>;
     };
-    if (nav.canShare && nav.canShare({ files: [file] }) && nav.share) {
+    // Native Web Share (mobile): share the bib image + link
+    if (file && nav.share && nav.canShare && nav.canShare({ files: [file] })) {
       try {
         await nav.share({
           files: [file],
           title: "I'm running Takoma with Love",
-          text: `I'm in for Run Takoma With Love 5K · Aug 2, 2026. Bib #${bib}. Come run with us: grytrun.com`,
+          text: shareText,
+          url: shareUrl,
         });
-        setShared(true);
-        setTimeout(() => setShared(false), 2400);
+        setShared("shared");
+        setTimeout(() => setShared("idle"), 2400);
         return;
       } catch {
-        /* user cancelled or unsupported — fall through */
+        /* user cancelled — bail without fallback */
+        return;
       }
     }
-    download();
+    // Desktop fallback: copy shareable link to clipboard
+    try {
+      await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+      setShared("copied");
+      setTimeout(() => setShared("idle"), 2400);
+    } catch {
+      download();
+    }
   };
 
   return (
@@ -507,7 +520,7 @@ function BibCard({
             <polyline points="16 6 12 2 8 6" />
             <line x1="12" y1="2" x2="12" y2="15" />
           </svg>
-          {shared ? "Shared!" : "Share my bib"}
+          {shared === "shared" ? "Shared!" : shared === "copied" ? "Link copied ✓" : "Share my bib"}
         </button>
         <button
           type="button"
@@ -751,7 +764,6 @@ function RunTakomaOnePager() {
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 pt-6 sm:pt-8">
         <span className="eyebrow text-forest">GRYT Club · 5K Series</span>
         <div className="flex items-center gap-4">
-          <ReduceMotionToggle />
           <span className="eyebrow text-terracotta hidden sm:inline">
             08 · 02 · 2026
           </span>
@@ -1773,45 +1785,6 @@ function Feature({ kicker, title, body }: { kicker: string; title: string; body:
   );
 }
 
-function ReduceMotionToggle() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = (prefers: boolean) => {
-      setReduced(prefers);
-      document.documentElement.classList.toggle("motion-off", prefers);
-    };
-    const stored = localStorage.getItem("gryt-reduce-motion");
-    apply(stored === null ? mql.matches : stored === "1");
-    const onChange = (e: MediaQueryListEvent) => {
-      if (localStorage.getItem("gryt-reduce-motion") === null) apply(e.matches);
-    };
-    mql.addEventListener?.("change", onChange);
-    return () => mql.removeEventListener?.("change", onChange);
-  }, []);
-  function toggle() {
-    const next = !reduced;
-    setReduced(next);
-    document.documentElement.classList.toggle("motion-off", next);
-    localStorage.setItem("gryt-reduce-motion", next ? "1" : "0");
-  }
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-pressed={reduced}
-      aria-label={reduced ? "Motion reduced. Activate to enable animations." : "Animations enabled. Activate to reduce motion."}
-      title="Toggle motion for animations. Timer and timeline stay usable."
-      className="eyebrow inline-flex items-center gap-2 border border-hairline px-2.5 py-1 text-ink-soft hover:text-terracotta hover:border-terracotta transition-colors"
-    >
-      <span
-        aria-hidden
-        className={`h-2 w-2 rounded-full ${reduced ? "bg-ink-soft" : "bg-terracotta"}`}
-      />
-      {reduced ? "Motion off" : "Reduce motion"}
-    </button>
-  );
-}
 
 const EVENT_TS = new Date("2026-08-02T09:00:00-04:00").getTime();
 

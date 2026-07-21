@@ -1785,45 +1785,6 @@ function Feature({ kicker, title, body }: { kicker: string; title: string; body:
   );
 }
 
-function ReduceMotionToggle() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = (prefers: boolean) => {
-      setReduced(prefers);
-      document.documentElement.classList.toggle("motion-off", prefers);
-    };
-    const stored = localStorage.getItem("gryt-reduce-motion");
-    apply(stored === null ? mql.matches : stored === "1");
-    const onChange = (e: MediaQueryListEvent) => {
-      if (localStorage.getItem("gryt-reduce-motion") === null) apply(e.matches);
-    };
-    mql.addEventListener?.("change", onChange);
-    return () => mql.removeEventListener?.("change", onChange);
-  }, []);
-  function toggle() {
-    const next = !reduced;
-    setReduced(next);
-    document.documentElement.classList.toggle("motion-off", next);
-    localStorage.setItem("gryt-reduce-motion", next ? "1" : "0");
-  }
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-pressed={reduced}
-      aria-label={reduced ? "Motion reduced. Activate to enable animations." : "Animations enabled. Activate to reduce motion."}
-      title="Toggle motion for animations. Timer and timeline stay usable."
-      className="eyebrow inline-flex items-center gap-2 border border-hairline px-2.5 py-1 text-ink-soft hover:text-terracotta hover:border-terracotta transition-colors"
-    >
-      <span
-        aria-hidden
-        className={`h-2 w-2 rounded-full ${reduced ? "bg-ink-soft" : "bg-terracotta"}`}
-      />
-      {reduced ? "Motion off" : "Reduce motion"}
-    </button>
-  );
-}
 
 const EVENT_TS = new Date("2026-08-02T09:00:00-04:00").getTime();
 

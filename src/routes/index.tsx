@@ -520,7 +520,7 @@ function BibCard({
             <polyline points="16 6 12 2 8 6" />
             <line x1="12" y1="2" x2="12" y2="15" />
           </svg>
-          {shared ? "Shared!" : "Share my bib"}
+          {shared === "shared" ? "Shared!" : shared === "copied" ? "Link copied ✓" : "Share my bib"}
         </button>
         <button
           type="button"

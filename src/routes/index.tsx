@@ -564,7 +564,20 @@ function RunTakomaOnePager() {
     const params = new URLSearchParams(window.location.search);
     const strava = params.get("strava");
     const rid = params.get("rid");
-    if (!strava || !rid) return;
+    if (!strava || !rid) {
+      // No Strava callback — restore last registration from localStorage if present.
+      try {
+        const raw = localStorage.getItem("rtwl-last-submitted");
+        if (raw) {
+          const prev = JSON.parse(raw);
+          if (prev && typeof prev === "object" && prev.name && prev.ticket) {
+            setSubmitted((s) => s ?? prev);
+          }
+        }
+      } catch {}
+      return;
+    }
+
 
     // Clean the URL so a refresh doesn't re-trigger this.
     const clean = new URL(window.location.href);

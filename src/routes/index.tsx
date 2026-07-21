@@ -446,30 +446,43 @@ function BibCard({
   const share = async () => {
     const c = canvasRef.current;
     if (!c) return;
+    const shareUrl = `https://grytrun.com/?bib=${bib}`;
+    const shareText = `I'm in for Run Takoma With Love 5K · Aug 2, 2026. Bib #${bib}. Come run with us:`;
     const blob: Blob | null = await new Promise((res) =>
       c.toBlob((b) => res(b), "image/png"),
     );
-    if (!blob) return download();
-    const file = new File([blob], `rtwl-bib-${bib}.png`, { type: "image/png" });
+    const file = blob
+      ? new File([blob], `rtwl-bib-${bib}.png`, { type: "image/png" })
+      : null;
     const nav = navigator as Navigator & {
-      canShare?: (d: { files: File[] }) => boolean;
-      share?: (d: { files?: File[]; title?: string; text?: string }) => Promise<void>;
+      canShare?: (d: { files?: File[]; url?: string }) => boolean;
+      share?: (d: { files?: File[]; title?: string; text?: string; url?: string }) => Promise<void>;
     };
-    if (nav.canShare && nav.canShare({ files: [file] }) && nav.share) {
+    // Native Web Share (mobile): share the bib image + link
+    if (file && nav.share && nav.canShare && nav.canShare({ files: [file] })) {
       try {
         await nav.share({
           files: [file],
           title: "I'm running Takoma with Love",
-          text: `I'm in for Run Takoma With Love 5K · Aug 2, 2026. Bib #${bib}. Come run with us: grytrun.com`,
+          text: shareText,
+          url: shareUrl,
         });
-        setShared(true);
-        setTimeout(() => setShared(false), 2400);
+        setShared("shared");
+        setTimeout(() => setShared("idle"), 2400);
         return;
       } catch {
-        /* user cancelled or unsupported — fall through */
+        /* user cancelled — bail without fallback */
+        return;
       }
     }
-    download();
+    // Desktop fallback: copy shareable link to clipboard
+    try {
+      await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+      setShared("copied");
+      setTimeout(() => setShared("idle"), 2400);
+    } catch {
+      download();
+    }
   };
 
   return (

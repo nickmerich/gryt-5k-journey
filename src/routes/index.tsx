@@ -286,8 +286,9 @@ function bibNumberFrom(id: string | null | undefined): string {
   for (let i = 0; i < id.length; i++) {
     hash = (hash * 31 + id.charCodeAt(i)) >>> 0;
   }
-  const n = (hash % 899) + 100; // 100–998, no leading-zero collisions
-  return String(n);
+  const n = hash % 101; // 0–100
+  return String(n).padStart(3, "0");
+
 }
 
 function drawBibCanvas(opts: {

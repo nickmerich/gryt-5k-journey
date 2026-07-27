@@ -114,7 +114,7 @@ export function buildBibPdf(opts: {
   );
 
   // Big bib number
-  centeredText(ops, bib, cx, by + 132, 170, 4);
+  centeredText(ops, bib, cx, by + 146, 170, 4);
 
   // Name
   centeredText(ops, name.length > 24 ? name.slice(0, 23) + "..." : name, cx, by + 92, 22, 0.8);

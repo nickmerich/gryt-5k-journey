@@ -461,6 +461,33 @@ function BibCard({
     setTimeout(() => setPrinted(false), 2400);
   };
 
+  const printNow = () => {
+    const blob = buildBibPdf({ name, bib, ticket: ticketShort(ticket) });
+    const url = URL.createObjectURL(blob);
+    const win = window.open(url, "_blank", "noopener");
+    if (!win) {
+      // Popup blocked — fall back to downloading the PDF.
+      downloadPdf();
+      return;
+    }
+    // Ask the PDF viewer to open the print dialog once it has rendered.
+    const tryPrint = () => {
+      try {
+        win.focus();
+        win.print();
+      } catch {
+        /* viewer blocks scripted print — user can print from the tab */
+      }
+    };
+    win.addEventListener?.("load", () => setTimeout(tryPrint, 400));
+    setTimeout(tryPrint, 1200);
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    setPrintOpened(true);
+    setTimeout(() => setPrintOpened(false), 2400);
+  };
+
+
+
 
   const share = async () => {
     const c = canvasRef.current;

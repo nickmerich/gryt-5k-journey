@@ -416,6 +416,8 @@ function BibCard({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [downloaded, setDownloaded] = useState(false);
   const [printed, setPrinted] = useState(false);
+  const [printOpened, setPrintOpened] = useState(false);
+
   const [shared, setShared] = useState<"idle" | "shared" | "copied">("idle");
 
   const bib = bibNumberFrom(registrationId);
@@ -460,6 +462,33 @@ function BibCard({
     setPrinted(true);
     setTimeout(() => setPrinted(false), 2400);
   };
+
+  const printNow = () => {
+    const blob = buildBibPdf({ name, bib, ticket: ticketShort(ticket) });
+    const url = URL.createObjectURL(blob);
+    const win = window.open(url, "_blank", "noopener");
+    if (!win) {
+      // Popup blocked — fall back to downloading the PDF.
+      downloadPdf();
+      return;
+    }
+    // Ask the PDF viewer to open the print dialog once it has rendered.
+    const tryPrint = () => {
+      try {
+        win.focus();
+        win.print();
+      } catch {
+        /* viewer blocks scripted print — user can print from the tab */
+      }
+    };
+    win.addEventListener?.("load", () => setTimeout(tryPrint, 400));
+    setTimeout(tryPrint, 1200);
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    setPrintOpened(true);
+    setTimeout(() => setPrintOpened(false), 2400);
+  };
+
+
 
 
   const share = async () => {
@@ -566,9 +595,24 @@ function BibCard({
           </svg>
           {printed ? "PDF saved ✓" : "Print-ready PDF"}
         </button>
+        <button
+          type="button"
+          onClick={printNow}
+          title="Opens the print-ready bib in a new tab and starts the print dialog"
+          className="inline-flex items-center gap-2 px-4 py-2.5 text-sm border border-hairline hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors eyebrow"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+            <polyline points="9 18 12 21 15 18" />
+          </svg>
+          {printOpened ? "Print dialog opened ✓" : "Print now"}
+        </button>
       </div>
       <p className="mt-2 text-xs text-ink-soft">
         Print-ready PDF: US Letter, pure black on white, cut line and pin marks included.
+
       </p>
 
     </div>

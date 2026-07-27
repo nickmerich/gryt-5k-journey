@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
+import { buildBibPdf } from "@/lib/bib-pdf";
+
 
 const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
 const STRAVA_EVENT_URL =

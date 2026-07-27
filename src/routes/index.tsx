@@ -413,7 +413,9 @@ function BibCard({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [downloaded, setDownloaded] = useState(false);
+  const [printed, setPrinted] = useState(false);
   const [shared, setShared] = useState<"idle" | "shared" | "copied">("idle");
+
   const bib = bibNumberFrom(registrationId);
 
   useEffect(() => {

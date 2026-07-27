@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
+import { buildBibPdf } from "@/lib/bib-pdf";
+
 
 const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
 const STRAVA_EVENT_URL =
@@ -413,7 +415,9 @@ function BibCard({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [downloaded, setDownloaded] = useState(false);
+  const [printed, setPrinted] = useState(false);
   const [shared, setShared] = useState<"idle" | "shared" | "copied">("idle");
+
   const bib = bibNumberFrom(registrationId);
 
   useEffect(() => {
@@ -442,6 +446,21 @@ function BibCard({
     setDownloaded(true);
     setTimeout(() => setDownloaded(false), 2400);
   };
+
+  const downloadPdf = () => {
+    const blob = buildBibPdf({ name, bib, ticket: ticketShort(ticket) });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `rtwl-bib-${bib}-print.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    setPrinted(true);
+    setTimeout(() => setPrinted(false), 2400);
+  };
+
 
   const share = async () => {
     const c = canvasRef.current;
@@ -534,7 +553,24 @@ function BibCard({
           </svg>
           {downloaded ? "Downloaded ✓" : "Download PNG"}
         </button>
+        <button
+          type="button"
+          onClick={downloadPdf}
+          title="High-contrast black & white bib, US Letter, with cut line and pin marks"
+          className="inline-flex items-center gap-2 px-4 py-2.5 text-sm border border-hairline hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors eyebrow"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+          </svg>
+          {printed ? "PDF saved ✓" : "Print-ready PDF"}
+        </button>
       </div>
+      <p className="mt-2 text-xs text-ink-soft">
+        Print-ready PDF: US Letter, pure black on white, cut line and pin marks included.
+      </p>
+
     </div>
   );
 }

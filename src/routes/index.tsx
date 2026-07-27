@@ -443,6 +443,21 @@ function BibCard({
     setTimeout(() => setDownloaded(false), 2400);
   };
 
+  const downloadPdf = () => {
+    const blob = buildBibPdf({ name, bib, ticket: ticketShort(ticket) });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `rtwl-bib-${bib}-print.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    setPrinted(true);
+    setTimeout(() => setPrinted(false), 2400);
+  };
+
+
   const share = async () => {
     const c = canvasRef.current;
     if (!c) return;

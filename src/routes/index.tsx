@@ -1571,7 +1571,7 @@ function RunTakomaOnePager() {
                   onBlur={() => handleBlur("name")}
                   maxLength={100}
                   className={inputCls(!!errors.name)}
-                  placeholder="Angela Davis"
+                  placeholder="Nick Merich"
                 />
               </Field>
 

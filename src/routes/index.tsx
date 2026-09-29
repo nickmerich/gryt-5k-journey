@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
+import recapVideo from "@/assets/rtwl-recap.mp4.asset.json";
+import recapPoster from "@/assets/rtwl-recap-poster.jpg.asset.json";
 import { buildBibPdf } from "@/lib/bib-pdf";
 
 
@@ -950,6 +952,64 @@ function RunTakomaOnePager() {
         </div>
       </section>
 
+
+      {/* RECAP — official event recap video + final stats */}
+      <section
+        id="recap"
+        aria-labelledby="recap-heading"
+        className="relative z-10 mx-auto max-w-6xl px-5 pb-14 sm:px-6 sm:pb-20"
+      >
+        <RuledLabel>The Recap</RuledLabel>
+        <h2
+          id="recap-heading"
+          className="mt-4 text-center display-tight text-4xl sm:text-6xl leading-[0.9]"
+        >
+          <span className="text-forest">WE RAN </span>
+          <span className="text-terracotta">TAKOMA</span>
+          <span className="block brush-script text-forest text-4xl sm:text-5xl mt-2">
+            with love <span aria-hidden className="text-terracotta">♡</span>
+          </span>
+        </h2>
+
+        <div className="relative mx-auto mt-8 max-w-4xl">
+          <div
+            aria-hidden
+            className="absolute -inset-2 -z-10 sm:-inset-3"
+            style={{ backgroundColor: "var(--color-terracotta)", transform: "rotate(0.8deg)" }}
+          />
+          <video
+            className="block w-full border-2 border-ink bg-ink"
+            src={recapVideo.url}
+            poster={recapPoster.url}
+            controls
+            playsInline
+            preload="metadata"
+            aria-label="Run Takoma With Love 5K official recap video"
+          />
+        </div>
+
+        <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
+          {[
+            { n: "248", u: "signed up" },
+            { n: "98", u: "finished" },
+            { n: "5K", u: "through Takoma" },
+            { n: "1", u: "community" },
+          ].map((s) => (
+            <div
+              key={s.u}
+              className="hover-lift border-2 border-ink bg-paper-warm p-4 text-center"
+            >
+              <p className="display-tight text-5xl sm:text-6xl text-terracotta leading-none">
+                {s.n}
+              </p>
+              <p className="eyebrow mt-2 text-forest">{s.u}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 text-center display-tight tracking-[0.14em] text-forest">
+          DO HARD THINGS TOGETHER
+        </p>
+      </section>
 
       {/* Marquee ticker — infinite scrolling love */}
       <section

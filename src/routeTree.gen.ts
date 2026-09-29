@@ -13,14 +13,12 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ApiPublicRtwlResendRouteImport } from './routes/api/public/rtwl-resend'
 import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
-import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -46,11 +44,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccessibilityRoute = AccessibilityRouteImport.update({
@@ -81,11 +74,6 @@ const ApiPublicRtwlResendRoute = ApiPublicRtwlResendRouteImport.update({
 const ApiPublicRtwlRegisterRoute = ApiPublicRtwlRegisterRouteImport.update({
   id: '/api/public/rtwl-register',
   path: '/api/public/rtwl-register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
-  id: '/api/public/contact',
-  path: '/api/public/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LovableEmailTransactionalSendRoute =
@@ -125,13 +113,11 @@ const ApiPublicStravaCallbackRoute = ApiPublicStravaCallbackRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessibility': typeof AccessibilityRoute
-  '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -145,13 +131,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessibility': typeof AccessibilityRoute
-  '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -166,13 +150,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accessibility': typeof AccessibilityRoute
-  '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
@@ -188,13 +170,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessibility'
-    | '/contact'
     | '/privacy'
     | '/sitemap.xml'
     | '/story'
     | '/terms'
     | '/email/unsubscribe'
-    | '/api/public/contact'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/lovable/email/suppression'
@@ -208,13 +188,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/accessibility'
-    | '/contact'
     | '/privacy'
     | '/sitemap.xml'
     | '/story'
     | '/terms'
     | '/email/unsubscribe'
-    | '/api/public/contact'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/lovable/email/suppression'
@@ -228,13 +206,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/accessibility'
-    | '/contact'
     | '/privacy'
     | '/sitemap.xml'
     | '/story'
     | '/terms'
     | '/email/unsubscribe'
-    | '/api/public/contact'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/lovable/email/suppression'
@@ -249,13 +225,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessibilityRoute: typeof AccessibilityRoute
-  ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoryRoute: typeof StoryRoute
   TermsRoute: typeof TermsRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
-  ApiPublicContactRoute: typeof ApiPublicContactRoute
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
   ApiPublicRtwlResendRoute: typeof ApiPublicRtwlResendRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
@@ -295,13 +269,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accessibility': {
@@ -344,13 +311,6 @@ declare module '@tanstack/react-router' {
       path: '/api/public/rtwl-register'
       fullPath: '/api/public/rtwl-register'
       preLoaderRoute: typeof ApiPublicRtwlRegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/contact': {
-      id: '/api/public/contact'
-      path: '/api/public/contact'
-      fullPath: '/api/public/contact'
-      preLoaderRoute: typeof ApiPublicContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/transactional/send': {
@@ -401,13 +361,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessibilityRoute: AccessibilityRoute,
-  ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoryRoute: StoryRoute,
   TermsRoute: TermsRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
-  ApiPublicContactRoute: ApiPublicContactRoute,
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,
   ApiPublicRtwlResendRoute: ApiPublicRtwlResendRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,

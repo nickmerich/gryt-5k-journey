@@ -1730,9 +1730,6 @@ function RunTakomaOnePager() {
               <a href="/story" className="eyebrow text-ink-soft hover:text-ink transition-colors">
                 The Story
               </a>
-              <a href="/contact" className="eyebrow text-ink-soft hover:text-ink transition-colors">
-                Contact
-              </a>
               <a href="/terms" className="eyebrow text-ink-soft hover:text-ink transition-colors">
                 Terms
               </a>

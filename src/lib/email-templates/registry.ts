@@ -1,6 +1,5 @@
 import type { ComponentType } from 'react'
 import { template as rtwlConfirmation } from './rtwl-confirmation'
-import { template as contactInquiry } from './contact-inquiry'
 
 export interface TemplateEntry {
   component: ComponentType<any>
@@ -13,5 +12,4 @@ export interface TemplateEntry {
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'rtwl-confirmation': rtwlConfirmation,
-  'contact-inquiry': contactInquiry,
 }

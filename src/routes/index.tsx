@@ -35,6 +35,14 @@ import p04879 from "@/assets/rtwl-twl5k-04879.jpg.asset.json";
 import p04883 from "@/assets/rtwl-twl5k-04883.jpg.asset.json";
 import p04888 from "@/assets/rtwl-twl5k-04888.jpg.asset.json";
 import p04894 from "@/assets/rtwl-twl5k-04894.jpg.asset.json";
+import p04902 from "@/assets/rtwl-twl5k-04902.jpg.asset.json";
+import p04928 from "@/assets/rtwl-twl5k-04928.jpg.asset.json";
+import p04942 from "@/assets/rtwl-twl5k-04942.jpg.asset.json";
+import p04945 from "@/assets/rtwl-twl5k-04945.jpg.asset.json";
+import p04952 from "@/assets/rtwl-twl5k-04952.jpg.asset.json";
+import p04962 from "@/assets/rtwl-twl5k-04962.jpg.asset.json";
+import p04975 from "@/assets/rtwl-twl5k-04975.jpg.asset.json";
+import p04979 from "@/assets/rtwl-twl5k-04979.jpg.asset.json";
 
 const EVENT_PHOTOS = [
   { src: photoWelcome.url, alt: "Runners gathered behind the Run Takoma With Love 5K welcome sign" },
@@ -68,6 +76,14 @@ const EVENT_PHOTOS = [
   { src: p04883.url, alt: "A runner in black carrying a mint water bottle" },
   { src: p04888.url, alt: "A runner in headphones throwing a hand sign" },
   { src: p04894.url, alt: "A runner in pink headphones throwing a peace sign" },
+  { src: p04902.url, alt: "A runner in headphones raising a fist mid-stride" },
+  { src: p04928.url, alt: "A runner in a green shirt and five-panel cap on the road" },
+  { src: p04942.url, alt: "A young runner in red holding a water bottle" },
+  { src: p04945.url, alt: "A young runner in red pushing up the sidewalk" },
+  { src: p04952.url, alt: "A smiling runner giving a thumbs-up" },
+  { src: p04962.url, alt: "A runner giving a thumbs-up mid-stride" },
+  { src: p04975.url, alt: "A laughing runner in a #VOTEKINDNESS shirt" },
+  { src: p04979.url, alt: "Two runners smiling on the park stairs" },
 ];
 import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";

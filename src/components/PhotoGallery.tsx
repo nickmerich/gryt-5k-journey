@@ -16,7 +16,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
     [photos],
   );
   // Curated picks spanning the day
-  const highlightIdx = [0, 2, 6, 14, 22, 30, 35, 41, 47].filter((i) => i < tagged.length);
+  const highlightIdx = [0, 2, 4, 6, 10, 14, 18, 22, 26, 30, 35, 39, 41, 44, 47].filter((i) => i < tagged.length);
   const highlights = highlightIdx.map((i) => tagged[i]);
 
   const [open, setOpen] = useState(false);
@@ -63,7 +63,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
   return (
     <div className="mx-auto mt-12 max-w-5xl">
       <p className="eyebrow mb-6 text-center text-forest">Highlights · Aug 2, 2026</p>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5">
+      <div className="grid grid-flow-dense grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-5">
         {highlights.map((p, i) => (
           <button
             type="button"
@@ -71,7 +71,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
             onClick={() => openAt(p.n)}
             className={`group relative block text-left transition-transform duration-200 hover:rotate-0 hover:-translate-y-1 ${
               i % 3 === 0 ? "-rotate-1" : i % 3 === 1 ? "rotate-1" : ""
-            } ${i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}`}
+            } ${i === 0 ? "col-span-2 sm:row-span-2" : i === 7 || i === 12 ? "col-span-2" : ""}`}
             aria-label={`Open photo: ${p.alt}`}
           >
             <span
@@ -85,7 +85,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
                 alt={p.alt}
                 loading="lazy"
                 decoding="async"
-                className="block h-full w-full object-cover aspect-[3/4] transition-transform duration-300 group-hover:scale-[1.03]"
+                className={`block h-full w-full object-cover ${i === 7 || i === 12 ? "aspect-[3/2]" : "aspect-[3/4]"} transition-transform duration-300 group-hover:scale-[1.03]`}
               />
             </span>
             {i % 2 === 0 && (

@@ -20,6 +20,7 @@ const EVENT_PHOTOS = [
   { src: photoRunner.url, alt: "A runner in a bandana listening before the race" },
 ];
 import { buildBibPdf } from "@/lib/bib-pdf";
+import { Run2Hub } from "@/components/Run2Hub";
 
 
 const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
@@ -76,17 +77,17 @@ type StravaAthlete = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Run Takoma With Love 5K — GRYT Club" },
+      { title: "Run Takoma With Love Recap & Run #02 — GRYT Club" },
       {
         name: "description",
         content:
-          "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee.",
+          "248 signups, 98 finishers, one community. Relive Run Takoma With Love and get on the list for Run #02. Runners and brands welcome.",
       },
-      { property: "og:title", content: "Run Takoma With Love 5K — GRYT Club" },
+      { property: "og:title", content: "Run Takoma With Love Recap & Run #02 — GRYT Club" },
       {
         property: "og:description",
         content:
-          "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee.",
+          "248 signups, 98 finishers, one community. Relive Run Takoma With Love and get on the list for Run #02. Runners and brands welcome.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: flyerAsset.url },
@@ -868,103 +869,37 @@ function RunTakomaOnePager() {
       </header>
 
 
-      {/* HERO — official flyer as the branding source of truth */}
-      <section className="relative z-10 mx-auto grid max-w-6xl gap-8 px-5 pt-6 pb-10 sm:px-6 sm:pt-10 sm:pb-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10">
-        <figure className="relative mx-auto w-full max-w-xl">
-          <div
-            aria-hidden
-            className="absolute -inset-2 -z-10 sm:-inset-3"
-            style={{
-              backgroundColor: "var(--color-forest)",
-              transform: "rotate(-1.2deg)",
-            }}
-          />
-          <img
-            src={flyerAsset.url}
-            alt="Run Takoma With Love 5K — official flyer. Presented by GRYT Club, in partnership with smartwater. Sunday August 2, 2026 at 9:00 AM in Takoma Park, Maryland."
-            className="block w-full"
-            width={1600}
-            height={1600}
-          />
-        </figure>
-
-        {/* Mobile: compact CTA under the flyer (flyer already carries the wordmark) */}
-        <div className="lg:hidden text-center">
-          <h1 className="sr-only">
-            Run Takoma With Love 5K — Sunday August 2, 2026, Takoma Park, Maryland
-          </h1>
-          <a
-            href="#register"
-            className="brush-btn block w-full display-tight text-base tracking-[0.14em] py-5 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
-          >
-            REGISTER — LOCK IN YOUR SPOT
-          </a>
-          <p className="mt-3 eyebrow text-forest">
-            <span className="text-terracotta">♡</span> Sunday · Aug 2, 2026 · 9:00 AM <span className="text-terracotta">♡</span>
-          </p>
-          <div className="mt-5">
-            <Countdown />
-          </div>
-          <div className="mt-4">
-            <button
-              type="button"
-              onClick={downloadEventIcs}
-              className="eyebrow text-forest underline decoration-terracotta decoration-2 underline-offset-4"
-            >
-              + Add to calendar (.ics)
-            </button>
-          </div>
-        </div>
-
-        {/* Desktop / large: full editorial block */}
-
-        <div className="hidden lg:block text-center lg:text-left">
-          <RuledLabel align="lg-left">Presented by GRYT</RuledLabel>
+      {/* HERO — Run #01 recap + Run #02 call */}
+      <section className="relative z-10 mx-auto grid max-w-6xl gap-8 px-5 pt-6 pb-10 sm:px-6 sm:pt-10 sm:pb-16 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-10">
+        <div className="text-center lg:text-left">
+          <RuledLabel align="lg-left">Recap · Run #01 in the books</RuledLabel>
           <h1 className="mt-5 display-tight text-[clamp(3rem,8vw,6rem)] leading-[0.88]">
-            <span className="block">
-              <span className="text-forest">RUN </span>
-              <span className="text-terracotta">TAKOMA</span>
+            <span className="block text-forest">WE RAN</span>
+            <span className="block text-terracotta">TAKOMA</span>
+            <span className="mt-2 block brush-script text-forest text-[clamp(2.5rem,6vw,4rem)]">
+              with love <span aria-hidden className="text-terracotta">♡</span>
             </span>
-            <span className="mt-3 block brush-script text-forest text-[clamp(2.5rem,6vw,4rem)]">
-              with love{" "}
-              <span aria-hidden className="text-terracotta">♡</span>
-            </span>
-            <span className="mt-1 block text-forest">5K</span>
           </h1>
-
-          <div className="mt-8 inline-block">
-            <span className="paint-stroke inline-block bg-forest px-6 py-3 display-tight text-[color:var(--color-forest-ink)] text-lg sm:text-xl">
-              Sunday · August 2, 2026 · 9:00 AM
-            </span>
-            <p className="mt-3 display-tight text-forest tracking-[0.12em]">
-              Takoma Park, Maryland
-            </p>
-            <div className="mt-6 max-w-md">
-              <Countdown />
-            </div>
+          <p className="mt-5 max-w-md mx-auto lg:mx-0 text-ink-soft text-lg">
+            248 signed up. 98 crossed the line. One neighborhood showed up. Run #02 is next. Get in early.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+            <a href="#run2" className="brush-btn inline-flex items-center justify-center px-8 py-4 display-tight text-lg tracking-[0.1em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors">
+              JOIN THE RUN #02 LIST
+            </a>
+            <a href="#run2" onClick={() => setTimeout(() => (document.querySelectorAll('#run2 [role=tab]')[1] as HTMLElement | undefined)?.click(), 50)} className="brush-btn inline-flex items-center justify-center px-8 py-4 display-tight text-lg tracking-[0.1em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors">
+              PARTNER WITH US
+            </a>
           </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <span className="eyebrow text-ink-soft">In partnership with</span>
+          <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
+            <span className="eyebrow text-ink-soft">Run #01 with</span>
             <PartnerMark label="smartwater" />
           </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href="#register"
-              className="brush-btn inline-flex items-center justify-center px-10 py-5 display-tight text-lg tracking-[0.1em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors"
-            >
-              REGISTER | GRYTRUN.COM
-            </a>
-            <button
-              type="button"
-              onClick={downloadEventIcs}
-              className="eyebrow text-forest underline decoration-terracotta decoration-2 underline-offset-4"
-            >
-              + Add to calendar (.ics)
-            </button>
-          </div>
         </div>
+        <figure className="relative mx-auto w-full max-w-xl">
+          <div aria-hidden className="absolute -inset-2 -z-10 sm:-inset-3" style={{ backgroundColor: "var(--color-forest)", transform: "rotate(-1.2deg)" }} />
+          <img src={photoWelcome.url} alt="Runners gathered behind the Run Takoma With Love 5K welcome sign" className="block w-full aspect-[4/5] object-cover" />
+        </figure>
       </section>
 
 
@@ -1047,6 +982,8 @@ function RunTakomaOnePager() {
         </p>
       </section>
 
+      <Run2Hub />
+
       {/* Marquee ticker — infinite scrolling love */}
       <section
         aria-hidden
@@ -1059,7 +996,7 @@ function RunTakomaOnePager() {
               <span className="heart-pulse text-terracotta">♡</span>
               <span className="brush-script text-terracotta text-4xl sm:text-5xl">with love</span>
               <span className="heart-pulse text-terracotta">♡</span>
-              <span>SUN · AUG 2 · 9AM</span>
+              <span>RUN #02 · COMING SOON</span>
               <span className="heart-pulse text-terracotta">♡</span>
               <span>DO HARD THINGS TOGETHER</span>
               <span className="heart-pulse text-terracotta">♡</span>
@@ -1149,98 +1086,12 @@ function RunTakomaOnePager() {
         />
       </section>
 
-      {/* RUN OF SHOW — race day schedule */}
-
-      <section
-        id="run-of-show"
-        className="relative z-10 mx-auto max-w-5xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20"
-      >
-        <div className="flex flex-col items-center text-center">
-          <RuledLabel>Race day</RuledLabel>
-          <h2 className="mt-4 display-tight text-4xl sm:text-6xl leading-[0.9]">
-            <span className="text-forest">Run of </span>
-            <span className="brush-script text-terracotta text-5xl sm:text-7xl">show</span>
-          </h2>
-          <p className="mt-3 max-w-xl text-ink-soft">
-            Sunday, August 2, 2026 — from first coffee to last cheer. Move at your pace.
-          </p>
-        </div>
-
-        <ol className="relative mt-12 space-y-6 sm:space-y-0">
-          {/* Vertical timeline spine on desktop */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-6 top-2 bottom-2 w-px bg-hairline sm:left-1/2"
-          />
-          {[
-            { time: "7:30 AM", title: "Check-in & bib pickup", body: "Coffee's on. Grab your bib packet, pin up, warm up." },
-            { time: "8:30 AM", title: "Community warm-up", body: "Group stretch on the lawn. Everyone in — walkers, runners, kids." },
-            { time: "9:00 AM", title: "Start line ♡", body: "Horn goes off. Push if you want. Cruise if you want. Just move." },
-            { time: "9:20 AM", title: "First finishers", body: "Cowbells, high-fives, and a very loud cheer squad." },
-            { time: "10:00 AM", title: "Last finisher party", body: "The best applause is for whoever crosses last. We wait." },
-            { time: "10:30 AM", title: "Block party", body: "Music, snacks, smartwater, and a group photo you'll actually want." },
-          ].map((step, i) => {
-            const left = i % 2 === 0;
-            return (
-              <li
-                key={step.time}
-                className={`rise-in relative sm:grid sm:grid-cols-2 sm:gap-10 ${
-                  left ? "" : "sm:[&>*:first-child]:col-start-2"
-                }`}
-                style={{ animationDelay: `${i * 90}ms` }}
-              >
-                <div
-                  className={`relative pl-14 sm:pl-0 ${
-                    left ? "sm:pr-10 sm:text-right" : "sm:pl-10"
-                  }`}
-                >
-                  {/* Dot */}
-                  <span
-                    aria-hidden
-                    className={`absolute top-2 left-4 h-4 w-4 rounded-full border-2 border-ink bg-terracotta tick-bob sm:left-auto ${
-                      left ? "sm:right-[-8px]" : "sm:left-[-8px]"
-                    }`}
-                  />
-                  <p className="eyebrow text-terracotta">{step.time}</p>
-                  <p className="mt-1 display-tight text-xl sm:text-2xl text-forest">
-                    {step.title}
-                  </p>
-                  <p className="mt-2 text-ink-soft leading-relaxed">{step.body}</p>
-                </div>
-                {/* Spacer for the opposite column on desktop */}
-                <div className="hidden sm:block" />
-              </li>
-            );
-          })}
-        </ol>
-
-        {/* Stat strip — bring life */}
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {[
-            { n: "5", u: "kilometers" },
-            { n: "1", u: "loop" },
-            { n: "∞", u: "high-fives" },
-            { n: "0", u: "pressure" },
-          ].map((s, i) => (
-            <div
-              key={s.u}
-              className="hover-lift rise-in border-2 border-ink bg-paper-warm p-4 text-center"
-              style={{ animationDelay: `${i * 80 + 400}ms` }}
-            >
-
-              <p className="display-tight text-5xl sm:text-6xl text-terracotta leading-none">
-                {s.n}
-              </p>
-              <p className="eyebrow mt-2 text-forest">{s.u}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
 
 
 
       {/* REGISTRATION FORM */}
+      {submitted && (
       <section
         id="register"
         className="relative z-10 mx-auto max-w-2xl px-5 pb-32 sm:px-6 sm:pb-24 scroll-mt-4 sm:scroll-mt-16"
@@ -1757,6 +1608,7 @@ function RunTakomaOnePager() {
           )}
         </div>
       </section>
+      )}
 
       <footer className="relative z-10 border-t border-hairline">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-8 pb-28 text-center sm:flex-row sm:justify-between sm:pb-8 sm:text-left">
@@ -1826,13 +1678,13 @@ function RunTakomaOnePager() {
           style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)" }}
         >
           <a
-            href="#register"
+            href="#run2"
             className="brush-btn flex w-full items-center justify-center gap-2 text-center display-tight text-base tracking-[0.14em] py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
           >
-            REGISTER — AUG 2 ♡
+            JOIN RUN #02 ♡
           </a>
           <p className="mt-1.5 text-center text-[0.65rem] tracking-[0.14em] uppercase text-ink-soft">
-            Free · Under 60 seconds · Confirmation email
+            Runners & brands · Under 60 seconds
           </p>
         </div>
       )}

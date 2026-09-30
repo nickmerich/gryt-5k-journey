@@ -4,6 +4,21 @@ import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
 import recapVideo from "@/assets/rtwl-recap.mp4.asset.json";
 import recapPoster from "@/assets/rtwl-recap-poster.jpg.asset.json";
+import photoWelcome from "@/assets/rtwl-img-8082.jpg.asset.json";
+import photoBigThings from "@/assets/rtwl-twl5k-04449-1.jpg.asset.json";
+import photoCrew from "@/assets/rtwl-twl5k-04468.jpg.asset.json";
+import photoWarmup from "@/assets/rtwl-twl5k-04507-1.jpg.asset.json";
+import photoBmr from "@/assets/rtwl-twl5k-04546.jpg.asset.json";
+import photoRunner from "@/assets/rtwl-twl5k-04388.jpg.asset.json";
+
+const EVENT_PHOTOS = [
+  { src: photoWelcome.url, alt: "Runners gathered behind the Run Takoma With Love 5K welcome sign" },
+  { src: photoBigThings.url, alt: "Runners laughing together on the park benches before the start" },
+  { src: photoWarmup.url, alt: "Runners warming up and dancing on the plaza" },
+  { src: photoBmr.url, alt: "Three runners smiling for the camera in the park" },
+  { src: photoCrew.url, alt: "Crew members chatting under the park pavilion" },
+  { src: photoRunner.url, alt: "A runner in a bandana listening before the race" },
+];
 import { buildBibPdf } from "@/lib/bib-pdf";
 
 
@@ -1005,6 +1020,27 @@ function RunTakomaOnePager() {
               <p className="eyebrow mt-2 text-forest">{s.u}</p>
             </div>
           ))}
+        </div>
+        <div className="mx-auto mt-12 max-w-5xl">
+          <p className="eyebrow mb-4 text-center text-forest">From the day · Aug 2, 2026</p>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+            {EVENT_PHOTOS.map((p, i) => (
+              <figure
+                key={p.src}
+                className={`hover-lift overflow-hidden border-2 border-ink bg-paper-warm ${
+                  i === 0 ? "col-span-2 row-span-2 sm:col-span-2" : ""
+                }`}
+              >
+                <img
+                  src={p.src}
+                  alt={p.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover aspect-[3/4]"
+                />
+              </figure>
+            ))}
+          </div>
         </div>
         <p className="mt-6 text-center display-tight tracking-[0.14em] text-forest">
           DO HARD THINGS TOGETHER

@@ -10,6 +10,15 @@ import photoCrew from "@/assets/rtwl-twl5k-04468.jpg.asset.json";
 import photoWarmup from "@/assets/rtwl-twl5k-04507-1.jpg.asset.json";
 import photoBmr from "@/assets/rtwl-twl5k-04546.jpg.asset.json";
 import photoRunner from "@/assets/rtwl-twl5k-04388.jpg.asset.json";
+import p04643 from "@/assets/rtwl-twl5k-04643.jpg.asset.json";
+import p04646 from "@/assets/rtwl-twl5k-04646.jpg.asset.json";
+import p04653 from "@/assets/rtwl-twl5k-04653.jpg.asset.json";
+import p04668 from "@/assets/rtwl-twl5k-04668.jpg.asset.json";
+import p04686 from "@/assets/rtwl-twl5k-04686.jpg.asset.json";
+import p04690 from "@/assets/rtwl-twl5k-04690.jpg.asset.json";
+import p04695 from "@/assets/rtwl-twl5k-04695.jpg.asset.json";
+import p04700 from "@/assets/rtwl-twl5k-04700.jpg.asset.json";
+import p04714 from "@/assets/rtwl-twl5k-04714.jpg.asset.json";
 
 const EVENT_PHOTOS = [
   { src: photoWelcome.url, alt: "Runners gathered behind the Run Takoma With Love 5K welcome sign" },
@@ -18,6 +27,15 @@ const EVENT_PHOTOS = [
   { src: photoBmr.url, alt: "Three runners smiling for the camera in the park" },
   { src: photoCrew.url, alt: "Crew members chatting under the park pavilion" },
   { src: photoRunner.url, alt: "A runner in a bandana listening before the race" },
+  { src: p04668.url, alt: "A smiling runner throwing up a peace sign mid-stride" },
+  { src: p04643.url, alt: "Motion-blurred runners passing through a crosswalk" },
+  { src: p04700.url, alt: "A runner in a red shirt and blue cap smiling on the sidewalk" },
+  { src: p04690.url, alt: "A shirtless runner in headphones pushing up Grant Ave" },
+  { src: p04695.url, alt: "A runner in a teal shirt carrying a smartwater bottle" },
+  { src: p04714.url, alt: "A runner in a magenta top laughing on the phone mid-run" },
+  { src: p04646.url, alt: "A runner heading down a tree-lined Takoma street" },
+  { src: p04686.url, alt: "A runner crossing the street in headphones" },
+  { src: p04653.url, alt: "Abstract motion blur of a runner passing park signs" },
 ];
 import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";
@@ -958,13 +976,11 @@ function RunTakomaOnePager() {
         </div>
         <div className="mx-auto mt-12 max-w-5xl">
           <p className="eyebrow mb-4 text-center text-forest">From the day · Aug 2, 2026</p>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
             {EVENT_PHOTOS.map((p, i) => (
               <figure
                 key={p.src}
-                className={`hover-lift overflow-hidden border-2 border-ink bg-paper-warm ${
-                  i === 0 ? "col-span-2 row-span-2 sm:col-span-2" : ""
-                }`}
+                className="hover-lift overflow-hidden border-2 border-ink bg-paper-warm"
               >
                 <img
                   src={p.src}

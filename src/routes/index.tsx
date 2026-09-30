@@ -49,6 +49,16 @@ import p05148 from "@/assets/rtwl-twl5k-05148.jpg.asset.json";
 import p05157 from "@/assets/rtwl-twl5k-05157.jpg.asset.json";
 import p05167 from "@/assets/rtwl-twl5k-05167.jpg.asset.json";
 import p05183 from "@/assets/rtwl-twl5k-05183.jpg.asset.json";
+import p05194 from "@/assets/rtwl-twl5k-05194.jpg.asset.json";
+import p05199 from "@/assets/rtwl-twl5k-05199.jpg.asset.json";
+import p05200 from "@/assets/rtwl-twl5k-05200.jpg.asset.json";
+import p05203 from "@/assets/rtwl-twl5k-05203.jpg.asset.json";
+import p05217 from "@/assets/rtwl-twl5k-05217.jpg.asset.json";
+import p05227 from "@/assets/rtwl-twl5k-05227.jpg.asset.json";
+import p05284 from "@/assets/rtwl-twl5k-05284.jpg.asset.json";
+import p05295 from "@/assets/rtwl-twl5k-05295.jpg.asset.json";
+import p05302 from "@/assets/rtwl-twl5k-05302.jpg.asset.json";
+import p05313 from "@/assets/rtwl-twl5k-05313.jpg.asset.json";
 
 const EVENT_PHOTOS = [
   { src: photoWelcome.url, alt: "Runners gathered behind the Run Takoma With Love 5K welcome sign" },
@@ -96,6 +106,16 @@ const EVENT_PHOTOS = [
   { src: p05157.url, alt: "Smiling finisher with his medal in his teeth" },
   { src: p05167.url, alt: "Close-up of a runner kissing her medal" },
   { src: p05183.url, alt: "Finisher in a green tee biting his medal" },
+  { src: p05194.url, alt: "Finisher in a green tee holding his medal in his teeth" },
+  { src: p05199.url, alt: "Finisher laughing as he looks at his medal" },
+  { src: p05200.url, alt: "Young finisher smiling at his medal" },
+  { src: p05203.url, alt: "Young finisher showing off his 5K medal" },
+  { src: p05217.url, alt: "Runner in glasses pointing to her medal" },
+  { src: p05227.url, alt: "Runner in glasses smiling with her medal" },
+  { src: p05284.url, alt: "Two finishers posing with their medals" },
+  { src: p05295.url, alt: "Finisher in pink biting her medal" },
+  { src: p05302.url, alt: "Close-up of a finisher holding her medal to her face" },
+  { src: p05313.url, alt: "Two finishers showing their medals under the pavilion" },
 ];
 import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";

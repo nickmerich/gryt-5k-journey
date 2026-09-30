@@ -17,6 +17,7 @@ import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as ApiPublicRun2InterestRouteImport } from './routes/api/public/run2-interest'
 import { Route as ApiPublicRtwlResendRouteImport } from './routes/api/public/rtwl-resend'
 import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
@@ -64,6 +65,11 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicRun2InterestRoute = ApiPublicRun2InterestRouteImport.update({
+  id: '/api/public/run2-interest',
+  path: '/api/public/run2-interest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicRtwlResendRoute = ApiPublicRtwlResendRouteImport.update({
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
+  '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
   '/api/public/strava/start': typeof ApiPublicStravaStartRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
+  '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
   '/api/public/strava/start': typeof ApiPublicStravaStartRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
+  '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
   '/api/public/strava/start': typeof ApiPublicStravaStartRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
+    | '/api/public/run2-interest'
     | '/lovable/email/suppression'
     | '/api/public/strava/callback'
     | '/api/public/strava/start'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
+    | '/api/public/run2-interest'
     | '/lovable/email/suppression'
     | '/api/public/strava/callback'
     | '/api/public/strava/start'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
+    | '/api/public/run2-interest'
     | '/lovable/email/suppression'
     | '/api/public/strava/callback'
     | '/api/public/strava/start'
@@ -232,6 +244,7 @@ export interface RootRouteChildren {
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
   ApiPublicRtwlResendRoute: typeof ApiPublicRtwlResendRoute
+  ApiPublicRun2InterestRoute: typeof ApiPublicRun2InterestRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicStravaCallbackRoute: typeof ApiPublicStravaCallbackRoute
   ApiPublicStravaStartRoute: typeof ApiPublicStravaStartRoute
@@ -297,6 +310,13 @@ declare module '@tanstack/react-router' {
       path: '/lovable/email/suppression'
       fullPath: '/lovable/email/suppression'
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/run2-interest': {
+      id: '/api/public/run2-interest'
+      path: '/api/public/run2-interest'
+      fullPath: '/api/public/run2-interest'
+      preLoaderRoute: typeof ApiPublicRun2InterestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/rtwl-resend': {
@@ -368,6 +388,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,
   ApiPublicRtwlResendRoute: ApiPublicRtwlResendRoute,
+  ApiPublicRun2InterestRoute: ApiPublicRun2InterestRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicStravaCallbackRoute: ApiPublicStravaCallbackRoute,
   ApiPublicStravaStartRoute: ApiPublicStravaStartRoute,

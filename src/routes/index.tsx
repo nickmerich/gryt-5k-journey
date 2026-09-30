@@ -43,6 +43,12 @@ import p04952 from "@/assets/rtwl-twl5k-04952.jpg.asset.json";
 import p04962 from "@/assets/rtwl-twl5k-04962.jpg.asset.json";
 import p04975 from "@/assets/rtwl-twl5k-04975.jpg.asset.json";
 import p04979 from "@/assets/rtwl-twl5k-04979.jpg.asset.json";
+import p05136 from "@/assets/rtwl-twl5k-05136.jpg.asset.json";
+import p05143 from "@/assets/rtwl-twl5k-05143.jpg.asset.json";
+import p05148 from "@/assets/rtwl-twl5k-05148.jpg.asset.json";
+import p05157 from "@/assets/rtwl-twl5k-05157.jpg.asset.json";
+import p05167 from "@/assets/rtwl-twl5k-05167.jpg.asset.json";
+import p05183 from "@/assets/rtwl-twl5k-05183.jpg.asset.json";
 
 const EVENT_PHOTOS = [
   { src: photoWelcome.url, alt: "Runners gathered behind the Run Takoma With Love 5K welcome sign" },
@@ -84,6 +90,12 @@ const EVENT_PHOTOS = [
   { src: p04962.url, alt: "A runner giving a thumbs-up mid-stride" },
   { src: p04975.url, alt: "A laughing runner in a #VOTEKINDNESS shirt" },
   { src: p04979.url, alt: "Two runners smiling on the park stairs" },
+  { src: p05136.url, alt: "Finisher smiling as he receives his medal" },
+  { src: p05143.url, alt: "Finisher biting his 5K medal" },
+  { src: p05148.url, alt: "Runner biting his medal under the pavilion" },
+  { src: p05157.url, alt: "Smiling finisher with his medal in his teeth" },
+  { src: p05167.url, alt: "Close-up of a runner kissing her medal" },
+  { src: p05183.url, alt: "Finisher in a green tee biting his medal" },
 ];
 import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";

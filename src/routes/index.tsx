@@ -119,6 +119,7 @@ const EVENT_PHOTOS = [
 ];
 import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";
+import { PhotoGallery } from "@/components/PhotoGallery";
 
 
 const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
@@ -1054,25 +1055,7 @@ function RunTakomaOnePager() {
             </div>
           ))}
         </div>
-        <div className="mx-auto mt-12 max-w-5xl">
-          <p className="eyebrow mb-4 text-center text-forest">From the day · Aug 2, 2026</p>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-            {EVENT_PHOTOS.map((p, i) => (
-              <figure
-                key={p.src}
-                className="hover-lift overflow-hidden border-2 border-ink bg-paper-warm"
-              >
-                <img
-                  src={p.src}
-                  alt={p.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover aspect-[3/4]"
-                />
-              </figure>
-            ))}
-          </div>
-        </div>
+        <PhotoGallery photos={EVENT_PHOTOS} />
         <p className="mt-6 text-center display-tight tracking-[0.14em] text-forest">
           DO HARD THINGS TOGETHER
         </p>

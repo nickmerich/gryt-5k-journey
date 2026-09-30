@@ -16,7 +16,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
     [photos],
   );
   // Curated picks spanning the day
-  const highlightIdx = [0, 2, 6, 14, 22, 30, 41, 47].filter((i) => i < tagged.length);
+  const highlightIdx = [0, 2, 6, 14, 22, 30, 35, 41, 47].filter((i) => i < tagged.length);
   const highlights = highlightIdx.map((i) => tagged[i]);
 
   const [open, setOpen] = useState(false);
@@ -71,7 +71,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
             onClick={() => openAt(p.n)}
             className={`group relative block text-left transition-transform duration-200 hover:rotate-0 hover:-translate-y-1 ${
               i % 3 === 0 ? "-rotate-1" : i % 3 === 1 ? "rotate-1" : ""
-            } ${i === 0 || i === 5 ? "sm:col-span-2 sm:row-span-2" : ""}`}
+            } ${i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}`}
             aria-label={`Open photo: ${p.alt}`}
           >
             <span

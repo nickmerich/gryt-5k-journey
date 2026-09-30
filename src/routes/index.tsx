@@ -26,6 +26,15 @@ import p04776 from "@/assets/rtwl-twl5k-04776.jpg.asset.json";
 import p04779 from "@/assets/rtwl-twl5k-04779.jpg.asset.json";
 import p04800 from "@/assets/rtwl-twl5k-04800.jpg.asset.json";
 import p04809 from "@/assets/rtwl-twl5k-04809.jpg.asset.json";
+import p04815 from "@/assets/rtwl-twl5k-04815.jpg.asset.json";
+import p04830 from "@/assets/rtwl-twl5k-04830.jpg.asset.json";
+import p04836 from "@/assets/rtwl-twl5k-04836.jpg.asset.json";
+import p04846 from "@/assets/rtwl-twl5k-04846.jpg.asset.json";
+import p04863 from "@/assets/rtwl-twl5k-04863.jpg.asset.json";
+import p04879 from "@/assets/rtwl-twl5k-04879.jpg.asset.json";
+import p04883 from "@/assets/rtwl-twl5k-04883.jpg.asset.json";
+import p04888 from "@/assets/rtwl-twl5k-04888.jpg.asset.json";
+import p04894 from "@/assets/rtwl-twl5k-04894.jpg.asset.json";
 
 const EVENT_PHOTOS = [
   { src: photoWelcome.url, alt: "Runners gathered behind the Run Takoma With Love 5K welcome sign" },
@@ -50,6 +59,15 @@ const EVENT_PHOTOS = [
   { src: p04779.url, alt: "Two runners laughing together, one wearing bib 066" },
   { src: p04800.url, alt: "A runner in a teal set smiling mid-stride" },
   { src: p04809.url, alt: "A runner in headphones and a hijab dancing down the sidewalk" },
+  { src: p04815.url, alt: "A runner in headphones giving two thumbs up" },
+  { src: p04830.url, alt: "A runner in a gray tee giving a thumbs up mid-stride" },
+  { src: p04836.url, alt: "A runner grinning wide on the sidewalk" },
+  { src: p04846.url, alt: "A Black Men Run member in a red tank pushing the pace" },
+  { src: p04863.url, alt: "A runner in a Maryland tee on the sidewalk" },
+  { src: p04879.url, alt: "Two runners celebrating, one flexing with a scraped knee" },
+  { src: p04883.url, alt: "A runner in black carrying a mint water bottle" },
+  { src: p04888.url, alt: "A runner in headphones throwing a hand sign" },
+  { src: p04894.url, alt: "A runner in pink headphones throwing a peace sign" },
 ];
 import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";

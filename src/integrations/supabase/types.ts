@@ -146,6 +146,45 @@ export type Database = {
         }
         Relationships: []
       }
+      run2_interest: {
+        Row: {
+          brand: string | null
+          category: string | null
+          created_at: string
+          email: string
+          id: string
+          kind: string
+          message: string | null
+          name: string
+          pace: string | null
+          role: string | null
+        }
+        Insert: {
+          brand?: string | null
+          category?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          kind: string
+          message?: string | null
+          name: string
+          pace?: string | null
+          role?: string | null
+        }
+        Update: {
+          brand?: string | null
+          category?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          kind?: string
+          message?: string | null
+          name?: string
+          pace?: string | null
+          role?: string | null
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string

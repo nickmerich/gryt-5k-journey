@@ -10,7 +10,6 @@ import photoCrew from "@/assets/rtwl-twl5k-04468.jpg.asset.json";
 import photoWarmup from "@/assets/rtwl-twl5k-04507-1.jpg.asset.json";
 import photoBmr from "@/assets/rtwl-twl5k-04546.jpg.asset.json";
 import photoRunner from "@/assets/rtwl-twl5k-04388.jpg.asset.json";
-import p04624 from "@/assets/rtwl-twl5k-04624.jpg.asset.json";
 import p04643 from "@/assets/rtwl-twl5k-04643.jpg.asset.json";
 import p04646 from "@/assets/rtwl-twl5k-04646.jpg.asset.json";
 import p04653 from "@/assets/rtwl-twl5k-04653.jpg.asset.json";
@@ -28,7 +27,6 @@ const EVENT_PHOTOS = [
   { src: photoBmr.url, alt: "Three runners smiling for the camera in the park" },
   { src: photoCrew.url, alt: "Crew members chatting under the park pavilion" },
   { src: photoRunner.url, alt: "A runner in a bandana listening before the race" },
-  { src: p04624.url, alt: "Runners gathering at the start behind the welcome sign" },
   { src: p04668.url, alt: "A smiling runner throwing up a peace sign mid-stride" },
   { src: p04643.url, alt: "Motion-blurred runners passing through a crosswalk" },
   { src: p04700.url, alt: "A runner in a red shirt and blue cap smiling on the sidewalk" },

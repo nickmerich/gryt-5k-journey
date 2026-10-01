@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Track = "runner" | "brand";
 
@@ -26,6 +26,20 @@ export function Run2Hub() {
   const [err, setErr] = useState("");
 
   const set = (k: string) => (e: { target: { value: string } }) => setF((p) => ({ ...p, [k]: e.target.value }));
+
+  // Hero "Join the Run #02 list" opens the runner form and focuses the name field.
+  useEffect(() => {
+    const open = (e: Event) => {
+      const t = ((e as CustomEvent).detail as Track) ?? "runner";
+      setTrack(t);
+      setState((s) => (s === "done" && t === track ? s : "idle"));
+      setErr("");
+      document.getElementById("run2")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => document.getElementById("run2-name")?.focus({ preventScroll: true }), 450);
+    };
+    window.addEventListener("run2:open", open);
+    return () => window.removeEventListener("run2:open", open);
+  }, [track]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -89,13 +103,26 @@ export function Run2Hub() {
 
       <div className="card-lift mx-auto mt-6 max-w-2xl border-2 border-ink bg-paper-warm p-5 sm:p-8">
         {state === "done" ? (
-          <div className="text-center py-6" role="status">
-            <p className="display-tight text-4xl text-terracotta">YOU'RE IN.</p>
+          <div className="text-center py-6" role="status" aria-live="polite">
+            <p className="display-tight text-4xl text-terracotta">YOU'RE IN{f.name ? `, ${f.name.trim().split(" ")[0].toUpperCase()}` : ""}.</p>
             <p className="mt-3 text-ink-soft">
               {track === "runner"
                 ? "You're on the Run #02 drop list. First word on the date, route, and bibs lands in your inbox."
                 : "Thanks. The GRYT crew will reach out about partnering on Run #02."}
             </p>
+            <dl className="mx-auto mt-6 max-w-sm border-2 border-dashed border-ink bg-paper p-4 text-left text-sm">
+              <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Name</dt><dd className="truncate text-ink">{f.name}</dd></div>
+              <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Email</dt><dd className="truncate text-ink">{f.email}</dd></div>
+              {track === "runner" ? (
+                <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Pace</dt><dd className="text-ink">{PACES.find((p) => p.v === f.pace)?.l}</dd></div>
+              ) : (
+                <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Brand</dt><dd className="truncate text-ink">{f.brand}</dd></div>
+              )}
+              <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">List</dt><dd className="text-ink">Run #02 · {track === "runner" ? "Runners" : "Partners"}</dd></div>
+            </dl>
+            <button type="button" onClick={() => { setState("idle"); setF({ pace: "casual", category: "apparel" }); }} className="mt-4 eyebrow text-forest underline underline-offset-4 hover:text-terracotta">
+              Sign up someone else
+            </button>
             <p className="mt-6 display-tight tracking-[0.14em] text-forest">DO HARD THINGS TOGETHER</p>
           </div>
         ) : (
@@ -113,7 +140,7 @@ export function Run2Hub() {
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="eyebrow text-forest">Full name</span>
-                <input className={`${input} mt-1`} value={f.name ?? ""} onChange={set("name")} placeholder="Nick Merich" autoComplete="name" maxLength={100} />
+                <input id="run2-name" className={`${input} mt-1`} value={f.name ?? ""} onChange={set("name")} placeholder="Nick Merich" autoComplete="name" maxLength={100} />
               </label>
               <label className="block">
                 <span className="eyebrow text-forest">Email</span>

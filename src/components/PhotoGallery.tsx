@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 
 export type GalleryPhoto = { src: string; alt: string };
 type Cat = "all" | "pre" | "course" | "medal";
@@ -120,7 +121,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
         <p className="eyebrow text-ink-soft">Find yourself · save your shot</p>
       </div>
 
-      {open && (
+      {open && typeof document !== "undefined" && createPortal(
         <div
           role="dialog"
           aria-modal="true"
@@ -215,7 +216,8 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
               </div>
             </div>
           )}
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   );

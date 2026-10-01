@@ -157,6 +157,7 @@ export type Database = {
           message: string | null
           name: string
           pace: string | null
+          preferred_weekend: string | null
           role: string | null
         }
         Insert: {
@@ -169,6 +170,7 @@ export type Database = {
           message?: string | null
           name: string
           pace?: string | null
+          preferred_weekend?: string | null
           role?: string | null
         }
         Update: {
@@ -181,6 +183,7 @@ export type Database = {
           message?: string | null
           name?: string
           pace?: string | null
+          preferred_weekend?: string | null
           role?: string | null
         }
         Relationships: []

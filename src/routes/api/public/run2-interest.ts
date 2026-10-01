@@ -7,7 +7,12 @@ const base = {
   email: z.string().trim().email().max(255),
 }
 const schema = z.discriminatedUnion('kind', [
-  z.object({ kind: z.literal('runner'), ...base, pace: z.enum(['first-5k', 'casual', 'regular', 'fast']) }),
+  z.object({
+    kind: z.literal('runner'),
+    ...base,
+    pace: z.enum(['first-5k', 'casual', 'regular', 'fast']),
+    weekend: z.enum(['dec-1', 'dec-2', 'dec-3', 'any']),
+  }),
   z.object({
     kind: z.literal('brand'),
     ...base,
@@ -36,6 +41,7 @@ export const Route = createFileRoute('/api/public/run2-interest')({
           name: d.name,
           email: d.email.toLowerCase(),
           pace: d.kind === 'runner' ? d.pace : null,
+          preferred_weekend: d.kind === 'runner' ? d.weekend : null,
           brand: d.kind === 'brand' ? d.brand : null,
           role: d.kind === 'brand' ? d.role : null,
           category: d.kind === 'brand' ? d.category : null,

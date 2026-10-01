@@ -8,6 +8,12 @@ const PACES = [
   { v: "regular", l: "Regular" },
   { v: "fast", l: "Chasing time" },
 ];
+const WEEKENDS = [
+  { v: "dec-1", l: "1st weekend", d: "Dec 5–6" },
+  { v: "dec-2", l: "2nd weekend", d: "Dec 12–13" },
+  { v: "dec-3", l: "3rd weekend", d: "Dec 19–20" },
+  { v: "any", l: "Any works", d: "I'm flexible" },
+];
 const CATEGORIES = [
   { v: "apparel", l: "Footwear & apparel" },
   { v: "hydration", l: "Hydration & nutrition" },
@@ -22,6 +28,7 @@ const input =
 export function Run2Hub() {
   const [track, setTrack] = useState<Track>("runner");
   const [f, setF] = useState<Record<string, string>>({ pace: "casual", category: "apparel" });
+  const weekendLabel = (v?: string) => { const w = WEEKENDS.find((x) => x.v === v); return w ? `${w.l} · ${w.d}` : ""; };
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [err, setErr] = useState("");
 
@@ -49,11 +56,12 @@ export function Run2Hub() {
     if (name.length < 2) return setErr("Full name is required.");
     if (!/^\S+@\S+\.\S+$/.test(email)) return setErr("Enter a valid email address.");
     if (track === "brand" && (f.brand ?? "").trim().length < 2) return setErr("Brand or organization is required.");
+    if (track === "runner" && !f.weekend) return setErr("Pick the December weekend that works best.");
     setState("sending");
     try {
       const body =
         track === "runner"
-          ? { kind: "runner", name, email, pace: f.pace }
+          ? { kind: "runner", name, email, pace: f.pace, weekend: f.weekend }
           : { kind: "brand", name, email, brand: f.brand, role: f.role ?? "", category: f.category, message: f.message ?? "" };
       const res = await fetch("/api/public/run2-interest", {
         method: "POST",
@@ -74,13 +82,13 @@ export function Run2Hub() {
   return (
     <section id="run2" className="relative z-10 mx-auto max-w-5xl px-5 py-14 sm:px-6 sm:py-20 scroll-mt-4">
       <div className="text-center">
-        <p className="eyebrow text-terracotta">Run #02 · Coming soon</p>
+        <p className="eyebrow text-terracotta">Run #02 · Early December 2026</p>
         <h2 className="mt-3 display-tight text-4xl sm:text-6xl leading-[0.9]">
           <span className="text-forest">Want in on </span>
           <span className="brush-script text-terracotta">run #02?</span>
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-ink-soft">
-          248 signed up. 98 finished. Run #01 filled fast. Pick your lane and get first word on the date, route, and bibs.
+          248 signed up. 98 finished. Run #02 is targeting early December 2026. Tell us which weekend works and get first word on the date, route, and bibs.
         </p>
       </div>
 
@@ -114,7 +122,10 @@ export function Run2Hub() {
               <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Name</dt><dd className="truncate text-ink">{f.name}</dd></div>
               <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Email</dt><dd className="truncate text-ink">{f.email}</dd></div>
               {track === "runner" ? (
-                <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Pace</dt><dd className="text-ink">{PACES.find((p) => p.v === f.pace)?.l}</dd></div>
+                <>
+                  <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Pace</dt><dd className="text-ink">{PACES.find((p) => p.v === f.pace)?.l}</dd></div>
+                  <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Weekend</dt><dd className="text-ink">{weekendLabel(f.weekend)}</dd></div>
+                </>
               ) : (
                 <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">Brand</dt><dd className="truncate text-ink">{f.brand}</dd></div>
               )}
@@ -147,6 +158,20 @@ export function Run2Hub() {
                 <input type="email" className={`${input} mt-1`} value={f.email ?? ""} onChange={set("email")} placeholder="you@email.com" autoComplete="email" maxLength={255} />
               </label>
             </div>
+            {track === "runner" && (
+              <fieldset>
+                <legend className="eyebrow text-forest">Which December weekend works best?</legend>
+                <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                  {WEEKENDS.map((w) => (
+                    <label key={w.v} className={`cursor-pointer border-2 border-ink px-3 py-3 text-center transition-colors ${f.weekend === w.v ? "bg-forest text-[color:var(--color-forest-ink)]" : "bg-paper text-forest"}`}>
+                      <input type="radio" name="weekend" value={w.v} checked={f.weekend === w.v} onChange={set("weekend")} className="sr-only" />
+                      <span className="block display-tight text-sm tracking-[0.1em]">{w.l}</span>
+                      <span className="block text-xs opacity-80">{w.d}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            )}
             {track === "runner" ? (
               <fieldset>
                 <legend className="eyebrow text-forest">Your pace</legend>

@@ -1,0 +1,1 @@
+ALTER TABLE public.run2_interest ADD COLUMN preferred_weekend text;

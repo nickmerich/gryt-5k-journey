@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { HeroGroup } from "@/components/HeroGroup";
+import groupFinishers from "@/assets/rtwl-group-finishers.jpg.asset.json";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
 import recapVideo from "@/assets/rtwl-recap.mp4.asset.json";
@@ -62,6 +64,7 @@ import p05313 from "@/assets/rtwl-twl5k-05313.jpg.asset.json";
 
 const EVENT_PHOTOS = [
   { src: photoWelcome.url, alt: "Runners gathered behind the Run Takoma With Love 5K welcome sign" },
+  { src: groupFinishers.url, alt: "Finishers posing together with their medals in a Takoma Park garden" },
   { src: photoBigThings.url, alt: "Runners laughing together on the park benches before the start" },
   { src: photoWarmup.url, alt: "Runners warming up and dancing on the plaza" },
   { src: photoBmr.url, alt: "Three runners smiling for the camera in the park" },
@@ -968,38 +971,12 @@ function RunTakomaOnePager() {
       </header>
 
 
-      {/* HERO — Run #01 recap + Run #02 call */}
-      <section className="relative z-10 mx-auto grid max-w-6xl gap-8 px-5 pt-6 pb-10 sm:px-6 sm:pt-10 sm:pb-16 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-10">
-        <div className="text-center lg:text-left">
-          <RuledLabel align="lg-left">Recap · Run #01 in the books</RuledLabel>
-          <h1 className="mt-5 display-tight text-[clamp(3rem,8vw,6rem)] leading-[0.88]">
-            <span className="block text-forest">WE RAN</span>
-            <span className="block text-terracotta">TAKOMA</span>
-            <span className="mt-2 block brush-script text-forest text-[clamp(2.5rem,6vw,4rem)]">
-              with love <span aria-hidden className="text-terracotta">♡</span>
-            </span>
-          </h1>
-          <p className="mt-5 max-w-md mx-auto lg:mx-0 text-ink-soft text-lg">
-            248 signed up. 98 crossed the line. One neighborhood showed up. Run #02 is next. Get in early.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
-            <a href="#run2" className="brush-btn inline-flex items-center justify-center px-8 py-4 display-tight text-lg tracking-[0.1em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors">
-              JOIN THE RUN #02 LIST
-            </a>
-            <a href="#run2" onClick={() => setTimeout(() => (document.querySelectorAll('#run2 [role=tab]')[1] as HTMLElement | undefined)?.click(), 50)} className="brush-btn inline-flex items-center justify-center px-8 py-4 display-tight text-lg tracking-[0.1em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors">
-              PARTNER WITH US
-            </a>
-          </div>
-          <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
-            <span className="eyebrow text-ink-soft">Run #01 with</span>
-            <PartnerMark label="smartwater" />
-          </div>
-        </div>
-        <figure className="relative mx-auto w-full max-w-xl">
-          <div aria-hidden className="absolute -inset-2 -z-10 sm:-inset-3" style={{ backgroundColor: "var(--color-forest)", transform: "rotate(-1.2deg)" }} />
-          <img src={photoWelcome.url} alt="Runners gathered behind the Run Takoma With Love 5K welcome sign" className="block w-full aspect-[4/5] object-cover" />
-        </figure>
-      </section>
+      {/* HERO — group finisher photo + Run #02 call */}
+      <HeroGroup />
+      <div className="relative z-10 mx-auto -mt-4 mb-10 flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-5 sm:px-6">
+        <span className="eyebrow text-ink-soft">Run #01 with</span>
+        <PartnerMark label="smartwater" />
+      </div>
 
 
       {/* RECAP — official event recap video + final stats */}

@@ -64,6 +64,7 @@ import p05313 from "@/assets/rtwl-twl5k-05313.jpg.asset.json";
 
 const EVENT_PHOTOS = [
   { src: photoWelcome.url, alt: "Runners gathered behind the Run Takoma With Love 5K welcome sign" },
+  { src: groupFinishers.url, alt: "Finishers posing together with their medals in a Takoma Park garden" },
   { src: photoBigThings.url, alt: "Runners laughing together on the park benches before the start" },
   { src: photoWarmup.url, alt: "Runners warming up and dancing on the plaza" },
   { src: photoBmr.url, alt: "Three runners smiling for the camera in the park" },

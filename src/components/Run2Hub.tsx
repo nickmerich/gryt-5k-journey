@@ -115,7 +115,7 @@ export function Run2Hub() {
             <p className="display-tight text-4xl text-terracotta">YOU'RE IN{f.name ? `, ${f.name.trim().split(" ")[0].toUpperCase()}` : ""}.</p>
             <p className="mt-3 text-ink-soft">
               {track === "runner"
-                ? "You're on the Run #02 drop list. First word on the date, route, and bibs lands in your inbox."
+                ? "You're on the Run #02 drop list. A confirmation with your weekend and pace is headed to your inbox."
                 : "Thanks. The GRYT crew will reach out about partnering on Run #02."}
             </p>
             <dl className="mx-auto mt-6 max-w-sm border-2 border-dashed border-ink bg-paper p-4 text-left text-sm">

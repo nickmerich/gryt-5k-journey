@@ -216,7 +216,8 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
               </div>
             </div>
           )}
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   );

@@ -1,7 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { TEMPLATES } from '@/lib/email-templates/registry'
 import { sendAndLog } from '@/lib/email-templates/log-send.server'
 
 const TEMPLATE_NAME = 'rtwl-confirmation'
@@ -47,7 +46,6 @@ export const Route = createFileRoute('/api/public/rtwl-resend')({
         }
 
         const recipient = reg.email as string
-        const normalized = recipient.toLowerCase()
 
         // Rate limit: at most 1 resend per minute per recipient
         const oneMinAgo = new Date(Date.now() - 60_000).toISOString()

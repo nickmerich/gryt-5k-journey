@@ -116,99 +116,20 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
           }
         }
 
-        // Suppression check
-        const { data: suppressed, error: supErr } = await supabase
-          .from('suppressed_emails')
-          .select('id')
-          .eq('email', normalized)
-          .maybeSingle()
-        if (supErr) {
-          return Response.json({ error: 'Suppression check failed' }, { status: 500 })
-        }
-        if (suppressed) {
-          await supabase.from('email_send_log').insert({
-            message_id: messageId,
-            template_name: TEMPLATE_NAME,
-            recipient_email: recipient,
-            status: 'suppressed',
-          })
+        const r = await sendAndLog(
+          supabase,
+          TEMPLATE_NAME,
+          recipient,
+          { name, ticket, waiverAccepted: waiver },
+          idempotencyKey,
+        )
+        if (r.suppressed) {
           // Still succeed the registration for UX; the email just won't send.
           return Response.json({ success: true, emailed: false, reason: 'suppressed' })
         }
-
-        // Unsubscribe token (reuse existing unused)
-        let unsubscribeToken: string
-        const { data: existing } = await supabase
-          .from('email_unsubscribe_tokens')
-          .select('token, used_at')
-          .eq('email', normalized)
-          .maybeSingle()
-        if (existing && !existing.used_at) {
-          unsubscribeToken = existing.token
-        } else {
-          unsubscribeToken = generateToken()
-          await supabase
-            .from('email_unsubscribe_tokens')
-            .upsert(
-              { token: unsubscribeToken, email: normalized },
-              { onConflict: 'email', ignoreDuplicates: true },
-            )
-          const { data: stored } = await supabase
-            .from('email_unsubscribe_tokens')
-            .select('token')
-            .eq('email', normalized)
-            .maybeSingle()
-          if (stored?.token) unsubscribeToken = stored.token
-        }
-
-        // Render
-        const templateData = { name, ticket, waiverAccepted: waiver }
-        const element = React.createElement(template.component, templateData)
-        const html = await render(element)
-        const plainText = await render(element, { plainText: true })
-        const subject =
-          typeof template.subject === 'function'
-            ? template.subject(templateData)
-            : template.subject
-
-        await supabase.from('email_send_log').insert({
-          message_id: messageId,
-          template_name: TEMPLATE_NAME,
-          recipient_email: recipient,
-          status: 'pending',
-        })
-
-        const { error: enqueueError } = await supabase.rpc('enqueue_email', {
-          queue_name: 'transactional_emails',
-          payload: {
-            message_id: messageId,
-            to: recipient,
-            from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-            sender_domain: SENDER_DOMAIN,
-            subject,
-            html,
-            text: plainText,
-            purpose: 'transactional',
-            label: TEMPLATE_NAME,
-            idempotency_key: idempotencyKey,
-            unsubscribe_token: unsubscribeToken,
-            queued_at: new Date().toISOString(),
-          },
-        })
-
-        if (enqueueError) {
-          console.error('Enqueue failed', { error: enqueueError, recipient: redact(recipient) })
-          await supabase.from('email_send_log').insert({
-            message_id: messageId,
-            template_name: TEMPLATE_NAME,
-            recipient_email: recipient,
-            status: 'failed',
-            error_message: 'Failed to enqueue email',
-          })
-          return Response.json(
-            { success: true, emailed: false, error: 'enqueue_failed' },
-            { status: 200 },
-          )
+        if (!r.sent) {
+          console.error('Confirmation send failed', { recipient: redact(recipient), messageId })
+          return Response.json({ success: true, emailed: false, error: 'send_failed' }, { status: 200 })
         }
 
         return Response.json({ success: true, emailed: true, registrationId })

@@ -1,13 +1,9 @@
-import * as React from 'react'
-import { render } from '@react-email/render'
 import { createClient } from '@supabase/supabase-js'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { TEMPLATES } from '@/lib/email-templates/registry'
+import { sendAndLog } from '@/lib/email-templates/log-send.server'
 
-const SITE_NAME = 'GRYT 5K Run'
-const SENDER_DOMAIN = 'notify.grytrunclub.com'
-const FROM_DOMAIN = 'notify.grytrunclub.com'
 const TEMPLATE_NAME = 'rtwl-confirmation'
 
 const schema = z.object({
@@ -16,12 +12,6 @@ const schema = z.object({
 }).refine((v) => v.registrationId || v.email, {
   message: 'registrationId or email required',
 })
-
-function generateToken(): string {
-  const bytes = new Uint8Array(32)
-  crypto.getRandomValues(bytes)
-  return Array.from(bytes).map((b) => b.toString(16).padStart(2, '0')).join('')
-}
 
 export const Route = createFileRoute('/api/public/rtwl-resend')({
   server: {

@@ -9,43 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AccessibilityRouteImport } from './routes/accessibility'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as StoryRouteImport } from './routes/story'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as StoryRouteImport } from './routes/story'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as AccessibilityRouteImport } from './routes/accessibility'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
-import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
-import { Route as ApiPublicRtwlResendRouteImport } from './routes/api/public/rtwl-resend'
-import { Route as ApiPublicRun2InterestRouteImport } from './routes/api/public/run2-interest'
-import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
-import { Route as ApiPublicStravaCallbackRouteImport } from './routes/api/public/strava.callback'
-import { Route as ApiPublicStravaStartRouteImport } from './routes/api/public/strava.start'
-import { Route as ApiPublicStravaStatusRouteImport } from './routes/api/public/strava.status'
-import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
-import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
+import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
+import { Route as ApiPublicRun2InterestRouteImport } from './routes/api/public/run2-interest'
+import { Route as ApiPublicRtwlResendRouteImport } from './routes/api/public/rtwl-resend'
+import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
+import { Route as ApiPublicStravaStatusRouteImport } from './routes/api/public/strava.status'
+import { Route as ApiPublicStravaStartRouteImport } from './routes/api/public/strava.start'
+import { Route as ApiPublicStravaCallbackRouteImport } from './routes/api/public/strava.callback'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccessibilityRoute = AccessibilityRouteImport.update({
-  id: '/accessibility',
-  path: '/accessibility',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StoryRoute = StoryRouteImport.update({
@@ -53,9 +38,24 @@ const StoryRoute = StoryRouteImport.update({
   path: '/story',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessibilityRoute = AccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
@@ -63,19 +63,9 @@ const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   path: '/email/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicRtwlRegisterRoute = ApiPublicRtwlRegisterRouteImport.update({
-  id: '/api/public/rtwl-register',
-  path: '/api/public/rtwl-register',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicRtwlResendRoute = ApiPublicRtwlResendRouteImport.update({
-  id: '/api/public/rtwl-resend',
-  path: '/api/public/rtwl-resend',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicRun2InterestRoute = ApiPublicRun2InterestRouteImport.update({
-  id: '/api/public/run2-interest',
-  path: '/api/public/run2-interest',
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
@@ -83,30 +73,25 @@ const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
   path: '/lovable/email/events',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
-  id: '/lovable/email/suppression',
-  path: '/lovable/email/suppression',
+const ApiPublicRun2InterestRoute = ApiPublicRun2InterestRouteImport.update({
+  id: '/api/public/run2-interest',
+  path: '/api/public/run2-interest',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicStravaCallbackRoute = ApiPublicStravaCallbackRouteImport.update({
-  id: '/api/public/strava/callback',
-  path: '/api/public/strava/callback',
+const ApiPublicRtwlResendRoute = ApiPublicRtwlResendRouteImport.update({
+  id: '/api/public/rtwl-resend',
+  path: '/api/public/rtwl-resend',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicStravaStartRoute = ApiPublicStravaStartRouteImport.update({
-  id: '/api/public/strava/start',
-  path: '/api/public/strava/start',
+const ApiPublicRtwlRegisterRoute = ApiPublicRtwlRegisterRouteImport.update({
+  id: '/api/public/rtwl-register',
+  path: '/api/public/rtwl-register',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicStravaStatusRoute = ApiPublicStravaStatusRouteImport.update({
-  id: '/api/public/strava/status',
-  path: '/api/public/strava/status',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LovableEmailQueueProcessRoute =
-  LovableEmailQueueProcessRouteImport.update({
-    id: '/lovable/email/queue/process',
-    path: '/lovable/email/queue/process',
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
     getParentRoute: () => rootRouteImport,
   } as any)
 const LovableEmailTransactionalPreviewRoute =
@@ -115,12 +100,27 @@ const LovableEmailTransactionalPreviewRoute =
     path: '/lovable/email/transactional/preview',
     getParentRoute: () => rootRouteImport,
   } as any)
-const LovableEmailTransactionalSendRoute =
-  LovableEmailTransactionalSendRouteImport.update({
-    id: '/lovable/email/transactional/send',
-    path: '/lovable/email/transactional/send',
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicStravaStatusRoute = ApiPublicStravaStatusRouteImport.update({
+  id: '/api/public/strava/status',
+  path: '/api/public/strava/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicStravaStartRoute = ApiPublicStravaStartRouteImport.update({
+  id: '/api/public/strava/start',
+  path: '/api/public/strava/start',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicStravaCallbackRoute = ApiPublicStravaCallbackRouteImport.update({
+  id: '/api/public/strava/callback',
+  path: '/api/public/strava/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -269,32 +269,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/accessibility': {
-      id: '/accessibility'
-      path: '/accessibility'
-      fullPath: '/accessibility'
-      preLoaderRoute: typeof AccessibilityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/story': {
@@ -304,11 +283,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StoryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accessibility': {
+      id: '/accessibility'
+      path: '/accessibility'
+      fullPath: '/accessibility'
+      preLoaderRoute: typeof AccessibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/email/unsubscribe': {
@@ -318,25 +318,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EmailUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/rtwl-register': {
-      id: '/api/public/rtwl-register'
-      path: '/api/public/rtwl-register'
-      fullPath: '/api/public/rtwl-register'
-      preLoaderRoute: typeof ApiPublicRtwlRegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/rtwl-resend': {
-      id: '/api/public/rtwl-resend'
-      path: '/api/public/rtwl-resend'
-      fullPath: '/api/public/rtwl-resend'
-      preLoaderRoute: typeof ApiPublicRtwlResendRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/run2-interest': {
-      id: '/api/public/run2-interest'
-      path: '/api/public/run2-interest'
-      fullPath: '/api/public/run2-interest'
-      preLoaderRoute: typeof ApiPublicRun2InterestRouteImport
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/events': {
@@ -346,39 +332,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/suppression': {
-      id: '/lovable/email/suppression'
-      path: '/lovable/email/suppression'
-      fullPath: '/lovable/email/suppression'
-      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+    '/api/public/run2-interest': {
+      id: '/api/public/run2-interest'
+      path: '/api/public/run2-interest'
+      fullPath: '/api/public/run2-interest'
+      preLoaderRoute: typeof ApiPublicRun2InterestRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/strava/callback': {
-      id: '/api/public/strava/callback'
-      path: '/api/public/strava/callback'
-      fullPath: '/api/public/strava/callback'
-      preLoaderRoute: typeof ApiPublicStravaCallbackRouteImport
+    '/api/public/rtwl-resend': {
+      id: '/api/public/rtwl-resend'
+      path: '/api/public/rtwl-resend'
+      fullPath: '/api/public/rtwl-resend'
+      preLoaderRoute: typeof ApiPublicRtwlResendRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/strava/start': {
-      id: '/api/public/strava/start'
-      path: '/api/public/strava/start'
-      fullPath: '/api/public/strava/start'
-      preLoaderRoute: typeof ApiPublicStravaStartRouteImport
+    '/api/public/rtwl-register': {
+      id: '/api/public/rtwl-register'
+      path: '/api/public/rtwl-register'
+      fullPath: '/api/public/rtwl-register'
+      preLoaderRoute: typeof ApiPublicRtwlRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/strava/status': {
-      id: '/api/public/strava/status'
-      path: '/api/public/strava/status'
-      fullPath: '/api/public/strava/status'
-      preLoaderRoute: typeof ApiPublicStravaStatusRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/lovable/email/queue/process': {
-      id: '/lovable/email/queue/process'
-      path: '/lovable/email/queue/process'
-      fullPath: '/lovable/email/queue/process'
-      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/transactional/preview': {
@@ -388,11 +367,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lovable/email/transactional/send': {
-      id: '/lovable/email/transactional/send'
-      path: '/lovable/email/transactional/send'
-      fullPath: '/lovable/email/transactional/send'
-      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/strava/status': {
+      id: '/api/public/strava/status'
+      path: '/api/public/strava/status'
+      fullPath: '/api/public/strava/status'
+      preLoaderRoute: typeof ApiPublicStravaStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/strava/start': {
+      id: '/api/public/strava/start'
+      path: '/api/public/strava/start'
+      fullPath: '/api/public/strava/start'
+      preLoaderRoute: typeof ApiPublicStravaStartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/strava/callback': {
+      id: '/api/public/strava/callback'
+      path: '/api/public/strava/callback'
+      fullPath: '/api/public/strava/callback'
+      preLoaderRoute: typeof ApiPublicStravaCallbackRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

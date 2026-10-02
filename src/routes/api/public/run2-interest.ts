@@ -1,68 +1,17 @@
-import * as React from 'react'
-import { render } from '@react-email/render'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { TEMPLATES } from '@/lib/email-templates/registry'
+import { sendAndLog } from '@/lib/email-templates/log-send.server'
 
 const TEMPLATE_NAME = 'run2-confirmation'
-const SENDER_DOMAIN = 'notify.grytrunclub.com'
-const FROM_DOMAIN = 'notify.grytrunclub.com'
-
-function token() {
-  const b = new Uint8Array(32)
-  crypto.getRandomValues(b)
-  return Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('')
-}
 
 async function sendRunnerConfirmation(
   supabase: SupabaseClient,
   email: string,
   data: { name: string; pace: string; weekend: string },
 ): Promise<boolean> {
-  const template = TEMPLATES[TEMPLATE_NAME]
-  const messageId = crypto.randomUUID()
-  const { data: suppressed } = await supabase.from('suppressed_emails').select('id').eq('email', email).maybeSingle()
-  if (suppressed) {
-    await supabase.from('email_send_log').insert({ message_id: messageId, template_name: TEMPLATE_NAME, recipient_email: email, status: 'suppressed' })
-    return false
-  }
-  let unsub: string | undefined
-  const { data: existing } = await supabase.from('email_unsubscribe_tokens').select('token, used_at').eq('email', email).maybeSingle()
-  if (existing && !existing.used_at) unsub = existing.token
-  else {
-    await supabase.from('email_unsubscribe_tokens').upsert({ token: token(), email }, { onConflict: 'email', ignoreDuplicates: true })
-    const { data: stored } = await supabase.from('email_unsubscribe_tokens').select('token').eq('email', email).maybeSingle()
-    unsub = stored?.token
-  }
-  if (!unsub) return false
-  const el = React.createElement(template.component, data)
-  const html = await render(el)
-  const text = await render(el, { plainText: true })
-  const subject = typeof template.subject === 'function' ? template.subject(data) : template.subject
-  await supabase.from('email_send_log').insert({ message_id: messageId, template_name: TEMPLATE_NAME, recipient_email: email, status: 'pending' })
-  const { error } = await supabase.rpc('enqueue_email', {
-    queue_name: 'transactional_emails',
-    payload: {
-      message_id: messageId,
-      to: email,
-      from: `GRYT Run Club <noreply@${FROM_DOMAIN}>`,
-      sender_domain: SENDER_DOMAIN,
-      subject,
-      html,
-      text,
-      purpose: 'transactional',
-      label: TEMPLATE_NAME,
-      idempotency_key: `run2-${messageId}`,
-      unsubscribe_token: unsub,
-      queued_at: new Date().toISOString(),
-    },
-  })
-  if (error) {
-    await supabase.from('email_send_log').insert({ message_id: messageId, template_name: TEMPLATE_NAME, recipient_email: email, status: 'failed', error_message: 'Failed to enqueue email' })
-    return false
-  }
-  return true
+  const r = await sendAndLog(supabase, TEMPLATE_NAME, email, data, `run2-${crypto.randomUUID()}`)
+  return r.sent
 }
 
 const base = {

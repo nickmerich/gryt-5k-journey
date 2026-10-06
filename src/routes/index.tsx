@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
+import mocoParksLogo from "@/assets/partner-IMG_8387.png.asset.json";
 import { useEffect, useRef, useState } from "react";
 import { HeroGroup } from "@/components/HeroGroup";
 import groupFinishers from "@/assets/rtwl-group-finishers.jpg.asset.json";

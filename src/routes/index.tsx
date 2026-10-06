@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { PartnerQA } from "@/components/PartnerQA";
 import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
 import mocoParksLogo from "@/assets/partner-IMG_8387.png.asset.json";
 import { useEffect, useRef, useState } from "react";

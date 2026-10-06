@@ -235,19 +235,28 @@ export function Run2Hub() {
   );
 }
 
+const SHARE_TEXT = "I'm on the list for GRYT Run #02 in early December. Run it with me.";
+
 function ShareWithFriend() {
   const [copied, setCopied] = useState(false);
+  const [url, setUrl] = useState("/#run2");
+  useEffect(() => { setUrl(`${window.location.origin}/#run2`); }, []);
   async function share() {
-    const url = `${window.location.origin}/#run2`;
-    const text = "I'm on the list for GRYT Run #02 in early December. Run it with me.";
     if (navigator.share) {
-      try { await navigator.share({ title: "GRYT Run #02", text, url }); return; } catch (e) { if ((e as Error).name === "AbortError") return; }
+      try { await navigator.share({ title: "GRYT Run #02", text: SHARE_TEXT, url }); return; } catch (e) { if ((e as Error).name === "AbortError") return; }
     }
-    try { await navigator.clipboard.writeText(`${text} ${url}`); setCopied(true); setTimeout(() => setCopied(false), 2200); } catch {}
+    try { await navigator.clipboard.writeText(`${SHARE_TEXT} ${url}`); setCopied(true); setTimeout(() => setCopied(false), 2200); } catch {}
   }
   return (
-    <button type="button" onClick={share} className="brush-btn mt-6 w-full max-w-sm mx-auto block display-tight text-lg tracking-[0.14em] py-3 bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors">
-      {copied ? "LINK COPIED" : "SHARE WITH A FRIEND"}
-    </button>
+    <div className="mx-auto mt-6 max-w-sm">
+      <div className="border-2 border-ink bg-paper p-4 text-left">
+        <p className="eyebrow text-ink-soft">Invite preview</p>
+        <p className="mt-2 text-sm text-ink">{SHARE_TEXT}</p>
+        <p className="mt-2 break-all text-sm text-terracotta underline underline-offset-2">{url}</p>
+      </div>
+      <button type="button" onClick={share} className="brush-btn mt-3 w-full block display-tight text-lg tracking-[0.14em] py-3 bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors">
+        {copied ? "LINK COPIED" : "SHARE WITH A FRIEND"}
+      </button>
+    </div>
   );
 }

@@ -1014,6 +1014,7 @@ function RunTakomaOnePager() {
             PARTNER WITH US FOR RUN #02
           </a>
         </div>
+        <PartnerQA />
       </section>
 
 

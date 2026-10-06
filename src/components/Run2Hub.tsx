@@ -110,7 +110,7 @@ export function Run2Hub() {
             role="tab"
             type="button"
             aria-selected={track === t}
-            onClick={() => { setTrack(t); setState("idle"); setErr(""); }}
+            onClick={() => { setTrack(t); if (state !== "done") setState("idle"); setErr(""); }}
             className={`display-tight py-3 tracking-[0.14em] transition-colors ${
               track === t ? "bg-forest text-[color:var(--color-forest-ink)]" : "bg-paper-warm text-forest hover:text-terracotta"
             }`}
@@ -142,7 +142,7 @@ export function Run2Hub() {
               )}
               <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">List</dt><dd className="text-ink">Run #02 · {track === "runner" ? "Runners" : "Partners"}</dd></div>
             </dl>
-            <button type="button" onClick={() => { setState("idle"); setF({ pace: "casual", category: "apparel" }); }} className="mt-4 eyebrow text-forest underline underline-offset-4 hover:text-terracotta">
+            <button type="button" onClick={() => { try { localStorage.removeItem("run2-signup"); } catch {} setState("idle"); setF({ pace: "casual", category: "apparel" }); }} className="mt-4 eyebrow text-forest underline underline-offset-4 hover:text-terracotta">
               Sign up someone else
             </button>
             <p className="mt-6 display-tight tracking-[0.14em] text-forest">DO HARD THINGS TOGETHER</p>

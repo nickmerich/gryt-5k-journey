@@ -142,7 +142,8 @@ export function Run2Hub() {
               )}
               <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">List</dt><dd className="text-ink">Run #02 · {track === "runner" ? "Runners" : "Partners"}</dd></div>
             </dl>
-            <button type="button" onClick={() => { try { localStorage.removeItem("run2-signup"); } catch {} setState("idle"); setF({ pace: "casual", category: "apparel" }); }} className="mt-4 eyebrow text-forest underline underline-offset-4 hover:text-terracotta">
+            <ShareWithFriend />
+            <button type="button" onClick={() => { try { localStorage.removeItem("run2-signup"); } catch {} setState("idle"); setF({ pace: "casual", category: "apparel" }); }} className="mt-4 block mx-auto eyebrow text-forest underline underline-offset-4 hover:text-terracotta">
               Sign up someone else
             </button>
             <p className="mt-6 display-tight tracking-[0.14em] text-forest">DO HARD THINGS TOGETHER</p>
@@ -231,5 +232,22 @@ export function Run2Hub() {
         )}
       </div>
     </section>
+  );
+}
+
+function ShareWithFriend() {
+  const [copied, setCopied] = useState(false);
+  async function share() {
+    const url = `${window.location.origin}/#run2`;
+    const text = "I'm on the list for GRYT Run #02 in early December. Run it with me.";
+    if (navigator.share) {
+      try { await navigator.share({ title: "GRYT Run #02", text, url }); return; } catch (e) { if ((e as Error).name === "AbortError") return; }
+    }
+    try { await navigator.clipboard.writeText(`${text} ${url}`); setCopied(true); setTimeout(() => setCopied(false), 2200); } catch {}
+  }
+  return (
+    <button type="button" onClick={share} className="brush-btn mt-6 w-full max-w-sm mx-auto block display-tight text-lg tracking-[0.14em] py-3 bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors">
+      {copied ? "LINK COPIED" : "SHARE WITH A FRIEND"}
+    </button>
   );
 }

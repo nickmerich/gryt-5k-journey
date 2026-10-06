@@ -92,9 +92,6 @@ export function HeroGroup() {
           <a href="#run2" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent("run2:open", { detail: "runner" })); }} className="brush-btn inline-flex min-h-14 w-full sm:w-auto items-center justify-center px-8 py-4 display-tight text-lg tracking-[0.1em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] active:translate-y-px transition-colors">
             JOIN THE RUN #02 LIST
           </a>
-          <a href="#run2" onClick={() => setTimeout(() => (document.querySelectorAll('#run2 [role=tab]')[1] as HTMLElement | undefined)?.click(), 50)} className="inline-flex min-h-12 w-full sm:w-auto sm:brush-btn items-center justify-center border-2 border-forest sm:border-0 px-8 py-3 sm:py-4 display-tight text-base sm:text-lg tracking-[0.1em] text-forest sm:bg-forest sm:text-[color:var(--color-forest-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] active:translate-y-px transition-colors">
-            PARTNER WITH US
-          </a>
         </div>
       </div>
 

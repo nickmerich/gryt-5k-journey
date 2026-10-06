@@ -37,6 +37,10 @@ export function Run2Hub() {
   // Restore a previous successful signup so returning visitors see their confirmation, not the form.
   useEffect(() => {
     try {
+      const r = new URLSearchParams(window.location.search).get("ref");
+      if (r && /^[a-z0-9]{6,12}$/.test(r)) localStorage.setItem("run2-ref", r);
+    } catch {}
+    try {
       const raw = localStorage.getItem("run2-signup");
       if (!raw) return;
       const prev = JSON.parse(raw) as { track: Track; f: Record<string, string> };
@@ -69,10 +73,12 @@ export function Run2Hub() {
     if (track === "runner" && !f.weekend) return setErr("Pick the December weekend that works best.");
     setState("sending");
     try {
+      let ref: string | null = null;
+      try { ref = new URLSearchParams(window.location.search).get("ref") || localStorage.getItem("run2-ref"); } catch {}
       const body =
         track === "runner"
-          ? { kind: "runner", name, email, pace: f.pace, weekend: f.weekend }
-          : { kind: "brand", name, email, brand: f.brand, role: f.role ?? "", category: f.category, message: f.message ?? "" };
+          ? { kind: "runner", name, email, pace: f.pace, weekend: f.weekend, ref }
+          : { kind: "brand", name, email, brand: f.brand, role: f.role ?? "", category: f.category, message: f.message ?? "", ref };
       const res = await fetch("/api/public/run2-interest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -82,8 +88,11 @@ export function Run2Hub() {
         const j = await res.json().catch(() => ({}));
         throw new Error(j.error || "Something went wrong.");
       }
+      const j = await res.json().catch(() => ({}));
+      const nf = { ...f, code: typeof j.referralCode === "string" ? j.referralCode : "" };
+      setF(nf);
       setState("done");
-      try { localStorage.setItem("run2-signup", JSON.stringify({ track, f })); } catch {}
+      try { localStorage.setItem("run2-signup", JSON.stringify({ track, f: nf })); } catch {}
     } catch (x) {
       setErr(x instanceof Error ? x.message : "Something went wrong.");
       setState("error");
@@ -142,7 +151,7 @@ export function Run2Hub() {
               )}
               <div className="flex justify-between gap-4 py-1"><dt className="eyebrow text-ink-soft">List</dt><dd className="text-ink">Run #02 · {track === "runner" ? "Runners" : "Partners"}</dd></div>
             </dl>
-            <ShareWithFriend />
+            <ShareWithFriend code={f.code} />
             <button type="button" onClick={() => { try { localStorage.removeItem("run2-signup"); } catch {} setState("idle"); setF({ pace: "casual", category: "apparel" }); }} className="mt-4 block mx-auto eyebrow text-forest underline underline-offset-4 hover:text-terracotta">
               Sign up someone else
             </button>
@@ -237,10 +246,18 @@ export function Run2Hub() {
 
 const SHARE_TEXT = "I'm on the list for GRYT Run #02 in early December. Run it with me.";
 
-function ShareWithFriend() {
+function ShareWithFriend({ code }: { code?: string }) {
   const [copied, setCopied] = useState(false);
   const [url, setUrl] = useState("/#run2");
-  useEffect(() => { setUrl(`${window.location.origin}/#run2`); }, []);
+  const [count, setCount] = useState<number | null>(null);
+  useEffect(() => {
+    setUrl(`${window.location.origin}/${code ? `?ref=${code}` : ""}#run2`);
+    if (!code) return;
+    fetch(`/api/public/run2-referrals?code=${code}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => { if (j && typeof j.count === "number") setCount(j.count); })
+      .catch(() => {});
+  }, [code]);
   async function share() {
     if (navigator.share) {
       try { await navigator.share({ title: "GRYT Run #02", text: SHARE_TEXT, url }); return; } catch (e) { if ((e as Error).name === "AbortError") return; }
@@ -257,6 +274,12 @@ function ShareWithFriend() {
       <button type="button" onClick={share} className="brush-btn mt-3 w-full block display-tight text-lg tracking-[0.14em] py-3 bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors">
         {copied ? "LINK COPIED" : "SHARE WITH A FRIEND"}
       </button>
+      {code && (
+        <p className="mt-3 text-center text-sm text-ink-soft" aria-live="polite">
+          <span className="display-tight text-2xl text-terracotta">{count ?? "–"}</span>{" "}
+          {count === 1 ? "friend has" : "friends have"} signed up with your link
+        </p>
+      )}
     </div>
   );
 }

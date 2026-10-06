@@ -47,6 +47,9 @@ export const Route = createFileRoute('/api/public/run2-interest')({
         const parsed = schema.safeParse(body)
         if (!parsed.success) return Response.json({ error: 'Please check the highlighted fields.' }, { status: 400 })
         const d = parsed.data
+        const rawRef = (body as { ref?: unknown })?.ref
+        const referredBy = typeof rawRef === 'string' && /^[a-z0-9]{6,12}$/.test(rawRef) ? rawRef : null
+        const referralCode = crypto.randomUUID().replace(/-/g, '').slice(0, 8)
         const supabase = createClient(url, key)
         const { error } = await supabase.from('run2_interest').insert({
           kind: d.kind,
@@ -58,6 +61,8 @@ export const Route = createFileRoute('/api/public/run2-interest')({
           role: d.kind === 'brand' ? d.role : null,
           category: d.kind === 'brand' ? d.category : null,
           message: d.kind === 'brand' ? d.message : null,
+          referral_code: referralCode,
+          referred_by: referredBy,
         })
         if (error) return Response.json({ error: 'Could not save. Try again shortly.' }, { status: 500 })
 
@@ -72,7 +77,7 @@ export const Route = createFileRoute('/api/public/run2-interest')({
             `owner-run2-${crypto.randomUUID()}`)
         } catch (e) { console.error('owner alert failed', e) }
 
-        if (d.kind !== 'runner') return Response.json({ success: true })
+        if (d.kind !== 'runner') return Response.json({ success: true, referralCode })
 
         // Confirmation email (best effort — signup already saved)
         let emailed = false
@@ -81,7 +86,7 @@ export const Route = createFileRoute('/api/public/run2-interest')({
         } catch (e) {
           console.error('run2 confirmation failed', e)
         }
-        return Response.json({ success: true, emailed })
+        return Response.json({ success: true, emailed, referralCode })
       },
     },
   },

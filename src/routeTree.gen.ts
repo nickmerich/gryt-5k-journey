@@ -18,6 +18,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
 import { Route as ApiPublicRtwlResendRouteImport } from './routes/api/public/rtwl-resend'
 import { Route as ApiPublicRun2InterestRouteImport } from './routes/api/public/run2-interest'
+import { Route as ApiPublicRun2PartnerQaRouteImport } from './routes/api/public/run2-partner-qa'
 import { Route as ApiPublicRun2ReferralsRouteImport } from './routes/api/public/run2-referrals'
 import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as ApiPublicStravaCallbackRouteImport } from './routes/api/public/strava.callback'
@@ -70,6 +71,11 @@ const ApiPublicRun2InterestRoute = ApiPublicRun2InterestRouteImport.update({
   path: '/api/public/run2-interest',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicRun2PartnerQaRoute = ApiPublicRun2PartnerQaRouteImport.update({
+  id: '/api/public/run2-partner-qa',
+  path: '/api/public/run2-partner-qa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicRun2ReferralsRoute = ApiPublicRun2ReferralsRouteImport.update({
   id: '/api/public/run2-referrals',
   path: '/api/public/run2-referrals',
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
+  '/api/public/run2-partner-qa': typeof ApiPublicRun2PartnerQaRoute
   '/api/public/run2-referrals': typeof ApiPublicRun2ReferralsRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
+  '/api/public/run2-partner-qa': typeof ApiPublicRun2PartnerQaRoute
   '/api/public/run2-referrals': typeof ApiPublicRun2ReferralsRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
+  '/api/public/run2-partner-qa': typeof ApiPublicRun2PartnerQaRoute
   '/api/public/run2-referrals': typeof ApiPublicRun2ReferralsRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
+    | '/api/public/run2-partner-qa'
     | '/api/public/run2-referrals'
     | '/lovable/email/events'
     | '/api/public/strava/callback'
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
+    | '/api/public/run2-partner-qa'
     | '/api/public/run2-referrals'
     | '/lovable/email/events'
     | '/api/public/strava/callback'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
+    | '/api/public/run2-partner-qa'
     | '/api/public/run2-referrals'
     | '/lovable/email/events'
     | '/api/public/strava/callback'
@@ -218,6 +230,7 @@ export interface RootRouteChildren {
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
   ApiPublicRtwlResendRoute: typeof ApiPublicRtwlResendRoute
   ApiPublicRun2InterestRoute: typeof ApiPublicRun2InterestRoute
+  ApiPublicRun2PartnerQaRoute: typeof ApiPublicRun2PartnerQaRoute
   ApiPublicRun2ReferralsRoute: typeof ApiPublicRun2ReferralsRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
   ApiPublicStravaCallbackRoute: typeof ApiPublicStravaCallbackRoute
@@ -291,6 +304,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicRun2InterestRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/run2-partner-qa': {
+      id: '/api/public/run2-partner-qa'
+      path: '/api/public/run2-partner-qa'
+      fullPath: '/api/public/run2-partner-qa'
+      preLoaderRoute: typeof ApiPublicRun2PartnerQaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/run2-referrals': {
       id: '/api/public/run2-referrals'
       path: '/api/public/run2-referrals'
@@ -346,6 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,
   ApiPublicRtwlResendRoute: ApiPublicRtwlResendRoute,
   ApiPublicRun2InterestRoute: ApiPublicRun2InterestRoute,
+  ApiPublicRun2PartnerQaRoute: ApiPublicRun2PartnerQaRoute,
   ApiPublicRun2ReferralsRoute: ApiPublicRun2ReferralsRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
   ApiPublicStravaCallbackRoute: ApiPublicStravaCallbackRoute,

@@ -973,10 +973,20 @@ function RunTakomaOnePager() {
 
       {/* HERO — group finisher photo + Run #02 call */}
       <HeroGroup />
-      <div className="relative z-10 mx-auto -mt-4 mb-10 flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-5 sm:px-6">
-        <span className="eyebrow text-ink-soft">Run #01 with</span>
-        <PartnerMark label="smartwater" />
-      </div>
+      <section
+        aria-label="Partners"
+        className="relative z-10 mx-auto mb-14 max-w-4xl px-5 sm:px-6"
+      >
+        <p className="eyebrow text-center text-ink-soft">In partnership with</p>
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="card-lift flex h-32 items-center justify-center border-2 border-ink bg-paper-warm px-6">
+            <SmartwaterLogo />
+          </div>
+          <div className="card-lift flex h-32 items-center justify-center border-2 border-ink bg-paper-warm px-6">
+            <MontgomeryParksLogo />
+          </div>
+        </div>
+      </section>
 
 
       {/* RECAP — official event recap video + final stats */}
@@ -1833,6 +1843,35 @@ function RuledLabel({
 
 function Dot() {
   return <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-ink/50" />;
+}
+
+function SmartwaterLogo() {
+  return (
+    <span
+      role="img"
+      aria-label="smartwater"
+      className="text-4xl sm:text-5xl tracking-tight text-ink"
+      style={{ fontFamily: "'Helvetica Neue', Arial, sans-serif" }}
+    >
+      <span className="font-light">smart</span>
+      <span className="font-bold">water</span>
+    </span>
+  );
+}
+
+function MontgomeryParksLogo() {
+  return (
+    <span role="img" aria-label="Montgomery Parks" className="flex items-center gap-3 text-forest">
+      <svg viewBox="0 0 48 48" className="h-14 w-14" aria-hidden fill="currentColor">
+        <circle cx="24" cy="24" r="23" fill="none" stroke="currentColor" strokeWidth="2.5" />
+        <path d="M24 8c-6 5-9 10-9 15 0 4 2.5 7 6 8v6h6v-6c3.5-1 6-4 6-8 0-5-3-10-9-15z" />
+      </svg>
+      <span className="flex flex-col leading-none">
+        <span className="text-2xl sm:text-3xl font-bold tracking-tight">Montgomery</span>
+        <span className="text-lg sm:text-xl font-semibold tracking-[0.2em] uppercase">Parks</span>
+      </span>
+    </span>
+  );
 }
 
 function PartnerMark({ label, bold = false }: { label: string; bold?: boolean }) {

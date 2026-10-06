@@ -978,13 +978,36 @@ function RunTakomaOnePager() {
         className="relative z-10 mx-auto mb-14 max-w-4xl px-5 sm:px-6"
       >
         <p className="eyebrow text-center text-ink-soft">In partnership with</p>
-        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="card-lift flex h-32 items-center justify-center border-2 border-ink bg-paper-warm px-6">
-            <SmartwaterLogo />
+        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div className="card-lift relative overflow-hidden border-2 border-ink" style={{ backgroundColor: "#EAF0FB" }}>
+            <div aria-hidden className="absolute inset-x-0 top-0 h-2" style={{ backgroundColor: "#1E3FAE" }} />
+            <div className="flex h-44 items-center justify-center p-6">
+              <img src={smartwaterLogo.url} alt="Glacéau smartwater" className="max-h-32 w-auto object-contain" style={{ mixBlendMode: "multiply" }} loading="lazy" />
+            </div>
+            <p className="border-t-2 border-ink bg-paper-warm px-4 py-2 text-center display-tight tracking-[0.14em] text-sm" style={{ color: "#1E3FAE" }}>
+              OFFICIAL HYDRATION PARTNER
+            </p>
           </div>
-          <div className="card-lift flex h-32 items-center justify-center border-2 border-ink bg-paper-warm px-6">
-            <MontgomeryParksLogo />
+          <div className="card-lift relative overflow-hidden border-2 border-ink" style={{ backgroundColor: "#EEF5EC" }}>
+            <div aria-hidden className="absolute inset-x-0 top-0 h-2" style={{ backgroundColor: "#1F7A3A" }} />
+            <div className="flex h-44 items-center justify-center p-6">
+              <img src={mocoParksLogo.url} alt="Montgomery Parks, M-NCPPC" className="max-h-32 w-auto object-contain" loading="lazy" />
+            </div>
+            <p className="border-t-2 border-ink bg-paper-warm px-4 py-2 text-center display-tight tracking-[0.14em] text-sm" style={{ color: "#1F7A3A" }}>
+              COMMUNITY PARKS PARTNER
+            </p>
           </div>
+        </div>
+        <div className="mt-8 border-2 border-dashed border-forest p-5 text-center">
+          <p className="display-tight text-2xl sm:text-3xl text-forest leading-none">YOUR BRAND HERE?</p>
+          <p className="mt-2 text-ink-soft">Fuel the community at the start line. Run #02 lands early December 2026.</p>
+          <a
+            href="#run2"
+            onClick={() => setTimeout(() => (document.querySelectorAll('#run2 [role=tab]')[1] as HTMLElement | undefined)?.click(), 50)}
+            className="brush-btn mt-4 inline-flex min-h-12 w-full sm:w-auto items-center justify-center px-8 py-3 display-tight text-lg tracking-[0.1em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta active:translate-y-px transition-colors"
+          >
+            PARTNER WITH US FOR RUN #02
+          </a>
         </div>
       </section>
 

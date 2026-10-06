@@ -274,6 +274,12 @@ function ShareWithFriend({ code }: { code?: string }) {
       <button type="button" onClick={share} className="brush-btn mt-3 w-full block display-tight text-lg tracking-[0.14em] py-3 bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta hover:text-[color:var(--color-terracotta-ink)] transition-colors">
         {copied ? "LINK COPIED" : "SHARE WITH A FRIEND"}
       </button>
+      {code && (
+        <p className="mt-3 text-center text-sm text-ink-soft" aria-live="polite">
+          <span className="display-tight text-2xl text-terracotta">{count ?? "–"}</span>{" "}
+          {count === 1 ? "friend has" : "friends have"} signed up with your link
+        </p>
+      )}
     </div>
   );
 }

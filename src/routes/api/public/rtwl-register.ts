@@ -104,6 +104,12 @@ export const Route = createFileRoute('/api/public/rtwl-register')({
           }
         }
 
+        try {
+          await sendAndLog(supabase, 'owner-signup-alert', 'merichnick@gmail.com',
+            { source: 'Run Takoma 5K · Registration', fields: { Name: name, Email: recipient, Ticket: ticket } },
+            `owner-rtwl-${crypto.randomUUID()}`)
+        } catch (e) { console.error('owner alert failed', e) }
+
         const r = await sendAndLog(
           supabase,
           TEMPLATE_NAME,

@@ -60,6 +60,18 @@ export const Route = createFileRoute('/api/public/run2-interest')({
           message: d.kind === 'brand' ? d.message : null,
         })
         if (error) return Response.json({ error: 'Could not save. Try again shortly.' }, { status: 500 })
+
+        // Owner alert (best effort)
+        try {
+          const fields: Record<string, string> =
+            d.kind === 'runner'
+              ? { Name: d.name, Email: d.email, Pace: d.pace, Weekend: d.weekend }
+              : { Name: d.name, Email: d.email, Brand: d.brand, Role: d.role, Category: d.category, Message: d.message }
+          await sendAndLog(supabase, 'owner-signup-alert', 'merichnick@gmail.com',
+            { source: d.kind === 'runner' ? 'Run #02 · Runner' : 'Run #02 · Brand', fields },
+            `owner-run2-${crypto.randomUUID()}`)
+        } catch (e) { console.error('owner alert failed', e) }
+
         if (d.kind !== 'runner') return Response.json({ success: true })
 
         // Confirmation email (best effort — signup already saved)

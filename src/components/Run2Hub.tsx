@@ -34,19 +34,29 @@ export function Run2Hub() {
 
   const set = (k: string) => (e: { target: { value: string } }) => setF((p) => ({ ...p, [k]: e.target.value }));
 
-  // Hero "Join the Run #02 list" opens the runner form and focuses the name field.
+  // Restore a previous successful signup so returning visitors see their confirmation, not the form.
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("run2-signup");
+      if (!raw) return;
+      const prev = JSON.parse(raw) as { track: Track; f: Record<string, string> };
+      if (prev?.f?.name) { setTrack(prev.track); setF(prev.f); setState("done"); }
+    } catch {}
+  }, []);
+
+  // Hero "Join the Run #02 list" scrolls to the form; keeps the confirmation if already signed up.
   useEffect(() => {
     const open = (e: Event) => {
       const t = ((e as CustomEvent).detail as Track) ?? "runner";
-      setTrack(t);
-      setState((s) => (s === "done" && t === track ? s : "idle"));
       setErr("");
       document.getElementById("run2")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (state === "done") return;
+      setTrack(t);
       setTimeout(() => document.getElementById("run2-name")?.focus({ preventScroll: true }), 450);
     };
     window.addEventListener("run2:open", open);
     return () => window.removeEventListener("run2:open", open);
-  }, [track]);
+  }, [state]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -73,6 +83,7 @@ export function Run2Hub() {
         throw new Error(j.error || "Something went wrong.");
       }
       setState("done");
+      try { localStorage.setItem("run2-signup", JSON.stringify({ track, f })); } catch {}
     } catch (x) {
       setErr(x instanceof Error ? x.message : "Something went wrong.");
       setState("error");

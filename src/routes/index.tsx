@@ -894,8 +894,7 @@ function RunTakomaOnePager() {
           <p className="mt-2 display-tight text-3xl leading-none text-forest">YOUR BRAND HERE?</p>
           <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft sm:text-base">Fuel the community at the start line for Run #02.</p>
           <a
-            href="#run2"
-            onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent("run2:open", { detail: "brand" })); }}
+            href="/partners"
             className="brush-btn mt-4 inline-flex min-h-14 w-full sm:w-auto items-center justify-center px-6 py-4 display-tight text-base sm:text-lg tracking-[0.1em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta active:translate-y-px transition-colors"
           >
             PARTNER WITH US FOR RUN #02

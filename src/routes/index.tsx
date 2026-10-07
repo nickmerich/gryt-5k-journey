@@ -1706,6 +1706,48 @@ function RunTakomaOnePager() {
       </section>
       )}
 
+      <section aria-labelledby="closing-title" className="relative z-10 border-t border-hairline bg-paper-warm">
+        <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+          <p className="eyebrow text-terracotta">Run #02 · Early December 2026</p>
+          <h2 id="closing-title" className="display-tight mt-3 text-5xl sm:text-7xl">
+            Do hard things <span className="brush-script text-terracotta normal-case">together</span>
+          </h2>
+
+          <div className="mt-12 grid gap-10 md:grid-cols-3">
+            <div>
+              <p className="eyebrow text-ink-soft">01 · The opportunity</p>
+              <h3 className="display-tight mt-2 text-3xl">100 bibs. One neighborhood.</h3>
+              <p className="mt-3 text-ink-soft leading-relaxed">
+                Run #02 is coming to Takoma Park this December. Free for runners, built with local partners. Grab a spot on the list or bring your brand to the start line.
+              </p>
+            </div>
+            <div>
+              <p className="eyebrow text-ink-soft">02 · The value</p>
+              <h3 className="display-tight mt-2 text-3xl">248 signed up. 98 finished.</h3>
+              <p className="mt-3 text-ink-soft leading-relaxed">
+                Run #01 filled fast with every pace and every experience level, walkers included. Partners met a real community face to face, at the shelter and on the field, long after the finish.
+              </p>
+            </div>
+            <div>
+              <p className="eyebrow text-ink-soft">03 · The story</p>
+              <h3 className="display-tight mt-2 text-3xl">A hang with a 5K in the middle.</h3>
+              <p className="mt-3 text-ink-soft leading-relaxed">
+                Not a race with splits and podiums. We're here to love Takoma and each other; the run is just the excuse. Food, games, music, and we leave the park better than we found it.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-col gap-3 sm:flex-row">
+            <a href="#run2" className="brush-btn display-tight text-lg tracking-[0.1em] px-8 py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors text-center">
+              Join the Run #02 list
+            </a>
+            <a href="/story" className="display-tight text-lg tracking-[0.1em] px-8 py-4 border border-hairline hover:bg-ink hover:text-paper transition-colors text-center">
+              Read the full story
+            </a>
+          </div>
+        </div>
+      </section>
+
       <footer className="relative z-10 border-t border-hairline">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-8 pb-28 text-center sm:flex-row sm:justify-between sm:pb-8 sm:text-left">
           <p className="eyebrow text-ink-soft">© GRYT Club · Takoma Park, MD</p>

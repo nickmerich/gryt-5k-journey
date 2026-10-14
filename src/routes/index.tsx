@@ -910,12 +910,12 @@ function RunTakomaOnePager() {
         aria-labelledby="oddisee-quote-label"
         className="relative z-10 mx-auto max-w-4xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20 sm:pb-10"
       >
-        <figure className="relative mr-1 border-2 border-ink bg-paper-warm px-5 pb-7 pt-12 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-12 sm:pb-10 sm:pt-14 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
+        <figure className="relative mr-1 border-2 border-ink bg-paper-warm px-6 pb-8 pt-14 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-14 sm:pb-12 sm:pt-16 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
           <span
             id="oddisee-quote-label"
             className="paint-stroke absolute left-4 top-0 -translate-y-1/2 whitespace-nowrap bg-forest px-5 py-2.5 display-tight text-sm tracking-[0.14em] text-[color:var(--color-forest-ink)] sm:left-10"
           >
-            Music · Running · Takoma
+            In his words
           </span>
           <span
             aria-hidden
@@ -923,13 +923,14 @@ function RunTakomaOnePager() {
           >
             &rdquo;
           </span>
-          <blockquote className="relative">
+          <p className="relative eyebrow text-terracotta">Music brought us here. Running keeps us together.</p>
+          <blockquote className="relative mt-4 sm:mt-5">
             <p className="serif-italic text-[1.75rem] leading-[1.2] text-ink sm:text-5xl sm:leading-[1.15]">
               &ldquo;Socializing with community around a healthy activity is what{" "}
               <span className="brush-script not-italic text-terracotta">Gryt does best.</span>&rdquo;
             </p>
           </blockquote>
-          <figcaption className="relative mt-7 flex items-center gap-4 border-t border-hairline pt-6">
+          <figcaption className="relative mt-8 flex items-center gap-4 border-t border-dashed border-hairline pt-6 sm:mt-10 sm:pt-8">
             <img
               src={oddiseeAvatar.url}
               alt="Oddisee"
@@ -941,7 +942,7 @@ function RunTakomaOnePager() {
             <span className="min-w-0">
               <span className="block display-tight text-2xl tracking-[0.06em] text-ink">Oddisee</span>
               <span className="mt-1 block text-sm text-ink-soft">
-                Co-creator of <em>From Takoma With Love</em>
+                The voice behind <em>From Takoma With Love</em> — the album this run is named for
               </span>
             </span>
             <span aria-hidden className="heart-pulse ml-auto shrink-0 text-2xl text-terracotta">&hearts;</span>

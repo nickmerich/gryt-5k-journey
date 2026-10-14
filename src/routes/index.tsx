@@ -905,6 +905,50 @@ function RunTakomaOnePager() {
       </section>
 
 
+      {/* ODDISEE QUOTE — music x running, right after the hero */}
+      <section
+        aria-labelledby="oddisee-quote-label"
+        className="relative z-10 mx-auto max-w-5xl px-5 pt-12 sm:px-6 sm:pt-16"
+      >
+        <figure className="relative overflow-hidden border-2 border-ink bg-paper-warm px-6 pb-8 pt-10 shadow-[6px_6px_0_0_var(--color-ink)] sm:px-12 sm:pb-12 sm:pt-14">
+          <span
+            id="oddisee-quote-label"
+            className="paint-stroke absolute left-5 top-0 -translate-y-1/2 bg-forest px-5 py-2 display-tight text-sm tracking-[0.14em] text-[color:var(--color-forest-ink)] sm:left-10"
+          >
+            Music · Running · Takoma
+          </span>
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -right-2 -top-6 select-none font-serif text-[10rem] leading-none text-terracotta/20 sm:text-[14rem]"
+          >
+            &rdquo;
+          </span>
+          <blockquote className="relative">
+            <p className="serif-italic text-3xl leading-[1.15] text-ink sm:text-5xl">
+              &ldquo;Socializing with community around a healthy activity is what{" "}
+              <span className="brush-script not-italic text-terracotta">Gryt does best.</span>&rdquo;
+            </p>
+          </blockquote>
+          <figcaption className="relative mt-8 flex items-center gap-4 border-t border-hairline pt-6">
+            <img
+              src={oddiseeAvatar.url}
+              alt="Oddisee"
+              width={72}
+              height={72}
+              loading="lazy"
+              className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]"
+            />
+            <span>
+              <span className="block display-tight text-2xl tracking-[0.06em] text-ink">Oddisee</span>
+              <span className="mt-1 block text-sm text-ink-soft">
+                Co-creator of <em>From Takoma With Love</em> · on the album-themed 5K
+              </span>
+            </span>
+            <span aria-hidden className="heart-pulse ml-auto text-2xl text-terracotta">&hearts;</span>
+          </figcaption>
+        </figure>
+      </section>
+
       {/* RECAP — official event recap video + final stats */}
       <section
         id="recap"
@@ -1009,52 +1053,6 @@ function RunTakomaOnePager() {
       </section>
 
       {/* HOW WE GOT HERE — condensed story with link to full /story */}
-      <section
-        aria-labelledby="oddisee-quote-label"
-        className="relative z-10 mx-auto max-w-4xl px-5 pt-16 sm:px-6 sm:pt-24"
-      >
-        <p
-          id="oddisee-quote-label"
-          className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-ink-soft"
-          style={{ fontFamily: "Oswald, var(--font-display)" }}
-        >
-          Music. Running. Community.
-        </p>
-        <figure className="relative mt-8 border-l-4 border-sky pl-6 sm:pl-10">
-          <span
-            aria-hidden
-            className="pointer-events-none absolute -top-8 left-4 select-none font-serif text-8xl leading-none text-sky/50 sm:left-8 sm:text-9xl"
-          >
-            &ldquo;
-          </span>
-          <blockquote className="relative">
-            <p className="font-sans text-2xl font-semibold leading-snug tracking-tight text-ink sm:text-4xl sm:leading-tight">
-              &ldquo;Socializing with community around a healthy activity is what Gryt does best.&rdquo;
-            </p>
-          </blockquote>
-          <figcaption className="mt-6 flex items-center gap-4">
-            <img
-              src={oddiseeAvatar.url}
-              alt="Oddisee"
-              width={64}
-              height={64}
-              loading="lazy"
-              className="h-14 w-14 shrink-0 rounded-full border-2 border-sky object-cover sm:h-16 sm:w-16"
-            />
-            <span>
-              <span
-                className="block text-lg font-bold uppercase tracking-[0.08em] text-ink"
-                style={{ fontFamily: "Oswald, var(--font-display)" }}
-              >
-                Oddisee
-              </span>
-              <span className="mt-1 block text-sm text-ink-soft">
-                On bringing music and running together through an album-themed 5K.
-              </span>
-            </span>
-          </figcaption>
-        </figure>
-      </section>
 
       <section
         id="story"

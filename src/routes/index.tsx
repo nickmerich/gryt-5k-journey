@@ -908,28 +908,28 @@ function RunTakomaOnePager() {
       {/* ODDISEE QUOTE — music x running, right after the hero */}
       <section
         aria-labelledby="oddisee-quote-label"
-        className="relative z-10 mx-auto max-w-5xl px-5 pt-12 sm:px-6 sm:pt-16"
+        className="relative z-10 mx-auto max-w-4xl px-5 pt-14 sm:px-6 sm:pt-20"
       >
-        <figure className="relative overflow-hidden border-2 border-ink bg-paper-warm px-6 pb-8 pt-10 shadow-[6px_6px_0_0_var(--color-ink)] sm:px-12 sm:pb-12 sm:pt-14">
+        <figure className="relative mr-1 border-2 border-ink bg-paper-warm px-5 pb-7 pt-12 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-12 sm:pb-10 sm:pt-14 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
           <span
             id="oddisee-quote-label"
-            className="paint-stroke absolute left-5 top-0 -translate-y-1/2 bg-forest px-5 py-2 display-tight text-sm tracking-[0.14em] text-[color:var(--color-forest-ink)] sm:left-10"
+            className="paint-stroke absolute left-4 top-0 -translate-y-1/2 whitespace-nowrap bg-forest px-5 py-2.5 display-tight text-sm tracking-[0.14em] text-[color:var(--color-forest-ink)] sm:left-10"
           >
             Music · Running · Takoma
           </span>
           <span
             aria-hidden
-            className="pointer-events-none absolute -right-2 -top-6 select-none font-serif text-[10rem] leading-none text-terracotta/20 sm:text-[14rem]"
+            className="pointer-events-none absolute right-3 top-2 select-none font-serif text-[6rem] leading-none text-terracotta/20 sm:right-8 sm:text-[9rem]"
           >
             &rdquo;
           </span>
           <blockquote className="relative">
-            <p className="serif-italic text-3xl leading-[1.15] text-ink sm:text-5xl">
+            <p className="serif-italic text-[1.75rem] leading-[1.2] text-ink sm:text-5xl sm:leading-[1.15]">
               &ldquo;Socializing with community around a healthy activity is what{" "}
               <span className="brush-script not-italic text-terracotta">Gryt does best.</span>&rdquo;
             </p>
           </blockquote>
-          <figcaption className="relative mt-8 flex items-center gap-4 border-t border-hairline pt-6">
+          <figcaption className="relative mt-7 flex items-center gap-4 border-t border-hairline pt-6">
             <img
               src={oddiseeAvatar.url}
               alt="Oddisee"
@@ -938,13 +938,13 @@ function RunTakomaOnePager() {
               loading="lazy"
               className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]"
             />
-            <span>
+            <span className="min-w-0">
               <span className="block display-tight text-2xl tracking-[0.06em] text-ink">Oddisee</span>
               <span className="mt-1 block text-sm text-ink-soft">
-                Co-creator of <em>From Takoma With Love</em> · on the album-themed 5K
+                Co-creator of <em>From Takoma With Love</em>
               </span>
             </span>
-            <span aria-hidden className="heart-pulse ml-auto text-2xl text-terracotta">&hearts;</span>
+            <span aria-hidden className="heart-pulse ml-auto shrink-0 text-2xl text-terracotta">&hearts;</span>
           </figcaption>
         </figure>
       </section>

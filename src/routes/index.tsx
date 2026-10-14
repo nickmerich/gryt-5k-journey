@@ -1,3 +1,4 @@
+import oddiseeAvatar from "@/assets/oddisee-avatar.png.asset.json";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PartnerQA } from "@/components/PartnerQA";
 import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";

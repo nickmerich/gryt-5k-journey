@@ -908,7 +908,7 @@ function RunTakomaOnePager() {
       {/* ODDISEE QUOTE — music x running, right after the hero */}
       <section
         aria-labelledby="oddisee-quote-label"
-        className="relative z-10 mx-auto max-w-4xl px-5 pt-14 sm:px-6 sm:pt-20"
+        className="relative z-10 mx-auto max-w-4xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20 sm:pb-10"
       >
         <figure className="relative mr-1 border-2 border-ink bg-paper-warm px-5 pb-7 pt-12 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-12 sm:pb-10 sm:pt-14 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
           <span

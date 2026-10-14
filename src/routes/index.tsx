@@ -1,3 +1,4 @@
+import oddiseeAvatar from "@/assets/oddisee-avatar.png.asset.json";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PartnerQA } from "@/components/PartnerQA";
 import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
@@ -1031,15 +1032,25 @@ function RunTakomaOnePager() {
               &ldquo;Socializing with community around a healthy activity is what Gryt does best.&rdquo;
             </p>
           </blockquote>
-          <figcaption className="mt-6">
-            <span
-              className="block text-lg font-bold uppercase tracking-[0.08em] text-ink"
-              style={{ fontFamily: "Oswald, var(--font-display)" }}
-            >
-              Oddisee
-            </span>
-            <span className="mt-1 block text-sm text-ink-soft">
-              On bringing music and running together through an album-themed 5K.
+          <figcaption className="mt-6 flex items-center gap-4">
+            <img
+              src={oddiseeAvatar.url}
+              alt="Oddisee"
+              width={64}
+              height={64}
+              loading="lazy"
+              className="h-14 w-14 shrink-0 rounded-full border-2 border-sky object-cover sm:h-16 sm:w-16"
+            />
+            <span>
+              <span
+                className="block text-lg font-bold uppercase tracking-[0.08em] text-ink"
+                style={{ fontFamily: "Oswald, var(--font-display)" }}
+              >
+                Oddisee
+              </span>
+              <span className="mt-1 block text-sm text-ink-soft">
+                On bringing music and running together through an album-themed 5K.
+              </span>
             </span>
           </figcaption>
         </figure>

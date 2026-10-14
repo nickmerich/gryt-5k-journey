@@ -1009,6 +1009,43 @@ function RunTakomaOnePager() {
 
       {/* HOW WE GOT HERE — condensed story with link to full /story */}
       <section
+        aria-labelledby="oddisee-quote-label"
+        className="relative z-10 mx-auto max-w-4xl px-5 pt-16 sm:px-6 sm:pt-24"
+      >
+        <p
+          id="oddisee-quote-label"
+          className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-ink-soft"
+          style={{ fontFamily: "Oswald, var(--font-display)" }}
+        >
+          Music. Running. Community.
+        </p>
+        <figure className="relative mt-8 border-l-4 border-sky pl-6 sm:pl-10">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -top-8 left-4 select-none font-serif text-8xl leading-none text-sky/50 sm:left-8 sm:text-9xl"
+          >
+            &ldquo;
+          </span>
+          <blockquote className="relative">
+            <p className="font-sans text-2xl font-semibold leading-snug tracking-tight text-ink sm:text-4xl sm:leading-tight">
+              &ldquo;Socializing with community around a healthy activity is what Gryt does best.&rdquo;
+            </p>
+          </blockquote>
+          <figcaption className="mt-6">
+            <span
+              className="block text-lg font-bold uppercase tracking-[0.08em] text-ink"
+              style={{ fontFamily: "Oswald, var(--font-display)" }}
+            >
+              Oddisee
+            </span>
+            <span className="mt-1 block text-sm text-ink-soft">
+              On bringing music and running together through an album-themed 5K.
+            </span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section
         id="story"
         className="relative z-10 mx-auto max-w-5xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20"
       >

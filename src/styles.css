@@ -358,3 +358,22 @@
 
 
 
+
+/* ─── Press "Highlighted by" logo bar ─── */
+.press-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.press-track { display: flex; width: max-content; animation: gryt-marquee 40s linear infinite; }
+.press-row { display: flex; align-items: center; gap: 3.5rem; padding-right: 3.5rem; flex-shrink: 0; }
+.press-viewport:hover .press-track,
+.press-viewport:focus-within .press-track,
+.press-viewport.is-paused .press-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .press-track { animation: none; width: auto; }
+  .press-row { flex-wrap: wrap; justify-content: center; gap: 1.5rem 2.5rem; padding: 0; }
+  .press-row[aria-hidden="true"], .press-toggle { display: none; }
+  .press-viewport { -webkit-mask-image: none; mask-image: none; }
+}
+.motion-off .press-track { animation: none; }

@@ -1,10 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
 import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
 import mocoParksLogo from "@/assets/partner-IMG_8387.png.asset.json";
 import { EVENT_PHOTOS } from "@/lib/event-photos";
 import { PhotoGallery } from "@/components/PhotoGallery";
-import { Run2Hub } from "@/components/Run2Hub";
+import { SponsorInquiryForm } from "@/components/SponsorInquiryForm";
 
 const TITLE = "Partner with Run Takoma With Love #02 — GRYT Club";
 const DESC =
@@ -64,21 +63,16 @@ const TIERS = [
 ];
 
 function PartnersPage() {
-  useEffect(() => {
-    const t = setTimeout(() => window.dispatchEvent(new CustomEvent("run2:open", { detail: "brand" })), 50);
-    return () => clearTimeout(t);
-  }, []);
-  const openForm = (e: React.MouseEvent) => {
+  const openForm = (e: React.MouseEvent, pkg?: string) => {
     e.preventDefault();
-    window.dispatchEvent(new CustomEvent("run2:open", { detail: "brand" }));
-    document.getElementById("run2")?.scrollIntoView({ behavior: "smooth" });
+    window.dispatchEvent(new CustomEvent("sponsor:pick", { detail: pkg }));
   };
 
   return (
     <main className="min-h-screen bg-paper text-ink">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Link to="/" className="display-tight text-2xl">gryt</Link>
-        <a href="#run2" onClick={openForm} className="eyebrow text-terracotta underline underline-offset-4">Talk to us</a>
+        <a href="#sponsor-form" onClick={(e) => openForm(e)} className="eyebrow text-terracotta underline underline-offset-4">Talk to us</a>
       </header>
 
       <section className="mx-auto max-w-6xl px-6 pt-8 pb-16">
@@ -91,7 +85,7 @@ function PartnersPage() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <a href="#tiers" className="brush-btn bg-terracotta px-8 py-4 text-center display-tight text-lg tracking-[0.1em] text-[color:var(--color-terracotta-ink)]">See packages</a>
-          <a href="#run2" onClick={openForm} className="border-2 border-ink px-8 py-4 text-center display-tight text-lg tracking-[0.1em] hover:bg-ink hover:text-paper">Start a conversation</a>
+          <a href="#sponsor-form" onClick={(e) => openForm(e)} className="border-2 border-ink px-8 py-4 text-center display-tight text-lg tracking-[0.1em] hover:bg-ink hover:text-paper">Start a conversation</a>
         </div>
       </section>
 
@@ -157,7 +151,7 @@ function PartnersPage() {
                   <li key={p} className="flex gap-2"><span aria-hidden>—</span><span>{p}</span></li>
                 ))}
               </ul>
-              <a href="#run2" onClick={openForm} className={`mt-8 border-2 px-6 py-3 text-center display-tight tracking-[0.1em] ${t.featured ? "border-[color:var(--color-forest-ink)] hover:bg-paper hover:text-ink" : "border-ink hover:bg-ink hover:text-paper"}`}>
+              <a href="#sponsor-form" onClick={(e) => openForm(e, t.name.toLowerCase())} className={`mt-8 border-2 px-6 py-3 text-center display-tight tracking-[0.1em] ${t.featured ? "border-[color:var(--color-forest-ink)] hover:bg-paper hover:text-ink" : "border-ink hover:bg-ink hover:text-paper"}`}>
                 Ask about {t.name}
               </a>
             </div>
@@ -167,7 +161,7 @@ function PartnersPage() {
       </section>
 
       <section className="border-t-2 border-ink">
-        <Run2Hub />
+        <SponsorInquiryForm />
       </section>
 
       <footer className="border-t border-hairline">

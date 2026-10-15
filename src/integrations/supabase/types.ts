@@ -194,6 +194,48 @@ export type Database = {
         }
         Relationships: []
       }
+      sponsor_inquiries: {
+        Row: {
+          budget: string
+          company: string
+          created_at: string
+          email: string
+          goals: string | null
+          id: string
+          name: string
+          package: string
+          role: string | null
+          status: string
+          website: string | null
+        }
+        Insert: {
+          budget: string
+          company: string
+          created_at?: string
+          email: string
+          goals?: string | null
+          id?: string
+          name: string
+          package: string
+          role?: string | null
+          status?: string
+          website?: string | null
+        }
+        Update: {
+          budget?: string
+          company?: string
+          created_at?: string
+          email?: string
+          goals?: string | null
+          id?: string
+          name?: string
+          package?: string
+          role?: string | null
+          status?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string

@@ -998,12 +998,12 @@ function RunTakomaOnePager() {
           />
         </div>
 
-        <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-5 sm:grid-cols-4 sm:gap-6">
           {[
             { n: "248", u: "signed up" },
             { n: "98", u: "finished" },
-            { n: "5K", u: "through Takoma" },
-            { n: "1", u: "community" },
+            { n: "5K", u: "one loop" },
+            { n: "1", u: "neighborhood" },
           ].map((s) => (
             <div
               key={s.u}

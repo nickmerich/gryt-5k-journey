@@ -948,10 +948,10 @@ function RunTakomaOnePager() {
               </span>
               <span className="mt-1.5 flex flex-wrap gap-1.5">
                 <a href="https://www.instagram.com/oddisee/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-[color:var(--color-forest-ink)]">
-                  <strong className="font-bold">117K+</strong> Instagram followers
+                  <strong className="font-bold">117K</strong> Instagram followers
                 </a>
                 <a href="https://open.spotify.com/artist/72tRiBHei5G9M8it4h4sfC" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-[color:var(--color-forest-ink)]">
-                  <strong className="font-bold">245K+</strong> Spotify monthly listeners
+                  <strong className="font-bold">245.7K</strong> Spotify monthly listeners
                 </a>
               </span>
               <span className="mt-1 block text-sm text-ink-soft">

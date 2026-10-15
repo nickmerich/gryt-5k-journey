@@ -378,3 +378,15 @@
 }
 .motion-off .press-track { animation: none; }
 @media (min-width: 640px) { .press-row { gap: 4.5rem; padding-right: 4.5rem; } }
+
+/* Quote-card look: hard ink edge + offset shadow, shared across homepage cards */
+@utility ink-card {
+  border: 2px solid var(--color-ink);
+  background-color: var(--color-paper-warm);
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out;
+  @media (min-width: 640px) { box-shadow: 6px 6px 0 0 var(--color-ink); }
+}
+@utility ink-card-hover {
+  &:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 var(--color-terracotta); }
+}

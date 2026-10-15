@@ -26,7 +26,7 @@ function Row({ hidden }: { hidden?: boolean }) {
             rel="noopener noreferrer"
             tabIndex={hidden ? -1 : undefined}
             aria-label={hidden ? undefined : `${p.label} (opens in a new tab)`}
-            className="flex min-h-14 items-center px-1 opacity-80 grayscale-[35%] transition duration-200 hover:opacity-100 hover:grayscale-0 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta"
+            className="flex min-h-14 items-center px-1 opacity-80 transition duration-200 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta"
           >
             <img src={p.logo} alt="" width={p.w} height={p.h} loading="lazy" className={`${p.size ?? "h-7 sm:h-9"} w-auto select-none`} draggable={false} style={{ maxWidth: "none" }} />
           </a>

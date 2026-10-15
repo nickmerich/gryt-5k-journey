@@ -16,11 +16,13 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as PartnersThanksRouteImport } from './routes/partners_.thanks'
 import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
 import { Route as ApiPublicRtwlResendRouteImport } from './routes/api/public/rtwl-resend'
 import { Route as ApiPublicRun2InterestRouteImport } from './routes/api/public/run2-interest'
 import { Route as ApiPublicRun2PartnerQaRouteImport } from './routes/api/public/run2-partner-qa'
 import { Route as ApiPublicRun2ReferralsRouteImport } from './routes/api/public/run2-referrals'
+import { Route as ApiPublicSponsorInquiryRouteImport } from './routes/api/public/sponsor-inquiry'
 import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as ApiPublicStravaCallbackRouteImport } from './routes/api/public/strava.callback'
 import { Route as ApiPublicStravaStartRouteImport } from './routes/api/public/strava.start'
@@ -62,6 +64,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnersThanksRoute = PartnersThanksRouteImport.update({
+  id: '/partners_/thanks',
+  path: '/partners/thanks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicRtwlRegisterRoute = ApiPublicRtwlRegisterRouteImport.update({
   id: '/api/public/rtwl-register',
   path: '/api/public/rtwl-register',
@@ -85,6 +92,11 @@ const ApiPublicRun2PartnerQaRoute = ApiPublicRun2PartnerQaRouteImport.update({
 const ApiPublicRun2ReferralsRoute = ApiPublicRun2ReferralsRouteImport.update({
   id: '/api/public/run2-referrals',
   path: '/api/public/run2-referrals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSponsorInquiryRoute = ApiPublicSponsorInquiryRouteImport.update({
+  id: '/api/public/sponsor-inquiry',
+  path: '/api/public/sponsor-inquiry',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
@@ -122,11 +134,13 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
+  '/partners/thanks': typeof PartnersThanksRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
   '/api/public/run2-partner-qa': typeof ApiPublicRun2PartnerQaRoute
   '/api/public/run2-referrals': typeof ApiPublicRun2ReferralsRoute
+  '/api/public/sponsor-inquiry': typeof ApiPublicSponsorInquiryRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
   '/api/public/strava/start': typeof ApiPublicStravaStartRoute
@@ -141,11 +155,13 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
+  '/partners/thanks': typeof PartnersThanksRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
   '/api/public/run2-partner-qa': typeof ApiPublicRun2PartnerQaRoute
   '/api/public/run2-referrals': typeof ApiPublicRun2ReferralsRoute
+  '/api/public/sponsor-inquiry': typeof ApiPublicSponsorInquiryRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
   '/api/public/strava/start': typeof ApiPublicStravaStartRoute
@@ -161,11 +177,13 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
+  '/partners_/thanks': typeof PartnersThanksRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
   '/api/public/run2-partner-qa': typeof ApiPublicRun2PartnerQaRoute
   '/api/public/run2-referrals': typeof ApiPublicRun2ReferralsRoute
+  '/api/public/sponsor-inquiry': typeof ApiPublicSponsorInquiryRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/api/public/strava/callback': typeof ApiPublicStravaCallbackRoute
   '/api/public/strava/start': typeof ApiPublicStravaStartRoute
@@ -182,11 +200,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/terms'
+    | '/partners/thanks'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
     | '/api/public/run2-partner-qa'
     | '/api/public/run2-referrals'
+    | '/api/public/sponsor-inquiry'
     | '/lovable/email/events'
     | '/api/public/strava/callback'
     | '/api/public/strava/start'
@@ -201,11 +221,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/terms'
+    | '/partners/thanks'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
     | '/api/public/run2-partner-qa'
     | '/api/public/run2-referrals'
+    | '/api/public/sponsor-inquiry'
     | '/lovable/email/events'
     | '/api/public/strava/callback'
     | '/api/public/strava/start'
@@ -220,11 +242,13 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/terms'
+    | '/partners_/thanks'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
     | '/api/public/run2-partner-qa'
     | '/api/public/run2-referrals'
+    | '/api/public/sponsor-inquiry'
     | '/lovable/email/events'
     | '/api/public/strava/callback'
     | '/api/public/strava/start'
@@ -240,11 +264,13 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoryRoute: typeof StoryRoute
   TermsRoute: typeof TermsRoute
+  PartnersThanksRoute: typeof PartnersThanksRoute
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
   ApiPublicRtwlResendRoute: typeof ApiPublicRtwlResendRoute
   ApiPublicRun2InterestRoute: typeof ApiPublicRun2InterestRoute
   ApiPublicRun2PartnerQaRoute: typeof ApiPublicRun2PartnerQaRoute
   ApiPublicRun2ReferralsRoute: typeof ApiPublicRun2ReferralsRoute
+  ApiPublicSponsorInquiryRoute: typeof ApiPublicSponsorInquiryRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
   ApiPublicStravaCallbackRoute: typeof ApiPublicStravaCallbackRoute
   ApiPublicStravaStartRoute: typeof ApiPublicStravaStartRoute
@@ -303,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/partners_/thanks': {
+      id: '/partners_/thanks'
+      path: '/partners/thanks'
+      fullPath: '/partners/thanks'
+      preLoaderRoute: typeof PartnersThanksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/rtwl-register': {
       id: '/api/public/rtwl-register'
       path: '/api/public/rtwl-register'
@@ -336,6 +369,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/run2-referrals'
       fullPath: '/api/public/run2-referrals'
       preLoaderRoute: typeof ApiPublicRun2ReferralsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/sponsor-inquiry': {
+      id: '/api/public/sponsor-inquiry'
+      path: '/api/public/sponsor-inquiry'
+      fullPath: '/api/public/sponsor-inquiry'
+      preLoaderRoute: typeof ApiPublicSponsorInquiryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/events': {
@@ -384,11 +424,13 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoryRoute: StoryRoute,
   TermsRoute: TermsRoute,
+  PartnersThanksRoute: PartnersThanksRoute,
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,
   ApiPublicRtwlResendRoute: ApiPublicRtwlResendRoute,
   ApiPublicRun2InterestRoute: ApiPublicRun2InterestRoute,
   ApiPublicRun2PartnerQaRoute: ApiPublicRun2PartnerQaRoute,
   ApiPublicRun2ReferralsRoute: ApiPublicRun2ReferralsRoute,
+  ApiPublicSponsorInquiryRoute: ApiPublicSponsorInquiryRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
   ApiPublicStravaCallbackRoute: ApiPublicStravaCallbackRoute,
   ApiPublicStravaStartRoute: ApiPublicStravaStartRoute,

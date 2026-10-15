@@ -6,6 +6,7 @@ import mocoParksLogo from "@/assets/partner-IMG_8387.png.asset.json";
 import { useEffect, useRef, useState } from "react";
 import { HeroGroup } from "@/components/HeroGroup";
 import { PressBar } from "@/components/PressBar";
+import bearLogo from "@/assets/gryt-bear.png.asset.json";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
 import recapVideo from "@/assets/rtwl-recap.mp4.asset.json";
@@ -858,6 +859,7 @@ function RunTakomaOnePager() {
           <span className="eyebrow text-terracotta hidden sm:inline">
             08 · 02 · 2026
           </span>
+          <img src={bearLogo.url} alt="GRYT Club" width={56} height={60} className="h-12 w-auto sm:h-16" />
         </div>
       </header>
 

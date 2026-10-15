@@ -366,7 +366,7 @@
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 .press-track { display: flex; width: max-content; animation: gryt-marquee 40s linear infinite; }
-.press-row { display: flex; align-items: center; gap: 3.5rem; padding-right: 3.5rem; flex-shrink: 0; }
+.press-row { display: flex; align-items: center; gap: 2.75rem; padding-right: 2.75rem; flex-shrink: 0; }
 .press-viewport:hover .press-track,
 .press-viewport:focus-within .press-track,
 .press-viewport.is-paused .press-track { animation-play-state: paused; }
@@ -377,3 +377,4 @@
   .press-viewport { -webkit-mask-image: none; mask-image: none; }
 }
 .motion-off .press-track { animation: none; }
+@media (min-width: 640px) { .press-row { gap: 4.5rem; padding-right: 4.5rem; } }

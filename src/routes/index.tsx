@@ -879,7 +879,7 @@ function RunTakomaOnePager() {
             { src: smartwaterLogo.url, alt: "Glacéau smartwater", bg: "#EAF0FB", accent: "#1E3FAE", label: "Hydration partner", blend: true },
             { src: mocoParksLogo.url, alt: "Montgomery Parks, M-NCPPC", bg: "#EEF5EC", accent: "#1F7A3A", label: "Parks partner", blend: false },
           ].map((p) => (
-            <div key={p.alt} className="card-lift relative flex flex-col overflow-hidden border-2 border-ink" style={{ backgroundColor: p.bg }}>
+            <div key={p.alt} className="ink-card ink-card-hover relative flex flex-col overflow-hidden" style={{ backgroundColor: p.bg }}>
               <div aria-hidden className="h-1.5 sm:h-2" style={{ backgroundColor: p.accent }} />
               <div className="flex aspect-square items-center justify-center p-4 sm:aspect-auto sm:h-44 sm:p-6">
                 <img src={p.src} alt={p.alt} className="max-h-full w-full max-w-[150px] object-contain sm:max-h-32 sm:w-auto sm:max-w-none" style={p.blend ? { mixBlendMode: "multiply" } : undefined} loading="lazy" />
@@ -890,7 +890,7 @@ function RunTakomaOnePager() {
             </div>
           ))}
         </div>
-        <div className="relative mt-6 border-2 border-ink bg-paper-warm p-5 text-center sm:mt-8 sm:p-7">
+        <div className="relative mt-6 ink-card p-5 text-center sm:mt-8 sm:p-7">
           <span className="absolute -top-3 left-1/2 -translate-x-1/2 -rotate-2 bg-terracotta px-3 py-1 eyebrow text-[color:var(--color-terracotta-ink)]">
             Run #02 · Dec 2026
           </span>
@@ -1007,7 +1007,7 @@ function RunTakomaOnePager() {
           ].map((s) => (
             <div
               key={s.u}
-              className="hover-lift border-2 border-ink bg-paper-warm p-4 text-center"
+              className="ink-card ink-card-hover p-4 sm:p-5 text-center"
             >
               <p className="display-tight text-5xl sm:text-6xl text-terracotta leading-none">
                 {s.n}
@@ -1090,7 +1090,7 @@ function RunTakomaOnePager() {
               key={ch.number}
               data-reveal
               style={{ transitionDelay: `${i * 120}ms` }}
-              className="reveal-on-scroll hover-lift card-lift border border-hairline bg-paper-warm p-6 flex flex-col"
+              className="reveal-on-scroll ink-card ink-card-hover p-6 sm:p-7 flex flex-col"
             >
               <p className="eyebrow text-terracotta">Chapter {ch.number}</p>
               <h3 className="mt-2 display-tight text-2xl text-forest leading-tight">
@@ -1137,7 +1137,7 @@ function RunTakomaOnePager() {
         id="register"
         className="relative z-10 mx-auto max-w-2xl px-5 pb-32 sm:px-6 sm:pb-24 scroll-mt-4 sm:scroll-mt-16"
       >
-        <div className="card-lift relative border-2 border-ink bg-paper-warm p-5 sm:p-8 md:p-10">
+        <div className="ink-card relative p-5 sm:p-8 md:p-10">
 
           <RuledLabel>Registration</RuledLabel>
           <h2 className="mt-4 display-tight text-4xl sm:text-5xl">

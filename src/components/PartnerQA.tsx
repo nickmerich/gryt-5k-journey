@@ -59,7 +59,7 @@ export function PartnerQA() {
   }
 
   return (
-    <div className="mt-6 border-2 border-ink bg-paper p-5 text-left sm:mt-8 sm:p-7">
+    <div className="ink-card mt-6 p-5 text-left sm:mt-8 sm:p-7">
       <p className="eyebrow text-terracotta">Partner Q&amp;A</p>
       <h3 className="mt-1 display-tight text-2xl leading-none text-forest">ASK ABOUT PARTNERING</h3>
       <p className="mt-2 text-sm text-ink-soft">Questions about sponsoring Run #02? Get a straight answer.</p>

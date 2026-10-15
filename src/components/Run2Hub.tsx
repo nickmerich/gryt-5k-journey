@@ -129,7 +129,7 @@ export function Run2Hub() {
         ))}
       </div>
 
-      <div className="card-lift mx-auto mt-6 max-w-2xl border-2 border-ink bg-paper-warm p-5 sm:p-8">
+      <div className="ink-card mx-auto mt-6 max-w-2xl p-5 sm:p-8">
         {state === "done" ? (
           <div className="text-center py-6" role="status" aria-live="polite">
             <p className="display-tight text-4xl text-terracotta">YOU'RE IN{f.name ? `, ${f.name.trim().split(" ")[0].toUpperCase()}` : ""}.</p>

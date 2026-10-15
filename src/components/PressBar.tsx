@@ -43,7 +43,7 @@ export function PressBar() {
       <div className="border-y border-hairline/30 py-6 sm:py-8">
         <div className="mb-4 flex items-end justify-between gap-4 sm:mb-6">
           <div>
-            <h2 id="press-heading" className="display-tight text-2xl sm:text-3xl text-forest">Highlighted by</h2>
+            <h2 id="press-heading" className="display-tight text-2xl sm:text-3xl text-forest">Featured In</h2>
             <p className="mt-1 text-sm text-ink-soft">Run Takoma With Love coverage and community calendar listings.</p>
           </div>
           <button

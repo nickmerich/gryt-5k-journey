@@ -5,6 +5,7 @@ import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
 import mocoParksLogo from "@/assets/partner-IMG_8387.png.asset.json";
 import { useEffect, useRef, useState } from "react";
 import { HeroGroup } from "@/components/HeroGroup";
+import { PressBar } from "@/components/PressBar";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
 import recapVideo from "@/assets/rtwl-recap.mp4.asset.json";
@@ -863,6 +864,7 @@ function RunTakomaOnePager() {
 
       {/* HERO — group finisher photo + Run #02 call */}
       <HeroGroup />
+      <PressBar />
       <section
         aria-label="Partners"
         className="relative z-10 mx-auto mb-14 max-w-4xl px-5 sm:px-6"

@@ -72,7 +72,7 @@ function PartnersPage() {
     <main className="min-h-screen bg-paper text-ink">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Link to="/" className="display-tight text-2xl">gryt</Link>
-        <a href="#sponsor-form" onClick={(e) => openForm(e, t.name.toLowerCase())} className="eyebrow text-terracotta underline underline-offset-4">Talk to us</a>
+        <a href="#sponsor-form" onClick={(e) => openForm(e)} className="eyebrow text-terracotta underline underline-offset-4">Talk to us</a>
       </header>
 
       <section className="mx-auto max-w-6xl px-6 pt-8 pb-16">
@@ -85,7 +85,7 @@ function PartnersPage() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <a href="#tiers" className="brush-btn bg-terracotta px-8 py-4 text-center display-tight text-lg tracking-[0.1em] text-[color:var(--color-terracotta-ink)]">See packages</a>
-          <a href="#sponsor-form" onClick={(e) => openForm(e, t.name.toLowerCase())} className="border-2 border-ink px-8 py-4 text-center display-tight text-lg tracking-[0.1em] hover:bg-ink hover:text-paper">Start a conversation</a>
+          <a href="#sponsor-form" onClick={(e) => openForm(e)} className="border-2 border-ink px-8 py-4 text-center display-tight text-lg tracking-[0.1em] hover:bg-ink hover:text-paper">Start a conversation</a>
         </div>
       </section>
 

@@ -8,11 +8,11 @@ import montgomery from "@/assets/press-montgomery.png.asset.json";
 type Pub = { name: string; size?: string; logo: string; w: number; h: number; href: string; label: string };
 
 const PUBS: Pub[] = [
-  { name: "The 51st", size: "h-7 sm:h-10", logo: the51st.url, w: 286, h: 134, href: "https://51st.news/washington-dc-events-things-to-do-weekend-july-30/", label: "Read Run Takoma With Love coverage in The 51st." },
-  { name: "PoPville", size: "h-7 sm:h-10", logo: popville.url, w: 440, h: 148, href: "https://www.popville.com/events/run-takoma-with-love--free-community-5k-picnic-27314/", label: "View the Run Takoma With Love listing on PoPville." },
-  { name: "RunWashington", size: "h-6 sm:h-8", logo: runwashington.url, w: 440, h: 114, href: "https://www.runwashington.com/events/run-takoma-with-love-free-community-5k-picnic-27307/", label: "View the Run Takoma With Love listing on RunWashington." },
-  { name: "Washington FAMILY", size: "h-4 sm:h-6", logo: washingtonfamily.url, w: 440, h: 72, href: "https://www.washingtonfamily.com/calendar/#/details/run-takoma-with-love-free-community-5k-picnic/19476773/2026-08-02T08", label: "View the Run Takoma With Love listing in Washington FAMILY." },
-  { name: "Montgomery Magazine", size: "h-7 sm:h-9", logo: montgomery.url, w: 440, h: 139, href: "https://www.montgomerymag.com/events/#/details/run-takoma-with-love-free-community-5k-picnic/19476773/2026-08-02T08", label: "View the Run Takoma With Love listing in Montgomery Magazine." },
+  { name: "The 51st", size: "h-10 sm:h-14", logo: the51st.url, w: 286, h: 134, href: "https://51st.news/washington-dc-events-things-to-do-weekend-july-30/", label: "Read Run Takoma With Love coverage in The 51st." },
+  { name: "PoPville", size: "h-10 sm:h-14", logo: popville.url, w: 440, h: 148, href: "https://www.popville.com/events/run-takoma-with-love--free-community-5k-picnic-27314/", label: "View the Run Takoma With Love listing on PoPville." },
+  { name: "RunWashington", size: "h-8 sm:h-11", logo: runwashington.url, w: 440, h: 114, href: "https://www.runwashington.com/events/run-takoma-with-love-free-community-5k-picnic-27307/", label: "View the Run Takoma With Love listing on RunWashington." },
+  { name: "Washington FAMILY", size: "h-6 sm:h-8", logo: washingtonfamily.url, w: 440, h: 72, href: "https://www.washingtonfamily.com/calendar/#/details/run-takoma-with-love-free-community-5k-picnic/19476773/2026-08-02T08", label: "View the Run Takoma With Love listing in Washington FAMILY." },
+  { name: "Montgomery Magazine", size: "h-10 sm:h-12", logo: montgomery.url, w: 440, h: 139, href: "https://www.montgomerymag.com/events/#/details/run-takoma-with-love-free-community-5k-picnic/19476773/2026-08-02T08", label: "View the Run Takoma With Love listing in Montgomery Magazine." },
 ];
 
 function Row({ hidden }: { hidden?: boolean }) {

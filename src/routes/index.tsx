@@ -859,7 +859,7 @@ function RunTakomaOnePager() {
           <span className="eyebrow text-terracotta hidden sm:inline">
             08 · 02 · 2026
           </span>
-          <img src={bearLogo.url} alt="GRYT Club" width={64} height={57} className="h-12 w-auto sm:h-16" />
+          <img src={bearLogo.url} alt="GRYT Club" width={56} height={60} className="h-12 w-auto sm:h-16" />
         </div>
       </header>
 

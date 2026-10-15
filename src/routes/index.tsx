@@ -942,7 +942,18 @@ function RunTakomaOnePager() {
               className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]"
             />
             <span className="min-w-0">
-              <span className="block display-tight text-2xl tracking-[0.06em] text-ink">Oddisee</span>
+              <span className="flex flex-wrap items-baseline gap-x-2">
+                <span className="display-tight text-2xl tracking-[0.06em] text-ink">Oddisee</span>
+                <span className="eyebrow text-forest">Artist &amp; Producer</span>
+              </span>
+              <span className="mt-1.5 flex flex-wrap gap-1.5">
+                <a href="https://www.instagram.com/oddisee/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-[color:var(--color-forest-ink)]">
+                  <strong className="font-bold">117K+</strong> Instagram followers
+                </a>
+                <a href="https://open.spotify.com/artist/72tRiBHei5G9M8it4h4sfC" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-[color:var(--color-forest-ink)]">
+                  <strong className="font-bold">245K+</strong> Spotify monthly listeners
+                </a>
+              </span>
               <span className="mt-1 block text-sm text-ink-soft">
                 The voice behind <em>From Takoma With Love</em> — the album this run is named for
               </span>

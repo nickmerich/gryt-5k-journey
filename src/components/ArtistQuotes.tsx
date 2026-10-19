@@ -43,6 +43,13 @@ export function ArtistQuotes() {
                   <img src={index === 0 ? henoAvatar.url : oddiseeAvatar.url} alt={index === 0 ? "Heno." : "Oddisee"} width={72} height={72} loading="lazy" className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]" />
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-baseline gap-x-2"><span className="display-tight text-2xl text-ink">{index === 0 ? "Heno." : "Oddisee"}</span><span className="eyebrow text-forest">Artist &amp; Producer</span></div>
+                    {index === 0 && <>
+                      <div className="mt-1.5 flex flex-wrap gap-1.5">
+                        <a href="https://www.instagram.com/mynameisheno/" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex flex-wrap items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">12,127</strong> Instagram followers</a>
+                        <span className="inline-flex flex-wrap items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink"><strong className="font-bold">26,301</strong> Spotify monthly listeners</span>
+                      </div>
+                      <p className="mt-2 text-xs leading-relaxed text-ink-soft">As of Oct 19, 2026 · Instagram count via Social Blade; not verified directly on Instagram.</p>
+                    </>}
                     {index === 1 && <div className="mt-1.5 flex flex-wrap gap-1.5">
                       <a href="https://www.instagram.com/oddisee/" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">117K</strong> Instagram followers</a>
                       <a href="https://open.spotify.com/artist/72tRiBHei5G9M8it4h4sfC" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">245.7K</strong> Spotify monthly listeners</a>

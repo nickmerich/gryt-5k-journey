@@ -14,6 +14,7 @@ import { Route as R5kSeriesRouteImport } from './routes/5k-series'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as Run03RouteImport } from './routes/run-03'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -53,6 +54,11 @@ const PartnersRoute = PartnersRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Run03Route = Run03RouteImport.update({
+  id: '/run-03',
+  path: '/run-03',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/accessibility': typeof AccessibilityRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
@@ -160,6 +167,7 @@ export interface FileRoutesByTo {
   '/accessibility': typeof AccessibilityRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/accessibility': typeof AccessibilityRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/partners'
     | '/privacy'
+    | '/run-03'
     | '/sitemap.xml'
     | '/story'
     | '/terms'
@@ -229,6 +239,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/partners'
     | '/privacy'
+    | '/run-03'
     | '/sitemap.xml'
     | '/story'
     | '/terms'
@@ -251,6 +262,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/partners'
     | '/privacy'
+    | '/run-03'
     | '/sitemap.xml'
     | '/story'
     | '/terms'
@@ -274,6 +286,7 @@ export interface RootRouteChildren {
   AccessibilityRoute: typeof AccessibilityRoute
   PartnersRoute: typeof PartnersRoute
   PrivacyRoute: typeof PrivacyRoute
+  Run03Route: typeof Run03Route
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoryRoute: typeof StoryRoute
   TermsRoute: typeof TermsRoute
@@ -326,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/run-03': {
+      id: '/run-03'
+      path: '/run-03'
+      fullPath: '/run-03'
+      preLoaderRoute: typeof Run03RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -442,6 +462,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccessibilityRoute: AccessibilityRoute,
   PartnersRoute: PartnersRoute,
   PrivacyRoute: PrivacyRoute,
+  Run03Route: Run03Route,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoryRoute: StoryRoute,
   TermsRoute: TermsRoute,

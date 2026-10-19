@@ -909,8 +909,6 @@ function RunTakomaOnePager() {
       </section>
 
 
-      <ArtistQuotes />
-
       {/* RECAP — official event recap video + final stats */}
       <section
         id="recap"
@@ -969,6 +967,8 @@ function RunTakomaOnePager() {
           DO HARD THINGS TOGETHER
         </p>
       </section>
+
+      <ArtistQuotes />
 
       <Run2Hub />
 

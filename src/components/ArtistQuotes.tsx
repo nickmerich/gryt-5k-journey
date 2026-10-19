@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import oddiseeAvatar from "@/assets/oddisee-avatar.png.asset.json";
+import henoAvatar from "@/assets/heno-avatar.webp.asset.json";
 
 export function ArtistQuotes() {
   const [slide, setSlide] = useState(0);
@@ -33,7 +34,7 @@ export function ArtistQuotes() {
               </blockquote>
               <figcaption className="relative mt-auto pt-8 sm:pt-10">
                 <div className="flex items-center gap-4 border-t border-dashed border-hairline pt-6 sm:pt-8">
-                  {index === 1 && <img src={oddiseeAvatar.url} alt="Oddisee" width={72} height={72} loading="lazy" className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]" />}
+                  <img src={index === 0 ? henoAvatar.url : oddiseeAvatar.url} alt={index === 0 ? "Heno." : "Oddisee"} width={72} height={72} loading="lazy" className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]" />
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-baseline gap-x-2"><span className="display-tight text-2xl text-ink">{index === 0 ? "Heno." : "Oddisee"}</span><span className="eyebrow text-forest">Artist &amp; Producer</span></div>
                     {index === 1 && <div className="mt-1.5 flex flex-wrap gap-1.5">

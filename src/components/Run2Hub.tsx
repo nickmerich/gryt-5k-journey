@@ -4,15 +4,15 @@ type Track = "runner" | "brand";
 
 const PACES = [
   { v: "first-5k", l: "First 5K" },
-  { v: "casual", l: "Casual" },
-  { v: "regular", l: "Regular" },
-  { v: "fast", l: "Chasing time" },
+  { v: "casual", l: "Easy and social" },
+  { v: "regular", l: "Regular runner" },
+  { v: "fast", l: "Chasing a time" },
 ];
 const WEEKENDS = [
-  { v: "dec-1", l: "1st weekend", d: "Dec 5–6" },
-  { v: "dec-2", l: "2nd weekend", d: "Dec 12–13" },
-  { v: "dec-3", l: "3rd weekend", d: "Dec 19–20" },
-  { v: "any", l: "Any works", d: "I'm flexible" },
+  { v: "dec-1", l: "Dec 5–6" },
+  { v: "dec-2", l: "Dec 12–13" },
+  { v: "dec-3", l: "Dec 19–20" },
+  { v: "any", l: "Any weekend works" },
 ];
 const CATEGORIES = [
   { v: "apparel", l: "Footwear & apparel" },
@@ -28,7 +28,7 @@ const input =
 export function Run2Hub() {
   const [track, setTrack] = useState<Track>("runner");
   const [f, setF] = useState<Record<string, string>>({ pace: "casual", category: "apparel" });
-  const weekendLabel = (v?: string) => { const w = WEEKENDS.find((x) => x.v === v); return w ? `${w.l} · ${w.d}` : ""; };
+  const weekendLabel = (v?: string) => { const w = WEEKENDS.find((x) => x.v === v); return w ? w.l : ""; };
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [err, setErr] = useState("");
 
@@ -67,10 +67,10 @@ export function Run2Hub() {
     setErr("");
     const name = (f.name ?? "").trim();
     const email = (f.email ?? "").trim();
-    if (name.length < 2) return setErr("Full name is required.");
-    if (!/^\S+@\S+\.\S+$/.test(email)) return setErr("Enter a valid email address.");
+    if (name.length < 2) return setErr(track === "runner" ? "We need your name for the bib." : "Full name is required.");
+    if (!/^\S+@\S+\.\S+$/.test(email)) return setErr("That email looks off. Mind checking it?");
     if (track === "brand" && (f.brand ?? "").trim().length < 2) return setErr("Brand or organization is required.");
-    if (track === "runner" && !f.weekend) return setErr("Pick the December weekend that works best.");
+    if (track === "runner" && !f.weekend) return setErr("Pick a weekend, or choose \"Any weekend works.\"");
     setState("sending");
     try {
       let ref: string | null = null;
@@ -104,11 +104,11 @@ export function Run2Hub() {
       <div className="text-center">
         <p className="eyebrow text-terracotta">Run #02 · Early December 2026</p>
         <h2 className="mt-3 display-tight text-4xl sm:text-6xl leading-[0.9]">
-          <span className="text-forest">Want in on </span>
-          <span className="brush-script text-terracotta">run #02?</span>
+          <span className="text-forest">Run Takoma again </span>
+          <span className="brush-script text-terracotta">in December</span>
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-ink-soft">
-          248 signed up. 98 finished. Run #02 is targeting early December 2026. Tell us which weekend works and get first word on the date, route, and bibs.
+          248 people signed up for the first one and 98 finished. Run #02 is free, and the 100 bibs go to this list first. Pick your weekend and we'll send the date and route as soon as they're locked.
         </p>
       </div>
 
@@ -124,7 +124,7 @@ export function Run2Hub() {
               track === t ? "bg-forest text-[color:var(--color-forest-ink)]" : "bg-paper-warm text-forest hover:text-terracotta"
             }`}
           >
-            {t === "runner" ? "I'M A RUNNER" : "I'M A BRAND"}
+            {t === "runner" ? "I'M RUNNING" : "I'M A BRAND"}
           </button>
         ))}
       </div>
@@ -135,7 +135,7 @@ export function Run2Hub() {
             <p className="display-tight text-4xl text-terracotta">YOU'RE IN{f.name ? `, ${f.name.trim().split(" ")[0].toUpperCase()}` : ""}.</p>
             <p className="mt-3 text-ink-soft">
               {track === "runner"
-                ? "You're on the Run #02 drop list. A confirmation with your weekend and pace is headed to your inbox."
+                ? "You're on the list. We'll email you first when bibs open for Run #02. Know someone who'd be down? Send them grytrun.com."
                 : "Thanks. The GRYT crew will reach out about partnering on Run #02."}
             </p>
             <dl className="mx-auto mt-6 max-w-sm border-2 border-dashed border-ink bg-paper p-4 text-left text-sm">
@@ -161,33 +161,33 @@ export function Run2Hub() {
           <form onSubmit={submit} noValidate className="space-y-4">
             <div>
               <h3 className="display-tight text-2xl text-forest">
-                {track === "runner" ? "Join the drop list" : "Partner on Run #02"}
+                {track === "runner" ? "Get first dibs on a bib" : "Partner on Run #02"}
               </h3>
               <p className="mt-1 text-sm text-ink-soft">
                 {track === "runner"
-                  ? "11am EST Start Time."
+                  ? <>Free. Every pace welcome, walkers too. Takes 30 seconds.<span className="mt-1 block">11am EST Start Time.</span></>
                   : <>Put your brand in front of a real crew on a real Sunday morning. <a href="/partners" className="underline underline-offset-4 text-terracotta">See numbers, photos & packages</a>.</>}
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
-                <span className="eyebrow text-forest">Full name</span>
-                <input id="run2-name" className={`${input} mt-1`} value={f.name ?? ""} onChange={set("name")} placeholder="Nick Merich" autoComplete="name" maxLength={100} />
+                <span className="eyebrow text-forest">{track === "runner" ? "Your name" : "Full name"}</span>
+                <input id="run2-name" className={`${input} mt-1`} value={f.name ?? ""} onChange={set("name")} placeholder={track === "runner" ? "First and last" : "Nick Merich"} autoComplete="name" maxLength={100} />
               </label>
               <label className="block">
                 <span className="eyebrow text-forest">Email</span>
-                <input type="email" className={`${input} mt-1`} value={f.email ?? ""} onChange={set("email")} placeholder="you@email.com" autoComplete="email" maxLength={255} />
+                <input type="email" className={`${input} mt-1`} value={f.email ?? ""} onChange={set("email")} placeholder={track === "runner" ? "Where we'll send your bib link" : "you@email.com"} autoComplete="email" maxLength={255} />
               </label>
             </div>
             {track === "runner" && (
               <fieldset>
-                <legend className="eyebrow text-forest">Which December weekend works best?</legend>
+                <legend className="eyebrow text-forest">Which weekend works for you?</legend>
+                <p className="mt-1 text-xs text-ink-soft">We'll pick the date most people can make.</p>
                 <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
                   {WEEKENDS.map((w) => (
                     <label key={w.v} className={`cursor-pointer border-2 border-ink px-3 py-3 text-center transition-colors ${f.weekend === w.v ? "bg-forest text-[color:var(--color-forest-ink)]" : "bg-paper text-forest"}`}>
                       <input type="radio" name="weekend" value={w.v} checked={f.weekend === w.v} onChange={set("weekend")} className="sr-only" />
                       <span className="block display-tight text-sm tracking-[0.1em]">{w.l}</span>
-                      <span className="block text-xs opacity-80">{w.d}</span>
                     </label>
                   ))}
                 </div>
@@ -195,7 +195,8 @@ export function Run2Hub() {
             )}
             {track === "runner" ? (
               <fieldset>
-                <legend className="eyebrow text-forest">Your pace</legend>
+                <legend className="eyebrow text-forest">How do you run?</legend>
+                <p className="mt-1 text-xs text-ink-soft">Just helps us plan. Nobody gets left behind.</p>
                 <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
                   {PACES.map((p) => (
                     <label key={p.v} className={`cursor-pointer border-2 border-ink px-3 py-3 text-center display-tight text-sm tracking-[0.1em] transition-colors ${f.pace === p.v ? "bg-terracotta text-[color:var(--color-terracotta-ink)]" : "bg-paper text-forest"}`}>
@@ -235,8 +236,9 @@ export function Run2Hub() {
               disabled={state === "sending"}
               className="brush-btn w-full display-tight text-lg tracking-[0.14em] py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] transition-colors disabled:opacity-60"
             >
-              {state === "sending" ? "SENDING…" : track === "runner" ? "PUT ME ON THE LIST" : "LET'S TALK"}
+              {state === "sending" ? "SENDING…" : track === "runner" ? "SAVE MY SPOT ON THE LIST" : "LET'S TALK"}
             </button>
+            {track === "runner" && <p className="text-center text-xs text-ink-soft">No spam. Just the date, the route and your bib link.</p>}
           </form>
         )}
       </div>

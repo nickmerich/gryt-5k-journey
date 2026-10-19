@@ -1701,10 +1701,10 @@ function RunTakomaOnePager() {
             href="#run2"
             className="brush-btn flex w-full items-center justify-center gap-2 text-center display-tight text-base tracking-[0.14em] py-4 bg-terracotta text-[color:var(--color-terracotta-ink)] active:scale-[0.99] transition-transform"
           >
-            JOIN RUN #02 ♡
+            RUN #02 LIST · FREE
           </a>
           <p className="mt-1.5 text-center text-[0.65rem] tracking-[0.14em] uppercase text-ink-soft">
-            Runners & brands · Under 60 seconds
+            Runners and brands, 30 seconds
           </p>
         </div>
       )}

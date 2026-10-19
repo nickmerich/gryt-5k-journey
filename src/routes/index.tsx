@@ -1727,7 +1727,7 @@ function TakomaStreetGrid() {
         {v.map((x) => <line key={`v${x}`} x1={x} y1="0" x2={x + 40} y2="800" />)}
         {h.map((y) => <line key={`h${y}`} x1="0" y1={y} x2="1440" y2={y - 30} />)}
       </g>
-      <g stroke="currentColor" fill="none" strokeOpacity="0.32" strokeLinecap="round">
+      <g stroke="currentColor" fill="none" strokeOpacity="0.2" strokeLinecap="round">
         <path d="M-20 720 L760 180 L1460 -40" strokeWidth="5" />
         <path d="M120 -20 L640 420 L1180 820" strokeWidth="4" />
         <path d="M-20 300 L1460 520" strokeWidth="3" />

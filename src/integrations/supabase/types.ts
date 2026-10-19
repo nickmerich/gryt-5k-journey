@@ -152,6 +152,7 @@ export type Database = {
           category: string | null
           created_at: string
           email: string
+          event_code: string
           id: string
           kind: string
           message: string | null
@@ -167,6 +168,7 @@ export type Database = {
           category?: string | null
           created_at?: string
           email: string
+          event_code?: string
           id?: string
           kind: string
           message?: string | null
@@ -182,6 +184,7 @@ export type Database = {
           category?: string | null
           created_at?: string
           email?: string
+          event_code?: string
           id?: string
           kind?: string
           message?: string | null

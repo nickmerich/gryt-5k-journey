@@ -93,6 +93,7 @@ function SeriesPage() {
       </section>
 
       <Run2Hub />
+      <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6"><p className="eyebrow text-terracotta">Looking ahead · Run #03</p><h2 className="mt-4 display-tight text-4xl text-forest">THE NEXT CHAPTER.</h2><p className="mt-4 max-w-lg leading-relaxed text-ink-soft">Run #03 has its own interest list. Date and route are still to be confirmed.</p><Button asChild variant="link" className="mt-4 h-auto px-0 text-terracotta"><Link to="/run-03">Explore Run #03 <ArrowUpRight /></Link></Button></section>
       <section className="border-y-2 border-ink bg-forest px-5 py-12 text-center text-forest-ink"><p className="eyebrow text-forest-ink">Run #02 · Partners</p><h2 className="mt-4 display-tight text-4xl">HELP BUILD THE NEXT ONE.</h2><Button asChild className="brush-btn mt-6 h-auto min-h-14 whitespace-normal rounded-none bg-paper px-6 py-4 display-tight text-lg text-forest shadow-none hover:bg-terracotta hover:text-terracotta-ink"><Link to="/partners">Partner with us <ArrowUpRight /></Link></Button></section>
       <footer className="mx-auto flex max-w-6xl flex-col justify-between gap-8 px-5 py-10 sm:flex-row sm:px-6">
         <p className="display-tight text-2xl text-forest">DO HARD THINGS TOGETHER</p>

@@ -13,6 +13,6 @@
 - [x] Remove the verification entry and report the list and delivery result. Deleted only the test entry by its ID; managed email logs confirmed both sends.
 
 # Run #03
-- [ ] Add an unconfirmed Run #03 page and independent signup form.
-- [ ] Save Run #03 entries separately in the shared list and email the owner.
-- [ ] Verify real submission, owner email, and cleanup.
+- [x] Add an unconfirmed Run #03 page and independent signup form.
+- [x] Save Run #03 entries separately in the shared list and email the owner.
+- [x] Verify real submission, owner email, and cleanup. Browser receipt and reload passed; database row and managed send confirmed; removed only the test row.

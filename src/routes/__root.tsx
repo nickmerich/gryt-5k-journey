@@ -93,8 +93,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Run Takoma With Love 5K — GRYT Club" },
       { name: "twitter:description", content: "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/9tsoZKQigUUH6OgBkhlqpd1Fu2W2/social-images/social-1784239322014-RTWL_FINAL.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/9tsoZKQigUUH6OgBkhlqpd1Fu2W2/social-images/social-1784239322014-RTWL_FINAL.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

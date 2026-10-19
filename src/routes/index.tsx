@@ -84,9 +84,7 @@ export const Route = createFileRoute("/")({
           "248 signups, 98 finishers, one community. Relive Run Takoma With Love and get on the list for Run #02. Runners and brands welcome.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: flyerAsset.url },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: flyerAsset.url },
     ],
   }),
   component: RunTakomaOnePager,
@@ -854,7 +852,7 @@ function RunTakomaOnePager() {
 
       {/* Top eyebrow */}
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 pt-6 sm:pt-8">
-        <span className="eyebrow text-forest">GRYT Club · 5K Series</span>
+        <Link to="/5k-series" className="eyebrow text-forest underline underline-offset-4 hover:text-terracotta">GRYT Club · 5K Series</Link>
         <div className="flex items-center gap-4">
           <span className="eyebrow text-terracotta hidden sm:inline">
             08 · 02 · 2026

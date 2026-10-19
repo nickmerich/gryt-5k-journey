@@ -7,3 +7,7 @@
 - [ ] Add Heno.'s approved testimonial while preserving Oddisee's quotation and attribution.
 - [ ] Add verified official album artwork to the artist section.
 - [ ] Check phone and desktop layouts without submitting forms or publishing.
+
+# Series signup delivery
+- [x] Verify the existing shared signup saves a real entry and sends the owner alert. The live 5K Series form saved the entry, sent both owner and runner emails, and restored the receipt after reload.
+- [x] Remove the verification entry and report the list and delivery result. Deleted only the test entry by its ID; managed email logs confirmed both sends.

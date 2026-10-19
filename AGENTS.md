@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Series pages
+- The 5K Series route reuses Run2Hub and EVENT_PHOTOS so signups, confirmation persistence, and event imagery stay consistent with the homepage.
+- Future runs show tentative dates and unconfirmed routes explicitly; interest-list entries are not race registrations.

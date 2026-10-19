@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as R5kSeriesRouteImport } from './routes/5k-series'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -32,6 +33,11 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const R5kSeriesRoute = R5kSeriesRouteImport.update({
+  id: '/5k-series',
+  path: '/5k-series',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccessibilityRoute = AccessibilityRouteImport.update({
@@ -128,6 +134,7 @@ const LovableEmailTransactionalPreviewRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
@@ -171,6 +179,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/5k-series'
     | '/accessibility'
     | '/partners'
     | '/privacy'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/5k-series'
     | '/accessibility'
     | '/partners'
     | '/privacy'
@@ -236,6 +247,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/5k-series'
     | '/accessibility'
     | '/partners'
     | '/privacy'
@@ -258,6 +270,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R5kSeriesRoute: typeof R5kSeriesRoute
   AccessibilityRoute: typeof AccessibilityRoute
   PartnersRoute: typeof PartnersRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -285,6 +298,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/5k-series': {
+      id: '/5k-series'
+      path: '/5k-series'
+      fullPath: '/5k-series'
+      preLoaderRoute: typeof R5kSeriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accessibility': {
@@ -418,6 +438,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R5kSeriesRoute: R5kSeriesRoute,
   AccessibilityRoute: AccessibilityRoute,
   PartnersRoute: PartnersRoute,
   PrivacyRoute: PrivacyRoute,

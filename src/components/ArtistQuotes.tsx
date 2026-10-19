@@ -24,7 +24,7 @@ export function ArtistQuotes() {
       if (event.key === "ArrowRight") { event.preventDefault(); next(); }
       if (event.key === "ArrowLeft") { event.preventDefault(); previous(); }
     }} className="relative z-10 mx-auto max-w-4xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20 sm:pb-10">
-      <div className="relative mr-1 border-2 border-ink bg-paper-warm px-6 pb-6 pt-14 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-14 sm:pb-8 sm:pt-16 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
+      <div className="relative mr-1 border-2 border-ink bg-paper-warm px-5 pb-5 pt-12 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-12 sm:pb-7 sm:pt-14 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
         <span className="paint-stroke absolute left-4 top-0 -translate-y-1/2 whitespace-nowrap bg-forest px-5 py-2.5 display-tight text-sm text-forest-ink sm:left-10">ARTISTS REVIEW THE RUN</span>
         <span aria-hidden className="pointer-events-none absolute right-3 top-2 select-none font-serif text-[6rem] leading-none text-terracotta/20 sm:right-8 sm:text-[9rem]">&rdquo;</span>
         <p className="relative eyebrow text-terracotta">Music brought us here. Running keeps us together.</p>
@@ -45,29 +45,33 @@ export function ArtistQuotes() {
           {[0, 1].map((index) => (
             <figure key={index} aria-hidden={slide !== index} aria-label={`${index + 1} of 3: ${index === 0 ? "Heno." : "Oddisee"}`} aria-roledescription="slide" className={`relative col-start-1 row-start-1 flex flex-col ${slide !== index ? "invisible" : ""}`}>
               <blockquote className="relative mt-4 sm:mt-5">
-                <p className="serif-italic text-[1.625rem] leading-[1.25] text-ink sm:text-[2.5rem] sm:leading-[1.15]">
+                <p className="serif-italic text-2xl leading-[1.3] text-ink sm:text-4xl sm:leading-[1.2]">
                   {index === 0 ? <>&ldquo;Working with GRYT on Run Takoma With Love has made me want to help make movement feel more accessible, social, and <span className="brush-script not-italic text-terracotta">connected to something bigger than ourselves.</span>&rdquo;</> : <>&ldquo;Socializing with community around a healthy activity is what <span className="brush-script not-italic text-terracotta">Gryt does best.</span>&rdquo;</>}
                 </p>
               </blockquote>
-              <figcaption className="relative mt-auto pt-8 sm:pt-10">
-                <div className="flex items-start gap-3 border-t border-dashed border-hairline pt-6 sm:items-center sm:gap-4 sm:pt-8">
-                  <img src={index === 0 ? henoAvatar.url : oddiseeAvatar.url} alt={index === 0 ? "Heno." : "Oddisee"} width={72} height={72} loading="lazy" className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]" />
+              <figcaption className="relative mt-auto pt-6 sm:pt-8">
+                <div className="flex items-center gap-4 border-t border-dashed border-hairline pt-5 sm:pt-6">
+                  <img src={index === 0 ? henoAvatar.url : oddiseeAvatar.url} alt={index === 0 ? "Heno." : "Oddisee"} width={64} height={64} loading="lazy" className="size-14 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:size-16" />
                   <div className="min-w-0">
-                    <div className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-2"><span className="display-tight text-2xl text-ink">{index === 0 ? "Heno." : "Oddisee"}</span><span className="eyebrow text-forest">Artist &amp; Producer</span></div>
-                    {index === 0 && <>
-                      <div className="mt-1.5 flex flex-wrap gap-1.5">
-                        <a href="https://www.instagram.com/mynameisheno/" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} aria-label="Heno. on Instagram — 12,127 followers" className="inline-flex flex-wrap items-center gap-1 border border-hairline/50 px-2 py-1 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><Instagram aria-hidden className="size-3" /><strong className="font-bold">12,127</strong> Instagram followers</a>
-                        <span className="inline-flex flex-wrap items-center gap-1 border border-hairline/50 px-2 py-1 eyebrow text-[0.65rem] text-ink"><Music2 aria-hidden className="size-3" /><strong className="font-bold">26,301</strong> Spotify monthly listeners</span>
-                      </div>
-                      <p className="mt-2 text-xs leading-relaxed text-ink-soft">As of Oct 19, 2026 · Instagram count via Social Blade; not verified directly on Instagram.</p>
-                    </>}
-                    {index === 1 && <div className="mt-1.5 flex flex-wrap gap-1.5">
-                      <a href="https://www.instagram.com/oddisee/" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">117K</strong> Instagram followers</a>
-                      <a href="https://open.spotify.com/artist/72tRiBHei5G9M8it4h4sfC" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">245.7K</strong> Spotify monthly listeners</a>
-                    </div>}
-                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">The {index === 0 ? "voice" : "sound"} behind <em>From Takoma With Love</em> — the album this run is named for</p>
+                    <p className="display-tight text-2xl leading-none text-ink sm:text-3xl">{index === 0 ? "Heno." : "Oddisee"}</p>
+                    <p className="mt-2 eyebrow text-forest">Artist &amp; Producer</p>
                   </div>
                 </div>
+                <div className="mt-5 grid grid-cols-2 gap-4 border-b border-hairline/30 pb-4 sm:gap-8">
+                  <a href={index === 0 ? "https://www.instagram.com/mynameisheno/" : "https://www.instagram.com/oddisee/"} target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="group min-w-0 text-ink transition-colors hover:text-terracotta">
+                    <span className="flex items-center gap-2"><Instagram aria-hidden className="size-4 shrink-0 text-forest" /><strong className="text-xl font-semibold leading-none tabular-nums sm:text-2xl">{index === 0 ? "12,127" : "117K"}</strong></span>
+                    <span className="mt-2 block text-xs leading-snug text-ink-soft">Instagram followers</span>
+                  </a>
+                  {index === 0 ? <div className="min-w-0 text-ink">
+                    <span className="flex items-center gap-2"><Music2 aria-hidden className="size-4 shrink-0 text-forest" /><strong className="text-xl font-semibold leading-none tabular-nums sm:text-2xl">26,301</strong></span>
+                    <span className="mt-2 block text-xs leading-snug text-ink-soft">Spotify monthly listeners</span>
+                  </div> : <a href="https://open.spotify.com/artist/72tRiBHei5G9M8it4h4sfC" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="min-w-0 text-ink transition-colors hover:text-terracotta">
+                    <span className="flex items-center gap-2"><Music2 aria-hidden className="size-4 shrink-0 text-forest" /><strong className="text-xl font-semibold leading-none tabular-nums sm:text-2xl">245.7K</strong></span>
+                    <span className="mt-2 block text-xs leading-snug text-ink-soft">Spotify monthly listeners</span>
+                  </a>}
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-ink-soft">The {index === 0 ? "voice" : "sound"} behind <em>From Takoma With Love</em> — the album this run is named for</p>
+                {index === 0 && <p className="mt-3 text-xs leading-relaxed text-ink-soft">As of Oct 19, 2026 · Instagram count via Social Blade; not verified directly on Instagram.</p>}
               </figcaption>
             </figure>
           ))}

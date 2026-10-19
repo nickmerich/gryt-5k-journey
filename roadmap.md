@@ -4,7 +4,8 @@
 - [x] Check page rendering, signup validation, and phone/desktop layout. Confirmation and persistence checked with a simulated response; no leads created or emails sent.
 
 # Artist section
-- [ ] Add Heno.'s approved testimonial while preserving Oddisee's quotation and attribution.
+- [x] Add Heno.'s approved testimonial while preserving Oddisee's quotation and attribution.
+- [ ] Combine the quotes into a Heno.-first carousel and verify both slides on phone and desktop.
 - [ ] Add verified official album artwork to the artist section.
 - [ ] Check phone and desktop layouts without submitting forms or publishing.
 

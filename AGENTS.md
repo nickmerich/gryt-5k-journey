@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Series pages
+- Homepage artist testimonials use the shared ArtistQuotes carousel with manual controls and swipe, keeping approved quotations separate from page layout.
 - The 5K Series route reuses Run2Hub and EVENT_PHOTOS so signups, confirmation persistence, and event imagery stay consistent with the homepage.
 - Future runs show tentative dates and unconfirmed routes explicitly; interest-list entries are not race registrations.
 - Run #03 uses its own validated server function and form; shared run2_interest rows are separated by event_code so new runs cannot mix with the existing list.

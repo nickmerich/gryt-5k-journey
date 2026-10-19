@@ -9,5 +9,5 @@
 - [ ] Check phone and desktop layouts without submitting forms or publishing.
 
 # Series signup delivery
-- [ ] Verify the existing shared signup saves a real entry and sends the owner alert.
-- [ ] Remove the verification entry and report the list and delivery result.
+- [x] Verify the existing shared signup saves a real entry and sends the owner alert. The live 5K Series form saved the entry, sent both owner and runner emails, and restored the receipt after reload.
+- [x] Remove the verification entry and report the list and delivery result. Deleted only the test entry by its ID; managed email logs confirmed both sends.

@@ -25,7 +25,7 @@ export function ArtistQuotes() {
           touchStart.current = null;
         }}>
           {[0, 1].map((index) => (
-            <figure key={index} hidden={slide !== index} aria-hidden={slide !== index} aria-label={`${index + 1} of 2: ${index === 0 ? "Heno." : "Oddisee"}`} aria-roledescription="slide" className={`relative col-start-1 row-start-1 flex flex-col ${slide !== index ? "invisible" : ""}`}>
+            <figure key={index} aria-hidden={slide !== index} aria-label={`${index + 1} of 2: ${index === 0 ? "Heno." : "Oddisee"}`} aria-roledescription="slide" className={`relative col-start-1 row-start-1 flex flex-col ${slide !== index ? "invisible" : ""}`}>
               <blockquote className="relative mt-4 sm:mt-5">
                 <p className="serif-italic text-[1.75rem] leading-[1.2] text-ink sm:text-[2.5rem] sm:leading-[1.15]">
                   {index === 0 ? <>&ldquo;Working with GRYT on Run Takoma With Love has made me want to help make movement feel more accessible, social, and <span className="brush-script not-italic text-terracotta">connected to something bigger than ourselves.</span>&rdquo;</> : <>&ldquo;Socializing with community around a healthy activity is what <span className="brush-script not-italic text-terracotta">Gryt does best.</span>&rdquo;</>}

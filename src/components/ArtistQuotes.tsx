@@ -16,7 +16,7 @@ export function ArtistQuotes() {
   return (
     <section aria-label="Artist testimonials" aria-roledescription="carousel" className="relative z-10 mx-auto max-w-4xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20 sm:pb-10">
       <div className="relative mr-1 border-2 border-ink bg-paper-warm px-6 pb-6 pt-14 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-14 sm:pb-8 sm:pt-16 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
-        <span className="paint-stroke absolute left-4 top-0 -translate-y-1/2 whitespace-nowrap bg-forest px-5 py-2.5 display-tight text-sm text-forest-ink sm:left-10">In his words</span>
+        <span className="paint-stroke absolute left-4 top-0 -translate-y-1/2 whitespace-nowrap bg-forest px-5 py-2.5 display-tight text-sm text-forest-ink sm:left-10">In their words</span>
         <span aria-hidden className="pointer-events-none absolute right-3 top-2 select-none font-serif text-[6rem] leading-none text-terracotta/20 sm:right-8 sm:text-[9rem]">&rdquo;</span>
         <p className="relative eyebrow text-terracotta">Music brought us here. Running keeps us together.</p>
         <div className="grid" aria-live="polite" aria-atomic="true" onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => {

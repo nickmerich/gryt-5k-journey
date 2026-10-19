@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Instagram, Music2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import oddiseeAvatar from "@/assets/oddisee-avatar.png.asset.json";
 import henoAvatar from "@/assets/heno-avatar.webp.asset.json";
@@ -7,7 +7,7 @@ import albumCover from "@/assets/from-takoma-cover.jpg.asset.json";
 
 export function ArtistQuotes() {
   const [slide, setSlide] = useState(0);
-  const touchStart = useRef<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const artist = slide === 0 ? "Heno." : slide === 1 ? "Oddisee" : "The album";
 
   function next() {
@@ -19,34 +19,45 @@ export function ArtistQuotes() {
   }
 
   return (
-    <section aria-label="Artist testimonials" aria-roledescription="carousel" className="relative z-10 mx-auto max-w-4xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20 sm:pb-10">
+    <section aria-label="Artist testimonials" aria-roledescription="carousel" onKeyDown={(event) => {
+      if (event.target instanceof HTMLElement && event.target.closest("a")) return;
+      if (event.key === "ArrowRight") { event.preventDefault(); next(); }
+      if (event.key === "ArrowLeft") { event.preventDefault(); previous(); }
+    }} className="relative z-10 mx-auto max-w-4xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20 sm:pb-10">
       <div className="relative mr-1 border-2 border-ink bg-paper-warm px-6 pb-6 pt-14 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-14 sm:pb-8 sm:pt-16 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
         <span className="paint-stroke absolute left-4 top-0 -translate-y-1/2 whitespace-nowrap bg-forest px-5 py-2.5 display-tight text-sm text-forest-ink sm:left-10">ARTISTS REVIEW THE RUN</span>
         <span aria-hidden className="pointer-events-none absolute right-3 top-2 select-none font-serif text-[6rem] leading-none text-terracotta/20 sm:right-8 sm:text-[9rem]">&rdquo;</span>
         <p className="relative eyebrow text-terracotta">Music brought us here. Running keeps us together.</p>
-        <div className="grid" aria-live="polite" aria-atomic="true" onTouchStart={(event) => { touchStart.current = event.touches[0]?.clientX ?? null; }} onTouchEnd={(event) => {
-          const end = event.changedTouches[0]?.clientX;
-          if (touchStart.current !== null && end !== undefined && Math.abs(end - touchStart.current) > 50) {
-            if (end < touchStart.current) next(); else previous();
+        <div className="grid" aria-live="polite" aria-atomic="true" onTouchStart={(event) => {
+          const touch = event.touches[0];
+          touchStart.current = touch ? { x: touch.clientX, y: touch.clientY } : null;
+        }} onTouchCancel={() => { touchStart.current = null; }} onTouchEnd={(event) => {
+          const end = event.changedTouches[0];
+          if (touchStart.current && end) {
+            const dx = end.clientX - touchStart.current.x;
+            const dy = end.clientY - touchStart.current.y;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+              if (dx < 0) next(); else previous();
+            }
           }
           touchStart.current = null;
         }}>
           {[0, 1].map((index) => (
             <figure key={index} aria-hidden={slide !== index} aria-label={`${index + 1} of 3: ${index === 0 ? "Heno." : "Oddisee"}`} aria-roledescription="slide" className={`relative col-start-1 row-start-1 flex flex-col ${slide !== index ? "invisible" : ""}`}>
               <blockquote className="relative mt-4 sm:mt-5">
-                <p className="serif-italic text-[1.75rem] leading-[1.2] text-ink sm:text-[2.5rem] sm:leading-[1.15]">
+                <p className="serif-italic text-[1.625rem] leading-[1.25] text-ink sm:text-[2.5rem] sm:leading-[1.15]">
                   {index === 0 ? <>&ldquo;Working with GRYT on Run Takoma With Love has made me want to help make movement feel more accessible, social, and <span className="brush-script not-italic text-terracotta">connected to something bigger than ourselves.</span>&rdquo;</> : <>&ldquo;Socializing with community around a healthy activity is what <span className="brush-script not-italic text-terracotta">Gryt does best.</span>&rdquo;</>}
                 </p>
               </blockquote>
               <figcaption className="relative mt-auto pt-8 sm:pt-10">
-                <div className="flex items-center gap-4 border-t border-dashed border-hairline pt-6 sm:pt-8">
+                <div className="flex items-start gap-3 border-t border-dashed border-hairline pt-6 sm:items-center sm:gap-4 sm:pt-8">
                   <img src={index === 0 ? henoAvatar.url : oddiseeAvatar.url} alt={index === 0 ? "Heno." : "Oddisee"} width={72} height={72} loading="lazy" className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]" />
                   <div className="min-w-0">
-                    <div className="flex flex-wrap items-baseline gap-x-2"><span className="display-tight text-2xl text-ink">{index === 0 ? "Heno." : "Oddisee"}</span><span className="eyebrow text-forest">Artist &amp; Producer</span></div>
+                    <div className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-2"><span className="display-tight text-2xl text-ink">{index === 0 ? "Heno." : "Oddisee"}</span><span className="eyebrow text-forest">Artist &amp; Producer</span></div>
                     {index === 0 && <>
                       <div className="mt-1.5 flex flex-wrap gap-1.5">
-                        <a href="https://www.instagram.com/mynameisheno/" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex flex-wrap items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">12,127</strong> Instagram followers</a>
-                        <span className="inline-flex flex-wrap items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink"><strong className="font-bold">26,301</strong> Spotify monthly listeners</span>
+                        <a href="https://www.instagram.com/mynameisheno/" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} aria-label="Heno. on Instagram — 12,127 followers" className="inline-flex flex-wrap items-center gap-1 border border-hairline/50 px-2 py-1 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><Instagram aria-hidden className="size-3" /><strong className="font-bold">12,127</strong> Instagram followers</a>
+                        <span className="inline-flex flex-wrap items-center gap-1 border border-hairline/50 px-2 py-1 eyebrow text-[0.65rem] text-ink"><Music2 aria-hidden className="size-3" /><strong className="font-bold">26,301</strong> Spotify monthly listeners</span>
                       </div>
                       <p className="mt-2 text-xs leading-relaxed text-ink-soft">As of Oct 19, 2026 · Instagram count via Social Blade; not verified directly on Instagram.</p>
                     </>}
@@ -54,7 +65,7 @@ export function ArtistQuotes() {
                       <a href="https://www.instagram.com/oddisee/" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">117K</strong> Instagram followers</a>
                       <a href="https://open.spotify.com/artist/72tRiBHei5G9M8it4h4sfC" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">245.7K</strong> Spotify monthly listeners</a>
                     </div>}
-                    <p className="mt-1 text-sm text-ink-soft">The {index === 0 ? "voice" : "sound"} behind <em>From Takoma With Love</em> — the album this run is named for</p>
+                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">The {index === 0 ? "voice" : "sound"} behind <em>From Takoma With Love</em> — the album this run is named for</p>
                   </div>
                 </div>
               </figcaption>

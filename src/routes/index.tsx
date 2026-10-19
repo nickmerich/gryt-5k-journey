@@ -1733,7 +1733,20 @@ function TakomaStreetGrid() {
         <path d="M-20 300 L1460 520" strokeWidth="3" />
         <path d="M980 -20 C 900 160, 1060 280, 960 420 S 1020 680, 900 820" strokeWidth="6" strokeOpacity="0.22" />
       </g>
-      <circle cx="640" cy="420" r="7" className="fill-terracotta" fillOpacity="0.55" />
+      {/* 5K loop route with start/finish and km markers */}
+      <g className="text-terracotta" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path id="takoma-route" d="M640 420 L760 330 L900 250 C 960 220, 1010 260, 990 330 C 975 400, 1040 470, 1000 560 L 880 640 L 700 560 L 560 610 C 470 640, 400 580, 430 500 L 500 400 Z" strokeWidth="10" strokeOpacity="0.12" />
+        <path d="M640 420 L760 330 L900 250 C 960 220, 1010 260, 990 330 C 975 400, 1040 470, 1000 560 L 880 640 L 700 560 L 560 610 C 470 640, 400 580, 430 500 L 500 400 Z" strokeWidth="3.5" strokeOpacity="0.5" strokeDasharray="14 10" />
+      </g>
+      <g className="fill-forest" fillOpacity="0.5" fontFamily="Bebas Neue, sans-serif" fontSize="15" letterSpacing="2">
+        {[[900, 250, "1K"], [1000, 560, "2K"], [700, 560, "3K"], [430, 500, "4K"]].map(([x, y, l]) => (
+          <g key={l as string}><circle cx={x} cy={y} r="11" className="fill-paper" fillOpacity="0.9" stroke="currentColor" strokeOpacity="0.4" /><text x={x as number} y={(y as number) + 5} textAnchor="middle">{l}</text></g>
+        ))}
+      </g>
+      <g className="text-terracotta" fillOpacity="0.6">
+        <circle cx="640" cy="420" r="13" className="fill-terracotta" />
+        <text x="640" y="455" textAnchor="middle" className="fill-terracotta" fontFamily="Bebas Neue, sans-serif" fontSize="16" letterSpacing="3">START · FINISH</text>
+      </g>
     </svg>
   );
 }

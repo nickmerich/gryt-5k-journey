@@ -75,15 +75,15 @@ export function ArtistQuotes() {
               </figcaption>
             </figure>
           ))}
-          <figure aria-hidden={slide !== 2} aria-label="3 of 3: From Takoma With Love" aria-roledescription="slide" className={`relative col-start-1 row-start-1 mt-5 flex flex-col justify-center gap-5 sm:flex-row sm:items-center sm:gap-8 ${slide !== 2 ? "invisible" : ""}`}>
-            <a href="https://orcd.co/ykrr2qx" target="_blank" rel="noopener noreferrer" tabIndex={slide === 2 ? 0 : -1} aria-label="Listen to From Takoma With Love" className="mx-auto block w-52 shrink-0 border-2 border-ink shadow-[4px_4px_0_0_var(--color-terracotta)] sm:w-64">
-              <img src={albumCover.url} alt="From Takoma With Love official album cover" width={300} height={300} loading="lazy" className="aspect-square w-full object-contain" />
+          <figure aria-hidden={slide !== 2} aria-label="3 of 3: From Takoma With Love" aria-roledescription="slide" className={`relative col-start-1 row-start-1 mt-5 flex flex-col justify-center gap-6 sm:flex-row sm:items-center sm:gap-10 ${slide !== 2 ? "invisible" : ""}`}>
+            <a href="https://orcd.co/ykrr2qx" target="_blank" rel="noopener noreferrer" tabIndex={slide === 2 ? 0 : -1} aria-label="Listen to From Takoma With Love" className="mx-auto block w-64 shrink-0 border-2 border-ink shadow-[6px_6px_0_0_var(--color-terracotta)] sm:mx-0 sm:w-80 lg:w-96">
+              <img src={albumCover.url} alt="From Takoma With Love official album cover" width={400} height={400} loading="lazy" className="aspect-square w-full object-contain" />
             </a>
             <figcaption className="min-w-0 text-center sm:text-left">
-              <p className="eyebrow text-forest">Oddisee &amp; Heno.</p>
-              <h2 className="mt-3 display-tight text-4xl text-ink sm:text-5xl">From Takoma<br />With Love</h2>
-              <p className="mt-3 text-sm text-ink-soft">The album that brought us here.</p>
-              <Button asChild className="mt-5 rounded-none bg-forest text-forest-ink hover:bg-terracotta hover:text-terracotta-ink">
+              <p className="eyebrow text-base text-forest">Oddisee &amp; Heno.</p>
+              <h2 className="mt-3 display-tight text-5xl text-ink sm:text-6xl lg:text-7xl">From Takoma<br />With Love</h2>
+              <p className="mt-4 text-lg text-ink-soft sm:text-xl">The album that brought us here.</p>
+              <Button asChild className="mt-6 h-12 rounded-none bg-forest px-6 text-base text-forest-ink hover:bg-terracotta hover:text-terracotta-ink">
                 <a href="https://orcd.co/ykrr2qx" target="_blank" rel="noopener noreferrer" tabIndex={slide === 2 ? 0 : -1}>Listen to the album <ArrowUpRight /></a>
               </Button>
             </figcaption>

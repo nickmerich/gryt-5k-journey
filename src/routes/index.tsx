@@ -1599,8 +1599,9 @@ function RunTakomaOnePager() {
       </section>
       )}
 
-      <section aria-labelledby="closing-title" className="relative z-10 border-t border-hairline bg-paper-warm">
-        <div className="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+      <section aria-labelledby="closing-title" className="relative z-10 isolate overflow-hidden border-t border-hairline bg-paper-warm">
+        <TakomaStreetGrid />
+        <div className="relative mx-auto max-w-5xl px-6 py-16 sm:py-24">
           <p className="eyebrow text-terracotta">Run #02 · Early December 2026</p>
           <h2 id="closing-title" className="display-tight mt-3 text-5xl sm:text-7xl">
             Do hard things <span className="brush-script text-terracotta normal-case">together</span>
@@ -1715,6 +1716,27 @@ function RunTakomaOnePager() {
 }
 
 /* --- helpers --- */
+
+// Stylized Takoma Park street map: square blocks cut by the diagonal avenues and Sligo Creek.
+function TakomaStreetGrid() {
+  const v = Array.from({ length: 25 }, (_, i) => i * 60);
+  const h = Array.from({ length: 14 }, (_, i) => i * 60);
+  return (
+    <svg aria-hidden="true" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" className="pointer-events-none absolute inset-0 -z-10 h-full w-full text-forest">
+      <g stroke="currentColor" fill="none" strokeOpacity="0.14" strokeWidth="1">
+        {v.map((x) => <line key={`v${x}`} x1={x} y1="0" x2={x + 40} y2="800" />)}
+        {h.map((y) => <line key={`h${y}`} x1="0" y1={y} x2="1440" y2={y - 30} />)}
+      </g>
+      <g stroke="currentColor" fill="none" strokeOpacity="0.2" strokeLinecap="round">
+        <path d="M-20 720 L760 180 L1460 -40" strokeWidth="5" />
+        <path d="M120 -20 L640 420 L1180 820" strokeWidth="4" />
+        <path d="M-20 300 L1460 520" strokeWidth="3" />
+        <path d="M980 -20 C 900 160, 1060 280, 960 420 S 1020 680, 900 820" strokeWidth="6" strokeOpacity="0.22" />
+      </g>
+      <circle cx="640" cy="420" r="7" className="fill-terracotta" fillOpacity="0.55" />
+    </svg>
+  );
+}
 
 function ticketLabel(v: string) {
   if (v === "5k") return "5K Runner";

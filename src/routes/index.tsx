@@ -1,4 +1,4 @@
-import oddiseeAvatar from "@/assets/oddisee-avatar.png.asset.json";
+import { ArtistQuotes } from "@/components/ArtistQuotes";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PartnerQA } from "@/components/PartnerQA";
 import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
@@ -907,61 +907,7 @@ function RunTakomaOnePager() {
       </section>
 
 
-      {/* ODDISEE QUOTE — music x running, right after the hero */}
-      <section
-        aria-labelledby="oddisee-quote-label"
-        className="relative z-10 mx-auto max-w-4xl px-5 pt-14 pb-6 sm:px-6 sm:pt-20 sm:pb-10"
-      >
-        <figure className="relative mr-1 border-2 border-ink bg-paper-warm px-6 pb-8 pt-14 shadow-[4px_4px_0_0_var(--color-ink)] sm:mr-0 sm:px-14 sm:pb-12 sm:pt-16 sm:shadow-[8px_8px_0_0_var(--color-ink)]">
-          <span
-            id="oddisee-quote-label"
-            className="paint-stroke absolute left-4 top-0 -translate-y-1/2 whitespace-nowrap bg-forest px-5 py-2.5 display-tight text-sm tracking-[0.14em] text-[color:var(--color-forest-ink)] sm:left-10"
-          >
-            In his words
-          </span>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute right-3 top-2 select-none font-serif text-[6rem] leading-none text-terracotta/20 sm:right-8 sm:text-[9rem]"
-          >
-            &rdquo;
-          </span>
-          <p className="relative eyebrow text-terracotta">Music brought us here. Running keeps us together.</p>
-          <blockquote className="relative mt-4 sm:mt-5">
-            <p className="serif-italic text-[1.75rem] leading-[1.2] text-ink sm:text-5xl sm:leading-[1.15]">
-              &ldquo;Socializing with community around a healthy activity is what{" "}
-              <span className="brush-script not-italic text-terracotta">Gryt does best.</span>&rdquo;
-            </p>
-          </blockquote>
-          <figcaption className="relative mt-8 flex items-center gap-4 border-t border-dashed border-hairline pt-6 sm:mt-10 sm:pt-8">
-            <img
-              src={oddiseeAvatar.url}
-              alt="Oddisee"
-              width={72}
-              height={72}
-              loading="lazy"
-              className="h-16 w-16 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:h-[72px] sm:w-[72px]"
-            />
-            <span className="min-w-0">
-              <span className="flex flex-wrap items-baseline gap-x-2">
-                <span className="display-tight text-2xl tracking-[0.06em] text-ink">Oddisee</span>
-                <span className="eyebrow text-forest">Artist &amp; Producer</span>
-              </span>
-              <span className="mt-1.5 flex flex-wrap gap-1.5">
-                <a href="https://www.instagram.com/oddisee/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-[color:var(--color-forest-ink)]">
-                  <strong className="font-bold">117K</strong> Instagram followers
-                </a>
-                <a href="https://open.spotify.com/artist/72tRiBHei5G9M8it4h4sfC" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-[color:var(--color-forest-ink)]">
-                  <strong className="font-bold">245.7K</strong> Spotify monthly listeners
-                </a>
-              </span>
-              <span className="mt-1 block text-sm text-ink-soft">
-                The voice behind <em>From Takoma With Love</em> — the album this run is named for
-              </span>
-            </span>
-            <span aria-hidden className="heart-pulse ml-auto shrink-0 text-2xl text-terracotta">&hearts;</span>
-          </figcaption>
-        </figure>
-      </section>
+      <ArtistQuotes />
 
       {/* RECAP — official event recap video + final stats */}
       <section

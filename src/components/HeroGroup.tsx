@@ -93,7 +93,7 @@ export function HeroGroup() {
 
       <div className="mt-4 grid gap-5 px-5 sm:mt-8 sm:px-0 lg:grid-cols-[1.3fr_1fr] lg:items-center">
         <p className="text-ink-soft text-base sm:text-lg max-w-xl">
-          248 signed up. 98 crossed the line. Run #02 is coming early December 2026. Get in early.
+          Join Us December 2026 for Run #2
         </p>
         <div className="grid gap-3 sm:flex sm:flex-row lg:justify-end">
           <a href="#run2" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent("run2:open", { detail: "runner" })); }} className="brush-btn inline-flex min-h-14 w-full sm:w-auto items-center justify-center px-8 py-4 display-tight text-lg tracking-[0.1em] bg-terracotta text-[color:var(--color-terracotta-ink)] hover:bg-forest hover:text-[color:var(--color-forest-ink)] active:translate-y-px transition-colors">

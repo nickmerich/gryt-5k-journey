@@ -10,14 +10,14 @@ interface Props {
 
 const PACES: Record<string, string> = {
   'first-5k': 'First 5K',
-  casual: 'Casual',
-  regular: 'Regular',
-  fast: 'Chasing time',
+  casual: 'Easy and social',
+  regular: 'Regular runner',
+  fast: 'Chasing a time',
 }
 const WEEKENDS: Record<string, string> = {
-  'dec-1': '1st weekend · Dec 5–6',
-  'dec-2': '2nd weekend · Dec 12–13',
-  'dec-3': '3rd weekend · Dec 19–20',
+  'dec-1': 'Dec 5–6',
+  'dec-2': 'Dec 12–13',
+  'dec-3': 'Dec 19–20',
   any: 'Any weekend works',
 }
 
@@ -26,7 +26,7 @@ const Email = ({ name, pace, weekend }: Props) => {
   return (
     <Html lang="en" dir="ltr">
       <Head />
-      <Preview>You're on the Run #02 list. Early December 2026.</Preview>
+      <Preview>You're on the Run #02 list. Early December 2026, 11am EST start.</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={eyebrow}>GRYT CLUB · RUN #02</Text>
@@ -40,6 +40,7 @@ const Email = ({ name, pace, weekend }: Props) => {
             <Row label="Weekend" value={(weekend && WEEKENDS[weekend]) || 'Not set'} />
             <Row label="Pace" value={(pace && PACES[pace]) || 'Not set'} />
             <Row label="Target" value="Early December 2026" />
+            <Row label="Start time" value="11am EST" />
           </Section>
           <Text style={body}>
             We'll lock the date based on what the crew votes for. Keep an eye on your inbox.

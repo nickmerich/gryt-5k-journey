@@ -54,7 +54,7 @@ export function ArtistQuotes() {
                       <a href="https://www.instagram.com/oddisee/" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">117K</strong> Instagram followers</a>
                       <a href="https://open.spotify.com/artist/72tRiBHei5G9M8it4h4sfC" target="_blank" rel="noopener noreferrer" tabIndex={slide === index ? 0 : -1} className="inline-flex items-center gap-1 border border-hairline/50 px-2 py-0.5 eyebrow text-[0.65rem] text-ink hover:bg-forest hover:text-forest-ink"><strong className="font-bold">245.7K</strong> Spotify monthly listeners</a>
                     </div>}
-                    <p className="mt-1 text-sm text-ink-soft">{index === 0 ? <em>From Takoma With Love</em> : <>The voice behind <em>From Takoma With Love</em> — the album this run is named for</>}</p>
+                    <p className="mt-1 text-sm text-ink-soft">The {index === 0 ? "voice" : "sound"} behind <em>From Takoma With Love</em> — the album this run is named for</p>
                   </div>
                 </div>
               </figcaption>

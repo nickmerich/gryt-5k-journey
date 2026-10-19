@@ -55,8 +55,15 @@ export function HeroGroup() {
             className="block w-full aspect-[4/3] sm:aspect-[3/2] object-cover object-[50%_78%] sm:object-[50%_70%] transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
           />
           <span aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block" style={{ background: "linear-gradient(to top, oklch(0.15 0.02 160 / 0.85), oklch(0.15 0.02 160 / 0.1) 55%, transparent)" }} />
-          <span className="absolute left-2 top-2 sm:left-5 sm:top-5 -rotate-2 bg-terracotta px-2 py-1 sm:px-3 sm:py-1.5 display-tight text-xs sm:text-base tracking-[0.12em] text-[color:var(--color-terracotta-ink)]">
-            98 FINISHERS · ONE FRAME
+          <span className="pointer-events-none absolute left-2 top-2 sm:left-5 sm:top-5 -rotate-2 w-[180px] sm:w-[260px] text-terracotta" aria-label="98 finishers · one frame">
+            <svg aria-hidden="true" viewBox="0 0 320 170" className="block h-auto w-full overflow-visible">
+              <path fill="currentColor" d="M0.8,0 L266.7,0 L273.4,118.1 L320,119.2 L305.8,158.7 L294.7,160.2 L275,165.9 L259.6,170 L260,154.6 L254.1,148.4 L262.4,141.8 L251.3,126.3 L247.8,133 L232.8,131.5 L227.7,114.5 L232.4,114.5 L232.8,92.4 L237.5,83.7 L231.2,53.9 L239.1,36.5 L251.3,33.4 L253.3,15.4 L244.2,17.5 L243.8,26.7 L224.9,38.5 L219.4,49.3 L218.2,76.5 L211.1,89.4 L214.3,110.9 L223.7,125.8 L222.5,137.1 L228.5,148.4 L225.3,156.1 L208.7,141.2 L185.1,134 L178,119.7 L164.5,127.9 L159.4,116.6 L170.1,102.2 L176.4,87.3 L185.8,77.6 L176.8,68.3 L170.9,74 L161.4,65.2 L146.4,60.6 L146.4,46.7 L138.5,39 L127.4,37.5 L119.2,11.3 L106.9,11.3 L94.7,2.6 L88,9.8 L76.2,9.2 L73.4,19.5 L52.1,12.8 L37.9,26.7 L28.4,23.6 L14.2,39.5 L0,48.3 Z" />
+              <g fill="currentColor" className="display-tight text-terracotta-ink" textAnchor="middle">
+                <text x="190" y="34" fontSize="38">98</text>
+                <text x="190" y="54" fontSize="21">FINISHERS</text>
+                <text x="190" y="68" fontSize="11">ONE FRAME</text>
+              </g>
+            </svg>
           </span>
           <span className="absolute right-2 top-2 sm:right-5 sm:top-5 rotate-2 bg-paper px-2 py-1 sm:px-3 sm:py-1.5 eyebrow text-forest">
             08.02.26

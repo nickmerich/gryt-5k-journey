@@ -165,7 +165,7 @@ export function Run2Hub() {
               </h3>
               <p className="mt-1 text-sm text-ink-soft">
                 {track === "runner"
-                  ? "Free. Community-first. Priority access to the next 100 bibs."
+                  ? "11am EST Start Time."
                   : <>Put your brand in front of a real crew on a real Sunday morning. <a href="/partners" className="underline underline-offset-4 text-terracotta">See numbers, photos & packages</a>.</>}
               </p>
             </div>

@@ -4,9 +4,12 @@
 - [x] Check page rendering, signup validation, and phone/desktop layout. Confirmation and persistence checked with a simulated response; no leads created or emails sent.
 
 # Artist section
+- [x] Add a final official album-cover carousel slide with the verified artist release listening link.
+- [ ] Replace the listening destination with the requested song.link URL. Blocked: exact URL not supplied or publicly verifiable.
+- [x] Enlarge the homepage series link and rename it GRYT ARTIST 5K SERIES.
 - [x] Add Heno.'s approved testimonial while preserving Oddisee's quotation and attribution.
 - [x] Combine the quotes into a Heno.-first carousel and verify both slides on phone and desktop.
-- [ ] Add verified official album artwork to the artist section. Blocked: approved artwork or reproduction permission has not been supplied; outside this carousel request.
+- [x] Add verified official album artwork to the artist section, as requested.
 - [x] Check phone and desktop layouts without submitting forms or publishing.
 
 # Series signup delivery

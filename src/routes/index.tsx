@@ -852,9 +852,8 @@ function RunTakomaOnePager() {
 
       {/* Top eyebrow */}
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 pt-6 sm:pt-8">
-        <Link to="/5k-series" className="group flex min-h-12 min-w-0 flex-col items-start gap-1 text-forest transition-colors hover:text-terracotta" aria-label="GRYT Artist 5K Series">
-          <span className="display-tight text-3xl sm:text-5xl">GRYT ARTIST</span>
-          <span className="display-tight border-b-2 border-terracotta pb-1 text-xl sm:text-2xl">5K SERIES</span>
+        <Link to="/5k-series" className="flex min-h-12 min-w-0 items-center text-forest transition-colors hover:text-terracotta" aria-label="GRYT x CREATORS 5K SERIES">
+          <span className="whitespace-nowrap border-b-2 border-terracotta pb-1 font-display text-lg font-bold leading-none tracking-normal sm:text-4xl">GRYT x CREATORS 5K SERIES</span>
         </Link>
         <div className="flex items-center gap-4">
           <span className="eyebrow text-terracotta hidden sm:inline">

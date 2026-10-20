@@ -12,11 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as R5kSeriesRouteImport } from './routes/5k-series'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
+import { Route as ArtistsRouteImport } from './routes/artists'
+import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as Run03RouteImport } from './routes/run-03'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as StoryRouteImport } from './routes/story'
+import { Route as TakomaRouteImport } from './routes/takoma'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PartnersThanksRouteImport } from './routes/partners_.thanks'
 import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
@@ -46,6 +49,16 @@ const AccessibilityRoute = AccessibilityRouteImport.update({
   path: '/accessibility',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArtistsRoute = ArtistsRouteImport.update({
+  id: '/artists',
+  path: '/artists',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsRoute = BrandsRouteImport.update({
+  id: '/brands',
+  path: '/brands',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
@@ -69,6 +82,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const StoryRoute = StoryRouteImport.update({
   id: '/story',
   path: '/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TakomaRoute = TakomaRouteImport.update({
+  id: '/takoma',
+  path: '/takoma',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -142,11 +160,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
+  '/artists': typeof ArtistsRoute
+  '/brands': typeof BrandsRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
+  '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
   '/partners/thanks': typeof PartnersThanksRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
@@ -165,11 +186,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
+  '/artists': typeof ArtistsRoute
+  '/brands': typeof BrandsRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
+  '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
   '/partners/thanks': typeof PartnersThanksRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
@@ -189,11 +213,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
+  '/artists': typeof ArtistsRoute
+  '/brands': typeof BrandsRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
+  '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
   '/partners_/thanks': typeof PartnersThanksRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
@@ -214,11 +241,14 @@ export interface FileRouteTypes {
     | '/'
     | '/5k-series'
     | '/accessibility'
+    | '/artists'
+    | '/brands'
     | '/partners'
     | '/privacy'
     | '/run-03'
     | '/sitemap.xml'
     | '/story'
+    | '/takoma'
     | '/terms'
     | '/partners/thanks'
     | '/api/public/rtwl-register'
@@ -237,11 +267,14 @@ export interface FileRouteTypes {
     | '/'
     | '/5k-series'
     | '/accessibility'
+    | '/artists'
+    | '/brands'
     | '/partners'
     | '/privacy'
     | '/run-03'
     | '/sitemap.xml'
     | '/story'
+    | '/takoma'
     | '/terms'
     | '/partners/thanks'
     | '/api/public/rtwl-register'
@@ -260,11 +293,14 @@ export interface FileRouteTypes {
     | '/'
     | '/5k-series'
     | '/accessibility'
+    | '/artists'
+    | '/brands'
     | '/partners'
     | '/privacy'
     | '/run-03'
     | '/sitemap.xml'
     | '/story'
+    | '/takoma'
     | '/terms'
     | '/partners_/thanks'
     | '/api/public/rtwl-register'
@@ -284,11 +320,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R5kSeriesRoute: typeof R5kSeriesRoute
   AccessibilityRoute: typeof AccessibilityRoute
+  ArtistsRoute: typeof ArtistsRoute
+  BrandsRoute: typeof BrandsRoute
   PartnersRoute: typeof PartnersRoute
   PrivacyRoute: typeof PrivacyRoute
   Run03Route: typeof Run03Route
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoryRoute: typeof StoryRoute
+  TakomaRoute: typeof TakomaRoute
   TermsRoute: typeof TermsRoute
   PartnersThanksRoute: typeof PartnersThanksRoute
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
@@ -327,6 +366,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccessibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/artists': {
+      id: '/artists'
+      path: '/artists'
+      fullPath: '/artists'
+      preLoaderRoute: typeof ArtistsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands': {
+      id: '/brands'
+      path: '/brands'
+      fullPath: '/brands'
+      preLoaderRoute: typeof BrandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partners': {
       id: '/partners'
       path: '/partners'
@@ -360,6 +413,13 @@ declare module '@tanstack/react-router' {
       path: '/story'
       fullPath: '/story'
       preLoaderRoute: typeof StoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/takoma': {
+      id: '/takoma'
+      path: '/takoma'
+      fullPath: '/takoma'
+      preLoaderRoute: typeof TakomaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -460,11 +520,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R5kSeriesRoute: R5kSeriesRoute,
   AccessibilityRoute: AccessibilityRoute,
+  ArtistsRoute: ArtistsRoute,
+  BrandsRoute: BrandsRoute,
   PartnersRoute: PartnersRoute,
   PrivacyRoute: PrivacyRoute,
   Run03Route: Run03Route,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoryRoute: StoryRoute,
+  TakomaRoute: TakomaRoute,
   TermsRoute: TermsRoute,
   PartnersThanksRoute: PartnersThanksRoute,
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,

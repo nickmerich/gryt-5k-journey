@@ -858,48 +858,6 @@ function RunTakomaOnePager() {
       {/* HERO — group finisher photo + Run #02 call */}
       <HeroGroup />
       <PressBar />
-      <section
-        aria-label="Partners"
-        className="relative z-10 mx-auto mb-14 max-w-4xl px-5 sm:px-6"
-      >
-        <div className="flex items-center gap-3">
-          <span aria-hidden className="h-px flex-1 bg-ink/30" />
-          <p className="eyebrow shrink-0 text-ink-soft">In partnership with</p>
-          <span aria-hidden className="h-px flex-1 bg-ink/30" />
-        </div>
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-5 sm:gap-5">
-          {[
-            { src: smartwaterLogo.url, alt: "Glacéau smartwater", bg: "#EAF0FB", accent: "#1E3FAE", label: "Hydration partner", blend: true },
-            { src: mocoParksLogo.url, alt: "Montgomery Parks, M-NCPPC", bg: "#EEF5EC", accent: "#1F7A3A", label: "Parks partner", blend: false },
-          ].map((p) => (
-            <div key={p.alt} className="ink-card ink-card-hover relative flex flex-col overflow-hidden" style={{ backgroundColor: p.bg }}>
-              <div aria-hidden className="h-1.5 sm:h-2" style={{ backgroundColor: p.accent }} />
-              <div className="flex aspect-square items-center justify-center p-4 sm:aspect-auto sm:h-44 sm:p-6">
-                <img src={p.src} alt={p.alt} className="max-h-full w-full max-w-[150px] object-contain sm:max-h-32 sm:w-auto sm:max-w-none" style={p.blend ? { mixBlendMode: "multiply" } : undefined} loading="lazy" />
-              </div>
-              <p className="mt-auto border-t-2 border-ink bg-paper-warm px-2 py-2 text-center display-tight text-[0.72rem] tracking-[0.12em] sm:text-sm sm:tracking-[0.14em]" style={{ color: p.accent }}>
-                {p.label}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="relative mt-6 ink-card p-5 text-center sm:mt-8 sm:p-7">
-          <span className="absolute -top-3 left-1/2 -translate-x-1/2 -rotate-2 bg-terracotta px-3 py-1 eyebrow text-[color:var(--color-terracotta-ink)]">
-            Run #02 · Dec 2026
-          </span>
-          <p className="mt-2 display-tight text-3xl leading-none text-forest">YOUR BRAND HERE?</p>
-          <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft sm:text-base">Fuel the community at the start line for Run #02.</p>
-          <a
-            href="/partners"
-            className="brush-btn mt-4 inline-flex min-h-14 w-full sm:w-auto items-center justify-center px-6 py-4 display-tight text-base sm:text-lg tracking-[0.1em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta active:translate-y-px transition-colors"
-          >
-            PARTNER WITH US FOR RUN #02
-          </a>
-        </div>
-        <PartnerQA />
-      </section>
-
-
       {/* RECAP — official event recap video + final stats */}
       <section
         id="recap"
@@ -961,8 +919,50 @@ function RunTakomaOnePager() {
 
       <ArtistQuotes />
 
-      <Run2Course />
       <Run2Hub />
+      <Run2Course />
+      <section
+        aria-label="Partners"
+        className="relative z-10 mx-auto mb-14 max-w-4xl px-5 sm:px-6"
+      >
+        <div className="flex items-center gap-3">
+          <span aria-hidden className="h-px flex-1 bg-ink/30" />
+          <p className="eyebrow shrink-0 text-ink-soft">In partnership with</p>
+          <span aria-hidden className="h-px flex-1 bg-ink/30" />
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-5 sm:gap-5">
+          {[
+            { src: smartwaterLogo.url, alt: "Glacéau smartwater", bg: "#EAF0FB", accent: "#1E3FAE", label: "Hydration partner", blend: true },
+            { src: mocoParksLogo.url, alt: "Montgomery Parks, M-NCPPC", bg: "#EEF5EC", accent: "#1F7A3A", label: "Parks partner", blend: false },
+          ].map((p) => (
+            <div key={p.alt} className="ink-card ink-card-hover relative flex flex-col overflow-hidden" style={{ backgroundColor: p.bg }}>
+              <div aria-hidden className="h-1.5 sm:h-2" style={{ backgroundColor: p.accent }} />
+              <div className="flex aspect-square items-center justify-center p-4 sm:aspect-auto sm:h-44 sm:p-6">
+                <img src={p.src} alt={p.alt} className="max-h-full w-full max-w-[150px] object-contain sm:max-h-32 sm:w-auto sm:max-w-none" style={p.blend ? { mixBlendMode: "multiply" } : undefined} loading="lazy" />
+              </div>
+              <p className="mt-auto border-t-2 border-ink bg-paper-warm px-2 py-2 text-center display-tight text-[0.72rem] tracking-[0.12em] sm:text-sm sm:tracking-[0.14em]" style={{ color: p.accent }}>
+                {p.label}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="relative mt-6 ink-card p-5 text-center sm:mt-8 sm:p-7">
+          <span className="absolute -top-3 left-1/2 -translate-x-1/2 -rotate-2 bg-terracotta px-3 py-1 eyebrow text-[color:var(--color-terracotta-ink)]">
+            Run #02 · Dec 2026
+          </span>
+          <p className="mt-2 display-tight text-3xl leading-none text-forest">YOUR BRAND HERE?</p>
+          <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft sm:text-base">Fuel the community at the start line for Run #02.</p>
+          <a
+            href="/partners"
+            className="brush-btn mt-4 inline-flex min-h-14 w-full sm:w-auto items-center justify-center px-6 py-4 display-tight text-base sm:text-lg tracking-[0.1em] bg-forest text-[color:var(--color-forest-ink)] hover:bg-terracotta active:translate-y-px transition-colors"
+          >
+            PARTNER WITH US FOR RUN #02
+          </a>
+        </div>
+        <PartnerQA />
+      </section>
+
+
 
       {/* Marquee ticker — infinite scrolling love */}
       <section

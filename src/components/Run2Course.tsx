@@ -5,8 +5,8 @@ const TURNS: [string, string][] = [
   ["Bear right", "Swing southeast and start the long descent."],
   ["Straight", "Keep downhill along the east side."],
   ["Slight right", "Ease right, still dropping."],
-  ["Turn right", "Low point of the lap. Head southwest along the bottom."],
-  ["Slight right", "Begin climbing west."],
+  ["Turn right", "Head southwest along the bottom, still dropping."],
+  ["Slight right", "Low point of the lap. Begin climbing west."],
   ["Straight", "Short push up the south edge."],
   ["Turn right", "Head northwest, climbing."],
   ["Turn right", "North up the west side, the longest climb."],
@@ -19,7 +19,8 @@ const xs = PARK_OUTLINE.map((p) => p[0]), ys = PARK_OUTLINE.map((p) => p[1]);
 const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
 const k = Math.cos((((minY + maxY) / 2) * Math.PI) / 180);
 const scale = Math.min((W - PAD * 2) / ((maxX - minX) * k), (H - PAD * 2) / (maxY - minY));
-const proj = ([x, y]: [number, number]) => [PAD + (x - minX) * k * scale, H - PAD - (y - minY) * scale] as const;
+const offX = (W - PAD * 2 - (maxX - minX) * k * scale) / 2;
+const proj = ([x, y]: [number, number]) => [PAD + offX + (x - minX) * k * scale, H - PAD - (y - minY) * scale] as const;
 const toPath = (pts: [number, number][], close = false) => pts.map((p, i) => `${i ? "L" : "M"}${proj(p).map((n) => n.toFixed(1)).join(" ")}`).join(" ") + (close ? " Z" : "");
 
 const EW = 520, EH = 150;

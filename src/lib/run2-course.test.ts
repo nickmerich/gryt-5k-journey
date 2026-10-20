@@ -1,11 +1,8 @@
-import { describe, expect, it } from "vitest";
+import { describe, test } from "node:test";
+import { strictEqual } from "node:assert";
 import { FINISH_EXTRA_M, LAP_M, LAPS } from "./run2-course";
 
 describe("Run #02 course", () => {
-  it("adds up to a 5K", () => {
-    expect(LAP_M * LAPS + FINISH_EXTRA_M).toBe(5000);
-  });
-  it("uses six park laps", () => {
-    expect(LAPS).toBe(6);
-  });
+  test("adds up to a 5K", () => strictEqual(LAP_M * LAPS + FINISH_EXTRA_M, 5000));
+  test("uses six park laps", () => strictEqual(LAPS, 6));
 });

@@ -14,11 +14,12 @@ const TURNS: [string, string][] = [
   ["Bear left", "Run back to the start to finish the lap."],
 ];
 
-const W = 520, H = 400, PAD = 24;
+const W = 520, PAD = 28;
 const xs = PARK_OUTLINE.map((p) => p[0]), ys = PARK_OUTLINE.map((p) => p[1]);
 const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
 const k = Math.cos((((minY + maxY) / 2) * Math.PI) / 180);
-const scale = Math.min((W - PAD * 2) / ((maxX - minX) * k), (H - PAD * 2) / (maxY - minY));
+const scale = (W - PAD * 2) / ((maxX - minX) * k);
+const H = Math.round((maxY - minY) * scale + PAD * 2);
 const offX = (W - PAD * 2 - (maxX - minX) * k * scale) / 2;
 const proj = ([x, y]: [number, number]) => [PAD + offX + (x - minX) * k * scale, H - PAD - (y - minY) * scale] as const;
 const toPath = (pts: [number, number][], close = false) => pts.map((p, i) => `${i ? "L" : "M"}${proj(p).map((n) => n.toFixed(1)).join(" ")}`).join(" ") + (close ? " Z" : "");
@@ -40,8 +41,8 @@ export function Run2Course() {
       <p className="mt-2 text-sm font-medium text-forest">Draft course. Final route depends on approval from Montgomery Parks.</p>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-        <figure className="ink-card p-4 sm:p-6">
-          <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Map of the draft Run #02 lap inside Takoma-Piney Branch Local Park, running clockwise from the northwest corner">
+        <figure className="ink-card p-4 sm:p-6 lg:row-span-2">
+          <svg viewBox={`0 0 ${W} ${H}`} className="mx-auto h-auto w-full max-w-md" role="img" aria-label="Map of the draft Run #02 lap inside Takoma-Piney Branch Local Park, running clockwise from the northwest corner">
             <path d={toPath(PARK_OUTLINE, true)} className="fill-forest/10 stroke-forest" strokeWidth="2" strokeDasharray="6 5" />
             <path d={toPath(LOOP)} fill="none" className="stroke-terracotta" strokeWidth="5" strokeLinejoin="round" strokeLinecap="round" />
             {LOOP.slice(1, -1).map((p, i) => {
@@ -53,8 +54,9 @@ export function Run2Course() {
                 </g>
               );
             })}
+            <g transform={`translate(${W - 30},34)`}><path d="M0 -16 L7 6 L0 1 L-7 6 Z" className="fill-forest" /><text y="22" textAnchor="middle" fontSize="13" className="fill-forest" fontWeight="700">N</text></g>
             <circle cx={sx} cy={sy} r="13" className="fill-terracotta stroke-ink" strokeWidth="2" />
-            <text x={sx + 18} y={sy - 10} fontSize="15" className="fill-ink" fontFamily="Bebas Neue, sans-serif" letterSpacing="2">START · FINISH</text>
+            <text x={sx + 16} y={sy - 16} fontSize="15" className="fill-ink" fontFamily="Bebas Neue, sans-serif" letterSpacing="2">START · FINISH</text>
           </svg>
           <figcaption className="mt-3 text-xs text-ink-soft">Clockwise. Dashed line is the park boundary. Numbers match the directions.</figcaption>
         </figure>

@@ -1,17 +1,17 @@
 import { CLIMB_PER_LAP_FT, FINISH_EXTRA_M, LAP_M, LAPS, LOOP, LOOP_CUM_M, LOOP_ELEV_FT, PARK_OUTLINE } from "@/lib/run2-course";
 
 const TURNS: [string, string][] = [
-  ["Start", "Shelter lawn, northwest corner. Head northeast along the upper edge."],
+  ["Start", "Northwest corner of the park. Head northeast along the upper edge."],
   ["Bear right", "Swing southeast and start the long descent."],
   ["Straight", "Keep downhill along the east side."],
-  ["Slight right", "Ease toward the creek, still dropping."],
+  ["Slight right", "Ease right, still dropping."],
   ["Turn right", "Low point of the lap. Head southwest along the bottom."],
   ["Slight right", "Begin climbing west."],
   ["Straight", "Short push up the south edge."],
   ["Turn right", "Head northwest, climbing."],
-  ["Turn right", "North up the west side, the steepest pull."],
+  ["Turn right", "North up the west side, the longest climb."],
   ["Bear right", "Crest the climb and swing northeast."],
-  ["Bear left", "Run back to the shelter to finish the lap."],
+  ["Bear left", "Run back to the start to finish the lap."],
 ];
 
 const W = 520, H = 400, PAD = 24;
@@ -40,7 +40,7 @@ export function Run2Course() {
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr]">
         <figure className="ink-card p-4 sm:p-6">
-          <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Map of the draft Run #02 lap inside Takoma-Piney Branch Local Park, running clockwise from the shelter in the northwest corner">
+          <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Map of the draft Run #02 lap inside Takoma-Piney Branch Local Park, running clockwise from the northwest corner">
             <path d={toPath(PARK_OUTLINE, true)} className="fill-forest/10 stroke-forest" strokeWidth="2" strokeDasharray="6 5" />
             <path d={toPath(LOOP)} fill="none" className="stroke-terracotta" strokeWidth="5" strokeLinejoin="round" strokeLinecap="round" />
             {LOOP.slice(1, -1).map((p, i) => {
@@ -66,7 +66,7 @@ export function Run2Course() {
           </dl>
           <figure className="ink-card mt-4 p-4">
             <p className="eyebrow text-forest">Elevation · one lap</p>
-            <svg viewBox={`0 0 ${EW} ${EH}`} className="mt-2 h-auto w-full" role="img" aria-label={`Elevation for one lap: from ${Math.max(...LOOP_ELEV_FT)} feet at the start down to ${Math.min(...LOOP_ELEV_FT)} feet, then about ${CLIMB_PER_LAP_FT} feet of climbing back to the shelter`}>
+            <svg viewBox={`0 0 ${EW} ${EH}`} className="mt-2 h-auto w-full" role="img" aria-label={`Elevation for one lap: from ${Math.max(...LOOP_ELEV_FT)} feet at the start down to ${Math.min(...LOOP_ELEV_FT)} feet, then about ${CLIMB_PER_LAP_FT} feet of climbing back to the start`}>
               <path d={`${eLine} L${ePts.at(-1)![0]} ${EH - 28} L${ePts[0][0]} ${EH - 28} Z`} className="fill-terracotta/15" />
               <path d={eLine} fill="none" className="stroke-terracotta" strokeWidth="3" />
               <text x="0" y="18" fontSize="11" className="fill-ink-soft">{Math.round(eMax - 8)} ft</text>
@@ -74,7 +74,7 @@ export function Run2Course() {
               <text x="32" y={EH - 10} fontSize="11" className="fill-ink-soft">0 m</text>
               <text x={EW - 12} y={EH - 10} fontSize="11" textAnchor="end" className="fill-ink-soft">{LAP_M} m</text>
             </svg>
-            <p className="mt-2 text-xs text-ink-soft">Downhill first, then climb back to the shelter. About {CLIMB_PER_LAP_FT} ft up per lap.</p>
+            <p className="mt-2 text-xs text-ink-soft">Downhill first, then climb back to the start. About {CLIMB_PER_LAP_FT} ft up per lap.</p>
           </figure>
         </div>
       </div>
@@ -93,7 +93,7 @@ export function Run2Course() {
           ))}
           <li className="flex gap-4 border-b border-hairline py-3">
             <span className="display-tight w-8 shrink-0 text-xl text-terracotta">F</span>
-            <div><p className="font-semibold text-ink">Finish</p><p className="text-sm text-ink-soft">After lap {LAPS}, run {FINISH_EXTRA_M} m past the shelter to the finish arch.</p></div>
+            <div><p className="font-semibold text-ink">Finish</p><p className="text-sm text-ink-soft">After lap {LAPS}, run {FINISH_EXTRA_M} m past the start to the finish line.</p></div>
           </li>
         </ol>
       </div>

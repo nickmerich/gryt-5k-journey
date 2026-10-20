@@ -1,3 +1,4 @@
+import { Run2Course } from "@/components/Run2Course";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowLeft, ArrowUpRight, CalendarDays, MapPin, Route as RouteIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -69,7 +70,7 @@ function SeriesPage() {
           <dl className="divide-y-2 divide-ink border-y-2 border-ink">
             <div className="flex gap-4 py-5"><CalendarDays className="mt-1 size-5 shrink-0 text-terracotta" /><div><dt className="eyebrow text-forest">Date · To be confirmed</dt><dd className="mt-2 text-lg font-medium">December 2026</dd><dd className="mt-1 text-sm leading-relaxed text-ink-soft">Tell us: Dec 5–6, Dec 12–13, Dec 19–20, or any weekend.</dd></div></div>
             <div className="flex gap-4 py-5"><MapPin className="mt-1 size-5 shrink-0 text-terracotta" /><div><dt className="eyebrow text-forest">Location</dt><dd className="mt-2 text-lg font-medium">Takoma community</dd><dd className="mt-1 text-sm text-ink-soft">Meeting point and start time to be announced.</dd></div></div>
-            <div className="flex gap-4 py-5"><RouteIcon className="mt-1 size-5 shrink-0 text-terracotta" /><div><dt className="eyebrow text-forest">Route</dt><dd className="mt-2 text-lg font-medium">5K · Course to be confirmed</dd><dd className="mt-1 text-sm leading-relaxed text-ink-soft">Final course details will be shared before registration opens.</dd></div></div>
+            <div className="flex gap-4 py-5"><RouteIcon className="mt-1 size-5 shrink-0 text-terracotta" /><div><dt className="eyebrow text-forest">Route</dt><dd className="mt-2 text-lg font-medium">5K · 6 laps inside Takoma-Piney Branch Local Park</dd><dd className="mt-1 text-sm leading-relaxed text-ink-soft">Draft course below. Final route depends on park approval.</dd></div></div>
           </dl>
         </div>
       </section>
@@ -92,6 +93,7 @@ function SeriesPage() {
         </div>
       </section>
 
+      <Run2Course />
       <Run2Hub />
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6"><p className="eyebrow text-terracotta">Looking ahead · Run #03</p><h2 className="mt-4 display-tight text-4xl text-forest">THE NEXT CHAPTER.</h2><p className="mt-4 max-w-lg leading-relaxed text-ink-soft">Run #03 has its own interest list. Date and route are still to be confirmed.</p><Button asChild variant="link" className="mt-4 h-auto px-0 text-terracotta"><Link to="/run-03">Explore Run #03 <ArrowUpRight /></Link></Button></section>
       <section className="border-y-2 border-ink bg-forest px-5 py-12 text-center text-forest-ink"><p className="eyebrow text-forest-ink">Run #02 · Partners</p><h2 className="mt-4 display-tight text-4xl">HELP BUILD THE NEXT ONE.</h2><Button asChild className="brush-btn mt-6 h-auto min-h-14 whitespace-normal rounded-none bg-paper px-6 py-4 display-tight text-lg text-forest shadow-none hover:bg-terracotta hover:text-terracotta-ink"><Link to="/partners">Partner with us <ArrowUpRight /></Link></Button></section>

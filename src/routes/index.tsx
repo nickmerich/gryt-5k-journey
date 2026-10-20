@@ -6,7 +6,7 @@ import mocoParksLogo from "@/assets/partner-IMG_8387.png.asset.json";
 import { useEffect, useRef, useState } from "react";
 import { HeroGroup } from "@/components/HeroGroup";
 import { PressBar } from "@/components/PressBar";
-import bearLogo from "@/assets/gryt-bear.png.asset.json";
+import { SiteNav } from "@/components/SiteNav";
 import { z } from "zod";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
 import recapVideo from "@/assets/rtwl-recap.mp4.asset.json";
@@ -850,18 +850,8 @@ function RunTakomaOnePager() {
         }}
       />
 
-      {/* Top eyebrow */}
-      <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 pt-6 sm:pt-8">
-        <Link to="/5k-series" className="flex min-h-12 min-w-0 items-center text-forest transition-colors hover:text-terracotta" aria-label="ARTIST x GRYT 5K SERIES">
-          <span className="whitespace-nowrap border-b-2 border-terracotta pb-1 font-display text-lg font-bold leading-none tracking-normal sm:text-4xl">ARTIST x GRYT 5K SERIES</span>
-        </Link>
-        <div className="flex items-center gap-4">
-          <span className="eyebrow text-terracotta hidden sm:inline">
-            08 · 02 · 2026
-          </span>
-          <img src={bearLogo.url} alt="GRYT Club" width={56} height={60} className="h-12 w-auto sm:h-16" />
-        </div>
-      </header>
+      <SiteNav />
+
 
 
       {/* HERO — group finisher photo + Run #02 call */}
@@ -1598,6 +1588,41 @@ function RunTakomaOnePager() {
         </div>
       </section>
       )}
+
+      <section aria-labelledby="past-runs" className="relative z-10 mx-auto max-w-5xl px-5 py-14 sm:px-6">
+        <RuledLabel>Past runs</RuledLabel>
+        <h2 id="past-runs" className="sr-only">Past runs</h2>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          <Link to="/takoma" className="ink-card ink-card-hover block p-6">
+            <p className="eyebrow text-terracotta">08.02.26 · Takoma Park, MD</p>
+            <p className="mt-2 display-tight text-4xl text-forest">Run Takoma With Love</p>
+            <p className="mt-2 text-ink-soft">98 finishers</p>
+          </Link>
+          <Link to="/artists" className="block border-2 border-dashed border-ink/50 p-6 transition-colors hover:border-terracotta">
+            <p className="eyebrow text-ink-soft">Next up</p>
+            <p className="mt-2 display-tight text-4xl text-ink-soft">Your city next?</p>
+            <p className="mt-2 text-ink-soft">Bring a run to your neighborhood.</p>
+          </Link>
+        </div>
+      </section>
+
+      <section aria-labelledby="doors" className="relative z-10 mx-auto max-w-5xl px-5 pb-16 sm:px-6">
+        <RuledLabel>Find your door</RuledLabel>
+        <h2 id="doors" className="sr-only">Find your door</h2>
+        <div className="mt-6 grid gap-5 sm:grid-cols-3">
+          {[
+            { k: "For runners", t: "Join the list", b: "Free. Every pace welcome.", href: "/#run2" },
+            { k: "For brands", t: "Partner with us", b: "Meet the community face to face.", href: "/partners" },
+            { k: "For artists", t: "Host a run", b: "Your album. Your neighborhood.", href: "/artists" },
+          ].map((d) => (
+            <a key={d.k} href={d.href} className="ink-card ink-card-hover block p-6">
+              <p className="eyebrow text-terracotta">{d.k}</p>
+              <p className="mt-2 display-tight text-3xl text-forest">{d.t}</p>
+              <p className="mt-2 text-ink-soft">{d.b}</p>
+            </a>
+          ))}
+        </div>
+      </section>
 
       <section aria-labelledby="closing-title" className="relative z-10 isolate overflow-hidden border-t border-hairline bg-paper-warm">
         <TakomaStreetGrid />

@@ -1,3 +1,5 @@
+import { AuditFooterLinks } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { Run2Course } from "@/components/Run2Course";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowLeft, ArrowUpRight, CalendarDays, MapPin, Route as RouteIcon } from "lucide-react";
@@ -17,10 +19,13 @@ const DESCRIPTION = "Explore the Run Takoma With Love 5K series: Run #01 photos 
 
 export const Route = createFileRoute("/5k-series")({
   head: () => ({ meta: [
+      ...recapImageMeta,
     { title: TITLE },
     { name: "description", content: DESCRIPTION },
     { property: "og:title", content: TITLE },
+      { name: "twitter:title", content: TITLE },
     { property: "og:description", content: DESCRIPTION },
+      { name: "twitter:description", content: DESCRIPTION },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
@@ -96,10 +101,12 @@ function SeriesPage() {
       <Run2Course />
       <Run2Hub />
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6"><p className="eyebrow text-terracotta">Looking ahead · Run #03</p><h2 className="mt-4 display-tight text-4xl text-forest">THE NEXT CHAPTER.</h2><p className="mt-4 max-w-lg leading-relaxed text-ink-soft">Run #03 has its own interest list. Date and route are still to be confirmed.</p><Button asChild variant="link" className="mt-4 h-auto px-0 text-terracotta"><Link to="/run-03">Explore Run #03 <ArrowUpRight /></Link></Button></section>
+      <p className="mx-auto max-w-6xl px-5 pb-10 text-ink-soft sm:px-6"><a href="https://phihackathon.pplx.app" target="_blank" rel="noopener" className="underline decoration-terracotta underline-offset-4">Also on the calendar: Shake &amp; Ship Philadelphia, Nov 20 to 21, 2026</a></p>
       <section className="border-y-2 border-ink bg-forest px-5 py-12 text-center text-forest-ink"><p className="eyebrow text-forest-ink">Run #02 · Partners</p><h2 className="mt-4 display-tight text-4xl">HELP BUILD THE NEXT ONE.</h2><Button asChild className="brush-btn mt-6 h-auto min-h-14 whitespace-normal rounded-none bg-paper px-6 py-4 display-tight text-lg text-forest shadow-none hover:bg-terracotta hover:text-terracotta-ink"><Link to="/partners">Partner with us <ArrowUpRight /></Link></Button></section>
       <footer className="mx-auto flex max-w-6xl flex-col justify-between gap-8 px-5 py-10 sm:flex-row sm:px-6">
         <p className="display-tight text-2xl text-forest">DO HARD THINGS TOGETHER</p>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-3 text-sm text-ink-soft"><Link to="/">Home</Link><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><Link to="/accessibility">Accessibility</Link><a href="https://www.strava.com/clubs/1708552" target="_blank" rel="noopener noreferrer">Strava</a></nav>
+      <div className="px-5 pb-8"><AuditFooterLinks /></div>
       </footer>
     </main>
   );

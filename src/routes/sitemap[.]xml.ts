@@ -14,18 +14,18 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const today = new Date().toISOString().slice(0, 10);
         const entries: SitemapEntry[] = [
-          { path: "/", lastmod: today, changefreq: "weekly", priority: "1.0" },
-          { path: "/5k-series", lastmod: today, changefreq: "weekly", priority: "0.9" },
-          { path: "/run-03", lastmod: today, changefreq: "weekly", priority: "0.8" },
-          { path: "/takoma", lastmod: today, changefreq: "monthly", priority: "0.9" },
-          { path: "/artists", lastmod: today, changefreq: "monthly", priority: "0.8" },
-          { path: "/story", lastmod: today, changefreq: "weekly", priority: "0.9" },
-          { path: "/partners", lastmod: today, changefreq: "weekly", priority: "0.8" },
-          { path: "/terms", lastmod: today, changefreq: "yearly", priority: "0.3" },
-          { path: "/privacy", lastmod: today, changefreq: "yearly", priority: "0.3" },
-          { path: "/accessibility", lastmod: today, changefreq: "yearly", priority: "0.3" },
+          { path: "/", changefreq: "weekly", priority: "1.0" },
+          { path: "/5k-series", changefreq: "weekly", priority: "0.9" },
+          { path: "/run-03", changefreq: "weekly", priority: "0.8" },
+          { path: "/takoma", changefreq: "monthly", priority: "0.9" },
+          { path: "/press", changefreq: "monthly", priority: "0.8" },
+          { path: "/artists", changefreq: "monthly", priority: "0.8" },
+          { path: "/story", changefreq: "weekly", priority: "0.9" },
+          { path: "/partners", changefreq: "weekly", priority: "0.8" },
+          { path: "/terms", changefreq: "yearly", priority: "0.3" },
+          { path: "/privacy", changefreq: "yearly", priority: "0.3" },
+          { path: "/accessibility", changefreq: "yearly", priority: "0.3" },
         ];
 
         const urls = entries.map((e) =>

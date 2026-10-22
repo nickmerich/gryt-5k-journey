@@ -70,7 +70,7 @@ const Email = ({ name, ticket, waiverAccepted }: Props) => {
 
           <Text style={sign}>Community. Movement. Takoma.</Text>
           <Text style={signSmall}>
-            Presented by GRYT Club · In partnership with smartwater, HeNO,
+            Presented by GRYT Club · In partnership with smartwater, Heno.,
             and Oddisee
           </Text>
         </Container>

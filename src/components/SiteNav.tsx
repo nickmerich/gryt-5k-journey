@@ -8,6 +8,7 @@ const LINKS = [
   { to: "/artists", label: "Artists" },
   { to: "/partners", label: "Brands" },
   { to: "/story", label: "Story" },
+  { to: "/press", label: "Press" },
 ] as const;
 
 export function SiteNav() {
@@ -19,7 +20,7 @@ export function SiteNav() {
           <img src={bearLogo.url} alt="" width={56} height={60} className="h-11 w-auto sm:h-14" />
           <span className="font-display text-2xl font-bold leading-none text-forest sm:text-3xl">gryt</span>
         </Link>
-        <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-5 lg:flex">
           {LINKS.map((l) => (
             <Link key={l.to} to={l.to} className="eyebrow text-sm text-ink transition-colors hover:text-terracotta" activeProps={{ className: "text-terracotta" }}>
               {l.label}
@@ -31,7 +32,7 @@ export function SiteNav() {
         </nav>
         <button
           type="button"
-          className="inline-flex h-12 w-12 items-center justify-center border-2 border-ink md:hidden"
+          className="inline-flex h-12 w-12 items-center justify-center border-2 border-ink lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
@@ -40,7 +41,7 @@ export function SiteNav() {
         </button>
       </div>
       {open && (
-        <nav aria-label="Mobile" className="mt-3 grid gap-1 border-2 border-ink bg-paper-warm p-2 md:hidden">
+        <nav aria-label="Mobile" className="mt-3 grid gap-1 border-2 border-ink bg-paper-warm p-2 lg:hidden">
           {LINKS.map((l) => (
             <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="flex min-h-12 items-center px-3 display-tight text-xl text-forest">
               {l.label}

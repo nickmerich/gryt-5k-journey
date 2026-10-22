@@ -15,3 +15,8 @@
 - Future runs show tentative dates and unconfirmed routes explicitly; interest-list entries are not race registrations.
 - Run #03 uses its own validated server function and form; shared run2_interest rows are separated by event_code so new runs cannot mix with the existing list.
 - Shared SiteNav (src/components/SiteNav.tsx) is the header on homepage, /takoma and /artists; /brands redirects to /partners to keep the existing sponsor URL.
+
+## Public site audit
+- Define recap share-image metadata through the shared site-meta module on content leaf routes, never the root layout, so per-page social metadata remains independent.
+- Reuse AuditFooterLinks inside existing footers and SiteFooter on pages without a footer to keep press, contact, and event destinations consistent.
+- Retain a 404 status on unknown URLs; root head detects notFound matches for server-rendered fallback titles because thrown catch-all loaders do not contribute leaf metadata.

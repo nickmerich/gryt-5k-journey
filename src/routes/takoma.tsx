@@ -1,3 +1,5 @@
+import { SiteFooter } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -14,10 +16,13 @@ const DESC = "The first GRYT artist-led run. 248 signed up, 98 finished in Takom
 export const Route = createFileRoute("/takoma")({
   head: () => ({
     meta: [
+      ...recapImageMeta,
       { title: TITLE },
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
+      { name: "twitter:title", content: TITLE },
       { property: "og:description", content: DESC },
+      { name: "twitter:description", content: DESC },
       { property: "og:type", content: "article" },
       { property: "og:url", content: "https://grytrun.com/takoma" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -57,6 +62,7 @@ function TakomaPage() {
       <PressBar />
       <ArtistQuotes />
       <Run2Hub />
+    <SiteFooter />
     </main>
   );
 }

@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import the51st from "@/assets/press-the51st.png.asset.json";
 import popville from "@/assets/press-popville.png.asset.json";
@@ -43,7 +44,7 @@ export function PressBar() {
       <div className="py-6 sm:py-10">
         <div className="mb-5 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:mb-7 sm:gap-5">
           <span aria-hidden className="h-px bg-hairline/40" />
-          <h2 id="press-heading" className="eyebrow text-[0.8rem] tracking-[0.28em] text-forest sm:text-sm">Featured In</h2>
+          <h2 id="press-heading" className="eyebrow text-[0.8rem] tracking-[0.28em] text-forest sm:text-sm"><Link to="/press" className="hover:text-terracotta">Featured In</Link></h2>
           <span className="flex items-center gap-3">
             <span aria-hidden className="h-px flex-1 bg-hairline/40" />
             <button

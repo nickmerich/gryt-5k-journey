@@ -1,3 +1,6 @@
+import { ShakeAndShip } from "@/components/ShakeAndShip";
+import { AuditFooterLinks } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { Run2Course } from "@/components/Run2Course";
 import { ArtistQuotes } from "@/components/ArtistQuotes";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -72,15 +75,22 @@ type StravaAthlete = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Run Takoma With Love Recap & Run #02 — GRYT Club" },
+      ...recapImageMeta,
+      { title: "Run Takoma With Love Recap & Run #02 · GRYT" },
       {
         name: "description",
         content:
           "248 signups, 98 finishers, one community. Relive Run Takoma With Love and get on the list for Run #02. Runners and brands welcome.",
       },
-      { property: "og:title", content: "Run Takoma With Love Recap & Run #02 — GRYT Club" },
+      { property: "og:title", content: "Run Takoma With Love Recap & Run #02 · GRYT" },
+      { name: "twitter:title", content: "Run Takoma With Love Recap & Run #02 · GRYT" },
       {
         property: "og:description",
+        content:
+          "248 signups, 98 finishers, one community. Relive Run Takoma With Love and get on the list for Run #02. Runners and brands welcome.",
+      },
+      {
+        name: "twitter:description",
         content:
           "248 signups, 98 finishers, one community. Relive Run Takoma With Love and get on the list for Run #02. Runners and brands welcome.",
       },
@@ -920,6 +930,7 @@ function RunTakomaOnePager() {
       <ArtistQuotes />
 
       <Run2Hub />
+      <ShakeAndShip />
       <Run2Course />
       <section
         aria-label="Partners"
@@ -1716,6 +1727,7 @@ function RunTakomaOnePager() {
             </div>
           </div>
         </div>
+      <div className="px-5 pb-8"><AuditFooterLinks /></div>
       </footer>
 
 

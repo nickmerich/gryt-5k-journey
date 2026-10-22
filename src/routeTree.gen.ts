@@ -10,11 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SplatRouteImport } from './routes/$'
 import { Route as R5kSeriesRouteImport } from './routes/5k-series'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as ArtistsRouteImport } from './routes/artists'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as PressRouteImport } from './routes/press'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as Run03RouteImport } from './routes/run-03'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -37,6 +39,11 @@ import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/l
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const R5kSeriesRoute = R5kSeriesRouteImport.update({
@@ -62,6 +69,11 @@ const BrandsRoute = BrandsRouteImport.update({
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -158,11 +170,13 @@ const LovableEmailTransactionalPreviewRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
   '/artists': typeof ArtistsRoute
   '/brands': typeof BrandsRoute
   '/partners': typeof PartnersRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -184,11 +198,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
   '/artists': typeof ArtistsRoute
   '/brands': typeof BrandsRoute
   '/partners': typeof PartnersRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -211,11 +227,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/5k-series': typeof R5kSeriesRoute
   '/accessibility': typeof AccessibilityRoute
   '/artists': typeof ArtistsRoute
   '/brands': typeof BrandsRoute
   '/partners': typeof PartnersRoute
+  '/press': typeof PressRoute
   '/privacy': typeof PrivacyRoute
   '/run-03': typeof Run03Route
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -239,11 +257,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$'
     | '/5k-series'
     | '/accessibility'
     | '/artists'
     | '/brands'
     | '/partners'
+    | '/press'
     | '/privacy'
     | '/run-03'
     | '/sitemap.xml'
@@ -265,11 +285,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$'
     | '/5k-series'
     | '/accessibility'
     | '/artists'
     | '/brands'
     | '/partners'
+    | '/press'
     | '/privacy'
     | '/run-03'
     | '/sitemap.xml'
@@ -291,11 +313,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$'
     | '/5k-series'
     | '/accessibility'
     | '/artists'
     | '/brands'
     | '/partners'
+    | '/press'
     | '/privacy'
     | '/run-03'
     | '/sitemap.xml'
@@ -318,11 +342,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SplatRoute: typeof SplatRoute
   R5kSeriesRoute: typeof R5kSeriesRoute
   AccessibilityRoute: typeof AccessibilityRoute
   ArtistsRoute: typeof ArtistsRoute
   BrandsRoute: typeof BrandsRoute
   PartnersRoute: typeof PartnersRoute
+  PressRoute: typeof PressRoute
   PrivacyRoute: typeof PrivacyRoute
   Run03Route: typeof Run03Route
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -350,6 +376,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/5k-series': {
@@ -385,6 +418,13 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/partners'
       preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -518,11 +558,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SplatRoute: SplatRoute,
   R5kSeriesRoute: R5kSeriesRoute,
   AccessibilityRoute: AccessibilityRoute,
   ArtistsRoute: ArtistsRoute,
   BrandsRoute: BrandsRoute,
   PartnersRoute: PartnersRoute,
+  PressRoute: PressRoute,
   PrivacyRoute: PrivacyRoute,
   Run03Route: Run03Route,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

@@ -1,3 +1,5 @@
+import { SiteFooter } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SPONSOR_LABELS } from "@/components/SponsorInquiryForm";
@@ -8,13 +10,16 @@ const DESC = "Thanks for reaching out about partnering on Run Takoma With Love #
 export const Route = createFileRoute("/partners_/thanks")({
   head: () => ({
     meta: [
+      ...recapImageMeta,
       { title: TITLE },
       { name: "description", content: DESC },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: TITLE },
+      { name: "twitter:title", content: TITLE },
       { property: "og:description", content: DESC },
+      { name: "twitter:description", content: DESC },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Thanks,
@@ -75,6 +80,7 @@ function Thanks() {
         </div>
         <p className="mt-8 text-sm text-ink-soft">Questions in the meantime? DM <a className="underline" href="https://instagram.com/grytrunclub" target="_blank" rel="noopener noreferrer">@grytrunclub</a>.</p>
       </section>
+    <SiteFooter />
     </main>
   );
 }

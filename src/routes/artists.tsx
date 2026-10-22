@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import { SiteFooter } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 
@@ -7,10 +10,13 @@ const DESC = "Your album. Your neighborhood. Your fans, moving together. Bring a
 export const Route = createFileRoute("/artists")({
   head: () => ({
     meta: [
+      ...recapImageMeta,
       { title: TITLE },
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
+      { name: "twitter:title", content: TITLE },
       { property: "og:description", content: DESC },
+      { name: "twitter:description", content: DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://grytrun.com/artists" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -59,13 +65,13 @@ function ArtistsPage() {
         </div>
 
         <div className="mt-14 text-center">
-          <p className="display-tight text-4xl text-forest">Want your city next?</p>
-          <p className="mx-auto mt-2 max-w-md text-ink-soft">Send us your project, city and timeline. A pitch form is coming soon.</p>
-          <a href="https://instagram.com/grytrunclub" target="_blank" rel="noopener noreferrer" className="brush-btn mt-5 inline-flex min-h-14 items-center justify-center bg-terracotta px-8 display-tight text-lg tracking-[0.1em] text-[color:var(--color-terracotta-ink)] hover:bg-forest">
-            PITCH YOUR CITY ON INSTAGRAM
-          </a>
+          <p className="display-tight text-4xl text-forest">Pitch a run</p>
+          <p className="mx-auto mt-2 max-w-md text-ink-soft">Have an album, a city and a crew? Tell us the record, the neighborhood you'd run and roughly when. We read every pitch.</p>
+          <Button asChild className="brush-btn mt-5 min-h-14 rounded-none bg-terracotta px-8 display-tight text-lg text-terracotta-ink hover:bg-forest hover:text-forest-ink"><a href="mailto:merichnick@gmail.com?subject=Artist-led%20run%20pitch&body=Artist%20%2F%20project%3A%0ACity%20%2F%20neighborhood%3A%0ARough%20timing%3A%0ALinks%3A">Email your pitch</a></Button>
+          <p className="mt-4"><a href="https://instagram.com/grytrunclub" target="_blank" rel="noopener" className="text-forest underline underline-offset-4">Or DM us on Instagram</a></p>
         </div>
       </section>
+    <SiteFooter />
     </main>
   );
 }

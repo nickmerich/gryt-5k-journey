@@ -1,19 +1,28 @@
+import { SiteFooter } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
+      ...recapImageMeta,
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { title: "Privacy Policy — Run Takoma With Love 5K" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Privacy · GRYT Run" },
       {
         name: "description",
         content:
           "How GRYT Club collects, uses, and protects your information for the Run Takoma With Love 5K.",
       },
-      { property: "og:title", content: "Privacy Policy — Run Takoma With Love 5K" },
+      { property: "og:title", content: "Privacy · GRYT Run" },
+      { name: "twitter:title", content: "Privacy · GRYT Run" },
       {
         property: "og:description",
+        content:
+          "How GRYT Club collects, uses, and protects your information for the Run Takoma With Love 5K.",
+      },
+      {
+        name: "twitter:description",
         content:
           "How GRYT Club collects, uses, and protects your information for the Run Takoma With Love 5K.",
       },
@@ -115,6 +124,7 @@ function PrivacyPage() {
           </Link>
         </div>
       </div>
+    <SiteFooter />
     </main>
   );
 }

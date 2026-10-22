@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { ArtistPitchForm } from "@/components/ArtistPitchForm";
 import { SiteFooter } from "@/components/AuditFooterLinks";
 import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -64,12 +64,7 @@ function ArtistsPage() {
           </Link>
         </div>
 
-        <div className="mt-14 text-center">
-          <p className="display-tight text-4xl text-forest">Pitch a run</p>
-          <p className="mx-auto mt-2 max-w-md text-ink-soft">Have an album, a city and a crew? Tell us the record, the neighborhood you'd run and roughly when. We read every pitch.</p>
-          <Button asChild className="brush-btn mt-5 min-h-14 rounded-none bg-terracotta px-8 display-tight text-lg text-terracotta-ink hover:bg-forest hover:text-forest-ink"><a href="mailto:merichnick@gmail.com?subject=Artist-led%20run%20pitch&body=Artist%20%2F%20project%3A%0ACity%20%2F%20neighborhood%3A%0ARough%20timing%3A%0ALinks%3A">Email your pitch</a></Button>
-          <p className="mt-4"><a href="https://instagram.com/grytrunclub" target="_blank" rel="noopener" className="text-forest underline underline-offset-4">Or DM us on Instagram</a></p>
-        </div>
+        <ArtistPitchForm />
       </section>
     <SiteFooter />
     </main>

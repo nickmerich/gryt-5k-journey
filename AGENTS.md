@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Series pages
+- Artist city pitches use a shared client/server validation schema and a dedicated public submission handler with service-only storage, so pitches remain private and saved independently of owner email delivery.
 - Homepage artist testimonials and the closing album slide use the shared ArtistQuotes carousel with directional manual controls and swipe, keeping artist content separate from page layout.
 - The 5K Series route reuses Run2Hub and EVENT_PHOTOS so signups, confirmation persistence, and event imagery stay consistent with the homepage.
 - Future runs show tentative dates and unconfirmed routes explicitly; interest-list entries are not race registrations.

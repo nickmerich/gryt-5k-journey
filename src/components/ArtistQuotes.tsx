@@ -71,7 +71,7 @@ export function ArtistQuotes() {
                   </a>}
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-ink-soft">The {index === 0 ? "voice" : "sound"} behind <em>From Takoma With Love</em> — the album this run is named for</p>
-                {index === 0 && <p className="mt-3 text-xs leading-relaxed text-ink-soft">As of Oct 19, 2026 · Instagram count via Social Blade; not verified directly on Instagram.</p>}
+                {index === 0 && <p className="mt-3 text-xs leading-relaxed text-ink-soft">As of Oct 19, 2026</p>}
               </figcaption>
             </figure>
           ))}

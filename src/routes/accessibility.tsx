@@ -1,19 +1,28 @@
+import { SiteFooter } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/accessibility")({
   head: () => ({
     meta: [
+      ...recapImageMeta,
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { title: "Accessibility — Run Takoma With Love 5K" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Accessibility · GRYT Run" },
       {
         name: "description",
         content:
           "Our commitment to making the Run Takoma With Love 5K and grytrun.com accessible to everyone.",
       },
-      { property: "og:title", content: "Accessibility — Run Takoma With Love 5K" },
+      { property: "og:title", content: "Accessibility · GRYT Run" },
+      { name: "twitter:title", content: "Accessibility · GRYT Run" },
       {
         property: "og:description",
+        content:
+          "Our commitment to making the Run Takoma With Love 5K and grytrun.com accessible to everyone.",
+      },
+      {
+        name: "twitter:description",
         content:
           "Our commitment to making the Run Takoma With Love 5K and grytrun.com accessible to everyone.",
       },
@@ -111,6 +120,7 @@ function AccessibilityPage() {
           </Link>
         </div>
       </div>
+    <SiteFooter />
     </main>
   );
 }

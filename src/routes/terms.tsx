@@ -1,19 +1,28 @@
+import { SiteFooter } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
+      ...recapImageMeta,
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { title: "Terms of Service — Run Takoma With Love 5K" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "Terms · GRYT Run" },
       {
         name: "description",
         content:
           "Terms of Service, participant waiver, and event policies for the Run Takoma With Love 5K presented by GRYT Club.",
       },
-      { property: "og:title", content: "Terms of Service — Run Takoma With Love 5K" },
+      { property: "og:title", content: "Terms · GRYT Run" },
+      { name: "twitter:title", content: "Terms · GRYT Run" },
       {
         property: "og:description",
+        content:
+          "Terms of Service, participant waiver, and event policies for the Run Takoma With Love 5K.",
+      },
+      {
+        name: "twitter:description",
         content:
           "Terms of Service, participant waiver, and event policies for the Run Takoma With Love 5K.",
       },
@@ -173,6 +182,7 @@ function TermsPage() {
           </Link>
         </div>
       </div>
+    <SiteFooter />
     </main>
   );
 }

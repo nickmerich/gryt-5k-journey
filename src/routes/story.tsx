@@ -1,3 +1,5 @@
+import { AuditFooterLinks } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
@@ -8,12 +10,13 @@ import shelterAsset from "@/assets/img-shelter.webp.asset.json";
 const STORY_URL = "https://grytrun.com/story";
 const STORY_TITLE = "The Story — Run Takoma With Love 5K · GRYT Club";
 const STORY_DESCRIPTION =
-  "How an album became a starting line. The true story behind Run Takoma With Love — the friendship, the vision, the route, and the full race-day agenda. Sunday, August 2, 2026 · Takoma-Piney Branch Local Park · 100 runners, free RSVP.";
-const STORY_IMAGE = new URL(flyerAsset.url, "https://grytrun.com").toString();
+  "How an album became a starting line. The true story behind Run Takoma With Love: the friendship, the vision, the route and the day 98 runners finished in Takoma Park.";
+const STORY_IMAGE = "https://grytrun.com/og/grytrun-recap-1200x630.jpg";
 
 export const Route = createFileRoute("/story")({
   head: () => ({
     meta: [
+      ...recapImageMeta,
       { title: STORY_TITLE },
       { name: "description", content: STORY_DESCRIPTION },
       { name: "author", content: "GRYT Club" },
@@ -22,15 +25,9 @@ export const Route = createFileRoute("/story")({
       { property: "og:type", content: "article" },
       { property: "og:url", content: STORY_URL },
       { property: "og:site_name", content: "GRYT Club" },
-      { property: "og:image", content: STORY_IMAGE },
-      { property: "og:image:alt", content: "Run Takoma With Love 5K flyer" },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "1500" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: STORY_TITLE },
       { name: "twitter:description", content: STORY_DESCRIPTION },
-      { name: "twitter:image", content: STORY_IMAGE },
-      { name: "twitter:image:alt", content: "Run Takoma With Love 5K flyer" },
     ],
     links: [{ rel: "canonical", href: STORY_URL }],
     scripts: [
@@ -786,6 +783,7 @@ function StoryPage() {
         <span>© GRYT Club · Takoma Park, MD</span>
         <span className="footer__script">doing hard things, together ♡</span>
         <span>grytrun.com · @grytrunclub</span>
+      <div className="px-5 pb-8"><AuditFooterLinks /></div>
       </footer>
     </div>
   );

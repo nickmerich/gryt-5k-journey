@@ -1,3 +1,5 @@
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/lib/site-meta";
+import { SiteFooter } from "@/components/AuditFooterLinks";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -30,6 +32,7 @@ function NotFoundComponent() {
           </Link>
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 }
@@ -77,22 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Run Takoma With Love 5K — GRYT Club" },
-      {
-        name: "description",
-        content:
-          "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee.",
-      },
-      { property: "og:title", content: "Run Takoma With Love 5K — GRYT Club" },
-      {
-        property: "og:description",
-        content:
-          "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee.",
-      },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Run Takoma With Love 5K — GRYT Club" },
-      { name: "twitter:description", content: "Run Takoma With Love 5K — Sunday, August 2, 2026 at 9:00 AM in Takoma Park, MD. Presented by GRYT in partnership with smartwater, HeNO, and Oddisee." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

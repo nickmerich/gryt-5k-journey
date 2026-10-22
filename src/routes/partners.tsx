@@ -1,3 +1,5 @@
+import { AuditFooterLinks } from "@/components/AuditFooterLinks";
+import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
 import mocoParksLogo from "@/assets/partner-IMG_8387.png.asset.json";
@@ -12,10 +14,13 @@ const DESC =
 export const Route = createFileRoute("/partners")({
   head: () => ({
     meta: [
+      ...recapImageMeta,
       { title: TITLE },
       { name: "description", content: DESC },
       { property: "og:title", content: TITLE },
+      { name: "twitter:title", content: TITLE },
       { property: "og:description", content: DESC },
+      { name: "twitter:description", content: DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -173,6 +178,7 @@ function PartnersPage() {
             <Link to="/terms" className="eyebrow text-ink-soft hover:text-ink">Terms</Link>
           </div>
         </div>
+      <div className="px-5 pb-8"><AuditFooterLinks /></div>
       </footer>
     </main>
   );

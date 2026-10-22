@@ -73,8 +73,8 @@ export function ArtistPitchForm() {
           <form onSubmit={submit} noValidate className="mt-8 grid gap-6 sm:grid-cols-2">
             {fields.map(field => (
               <div key={field.name}>
-                <label htmlFor={`pitch-${field.name}`} className="eyebrow">{field.label}{field.required ? ' *' : ''}</label>
-                <input id={`pitch-${field.name}`} name={field.name} type={field.name === 'email' ? 'email' : 'text'} required={field.required} autoComplete={'autoComplete' in field ? field.autoComplete : undefined} maxLength={field.limit} className={fieldClass} aria-invalid={!!errors[field.name]} aria-describedby={errors[field.name] ? `error-${field.name}` : undefined} />
+                <label htmlFor={`pitch-${field.name}`} className="eyebrow">{field.label}{'required' in field ? ' *' : ''}</label>
+                <input id={`pitch-${field.name}`} name={field.name} type={field.name === 'email' ? 'email' : 'text'} required={'required' in field} autoComplete={'autoComplete' in field ? field.autoComplete : undefined} maxLength={field.limit} className={fieldClass} aria-invalid={!!errors[field.name]} aria-describedby={errors[field.name] ? `error-${field.name}` : undefined} />
                 {errors[field.name] && <p id={`error-${field.name}`} className="mt-2 text-sm text-destructive">{errors[field.name]}</p>}
               </div>
             ))}

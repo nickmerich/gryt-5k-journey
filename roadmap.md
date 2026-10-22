@@ -1,4 +1,6 @@
 # 5K Series
+- [ ] Apply the seven October 22 site-audit fixes: metadata, artist date note, press page, pitch/contact links, Shake & Ship, legal/404 titles, recap share image.
+- [ ] Verify the audit pages and publish the update.
 - [x] Add a homepage-matched series page with known dates, route details, and past-run media.
 - [x] Connect navigation and reuse the existing Run #02 signup and confirmation flow.
 - [x] Check page rendering, signup validation, and phone/desktop layout. Confirmation and persistence checked with a simulated response; no leads created or emails sent.

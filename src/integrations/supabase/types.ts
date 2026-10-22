@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      artist_city_pitches: {
+        Row: {
+          artist_project: string
+          city: string
+          created_at: string
+          email: string
+          id: string
+          links: string | null
+          message: string | null
+          name: string
+          neighborhood: string
+          timing: string | null
+        }
+        Insert: {
+          artist_project: string
+          city: string
+          created_at?: string
+          email: string
+          id?: string
+          links?: string | null
+          message?: string | null
+          name: string
+          neighborhood: string
+          timing?: string | null
+        }
+        Update: {
+          artist_project?: string
+          city?: string
+          created_at?: string
+          email?: string
+          id?: string
+          links?: string | null
+          message?: string | null
+          name?: string
+          neighborhood?: string
+          timing?: string | null
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string

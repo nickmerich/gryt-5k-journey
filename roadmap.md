@@ -1,4 +1,5 @@
 # 5K Series
+- [ ] Add an artist city pitch form, replace pitch destinations, verify saved submission and owner email, and remove the test entry.
 - [x] Apply the seven October 22 site-audit fixes: metadata, artist date note, press page, pitch/contact links, Shake & Ship, legal/404 titles, recap share image.
 - [x] Verify all audit page source, phone/desktop layout, ten press destinations, pitch link, recap image dimensions/size, and existing tests. Publishing requested; live deployment awaits confirmation.
 - [x] Add a homepage-matched series page with known dates, route details, and past-run media.

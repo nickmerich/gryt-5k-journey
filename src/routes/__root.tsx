@@ -76,15 +76,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
+  head: ({ matches }) => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: SITE_TITLE },
+      { title: matches.some((match) => match.status === "notFound" || match._notFound) ? "Page not found · GRYT Run" : SITE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
-      { property: "og:title", content: SITE_TITLE },
+      { property: "og:title", content: matches.some((match) => match.status === "notFound" || match._notFound) ? "Page not found · GRYT Run" : SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
-      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:title", content: matches.some((match) => match.status === "notFound" || match._notFound) ? "Page not found · GRYT Run" : SITE_TITLE },
       { name: "twitter:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

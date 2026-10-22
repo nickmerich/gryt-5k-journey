@@ -19,4 +19,4 @@
 ## Public site audit
 - Define recap share-image metadata through the shared site-meta module on content leaf routes, never the root layout, so per-page social metadata remains independent.
 - Reuse AuditFooterLinks inside existing footers and SiteFooter on pages without a footer to keep press, contact, and event destinations consistent.
-- Use the catch-all route for server-rendered 404 metadata and retain a 404 status rather than turning unknown URLs into content pages.
+- Retain a 404 status on unknown URLs; root head detects notFound matches for server-rendered fallback titles because thrown catch-all loaders do not contribute leaf metadata.

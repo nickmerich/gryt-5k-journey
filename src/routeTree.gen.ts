@@ -24,6 +24,7 @@ import { Route as StoryRouteImport } from './routes/story'
 import { Route as TakomaRouteImport } from './routes/takoma'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PartnersThanksRouteImport } from './routes/partners_.thanks'
+import { Route as ApiPublicArtistPitchRouteImport } from './routes/api/public/artist-pitch'
 import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
 import { Route as ApiPublicRtwlResendRouteImport } from './routes/api/public/rtwl-resend'
 import { Route as ApiPublicRun2InterestRouteImport } from './routes/api/public/run2-interest'
@@ -111,6 +112,11 @@ const PartnersThanksRoute = PartnersThanksRouteImport.update({
   path: '/partners/thanks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicArtistPitchRoute = ApiPublicArtistPitchRouteImport.update({
+  id: '/api/public/artist-pitch',
+  path: '/api/public/artist-pitch',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicRtwlRegisterRoute = ApiPublicRtwlRegisterRouteImport.update({
   id: '/api/public/rtwl-register',
   path: '/api/public/rtwl-register',
@@ -184,6 +190,7 @@ export interface FileRoutesByFullPath {
   '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
   '/partners/thanks': typeof PartnersThanksRoute
+  '/api/public/artist-pitch': typeof ApiPublicArtistPitchRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
@@ -212,6 +219,7 @@ export interface FileRoutesByTo {
   '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
   '/partners/thanks': typeof PartnersThanksRoute
+  '/api/public/artist-pitch': typeof ApiPublicArtistPitchRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
@@ -241,6 +249,7 @@ export interface FileRoutesById {
   '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
   '/partners_/thanks': typeof PartnersThanksRoute
+  '/api/public/artist-pitch': typeof ApiPublicArtistPitchRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
   '/api/public/run2-interest': typeof ApiPublicRun2InterestRoute
@@ -271,6 +280,7 @@ export interface FileRouteTypes {
     | '/takoma'
     | '/terms'
     | '/partners/thanks'
+    | '/api/public/artist-pitch'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
@@ -299,6 +309,7 @@ export interface FileRouteTypes {
     | '/takoma'
     | '/terms'
     | '/partners/thanks'
+    | '/api/public/artist-pitch'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
@@ -327,6 +338,7 @@ export interface FileRouteTypes {
     | '/takoma'
     | '/terms'
     | '/partners_/thanks'
+    | '/api/public/artist-pitch'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
     | '/api/public/run2-interest'
@@ -356,6 +368,7 @@ export interface RootRouteChildren {
   TakomaRoute: typeof TakomaRoute
   TermsRoute: typeof TermsRoute
   PartnersThanksRoute: typeof PartnersThanksRoute
+  ApiPublicArtistPitchRoute: typeof ApiPublicArtistPitchRoute
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
   ApiPublicRtwlResendRoute: typeof ApiPublicRtwlResendRoute
   ApiPublicRun2InterestRoute: typeof ApiPublicRun2InterestRoute
@@ -476,6 +489,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PartnersThanksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/artist-pitch': {
+      id: '/api/public/artist-pitch'
+      path: '/api/public/artist-pitch'
+      fullPath: '/api/public/artist-pitch'
+      preLoaderRoute: typeof ApiPublicArtistPitchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/rtwl-register': {
       id: '/api/public/rtwl-register'
       path: '/api/public/rtwl-register'
@@ -572,6 +592,7 @@ const rootRouteChildren: RootRouteChildren = {
   TakomaRoute: TakomaRoute,
   TermsRoute: TermsRoute,
   PartnersThanksRoute: PartnersThanksRoute,
+  ApiPublicArtistPitchRoute: ApiPublicArtistPitchRoute,
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,
   ApiPublicRtwlResendRoute: ApiPublicRtwlResendRoute,
   ApiPublicRun2InterestRoute: ApiPublicRun2InterestRoute,

@@ -4,6 +4,8 @@ export function AuditFooterLinks() {
   return <nav aria-label="Press and contact" className="flex flex-wrap justify-center gap-x-5 gap-y-3 text-sm text-ink-soft">
     <Link to="/press" className="hover:text-terracotta">Press</Link>
     <a href="mailto:merichnick@gmail.com" className="hover:text-terracotta">Contact</a>
+    <a href="/compare" className="hover:text-terracotta">Compare</a>
+    <a href="/guides/social-5k-runs" className="hover:text-terracotta">Social 5K guide</a>
     <a href="https://phihackathon.pplx.app" target="_blank" rel="noopener" className="hover:text-terracotta">Shake &amp; Ship</a>
   </nav>;
 }

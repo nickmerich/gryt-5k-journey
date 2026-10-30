@@ -1,4 +1,5 @@
 import { SiteFooter } from "@/components/AuditFooterLinks";
+import { canonicalLinks, ogUrl } from "@/lib/seo";
 import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
@@ -20,7 +21,9 @@ export const Route = createFileRoute("/partners_/thanks")({
       { name: "twitter:description", content: DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      ogUrl("/partners/thanks"),
     ],
+    links: canonicalLinks("/partners/thanks"),
   }),
   component: Thanks,
 });

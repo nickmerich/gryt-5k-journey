@@ -990,7 +990,7 @@ const CSS_TEXT = `
   --rust: oklch(0.6 0.15 32);
   --rust-deep: oklch(0.52 0.14 32);
   --water: oklch(0.55 0.11 245);
-  --display: "Bebas Neue", sans-serif;
+  --display: "Bebas Neue", "Bebas Neue Fallback", sans-serif;
   --script: "Caveat Brush", cursive;
   --serif: "Playfair Display", serif;
   --body: "Inter", sans-serif;

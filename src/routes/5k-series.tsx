@@ -5,7 +5,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowLeft, ArrowUpRight, CalendarDays, MapPin, Route as RouteIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Run2Hub } from "@/components/Run2Hub";
-import { PhotoGallery } from "@/components/PhotoGallery";
+import { PhotoGallery } from "@/components/lazy";
 import { EVENT_PHOTOS } from "@/lib/event-photos";
 import bearLogo from "@/assets/gryt-bear.png.asset.json";
 import largeGroupPhoto from "@/assets/rtwl-group-1920.webp.asset.json";
@@ -47,7 +47,7 @@ function SeriesPage() {
       </header>
 
       <section className="relative isolate bg-forest">
-        <ResponsiveImg asset={largeGroupPhoto.url} sizes="(max-width: 640px) 620px, 100vw" alt="Run Takoma With Love finishers together with medals in the park" width={1824} height={1215} priority className="absolute inset-0 -z-20 h-full w-full object-cover object-[50%_65%]" />
+        <ResponsiveImg asset={largeGroupPhoto.url} sizes="100vw" alt="Run Takoma With Love finishers together with medals in the park" width={1824} height={1215} priority className="absolute inset-0 -z-20 h-full w-full object-cover object-[50%_65%]" />
         <div aria-hidden className="absolute inset-0 -z-10 bg-ink/65" />
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24">
           <p className="eyebrow text-paper">GRYT Club · Takoma Park, Maryland</p>

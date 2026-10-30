@@ -2,9 +2,9 @@ import { ShakeAndShip } from "@/components/ShakeAndShip";
 import { AuditFooterLinks } from "@/components/AuditFooterLinks";
 import { recapImageMeta } from "@/lib/site-meta";
 import { Run2Course } from "@/components/Run2Course";
-import { ArtistQuotes } from "@/components/ArtistQuotes";
+import { ArtistQuotes } from "@/components/lazy";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PartnerQA } from "@/components/PartnerQA";
+import { PartnerQA } from "@/components/lazy";
 import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
 import mocoParksLogo from "@/assets/partner-IMG_8387.png.asset.json";
 import { useEffect, useRef, useState } from "react";
@@ -18,7 +18,7 @@ import recapPoster from "@/assets/rtwl-recap-poster.jpg.asset.json";
 import { EVENT_PHOTOS } from "@/lib/event-photos";
 import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";
-import { PhotoGallery } from "@/components/PhotoGallery";
+import { PhotoGallery } from "@/components/lazy";
 import { imageAtLeast } from "@/lib/responsive-image";
 
 

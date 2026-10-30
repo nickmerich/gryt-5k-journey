@@ -1,4 +1,5 @@
 import { AuditFooterLinks } from "@/components/AuditFooterLinks";
+import { canonicalLinks, ogUrl } from "@/lib/seo";
 import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import smartwaterLogo from "@/assets/partner-IMG_8388.png.asset.json";
@@ -23,7 +24,9 @@ export const Route = createFileRoute("/partners")({
       { name: "twitter:description", content: DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      ogUrl("/partners"),
     ],
+    links: canonicalLinks("/partners"),
   }),
   component: PartnersPage,
 });

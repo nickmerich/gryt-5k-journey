@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./fonts.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -47,7 +48,7 @@
   --color-hairline: var(--hairline);
   --color-sky: var(--sky);
 
-  --font-display: "Bebas Neue", "Oswald", "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bebas Neue", "Bebas Neue Fallback", "Oswald", "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
   --font-brush: "Caveat Brush", "Playfair Display", cursive;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -82,7 +83,7 @@
   --paper-warm: oklch(0.955 0.017 80);      /* slightly warmer card wash */
   --ink: oklch(0.20 0.01 60);               /* near-black */
   --ink-soft: oklch(0.52 0.02 70);          /* muted body */
-  --terracotta: oklch(0.60 0.15 32);        /* #b54a3f-ish */
+  --terracotta: oklch(0.545 0.15 32);       /* #b74633 — 4.5:1+ with paper text and on paper (WCAG AA) */
   --terracotta-ink: oklch(0.972 0.012 85);
   --forest: oklch(0.34 0.045 165);          /* deep pine */
   --forest-ink: oklch(0.95 0.02 95);

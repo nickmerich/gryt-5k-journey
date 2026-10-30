@@ -1,7 +1,18 @@
 import { createStart, createMiddleware } from "@tanstack/react-start";
 
 import { renderErrorPage } from "./lib/error-page";
-import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
+
+// Same behavior as `attachSupabaseAuth` from "@/integrations/supabase/auth-attacher",
+// but the Supabase client (~150 KB of JS) is imported on demand when a server
+// function is first called instead of shipping in the initial bundle of every page.
+const attachSupabaseAuthLazy = createMiddleware({ type: "function" }).client(async ({ next }) => {
+  const { supabase } = await import("@/integrations/supabase/client");
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
+  return next({
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+});
 
 const errorMiddleware = createMiddleware().server(async ({ request, next }) => {
   if (new URL(request.url).pathname.startsWith("/lovable/")) {
@@ -22,6 +33,6 @@ const errorMiddleware = createMiddleware().server(async ({ request, next }) => {
 });
 
 export const startInstance = createStart(() => ({
-  functionMiddleware: [attachSupabaseAuth],
+  functionMiddleware: [attachSupabaseAuthLazy],
   requestMiddleware: [errorMiddleware],
 }));

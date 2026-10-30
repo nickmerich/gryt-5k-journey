@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import groupPhoto from "@/assets/rtwl-group-finishers.jpg.asset.json";
-import g720 from "@/assets/rtwl-group-720.webp.asset.json";
-import g1200 from "@/assets/rtwl-group-1200.webp.asset.json";
 import g1920 from "@/assets/rtwl-group-1920.webp.asset.json";
+import { ResponsiveImg } from "@/components/ResponsiveImg";
 
 const ALT =
   "Run Takoma With Love finishers posing together with their medals in a Takoma Park garden";
@@ -31,8 +30,6 @@ export function HeroGroup() {
     setOrigin(`${((e.clientX - r.left) / r.width) * 100}% ${((e.clientY - r.top) / r.height) * 100}%`);
   }
 
-  const srcSet = `${g720.url} 720w, ${g1200.url} 1200w, ${g1920.url} 1920w`;
-
   return (
     <section className="relative z-10 mx-auto max-w-6xl px-0 pt-3 pb-8 sm:px-6 sm:pt-8 sm:pb-16">
       <figure className="group relative">
@@ -43,15 +40,13 @@ export function HeroGroup() {
           className="relative block w-full overflow-hidden border-y-2 sm:border-2 border-ink bg-forest focus-visible:outline-none"
           aria-label="Open the finisher group photo to find yourself"
         >
-          <img
-            src={g1200.url}
-            srcSet={srcSet}
+          <ResponsiveImg
+            asset={g1920.url}
             sizes="(min-width: 1152px) 1104px, (min-width: 640px) calc(100vw - 48px), 100vw"
             width={1824}
             height={1215}
             alt={ALT}
-            fetchPriority="high"
-            decoding="async"
+            priority
             className="block w-full aspect-[4/3] sm:aspect-[3/2] object-cover object-[50%_78%] sm:object-[50%_70%] transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none"
           />
           <span aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block" style={{ background: "linear-gradient(to top, oklch(0.15 0.02 160 / 0.85), oklch(0.15 0.02 160 / 0.1) 55%, transparent)" }} />

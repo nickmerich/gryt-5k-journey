@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Instagram, Music2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ResponsiveImg } from "@/components/ResponsiveImg";
 import oddiseeAvatar from "@/assets/oddisee-avatar.png.asset.json";
 import henoAvatar from "@/assets/heno-avatar.webp.asset.json";
 import albumCover from "@/assets/from-takoma-cover.jpg.asset.json";
@@ -51,7 +52,7 @@ export function ArtistQuotes() {
               </blockquote>
               <figcaption className="relative mt-auto pt-6 sm:pt-8">
                 <div className="flex items-center gap-4 border-t border-dashed border-hairline pt-5 sm:pt-6">
-                  <img src={index === 0 ? henoAvatar.url : oddiseeAvatar.url} alt={index === 0 ? "Heno." : "Oddisee"} width={64} height={64} loading="lazy" className="size-14 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:size-16" />
+                  <ResponsiveImg asset={index === 0 ? henoAvatar.url : oddiseeAvatar.url} sizes="64px" alt={index === 0 ? "Heno." : "Oddisee"} width={64} height={64} className="size-14 shrink-0 rounded-full border-2 border-terracotta object-cover ring-4 ring-paper sm:size-16" />
                   <div className="min-w-0">
                     <p className="display-tight text-2xl leading-none text-ink sm:text-3xl">{index === 0 ? "Heno." : "Oddisee"}</p>
                     <p className="mt-2 eyebrow text-forest">Artist &amp; Producer</p>
@@ -77,7 +78,7 @@ export function ArtistQuotes() {
           ))}
           <figure aria-hidden={slide !== 2} aria-label="3 of 3: From Takoma With Love" aria-roledescription="slide" className={`relative col-start-1 row-start-1 mt-5 flex flex-col justify-center gap-6 sm:flex-row sm:items-center sm:gap-10 ${slide !== 2 ? "invisible" : ""}`}>
             <a href="https://orcd.co/ykrr2qx" target="_blank" rel="noopener noreferrer" tabIndex={slide === 2 ? 0 : -1} aria-label="Listen to From Takoma With Love" className="mx-auto block w-64 shrink-0 border-2 border-ink shadow-[6px_6px_0_0_var(--color-terracotta)] sm:mx-0 sm:w-80 lg:w-96">
-              <img src={albumCover.url} alt="From Takoma With Love official album cover" width={400} height={400} loading="lazy" className="aspect-square w-full object-contain" />
+              <ResponsiveImg asset={albumCover.url} sizes="(min-width: 1024px) 384px, (min-width: 640px) 320px, 256px" alt="From Takoma With Love official album cover" width={400} height={400} className="aspect-square w-full object-contain" />
             </a>
             <figcaption className="min-w-0 text-center sm:text-left">
               <p className="eyebrow text-base text-forest">Oddisee &amp; Heno.</p>

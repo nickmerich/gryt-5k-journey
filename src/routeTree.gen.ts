@@ -23,6 +23,12 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as TakomaRouteImport } from './routes/takoma'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as CompareIndexRouteImport } from './routes/compare.index'
+import { Route as CompareGrytVsNovemberProjectRouteImport } from './routes/compare.gryt-vs-november-project'
+import { Route as CompareGrytVsParkrunRouteImport } from './routes/compare.gryt-vs-parkrun'
+import { Route as CompareGrytVsRockNRollRunningSeriesRouteImport } from './routes/compare.gryt-vs-rock-n-roll-running-series'
+import { Route as CompareGrytVsTheColorRunRouteImport } from './routes/compare.gryt-vs-the-color-run'
+import { Route as GuidesSocial5kRunsRouteImport } from './routes/guides.social-5k-runs'
 import { Route as PartnersThanksRouteImport } from './routes/partners_.thanks'
 import { Route as ApiPublicArtistPitchRouteImport } from './routes/api/public/artist-pitch'
 import { Route as ApiPublicRtwlRegisterRouteImport } from './routes/api/public/rtwl-register'
@@ -107,6 +113,39 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompareIndexRoute = CompareIndexRouteImport.update({
+  id: '/compare/',
+  path: '/compare/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareGrytVsNovemberProjectRoute =
+  CompareGrytVsNovemberProjectRouteImport.update({
+    id: '/compare/gryt-vs-november-project',
+    path: '/compare/gryt-vs-november-project',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompareGrytVsParkrunRoute = CompareGrytVsParkrunRouteImport.update({
+  id: '/compare/gryt-vs-parkrun',
+  path: '/compare/gryt-vs-parkrun',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareGrytVsRockNRollRunningSeriesRoute =
+  CompareGrytVsRockNRollRunningSeriesRouteImport.update({
+    id: '/compare/gryt-vs-rock-n-roll-running-series',
+    path: '/compare/gryt-vs-rock-n-roll-running-series',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CompareGrytVsTheColorRunRoute =
+  CompareGrytVsTheColorRunRouteImport.update({
+    id: '/compare/gryt-vs-the-color-run',
+    path: '/compare/gryt-vs-the-color-run',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const GuidesSocial5kRunsRoute = GuidesSocial5kRunsRouteImport.update({
+  id: '/guides/social-5k-runs',
+  path: '/guides/social-5k-runs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnersThanksRoute = PartnersThanksRouteImport.update({
   id: '/partners_/thanks',
   path: '/partners/thanks',
@@ -189,7 +228,13 @@ export interface FileRoutesByFullPath {
   '/story': typeof StoryRoute
   '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
+  '/compare/gryt-vs-november-project': typeof CompareGrytVsNovemberProjectRoute
+  '/compare/gryt-vs-parkrun': typeof CompareGrytVsParkrunRoute
+  '/compare/gryt-vs-rock-n-roll-running-series': typeof CompareGrytVsRockNRollRunningSeriesRoute
+  '/compare/gryt-vs-the-color-run': typeof CompareGrytVsTheColorRunRoute
+  '/guides/social-5k-runs': typeof GuidesSocial5kRunsRoute
   '/partners/thanks': typeof PartnersThanksRoute
+  '/compare/': typeof CompareIndexRoute
   '/api/public/artist-pitch': typeof ApiPublicArtistPitchRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
@@ -218,7 +263,13 @@ export interface FileRoutesByTo {
   '/story': typeof StoryRoute
   '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
+  '/compare/gryt-vs-november-project': typeof CompareGrytVsNovemberProjectRoute
+  '/compare/gryt-vs-parkrun': typeof CompareGrytVsParkrunRoute
+  '/compare/gryt-vs-rock-n-roll-running-series': typeof CompareGrytVsRockNRollRunningSeriesRoute
+  '/compare/gryt-vs-the-color-run': typeof CompareGrytVsTheColorRunRoute
+  '/guides/social-5k-runs': typeof GuidesSocial5kRunsRoute
   '/partners/thanks': typeof PartnersThanksRoute
+  '/compare': typeof CompareIndexRoute
   '/api/public/artist-pitch': typeof ApiPublicArtistPitchRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
@@ -248,7 +299,13 @@ export interface FileRoutesById {
   '/story': typeof StoryRoute
   '/takoma': typeof TakomaRoute
   '/terms': typeof TermsRoute
+  '/compare/gryt-vs-november-project': typeof CompareGrytVsNovemberProjectRoute
+  '/compare/gryt-vs-parkrun': typeof CompareGrytVsParkrunRoute
+  '/compare/gryt-vs-rock-n-roll-running-series': typeof CompareGrytVsRockNRollRunningSeriesRoute
+  '/compare/gryt-vs-the-color-run': typeof CompareGrytVsTheColorRunRoute
+  '/guides/social-5k-runs': typeof GuidesSocial5kRunsRoute
   '/partners_/thanks': typeof PartnersThanksRoute
+  '/compare/': typeof CompareIndexRoute
   '/api/public/artist-pitch': typeof ApiPublicArtistPitchRoute
   '/api/public/rtwl-register': typeof ApiPublicRtwlRegisterRoute
   '/api/public/rtwl-resend': typeof ApiPublicRtwlResendRoute
@@ -279,7 +336,13 @@ export interface FileRouteTypes {
     | '/story'
     | '/takoma'
     | '/terms'
+    | '/compare/gryt-vs-november-project'
+    | '/compare/gryt-vs-parkrun'
+    | '/compare/gryt-vs-rock-n-roll-running-series'
+    | '/compare/gryt-vs-the-color-run'
+    | '/guides/social-5k-runs'
     | '/partners/thanks'
+    | '/compare/'
     | '/api/public/artist-pitch'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
@@ -308,7 +371,13 @@ export interface FileRouteTypes {
     | '/story'
     | '/takoma'
     | '/terms'
+    | '/compare/gryt-vs-november-project'
+    | '/compare/gryt-vs-parkrun'
+    | '/compare/gryt-vs-rock-n-roll-running-series'
+    | '/compare/gryt-vs-the-color-run'
+    | '/guides/social-5k-runs'
     | '/partners/thanks'
+    | '/compare'
     | '/api/public/artist-pitch'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
@@ -337,7 +406,13 @@ export interface FileRouteTypes {
     | '/story'
     | '/takoma'
     | '/terms'
+    | '/compare/gryt-vs-november-project'
+    | '/compare/gryt-vs-parkrun'
+    | '/compare/gryt-vs-rock-n-roll-running-series'
+    | '/compare/gryt-vs-the-color-run'
+    | '/guides/social-5k-runs'
     | '/partners_/thanks'
+    | '/compare/'
     | '/api/public/artist-pitch'
     | '/api/public/rtwl-register'
     | '/api/public/rtwl-resend'
@@ -367,7 +442,13 @@ export interface RootRouteChildren {
   StoryRoute: typeof StoryRoute
   TakomaRoute: typeof TakomaRoute
   TermsRoute: typeof TermsRoute
+  CompareGrytVsNovemberProjectRoute: typeof CompareGrytVsNovemberProjectRoute
+  CompareGrytVsParkrunRoute: typeof CompareGrytVsParkrunRoute
+  CompareGrytVsRockNRollRunningSeriesRoute: typeof CompareGrytVsRockNRollRunningSeriesRoute
+  CompareGrytVsTheColorRunRoute: typeof CompareGrytVsTheColorRunRoute
+  GuidesSocial5kRunsRoute: typeof GuidesSocial5kRunsRoute
   PartnersThanksRoute: typeof PartnersThanksRoute
+  CompareIndexRoute: typeof CompareIndexRoute
   ApiPublicArtistPitchRoute: typeof ApiPublicArtistPitchRoute
   ApiPublicRtwlRegisterRoute: typeof ApiPublicRtwlRegisterRoute
   ApiPublicRtwlResendRoute: typeof ApiPublicRtwlResendRoute
@@ -482,6 +563,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compare/': {
+      id: '/compare/'
+      path: '/compare'
+      fullPath: '/compare/'
+      preLoaderRoute: typeof CompareIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare/gryt-vs-november-project': {
+      id: '/compare/gryt-vs-november-project'
+      path: '/compare/gryt-vs-november-project'
+      fullPath: '/compare/gryt-vs-november-project'
+      preLoaderRoute: typeof CompareGrytVsNovemberProjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare/gryt-vs-parkrun': {
+      id: '/compare/gryt-vs-parkrun'
+      path: '/compare/gryt-vs-parkrun'
+      fullPath: '/compare/gryt-vs-parkrun'
+      preLoaderRoute: typeof CompareGrytVsParkrunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare/gryt-vs-rock-n-roll-running-series': {
+      id: '/compare/gryt-vs-rock-n-roll-running-series'
+      path: '/compare/gryt-vs-rock-n-roll-running-series'
+      fullPath: '/compare/gryt-vs-rock-n-roll-running-series'
+      preLoaderRoute: typeof CompareGrytVsRockNRollRunningSeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare/gryt-vs-the-color-run': {
+      id: '/compare/gryt-vs-the-color-run'
+      path: '/compare/gryt-vs-the-color-run'
+      fullPath: '/compare/gryt-vs-the-color-run'
+      preLoaderRoute: typeof CompareGrytVsTheColorRunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/social-5k-runs': {
+      id: '/guides/social-5k-runs'
+      path: '/guides/social-5k-runs'
+      fullPath: '/guides/social-5k-runs'
+      preLoaderRoute: typeof GuidesSocial5kRunsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partners_/thanks': {
       id: '/partners_/thanks'
       path: '/partners/thanks'
@@ -591,7 +714,14 @@ const rootRouteChildren: RootRouteChildren = {
   StoryRoute: StoryRoute,
   TakomaRoute: TakomaRoute,
   TermsRoute: TermsRoute,
+  CompareGrytVsNovemberProjectRoute: CompareGrytVsNovemberProjectRoute,
+  CompareGrytVsParkrunRoute: CompareGrytVsParkrunRoute,
+  CompareGrytVsRockNRollRunningSeriesRoute:
+    CompareGrytVsRockNRollRunningSeriesRoute,
+  CompareGrytVsTheColorRunRoute: CompareGrytVsTheColorRunRoute,
+  GuidesSocial5kRunsRoute: GuidesSocial5kRunsRoute,
   PartnersThanksRoute: PartnersThanksRoute,
+  CompareIndexRoute: CompareIndexRoute,
   ApiPublicArtistPitchRoute: ApiPublicArtistPitchRoute,
   ApiPublicRtwlRegisterRoute: ApiPublicRtwlRegisterRoute,
   ApiPublicRtwlResendRoute: ApiPublicRtwlResendRoute,

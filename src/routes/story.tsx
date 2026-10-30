@@ -6,6 +6,7 @@ import flyerAsset from "@/assets/rtwl-flyer.png.asset.json";
 import vinylAsset from "@/assets/img-vinyl.webp.asset.json";
 import creekAsset from "@/assets/img-creek.webp.asset.json";
 import shelterAsset from "@/assets/img-shelter.webp.asset.json";
+import { ResponsiveImg } from "@/components/ResponsiveImg";
 
 const STORY_URL = "https://grytrun.com/story";
 const STORY_TITLE = "The Story — Run Takoma With Love 5K · GRYT Club";
@@ -179,11 +180,13 @@ function StoryPage() {
         <section className="hero">
           <div className="hero__inner">
             <figure className="hero__poster reveal">
-              <img
-                src={flyerAsset.url}
+              <ResponsiveImg
+                asset={flyerAsset.url}
+                sizes="(max-width: 820px) 286px, 436px"
                 alt="Run Takoma With Love 5K poster featuring Oddisee and Heno. among the greenery of Takoma Park"
                 width={1100}
                 height={1100}
+                priority
               />
             </figure>
             <div className="hero__copy">
@@ -291,10 +294,10 @@ function StoryPage() {
                 <p>Four hundred miles away in Pittsburgh, one listener took that literally.</p>
               </div>
               <figure className="split__media tilt-r reveal">
-                <img
-                  src={vinylAsset.url}
+                <ResponsiveImg
+                  asset={vinylAsset.url}
+                  sizes="(max-width: 820px) min(520px, 100vw - 48px), 540px"
                   alt="A vinyl record on a turntable beside worn olive running shoes and a blank race bib"
-                  loading="lazy"
                   width={1600}
                   height={1200}
                 />
@@ -399,10 +402,10 @@ function StoryPage() {
 
         {/* FULL BLEED */}
         <figure className="bleed">
-          <img
-            src={creekAsset.url}
+          <ResponsiveImg
+            asset={creekAsset.url}
+            sizes="100vw"
             alt="Morning sun and mist over a tree-lined creekside trail"
-            loading="lazy"
             width={1600}
             height={900}
           />
@@ -594,10 +597,10 @@ function StoryPage() {
                 </li>
               </ol>
               <figure className="day__media tilt-l reveal">
-                <img
-                  src={shelterAsset.url}
+                <ResponsiveImg
+                  asset={shelterAsset.url}
+                  sizes="(max-width: 980px) min(560px, 100vw - 48px), 540px"
                   alt="Covered picnic shelter set up with a check-in table and water coolers, runners chatting on the sunny lawn beyond"
-                  loading="lazy"
                   width={1400}
                   height={1120}
                 />
@@ -1010,8 +1013,11 @@ const CSS_TEXT = `
 .rtwl-page .album{font-family:var(--serif);font-style:italic}
 .rtwl-page .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .rtwl-page .reveal.is-in{opacity:1;transform:none}
+.rtwl-page .hero .reveal{opacity:1;transform:none;animation:rtwl-rise .7s cubic-bezier(.16,1,.3,1) both}
+@keyframes rtwl-rise{from{transform:translateY(18px)}}
 @media (prefers-reduced-motion: reduce){
   .rtwl-page .reveal{opacity:1;transform:none;transition:none}
+  .rtwl-page .hero .reveal{animation:none}
   .rtwl-page .marquee__track{animation:none}
 }
 .rtwl-page .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 28px;font-family:var(--display);font-size:15px;letter-spacing:.22em;color:var(--rust);position:sticky;top:0;z-index:50;background:oklch(from var(--paper) l c h / .88);backdrop-filter:blur(10px)}

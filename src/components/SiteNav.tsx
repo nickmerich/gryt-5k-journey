@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import bearLogo from "@/assets/gryt-bear.png.asset.json";
+import { ResponsiveImg } from "@/components/ResponsiveImg";
 
 const LINKS = [
   { to: "/5k-series", label: "Runs" },
@@ -17,7 +18,7 @@ export function SiteNav() {
     <header className="relative z-20 mx-auto max-w-6xl px-5 pt-5 sm:px-6 sm:pt-7">
       <div className="flex items-center justify-between gap-4">
         <Link to="/" className="flex min-h-12 items-center gap-3" aria-label="GRYT home">
-          <img src={bearLogo.url} alt="" width={56} height={60} className="h-11 w-auto sm:h-14" />
+          <ResponsiveImg asset={bearLogo.url} sizes="56px" alt="" width={56} height={60} loading="eager" className="h-11 w-auto sm:h-14" />
           <span className="font-display text-2xl font-bold leading-none text-forest sm:text-3xl">gryt</span>
         </Link>
         <nav aria-label="Main" className="hidden items-center gap-5 lg:flex">

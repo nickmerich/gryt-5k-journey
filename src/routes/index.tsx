@@ -19,6 +19,7 @@ import { EVENT_PHOTOS } from "@/lib/event-photos";
 import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";
 import { PhotoGallery } from "@/components/PhotoGallery";
+import { imageAtLeast } from "@/lib/responsive-image";
 
 
 const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
@@ -895,7 +896,7 @@ function RunTakomaOnePager() {
           <video
             className="block w-full border-2 border-ink bg-ink"
             src={recapVideo.url}
-            poster={recapPoster.url}
+            poster={imageAtLeast(recapPoster.url, 960)}
             controls
             playsInline
             preload="metadata"

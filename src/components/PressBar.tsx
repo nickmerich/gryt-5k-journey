@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { ResponsiveImg } from "@/components/ResponsiveImg";
 import the51st from "@/assets/press-the51st.png.asset.json";
 import popville from "@/assets/press-popville.png.asset.json";
 import runwashington from "@/assets/press-runwashington.png.asset.json";
@@ -29,7 +30,7 @@ function Row({ hidden }: { hidden?: boolean }) {
             aria-label={hidden ? undefined : `${p.label} (opens in a new tab)`}
             className="flex min-h-14 items-center px-1 opacity-80 transition duration-200 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta"
           >
-            <img src={p.logo} alt="" width={p.w} height={p.h} loading="lazy" className={`${p.size ?? "h-7 sm:h-9"} w-auto select-none`} draggable={false} style={{ maxWidth: "none" }} />
+            <ResponsiveImg asset={p.logo} sizes={`${p.w}px`} alt="" width={p.w} height={p.h} className={`${p.size ?? "h-7 sm:h-9"} w-auto select-none`} draggable={false} style={{ maxWidth: "none" }} />
           </a>
         </li>
       ))}

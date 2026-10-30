@@ -8,11 +8,11 @@ import { Run2Hub } from "@/components/Run2Hub";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { EVENT_PHOTOS } from "@/lib/event-photos";
 import bearLogo from "@/assets/gryt-bear.png.asset.json";
-import groupPhoto from "@/assets/rtwl-group-1200.webp.asset.json";
-import smallGroupPhoto from "@/assets/rtwl-group-720.webp.asset.json";
 import largeGroupPhoto from "@/assets/rtwl-group-1920.webp.asset.json";
 import recapVideo from "@/assets/rtwl-recap.mp4.asset.json";
 import recapPoster from "@/assets/rtwl-recap-poster.jpg.asset.json";
+import { ResponsiveImg } from "@/components/ResponsiveImg";
+import { imageAtLeast } from "@/lib/responsive-image";
 
 const TITLE = "5K Series — Run Takoma With Love | GRYT Club";
 const DESCRIPTION = "Explore the Run Takoma With Love 5K series: Run #01 photos and recap, Takoma route details, and the Run #02 December 2026 interest list.";
@@ -43,11 +43,11 @@ function SeriesPage() {
         <Button asChild variant="link" className="h-auto p-0 text-forest">
           <Link to="/"><ArrowLeft /> <span className="eyebrow">Back to Run Takoma</span></Link>
         </Button>
-        <Link to="/" aria-label="GRYT Club homepage"><img src={bearLogo.url} alt="GRYT Club" width={56} height={60} className="h-12 w-auto sm:h-16" /></Link>
+        <Link to="/" aria-label="GRYT Club homepage"><ResponsiveImg asset={bearLogo.url} sizes="60px" alt="GRYT Club" width={56} height={60} loading="eager" className="h-12 w-auto sm:h-16" /></Link>
       </header>
 
       <section className="relative isolate bg-forest">
-        <img src={groupPhoto.url} srcSet={`${smallGroupPhoto.url} 720w, ${groupPhoto.url} 1200w, ${largeGroupPhoto.url} 1920w`} sizes="100vw" alt="Run Takoma With Love finishers together with medals in the park" width={1824} height={1215} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-[50%_65%]" />
+        <ResponsiveImg asset={largeGroupPhoto.url} sizes="(max-width: 640px) 620px, 100vw" alt="Run Takoma With Love finishers together with medals in the park" width={1824} height={1215} priority className="absolute inset-0 -z-20 h-full w-full object-cover object-[50%_65%]" />
         <div aria-hidden className="absolute inset-0 -z-10 bg-ink/65" />
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24">
           <p className="eyebrow text-paper">GRYT Club · Takoma Park, Maryland</p>
@@ -89,7 +89,7 @@ function SeriesPage() {
           <div className="mt-8 grid grid-cols-2 gap-4 sm:max-w-lg">
             {[['248', 'Signed up'], ['98', 'Finished']].map(([number, label]) => <div key={label} className="ink-card p-5"><p className="display-tight text-5xl text-terracotta">{number}</p><p className="eyebrow mt-2 text-forest">{label}</p></div>)}
           </div>
-          <video controls playsInline preload="none" poster={recapPoster.url} className="mt-8 aspect-video w-full border-2 border-ink bg-ink" aria-label="Run Takoma With Love Run #01 recap"><source src={recapVideo.url} type="video/mp4" /><a href={recapVideo.url}>Watch the recap video</a></video>
+          <video controls playsInline preload="none" poster={imageAtLeast(recapPoster.url, 960)} className="mt-8 aspect-video w-full border-2 border-ink bg-ink" aria-label="Run Takoma With Love Run #01 recap"><source src={recapVideo.url} type="video/mp4" /><a href={recapVideo.url}>Watch the recap video</a></video>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             <div><h3 className="display-tight text-2xl text-forest">THE RUN #01 ROUTE</h3><p className="mt-3 leading-relaxed text-ink-soft">A 5K through Takoma, gathering at Takoma-Piney Branch Local Park. Neighborhood streets, familiar faces, and a finish worth sharing.</p><Button asChild variant="link" className="mt-3 h-auto px-0 text-terracotta"><a href="https://www.google.com/maps/search/?api=1&query=Takoma-Piney+Branch+Local+Park+Takoma+Park+MD" target="_blank" rel="noopener noreferrer">Find the Run #01 park <ArrowUpRight /></a></Button></div>
             <div><h3 className="display-tight text-2xl text-forest">FROM MUSIC TO MOVEMENT</h3><p className="mt-3 leading-relaxed text-ink-soft">Inspired by <em>From Takoma With Love</em>, the album by Heno. and Oddisee. A story rooted in Takoma, brought to life by the people who showed up.</p><Button asChild variant="link" className="mt-3 h-auto px-0 text-terracotta"><Link to="/story">Read how we got here <ArrowUpRight /></Link></Button></div>

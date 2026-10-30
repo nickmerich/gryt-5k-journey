@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
+import { ResponsiveImg } from "@/components/ResponsiveImg";
 
 export type GalleryPhoto = { src: string; alt: string };
 type Cat = "all" | "pre" | "course" | "medal";
@@ -81,11 +82,10 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
               style={{ backgroundColor: "var(--color-paper-warm)", border: "1px solid var(--color-ink)" }}
             />
             <span className="block overflow-hidden border-2 border-ink bg-paper-warm p-1.5">
-              <img
-                src={p.src}
+              <ResponsiveImg
+                asset={p.src}
+                sizes={i === 0 || i === 7 || i === 12 ? "(min-width: 1024px) 500px, (min-width: 640px) 50vw, 100vw" : "(min-width: 1024px) 250px, (min-width: 640px) 25vw, 50vw"}
                 alt={p.alt}
-                loading="lazy"
-                decoding="async"
                 className={`block h-full w-full object-cover ${i === 7 || i === 12 ? "aspect-[3/2]" : "aspect-[3/4]"} transition-transform duration-300 group-hover:scale-[1.03]`}
               />
             </span>
@@ -168,7 +168,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
                   className="hover-lift relative overflow-hidden border-2 border-ink bg-paper-warm"
                   aria-label={`View photo: ${p.alt}`}
                 >
-                  <img src={p.src} alt={p.alt} loading="lazy" decoding="async" className="block w-full aspect-[3/4] object-cover" />
+                  <ResponsiveImg asset={p.src} sizes="(min-width: 1024px) 290px, (min-width: 640px) 33vw, 50vw" alt={p.alt} className="block w-full aspect-[3/4] object-cover" />
                   <span className="absolute top-2 left-2 display-tight text-[10px] tracking-[0.14em] px-1.5 py-0.5 bg-paper-warm text-forest border border-ink">
                     #{String(p.n).padStart(2, "0")}
                   </span>

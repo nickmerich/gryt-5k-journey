@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Run2Hub } from "@/components/Run2Hub";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { EVENT_PHOTOS } from "@/lib/event-photos";
+import { ORG_ID, absUrl, breadcrumbJsonLd, canonicalLinks, faqJsonLd, jsonLdScript, ogUrl, type QA } from "@/lib/seo";
 import bearLogo from "@/assets/gryt-bear.png.asset.json";
 import groupPhoto from "@/assets/rtwl-group-1200.webp.asset.json";
 import smallGroupPhoto from "@/assets/rtwl-group-720.webp.asset.json";
@@ -14,8 +15,75 @@ import largeGroupPhoto from "@/assets/rtwl-group-1920.webp.asset.json";
 import recapVideo from "@/assets/rtwl-recap.mp4.asset.json";
 import recapPoster from "@/assets/rtwl-recap-poster.jpg.asset.json";
 
-const TITLE = "5K Series — Run Takoma With Love | GRYT Club";
+const TITLE = "Artist-Led 5K Series: Run Takoma With Love · GRYT Club";
 const DESCRIPTION = "Explore the Run Takoma With Love 5K series: Run #01 photos and recap, Takoma route details, and the Run #02 December 2026 interest list.";
+
+const SERIES_FAQ: QA[] = [
+  {
+    q: "What is the GRYT 5K Series?",
+    a: "A series of free, artist-led 5Ks in Takoma Park, Maryland, inspired by \"From Takoma With Love\" by Heno. and Oddisee. Each run is a walk/run 5K with neighbors, then a hang after.",
+  },
+  {
+    q: "When is Run #02?",
+    a: "Run #02 is targeting early December 2026. The date is not confirmed yet. The weekends on the table are Dec 5 to 6, Dec 12 to 13 and Dec 19 to 20. Join the interest list and we will email you when it is set.",
+  },
+  {
+    q: "Where is Run #02?",
+    a: "In the Takoma community. The draft route is 6 laps inside Takoma-Piney Branch Local Park. The meeting point and start time will be announced, and the final route depends on park approval.",
+  },
+  {
+    q: "Is the interest list a registration?",
+    a: "No. The interest list is not a confirmed race registration. It is how you get first word when the date, route and bibs are ready.",
+  },
+  {
+    q: "Can I walk it?",
+    a: "Yes. Every pace is welcome, walkers too. At Run #01 the finish stayed open until the last person was home.",
+  },
+  {
+    q: "What about Run #03?",
+    a: "Run #03 has its own interest list. Its date and route are still to be confirmed.",
+  },
+];
+
+const RUN1_EVENT = {
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  name: "Run Takoma With Love 5K (Run #01)",
+  description: "Free artist-led community 5K and picnic in Takoma Park, Maryland, inspired by the album From Takoma With Love by Heno. and Oddisee. 248 signed up and 98 finished.",
+  startDate: "2026-08-02T09:00:00-04:00",
+  endDate: "2026-08-02T11:00:00-04:00",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  sport: "Running",
+  isAccessibleForFree: true,
+  image: ["https://grytrun.com/og/grytrun-recap-1200x630.jpg"],
+  url: absUrl("/takoma"),
+  location: {
+    "@type": "Place",
+    name: "Takoma-Piney Branch Local Park",
+    address: { "@type": "PostalAddress", addressLocality: "Takoma Park", addressRegion: "MD", addressCountry: "US" },
+  },
+  organizer: { "@type": "SportsOrganization", "@id": ORG_ID, name: "GRYT Club", url: "https://grytrun.com/" },
+};
+
+/** Run #02: month only, no eventStatus, because the date is not confirmed. */
+const RUN2_EVENT = {
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  name: "Run Takoma With Love 5K, Run #02 (date to be confirmed)",
+  description: "Run #02 of the GRYT 5K Series is targeting early December 2026 in Takoma Park, Maryland. Date to be confirmed. Draft route is 6 laps inside Takoma-Piney Branch Local Park, pending park approval. The current list is an interest list, not registration.",
+  startDate: "2026-12",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  sport: "Running",
+  isAccessibleForFree: true,
+  url: absUrl("/5k-series"),
+  location: {
+    "@type": "Place",
+    name: "Takoma-Piney Branch Local Park",
+    address: { "@type": "PostalAddress", addressLocality: "Takoma Park", addressRegion: "MD", addressCountry: "US" },
+  },
+  organizer: { "@type": "SportsOrganization", "@id": ORG_ID, name: "GRYT Club", url: "https://grytrun.com/" },
+};
 
 export const Route = createFileRoute("/5k-series")({
   head: () => ({ meta: [
@@ -27,8 +95,17 @@ export const Route = createFileRoute("/5k-series")({
     { property: "og:description", content: DESCRIPTION },
       { name: "twitter:description", content: DESCRIPTION },
     { property: "og:type", content: "website" },
+    ogUrl("/5k-series"),
     { name: "twitter:card", content: "summary_large_image" },
-  ] }),
+  ],
+  links: canonicalLinks("/5k-series"),
+  scripts: [
+    jsonLdScript(RUN1_EVENT),
+    jsonLdScript(RUN2_EVENT),
+    jsonLdScript(faqJsonLd(SERIES_FAQ)),
+    jsonLdScript(breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "5K Series", path: "/5k-series" }])),
+  ],
+  }),
   component: SeriesPage,
 });
 
@@ -95,6 +172,38 @@ function SeriesPage() {
             <div><h3 className="display-tight text-2xl text-forest">FROM MUSIC TO MOVEMENT</h3><p className="mt-3 leading-relaxed text-ink-soft">Inspired by <em>From Takoma With Love</em>, the album by Heno. and Oddisee. A story rooted in Takoma, brought to life by the people who showed up.</p><Button asChild variant="link" className="mt-3 h-auto px-0 text-terracotta"><Link to="/story">Read how we got here <ArrowUpRight /></Link></Button></div>
           </div>
           <PhotoGallery photos={EVENT_PHOTOS} />
+        </div>
+      </section>
+
+      <section aria-labelledby="about-series-title" className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-20">
+        <p className="eyebrow text-terracotta">About the series</p>
+        <div className="mt-4 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+          <div>
+            <h2 id="about-series-title" className="display-tight text-4xl text-forest sm:text-6xl">AN ARTIST-LED 5K<span className="mt-1 block brush-script text-terracotta">in one neighborhood</span></h2>
+            <div className="mt-6 max-w-xl space-y-4 leading-relaxed text-ink-soft">
+              <p>The GRYT 5K Series started with an album. Heno. and Oddisee made "From Takoma With Love" about Takoma, and we built a 5K around it so people could move through the place the music is about, together.</p>
+              <p>Run #01 happened on Sunday, August 2, 2026 at Takoma-Piney Branch Local Park in Takoma Park, Maryland. 248 people signed up and 98 finished. Check-in opened at the covered picnic shelter, which doubled as HQ for water and first aid, and the day wound down with a picnic in the park.</p>
+              <p>It is not a race with splits and podiums. It is a hang with a 5K in the middle. Free for runners, built with local partners. For Run #01 that meant smartwater as hydration partner and Montgomery Parks (M-NCPPC) as parks partner.</p>
+              <p>Run #02 comes back to the same park in December 2026, with a draft route of 6 laps inside the park. Run #03 is next after that. Want one in your city? <Link to="/artists" className="text-forest underline decoration-terracotta underline-offset-4">Artists can pitch a run</Link>.</p>
+            </div>
+          </div>
+          <div>
+            <h3 className="display-tight text-2xl text-forest">WHAT TO EXPECT</h3>
+            <ul className="mt-4 divide-y divide-ink/20 border-y-2 border-ink text-ink-soft">
+              <li className="py-3"><strong className="text-ink">Every pace.</strong> Walkers, first-timers and fast folks all welcome. The finish stays open until the last person is home.</li>
+              <li className="py-3"><strong className="text-ink">Strollers and leashed dogs.</strong> Welcome at a walking pace. Line up at the back.</li>
+              <li className="py-3"><strong className="text-ink">A real home base.</strong> The covered shelter for check-in, water and first aid, with park restrooms on site.</li>
+              <li className="py-3"><strong className="text-ink">Marshals on course.</strong> At Run #01, at every turn and both road crossings.</li>
+              <li className="py-3"><strong className="text-ink">Small on purpose.</strong> Run #01 had 100 bibs so the day stayed personal.</li>
+            </ul>
+            <p className="mt-4 text-sm text-ink-soft">Accessibility details: <Link to="/accessibility" className="underline decoration-terracotta underline-offset-4">accessibility statement</Link>. New to social 5Ks? Read our <a href="/guides/social-5k-runs" className="underline decoration-terracotta underline-offset-4">guide to social 5K runs where walkers are welcome</a> or see <a href="/compare" className="underline decoration-terracotta underline-offset-4">how GRYT compares</a>.</p>
+          </div>
+        </div>
+        <div className="mt-14">
+          <h2 className="display-tight text-3xl text-forest sm:text-4xl">5K SERIES FAQ</h2>
+          <dl className="mt-5 grid gap-x-10 divide-y divide-ink/20 border-y-2 border-ink sm:grid-cols-2 sm:divide-y-0">
+            {SERIES_FAQ.map((f) => <div key={f.q} className="py-4"><dt className="display-tight text-xl text-forest">{f.q}</dt><dd className="mt-1 leading-relaxed text-ink-soft">{f.a}</dd></div>)}
+          </dl>
         </div>
       </section>
 

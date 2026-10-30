@@ -28,7 +28,7 @@ export const HOME_FAQ: QA[] = [
   },
   {
     q: "How is GRYT different from parkrun or November Project?",
-    a: "parkrun is a free timed 5K every Saturday, and November Project is free early-morning weekday workouts. GRYT happens a few times a year, each run built around one album and one neighborhood, with the artists there and a picnic after. Our compare pages go into detail.",
+    a: "parkrun is a free timed 5K every Saturday, and November Project is free early-morning weekday workouts. GRYT runs are occasional special events, each run built around one album and one neighborhood, with the artists there and a picnic after. Our compare pages go into detail.",
   },
   {
     q: "Can I bring a GRYT run to my city?",

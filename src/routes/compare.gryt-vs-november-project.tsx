@@ -11,7 +11,7 @@ const DESC =
 const FAQ: QA[] = [
   {
     q: "How is GRYT different from November Project?",
-    a: "November Project is a free workout group that meets early on weekday mornings, every week, for stairs, hills and bodyweight work. GRYT runs are free artist-led 5K events that happen a few times a year, built around an album and its neighborhood, with a walk/run 5K and a long picnic after. November Project is a weekly training habit. A GRYT run is a special day out.",
+    a: "November Project is a free workout group that meets early on weekday mornings, every week, for stairs, hills and bodyweight work. GRYT runs are free artist-led 5K events held one at a time as special events, built around an album and its neighborhood, with a walk/run 5K and a long picnic after. November Project is a weekly training habit. A GRYT run is a special day out.",
   },
   {
     q: "Are both free?",
@@ -65,7 +65,7 @@ function Page() {
         <p>
           <strong className="text-ink">Short answer:</strong> November Project is a free workout group that meets early
           on weekday mornings, every week, for stairs, hills and bodyweight work. GRYT runs are free artist-led 5Ks that
-          happen a few times a year, built around an album and its neighborhood, with a walk/run 5K and a long picnic after.
+          are held as occasional special events, built around an album and its neighborhood, with a walk/run 5K and a long picnic after.
           November Project is a weekly training habit. A GRYT run is a special day out. Both are free, both are about
           showing up for each other.
         </p>
@@ -78,7 +78,7 @@ function Page() {
           rows={[
             ["What it is", "An artist-led community 5K and park hangout.", <>A free fitness movement that started in Boston "to stay in shape during cold New England months" (<Ext href="https://november-project.com/">November Project</Ext>).</>],
             ["Activity", "A 5K you can run, jog or walk.", <>Workouts that mix running, stairs and bodyweight exercises (<Ext href="https://runningcrews.com/networks/november-project">RunningCrews</Ext>). Boston's Wednesday session is the Harvard Stadium stairs (<Ext href="https://november-project.com/boston/">November Project Boston</Ext>).</>],
-            ["When", "A few times a year, on a weekend morning. Run #01 was Sunday, August 2, 2026.", <>"Always in the morning and always on weekdays" (<Ext href="https://november-project.com/">November Project</Ext>).</>],
+            ["When", "Occasional special events on weekend mornings. Run #01 was Sunday, August 2, 2026.", <>"Always in the morning and always on weekdays" (<Ext href="https://november-project.com/">November Project</Ext>).</>],
             ["Cost", "Free for runners.", <>"Nothing. Zero." (<Ext href="https://november-project.com/">November Project</Ext>).</>],
             ["Sign-up", "Join the free list for the next run.", <>"No sign up forms." Just show up (<Ext href="https://november-project.com/">November Project</Ext>). Boston asks for a one-time waiver (<Ext href="https://november-project.com/boston/">November Project Boston</Ext>).</>],
             ["Vibe", "No clock, no podiums. A hang with a 5K in the middle.", <>High energy, with hugs and newcomers introduced at the start (<Ext href="https://www.bostonglobe.com/2024/08/27/metro/november-project-growth-exercise/">Boston Globe</Ext>).</>],

@@ -12,7 +12,7 @@ const PAGES = [
   {
     to: "/compare/gryt-vs-parkrun",
     name: "GRYT vs parkrun",
-    body: "Free weekly timed 5K vs free artist-led 5Ks a few times a year.",
+    body: "Free weekly timed 5K vs free artist-led 5Ks held as occasional special events.",
   },
   {
     to: "/compare/gryt-vs-november-project",

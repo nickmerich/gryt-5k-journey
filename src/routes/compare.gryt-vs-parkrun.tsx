@@ -6,7 +6,7 @@ import { BestFor, CompareTable, ContentShell, Ext, FaqList, In, Section } from "
 const PATH = "/compare/gryt-vs-parkrun";
 const TITLE = "GRYT vs parkrun: Free Community 5Ks Compared · GRYT Runs";
 const DESC =
-  "parkrun is a free, timed 5K every Saturday morning. GRYT runs are free artist-led 5Ks that happen a few times a year. Here is how they differ and who each one suits.";
+  "parkrun is a free, timed 5K every Saturday morning. GRYT runs are free artist-led 5Ks held one at a time as special events. Here is how they differ and who each one suits.";
 
 const FAQ: QA[] = [
   {
@@ -65,7 +65,7 @@ function Page() {
         <>
           <p>
             <strong className="text-ink">Short answer:</strong> parkrun is a free, timed 5K that happens every Saturday
-            morning in the same park, run by volunteers. GRYT runs are free artist-led 5Ks that happen a few times a year,
+            morning in the same park, run by volunteers. GRYT runs are free artist-led 5Ks held one at a time as special events,
             built around an album and the neighborhood it is about, with a long hangout after. If you want a weekly habit,
             go to parkrun. If you want a bigger day with music fans and a picnic, come to a GRYT run. Plenty of people do
             both.
@@ -79,7 +79,7 @@ function Page() {
           columns={["GRYT runs", "parkrun"]}
           rows={[
             ["What it is", "An artist-led community 5K and park hangout, built around an album and a real neighborhood.", <>A free, weekly 5K community event in parks and open spaces around the world (<Ext href="https://www.parkrun.com/">parkrun</Ext>).</>],
-            ["How often", "A few times a year. Run #01 was August 2, 2026. Run #02 is targeting early December 2026.", <>Every Saturday morning (<Ext href="https://www.parkrun.com/about/join-us/">parkrun</Ext>).</>],
+            ["How often", "Occasional special events. Run #01 was August 2, 2026. Run #02 is targeting early December 2026.", <>Every Saturday morning (<Ext href="https://www.parkrun.com/about/join-us/">parkrun</Ext>).</>],
             ["Cost", "Free for runners.", <>Free to take part (<Ext href="https://www.parkrun.com/about/join-us/">parkrun</Ext>).</>],
             ["Timing", "Not a race. No splits, no podiums.", <>Timed. Bring your barcode to get a result: "No barcode, no time, no exception" (<Ext href="https://support.parkrun.com/hc/en-us/articles/200566883-1-4-Barcodes">parkrun support</Ext>).</>],
             ["Walkers", "Every pace welcome, walkers included. Strollers and leashed dogs welcome at a walking pace.", <>Walk, jog, run or volunteer. A tail walker means nobody finishes last (<Ext href="https://www.parkrun.com/">parkrun</Ext>).</>],

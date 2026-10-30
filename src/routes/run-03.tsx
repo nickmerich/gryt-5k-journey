@@ -1,4 +1,5 @@
 import { AuditFooterLinks } from "@/components/AuditFooterLinks";
+import { canonicalLinks, ogUrl } from "@/lib/seo";
 import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowDown, CalendarDays, MapPin, Route as RouteIcon } from 'lucide-react'
@@ -18,7 +19,8 @@ export const Route = createFileRoute('/run-03')({
       { name: 'twitter:title', content: title }, { property: 'og:description', content: description },
       { name: 'twitter:description', content: description },
     { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' },
-  ] }),
+    ogUrl('/run-03'),
+  ], links: canonicalLinks('/run-03') }),
   component: Run3Page,
 })
 function Run3Page() {

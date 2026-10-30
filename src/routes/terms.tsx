@@ -1,4 +1,5 @@
 import { SiteFooter } from "@/components/AuditFooterLinks";
+import { canonicalLinks, ogUrl } from "@/lib/seo";
 import { recapImageMeta } from "@/lib/site-meta";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
@@ -26,7 +27,9 @@ export const Route = createFileRoute("/terms")({
         content:
           "Terms of Service, participant waiver, and event policies for the Run Takoma With Love 5K.",
       },
+      ogUrl("/terms"),
     ],
+    links: canonicalLinks("/terms"),
   }),
   component: TermsPage,
 });

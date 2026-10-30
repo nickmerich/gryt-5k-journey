@@ -26,6 +26,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/terms", changefreq: "yearly", priority: "0.3" },
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/accessibility", changefreq: "yearly", priority: "0.3" },
+          { path: "/compare", changefreq: "monthly", priority: "0.6" },
+          { path: "/compare/gryt-vs-parkrun", changefreq: "monthly", priority: "0.6" },
+          { path: "/compare/gryt-vs-november-project", changefreq: "monthly", priority: "0.6" },
+          { path: "/compare/gryt-vs-the-color-run", changefreq: "monthly", priority: "0.6" },
+          { path: "/compare/gryt-vs-rock-n-roll-running-series", changefreq: "monthly", priority: "0.6" },
+          { path: "/guides/social-5k-runs", changefreq: "monthly", priority: "0.7" },
         ];
 
         const urls = entries.map((e) =>

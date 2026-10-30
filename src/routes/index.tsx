@@ -20,6 +20,8 @@ import { buildBibPdf } from "@/lib/bib-pdf";
 import { Run2Hub } from "@/components/Run2Hub";
 import { PhotoGallery } from "@/components/lazy";
 import { imageAtLeast } from "@/lib/responsive-image";
+import { HomeAbout, HOME_FAQ } from "@/components/HomeAbout";
+import { canonicalLinks, faqJsonLd, jsonLdScript, ogUrl, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
 
 const STRAVA_CLUB_URL = "https://www.strava.com/clubs/1708552";
@@ -96,8 +98,11 @@ export const Route = createFileRoute("/")({
           "248 signups, 98 finishers, one community. Relive Run Takoma With Love and get on the list for Run #02. Runners and brands welcome.",
       },
       { property: "og:type", content: "website" },
+      ogUrl("/"),
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: canonicalLinks("/"),
+    scripts: [jsonLdScript(organizationJsonLd), jsonLdScript(websiteJsonLd), jsonLdScript(faqJsonLd(HOME_FAQ))],
   }),
   component: RunTakomaOnePager,
 });
@@ -1602,6 +1607,8 @@ function RunTakomaOnePager() {
         </div>
       </section>
       )}
+
+      <HomeAbout />
 
       <section aria-labelledby="past-runs" className="relative z-10 mx-auto max-w-5xl px-5 py-14 sm:px-6">
         <RuledLabel>Past runs</RuledLabel>

@@ -987,7 +987,7 @@ const CSS_TEXT = `
   --muted: oklch(0.52 0.02 70);
   --green: oklch(0.34 0.045 165);
   --green-deep: oklch(0.28 0.045 165);
-  --rust: oklch(0.6 0.15 32);
+  --rust: oklch(0.545 0.15 32); /* WCAG AA 4.5:1 with paper (was 0.6) */
   --rust-deep: oklch(0.52 0.14 32);
   --water: oklch(0.55 0.11 245);
   --display: "Bebas Neue", "Bebas Neue Fallback", sans-serif;
